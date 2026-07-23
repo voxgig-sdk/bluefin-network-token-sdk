@@ -1,0 +1,61 @@
+{
+  "existing": {
+    "network_token_bundle": {
+      "NETWORK_TOKEN_BUNDLE00": {
+        "card": {},
+        "card_number": "s65",
+        "expiration_month": "s66",
+        "expiration_year": "s67",
+        "issuer": {},
+        "metadata": {},
+        "network_token": {},
+        "network_token_bundle_id": "NETWORK_TOKEN_BUNDLE01",
+        "network_token_bundle_state": "s6c",
+        "security_code": "s6d",
+        "id": "NETWORK_TOKEN_BUNDLE00"
+      },
+      "NETWORK_TOKEN_BUNDLE01": {
+        "card": {},
+        "card_number": "sc9",
+        "expiration_month": "sca",
+        "expiration_year": "scb",
+        "issuer": {},
+        "metadata": {},
+        "network_token": {},
+        "network_token_bundle_id": "NETWORK_TOKEN_BUNDLE01",
+        "network_token_bundle_state": "sd0",
+        "security_code": "sd1",
+        "id": "NETWORK_TOKEN_BUNDLE01"
+      },
+      "NETWORK_TOKEN_BUNDLE02": {
+        "card": {},
+        "card_number": "s12d",
+        "expiration_month": "s12e",
+        "expiration_year": "s12f",
+        "issuer": {},
+        "metadata": {},
+        "network_token": {},
+        "network_token_bundle_id": "NETWORK_TOKEN_BUNDLE01",
+        "network_token_bundle_state": "s134",
+        "security_code": "s135",
+        "id": "NETWORK_TOKEN_BUNDLE02"
+      }
+    }
+  },
+  "new": {
+    "network_token_bundle": {
+      "network_token_bundle_ref01": {
+        "card": {},
+        "card_number": "s191",
+        "expiration_month": "s192",
+        "expiration_year": "s193",
+        "issuer": {},
+        "metadata": {},
+        "network_token": {},
+        "network_token_bundle_id": "NETWORK_TOKEN_BUNDLE01",
+        "network_token_bundle_state": "s198",
+        "security_code": "s199"
+      }
+    }
+  }
+}

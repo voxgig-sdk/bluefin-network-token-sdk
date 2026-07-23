@@ -1,0 +1,31 @@
+# API Information
+
+
+main: {
+  kit: {
+    info: {
+      description: "The purpose of the ShieldConex API's are to provide ability to tokenize/detokenize data"
+      license: {
+        name: "ShieldConex"
+        url: "httpd://bluefin.com"
+      }
+      security: {
+        in: "header"
+        name: "Authorization"
+        prefix: "Basic"
+        scheme: "basic"
+        type: "http"
+      }
+      servers: [
+        {
+          url: "https://secure-cert.shieldconex.com/api"
+        }
+      ]
+      summary: "The purpose of the ShieldConex API's are to provide ability to tokenize/detokenize data"
+      title: "Network Token Bundle"
+      version: "1.0"
+      website: "https://secure-cert.shieldconex.com"
+    }
+  }
+}
+

@@ -1,0 +1,239 @@
+# Entity: network_token_bundle
+
+main: kit: entity: network_token_bundle: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      name: "card"
+      req: false
+      type: "`$OBJECT`"
+    }
+    {
+      name: "card_number"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "expiration_month"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "expiration_year"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "issuer"
+      req: false
+      type: "`$OBJECT`"
+    }
+    {
+      name: "metadata"
+      req: false
+      type: "`$OBJECT`"
+    }
+    {
+      name: "network_token"
+      req: false
+      type: "`$OBJECT`"
+    }
+    {
+      name: "network_token_bundle_id"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "network_token_bundle_state"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "security_code"
+      req: false
+      type: "`$STRING`"
+    }
+  ]
+
+  name: "network_token_bundle"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          args: {
+            header: [
+              {
+                kind: "header"
+                name: "scx_client_reference"
+                orig: "scx_client_reference"
+                reqd: true
+                type: "`$STRING`"
+              }
+            ]
+          }
+          method: "POST"
+          orig: "/network-token-bundle"
+          parts: [
+            "network-token-bundle"
+          ]
+          select: {
+            exist: [
+              "scx_client_reference"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    load: {
+      name: "load"
+      points: [
+        {
+          args: {
+            header: [
+              {
+                kind: "header"
+                name: "scx_client_reference"
+                orig: "scx_client_reference"
+                reqd: true
+                type: "`$STRING`"
+              }
+            ]
+            params: [
+              {
+                kind: "param"
+                name: "id"
+                orig: "network_token_bundle_id"
+                reqd: true
+                type: "`$STRING`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/network-token-bundle/{networkTokenBundleId}"
+          parts: [
+            "network-token-bundle"
+            "{id}"
+          ]
+          rename: {
+            param: {
+              networkTokenBundleId: "id"
+            }
+          }
+          select: {
+            exist: [
+              "id"
+              "scx_client_reference"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          args: {
+            header: [
+              {
+                kind: "header"
+                name: "scx_client_reference"
+                orig: "scx_client_reference"
+                reqd: true
+                type: "`$STRING`"
+              }
+            ]
+            params: [
+              {
+                kind: "param"
+                name: "id"
+                orig: "network_token_bundle_id"
+                reqd: true
+                type: "`$STRING`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/network-token-bundle/{networkTokenBundleId}/payment-credentials"
+          parts: [
+            "network-token-bundle"
+            "{id}"
+            "payment-credentials"
+          ]
+          rename: {
+            param: {
+              networkTokenBundleId: "id"
+            }
+          }
+          select: {
+            "$action": "payment_credential"
+            exist: [
+              "id"
+              "scx_client_reference"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    remove: {
+      name: "remove"
+      points: [
+        {
+          args: {
+            header: [
+              {
+                kind: "header"
+                name: "scx_client_reference"
+                orig: "scx_client_reference"
+                reqd: true
+                type: "`$STRING`"
+              }
+            ]
+            params: [
+              {
+                kind: "param"
+                name: "id"
+                orig: "network_token_bundle_id"
+                reqd: true
+                type: "`$STRING`"
+              }
+            ]
+          }
+          method: "DELETE"
+          orig: "/network-token-bundle/{networkTokenBundleId}"
+          parts: [
+            "network-token-bundle"
+            "{id}"
+          ]
+          rename: {
+            param: {
+              networkTokenBundleId: "id"
+            }
+          }
+          select: {
+            exist: [
+              "id"
+              "scx_client_reference"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}
