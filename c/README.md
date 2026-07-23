@@ -4,7 +4,7 @@
 
 The C SDK for the BluefinNetworkToken API — an entity-oriented client following idiomatic C conventions (explicit structs, function-pointer vtables, and a trailing `PNError**` out-param for errors).
 
-The SDK exposes the API as capitalised, semantic **Entities** — for example `bluefin_network_token_network_token_bundle(client, NULL)` — each
+The SDK exposes the API as capitalised, semantic **Entities** — for example `bluefinnetworktoken_network_token_bundle(client, NULL)` — each
 carrying a small, uniform set of operations (`load`, `create`, `remove`) instead of raw URL
 paths and query strings. You work with named resources and verbs, which
 keeps the cognitive load low.
@@ -43,7 +43,7 @@ loading a specific record.
 ```c
 #include "core/api.h"
 
-BluefinNetworkTokenSDK* client = bluefin_network_token_sdk_new(cmap(1,
+BluefinNetworkTokenSDK* client = bluefinnetworktoken_sdk_new(cmap(1,
     "apikey", v_str(getenv("BLUEFIN_NETWORK_TOKEN_APIKEY"))));
 PNError* err = NULL;
 ```
@@ -53,7 +53,7 @@ PNError* err = NULL;
 `load()` returns the bare record and sets `*err` on failure.
 
 ```c
-Entity* network_token_bundle = bluefin_network_token_network_token_bundle(client, NULL);
+Entity* network_token_bundle = bluefinnetworktoken_network_token_bundle(client, NULL);
 voxgig_value* network_token_bundle_rec = network_token_bundle->vt->load(network_token_bundle, cmap(1, "id", v_str("example_id")), NULL, &err);
 if (err) {
     fprintf(stderr, "load failed: %s\n", err->msg);
@@ -151,7 +151,7 @@ BluefinNetworkTokenSDK* client = test_sdk(NULL, NULL);
 PNError* err = NULL;
 
 // Entity ops return the bare record and set *err on failure.
-Entity* network_token_bundle = bluefin_network_token_network_token_bundle(client, NULL);
+Entity* network_token_bundle = bluefinnetworktoken_network_token_bundle(client, NULL);
 voxgig_value* network_token_bundle_rec = network_token_bundle->vt->load(network_token_bundle, cmap(1, "id", v_str("test01")), NULL, &err);
 // network_token_bundle_rec contains the mock response record
 ```
@@ -171,7 +171,7 @@ static voxgig_value* mock_fetch(void* ud, voxgig_value* args) {
         "json", json_thunk(cmap(1, "id", v_str("mock01"))));
 }
 
-BluefinNetworkTokenSDK* client = bluefin_network_token_sdk_new(cmap(2,
+BluefinNetworkTokenSDK* client = bluefinnetworktoken_sdk_new(cmap(2,
     "base", v_str("http://localhost:8080"),
     "system", cmap(1, "fetch", vfn(mock_fetch, NULL))));
 ```
@@ -181,7 +181,7 @@ BluefinNetworkTokenSDK* client = bluefin_network_token_sdk_new(cmap(2,
 Override the base URL to reach a local or staging server:
 
 ```c
-BluefinNetworkTokenSDK* client = bluefin_network_token_sdk_new(cmap(1,
+BluefinNetworkTokenSDK* client = bluefinnetworktoken_sdk_new(cmap(1,
     "base", v_str("http://localhost:8080")));
 ```
 
@@ -208,7 +208,7 @@ cd c && make test
 ```c
 #include "core/api.h"
 
-BluefinNetworkTokenSDK* client = bluefin_network_token_sdk_new(options);
+BluefinNetworkTokenSDK* client = bluefinnetworktoken_sdk_new(options);
 ```
 
 Creates a new SDK client. `options` is a `voxgig_value*` map (`NULL` for
@@ -238,7 +238,7 @@ Creates a test-mode client with mock transport. Both arguments may be
 | --- | --- | --- |
 | `sdk_prepare` | `(BluefinNetworkTokenSDK*, fetchargs, PNError**) -> voxgig_value*` | Build an HTTP request definition without sending. |
 | `sdk_direct` | `(BluefinNetworkTokenSDK*, fetchargs, PNError**) -> voxgig_value*` | Build and send an HTTP request. Returns a result map (branch on `ok`). |
-| `bluefin_network_token_network_token_bundle` | `(BluefinNetworkTokenSDK*, entopts) -> Entity*` | Create a NetworkTokenBundle entity instance. |
+| `bluefinnetworktoken_network_token_bundle` | `(BluefinNetworkTokenSDK*, entopts) -> Entity*` | Create a NetworkTokenBundle entity instance. |
 
 ### Entity interface (vtable)
 
@@ -301,7 +301,7 @@ API path: `/network-token-bundle`
 
 ### NetworkTokenBundle
 
-Create an instance: `Entity* network_token_bundle = bluefin_network_token_network_token_bundle(client, NULL);`
+Create an instance: `Entity* network_token_bundle = bluefinnetworktoken_network_token_bundle(client, NULL);`
 
 #### Operations
 
@@ -329,14 +329,14 @@ Create an instance: `Entity* network_token_bundle = bluefin_network_token_networ
 #### Example: Load
 
 ```c
-Entity* network_token_bundle = bluefin_network_token_network_token_bundle(client, NULL);
+Entity* network_token_bundle = bluefinnetworktoken_network_token_bundle(client, NULL);
 voxgig_value* network_token_bundle_rec = network_token_bundle->vt->load(network_token_bundle, cmap(1, "id", v_str("network_token_bundle_id")), NULL, &err);
 ```
 
 #### Example: Create
 
 ```c
-Entity* network_token_bundle = bluefin_network_token_network_token_bundle(client, NULL);
+Entity* network_token_bundle = bluefinnetworktoken_network_token_bundle(client, NULL);
 voxgig_value* network_token_bundle_rec = network_token_bundle->vt->create(network_token_bundle, NULL, NULL, &err);
 ```
 

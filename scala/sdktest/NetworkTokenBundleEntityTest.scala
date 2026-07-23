@@ -43,10 +43,6 @@ object NetworkTokenBundleEntityTest {
       val networkTokenBundleRef01DataDt0Loaded = networkTokenBundleRef01Ent.load(networkTokenBundleRef01MatchDt0, null)
       rep.check("network_token_bundle.load.nonnull", networkTokenBundleRef01DataDt0Loaded != null, "expected load result to be non-null")
 
-      // REMOVE
-      val networkTokenBundleRef01MatchRm0 = new LinkedHashMap[String, Object]()
-      networkTokenBundleRef01MatchRm0.put("id", networkTokenBundleRef01Data.get("id"))
-      networkTokenBundleRef01Ent.remove(networkTokenBundleRef01MatchRm0, null)
     }
   }
 }

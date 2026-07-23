@@ -10,7 +10,7 @@ Complete API reference for the BluefinNetworkToken C SDK.
 ```c
 #include "core/api.h"
 
-BluefinNetworkTokenSDK* client = bluefin_network_token_sdk_new(options);
+BluefinNetworkTokenSDK* client = bluefinnetworktoken_sdk_new(options);
 ```
 
 Create a new SDK client instance. `options` is a `voxgig_value*` map
@@ -43,7 +43,7 @@ BluefinNetworkTokenSDK* client = test_sdk(NULL, NULL);
 
 ### Entity Accessors
 
-#### `Entity* bluefin_network_token_network_token_bundle(BluefinNetworkTokenSDK* client, voxgig_value* entopts)`
+#### `Entity* bluefinnetworktoken_network_token_bundle(BluefinNetworkTokenSDK* client, voxgig_value* entopts)`
 
 Create a new `NetworkTokenBundle` entity instance. Pass `NULL` for no initial
 options.
@@ -77,7 +77,7 @@ Prepare a fetch definition without sending. Returns the fetchdef and sets
 ## NetworkTokenBundle
 
 ```c
-Entity* network_token_bundle = bluefin_network_token_network_token_bundle(client, NULL);
+Entity* network_token_bundle = bluefinnetworktoken_network_token_bundle(client, NULL);
 ```
 
 ### Fields
@@ -102,7 +102,7 @@ Entity* network_token_bundle = bluefin_network_token_network_token_bundle(client
 Create a new entity with the given data. Returns the created entity data and sets `*err` on failure.
 
 ```c
-Entity* network_token_bundle = bluefin_network_token_network_token_bundle(client, NULL);
+Entity* network_token_bundle = bluefinnetworktoken_network_token_bundle(client, NULL);
 voxgig_value* result = network_token_bundle->vt->create(network_token_bundle, NULL, NULL, &err);
 ```
 
@@ -111,7 +111,7 @@ voxgig_value* result = network_token_bundle->vt->create(network_token_bundle, NU
 Load a single entity matching the given criteria. Returns the entity data and sets `*err` on failure.
 
 ```c
-Entity* network_token_bundle = bluefin_network_token_network_token_bundle(client, NULL);
+Entity* network_token_bundle = bluefinnetworktoken_network_token_bundle(client, NULL);
 voxgig_value* result = network_token_bundle->vt->load(network_token_bundle, cmap(1, "id", v_str("network_token_bundle_id")), NULL, &err);
 ```
 
@@ -120,7 +120,7 @@ voxgig_value* result = network_token_bundle->vt->load(network_token_bundle, cmap
 Remove the entity matching the given criteria. Sets `*err` on failure.
 
 ```c
-Entity* network_token_bundle = bluefin_network_token_network_token_bundle(client, NULL);
+Entity* network_token_bundle = bluefinnetworktoken_network_token_bundle(client, NULL);
 voxgig_value* result = network_token_bundle->vt->remove(network_token_bundle, cmap(1, "id", v_str("network_token_bundle_id")), NULL, &err);
 ```
 
@@ -155,7 +155,7 @@ Return the entity name.
 Features are activated via the `feature` option:
 
 ```c
-BluefinNetworkTokenSDK* client = bluefin_network_token_sdk_new(cmap(1,
+BluefinNetworkTokenSDK* client = bluefinnetworktoken_sdk_new(cmap(1,
     "feature", cmap(1,
         "test", cmap(1, "active", v_bool(true)))
 ));

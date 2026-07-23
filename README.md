@@ -93,7 +93,7 @@ local result, err = client:NetworkTokenBundle():load({ id = "test01" })
 
 BluefinNetworkTokenSDK* client = test_sdk(NULL, NULL);
 PNError* err = NULL;
-Entity* network_token_bundle = bluefin_network_token_network_token_bundle(client, NULL);
+Entity* network_token_bundle = bluefinnetworktoken_network_token_bundle(client, NULL);
 voxgig_value* network_token_bundle_rec = network_token_bundle->vt->load(network_token_bundle, cmap(1, "id", v_str("test01")), NULL, &err);
 printf("%s\n", voxgig_to_json(network_token_bundle_rec));
 ```
@@ -425,12 +425,12 @@ print(networktokenbundle)
 ```c
 #include "core/api.h"
 
-BluefinNetworkTokenSDK* client = bluefin_network_token_sdk_new(cmap(1,
+BluefinNetworkTokenSDK* client = bluefinnetworktoken_sdk_new(cmap(1,
     "apikey", v_str(getenv("BLUEFIN_NETWORK_TOKEN_APIKEY"))));
 PNError* err = NULL;
 
 
-Entity* network_token_bundle = bluefin_network_token_network_token_bundle(client, NULL);
+Entity* network_token_bundle = bluefinnetworktoken_network_token_bundle(client, NULL);
 // Load a specific networktokenbundle (returns the record, sets *err on failure)
 voxgig_value* network_token_bundle_rec = network_token_bundle->vt->load(network_token_bundle, cmap(1, "id", v_str("example_id")), NULL, &err);
 printf("%s\n", voxgig_to_json(network_token_bundle_rec));

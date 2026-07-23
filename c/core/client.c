@@ -204,7 +204,7 @@ voxgig_value* sdk_direct(BluefinNetworkTokenSDK* sdk, voxgig_value* fetchargs, P
 
 
 // NetworkTokenBundle entity bound to this client.
-Entity* bluefin_network_token_network_token_bundle(BluefinNetworkTokenSDK* client, voxgig_value* entopts) {
+Entity* bluefinnetworktoken_network_token_bundle(BluefinNetworkTokenSDK* client, voxgig_value* entopts) {
   return network_token_bundle_entity_new(client, entopts);
 }
 
