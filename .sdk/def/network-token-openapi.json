@@ -1,0 +1,1237 @@
+{
+ "openapi": "3.0.1",
+ "info": {
+  "title": "Network Token Bundle",
+  "description": "The purpose of the ShieldConex API's are to provide ability to tokenize/detokenize data",
+  "version": "1.0",
+  "license": {
+   "name": "ShieldConex",
+   "url": "httpd://bluefin.com"
+  }
+ },
+ "servers": [
+  {
+   "url": "https://secure-cert.shieldconex.com/api"
+  }
+ ],
+ "security": [
+  {
+   "basic": []
+  }
+ ],
+ "tags": [
+  {
+   "name": "Validate",
+   "description": " "
+  },
+  {
+   "name": "Tokenization",
+   "description": " "
+  },
+  {
+   "name": "Detokenization",
+   "description": " "
+  },
+  {
+   "name": "Healthcheck",
+   "description": " "
+  },
+  {
+   "name": "Tokenization Batch",
+   "description": " "
+  },
+  {
+   "name": "Detokenization Batch",
+   "description": " "
+  },
+  {
+   "name": "Network Token Bundle",
+   "description": " "
+  }
+ ],
+ "paths": {
+  "/network-token-bundle": {
+   "post": {
+    "tags": [
+     "Network Token Bundle"
+    ],
+    "summary": "Create Network Token Bundle",
+    "description": "",
+    "operationId": "create-network-token-bundle",
+    "parameters": [
+     {
+      "name": "scx-client-reference",
+      "in": "header",
+      "required": true,
+      "description": "",
+      "schema": {
+       "type": "string",
+       "minLength": 2,
+       "maxLength": 255
+      }
+     }
+    ],
+    "requestBody": {
+     "description": " ",
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/NetworkTokenBundleCreateRequest"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Network Token Creation Details",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/NetworkTokenBundleCreateResponse"
+        }
+       }
+      }
+     },
+     "400": {
+      "$ref": "#/components/responses/400"
+     },
+     "401": {
+      "$ref": "#/components/responses/401"
+     },
+     "403": {
+      "$ref": "#/components/responses/403"
+     },
+     "409": {
+      "$ref": "#/components/responses/409"
+     },
+     "500": {
+      "$ref": "#/components/responses/500"
+     }
+    }
+   }
+  },
+  "/network-token-bundle/{networkTokenBundleId}": {
+   "get": {
+    "tags": [
+     "Network Token Bundle"
+    ],
+    "summary": "Get Network Token Bundle",
+    "description": "",
+    "operationId": "get-network-token-bundle",
+    "parameters": [
+     {
+      "name": "scx-client-reference",
+      "in": "header",
+      "required": true,
+      "description": "",
+      "schema": {
+       "type": "string",
+       "minLength": 2,
+       "maxLength": 255
+      }
+     },
+     {
+      "name": "networkTokenBundleId",
+      "in": "path",
+      "required": true,
+      "description": "",
+      "schema": {
+       "type": "string"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Network Token details response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/NetworkTokenBundleDetailsResponse"
+        }
+       }
+      }
+     },
+     "401": {
+      "$ref": "#/components/responses/401"
+     },
+     "403": {
+      "$ref": "#/components/responses/403"
+     },
+     "500": {
+      "$ref": "#/components/responses/500"
+     }
+    }
+   },
+   "delete": {
+    "tags": [
+     "Network Token Bundle"
+    ],
+    "summary": "Delete Network Token Bundle",
+    "description": "",
+    "operationId": "delete-network-token-bundle",
+    "parameters": [
+     {
+      "name": "scx-client-reference",
+      "in": "header",
+      "required": true,
+      "description": "",
+      "schema": {
+       "type": "string",
+       "minLength": 2,
+       "maxLength": 255
+      }
+     },
+     {
+      "name": "networkTokenBundleId",
+      "in": "path",
+      "required": true,
+      "description": "",
+      "schema": {
+       "type": "string"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Network Token delete response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/NetworkTokenBundleDeleteResponse"
+        }
+       }
+      }
+     },
+     "401": {
+      "$ref": "#/components/responses/401"
+     },
+     "403": {
+      "$ref": "#/components/responses/403"
+     },
+     "409": {
+      "$ref": "#/components/responses/409"
+     },
+     "500": {
+      "$ref": "#/components/responses/500"
+     }
+    }
+   }
+  },
+  "/network-token-bundle/{networkTokenBundleId}/payment-credentials": {
+   "get": {
+    "tags": [
+     "Network Token Bundle"
+    ],
+    "summary": "Get Payment Credentials",
+    "description": "",
+    "operationId": "get-payment-credentials",
+    "parameters": [
+     {
+      "name": "scx-client-reference",
+      "in": "header",
+      "required": true,
+      "description": "",
+      "schema": {
+       "type": "string",
+       "minLength": 2,
+       "maxLength": 255
+      }
+     },
+     {
+      "name": "networkTokenBundleId",
+      "required": true,
+      "in": "path",
+      "description": "",
+      "schema": {
+       "type": "string"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Payment Credentials details response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/NetworkTokenBundle"
+        }
+       }
+      }
+     },
+     "401": {
+      "$ref": "#/components/responses/401"
+     },
+     "403": {
+      "$ref": "#/components/responses/403"
+     },
+     "500": {
+      "$ref": "#/components/responses/500"
+     }
+    }
+   }
+  }
+ },
+ "components": {
+  "schemas": {
+   "PartnerValidateRequest": {
+    "type": "object",
+    "properties": {
+     "reference": {
+      "type": "string",
+      "description": "Request Reference. This is a reference value that Developers can use to track API requests and responses. It is solely for tracking purposes."
+     }
+    },
+    "description": "Partner to be validated"
+   },
+   "TemplateValidateRequest": {
+    "required": [
+     "templateRef"
+    ],
+    "type": "object",
+    "properties": {
+     "reference": {
+      "type": "string",
+      "description": "Request Reference. This is a reference value that Developers can use to track API requests and responses. It is solely for tracking purposes."
+     },
+     "templateRef": {
+      "type": "string",
+      "description": "Template Reference. This is the unique alphanumeric string that is used to identify a template. The templateRef is created within ShieldConex Manager and can be found within the template details page of any template within ShieldConex Manager."
+     }
+    },
+    "description": "Template to be validated"
+   },
+   "TokenizeRequest": {
+    "required": [
+     "templateRef",
+     "values"
+    ],
+    "type": "object",
+    "properties": {
+     "reference": {
+      "type": "string",
+      "description": "Request Reference. This is a reference value that Developers can use to track API requests and responses. It is solely for tracking purposes."
+     },
+     "templateRef": {
+      "type": "string",
+      "description": "Template Reference. This is the unique alphanumeric string that is used to identify a template. The templateRef is created within ShieldConex Manager and can be found within the template details page of any template within ShieldConex Manager."
+     },
+     "values": {
+      "type": "array",
+      "items": {
+       "$ref": "#/components/schemas/TokenizeRequestItemData"
+      }
+     }
+    },
+    "description": "Data to be tokenized"
+   },
+   "TokenizeRequestItemData": {
+    "type": "object",
+    "properties": {
+     "name": {
+      "type": "string",
+      "description": "Field Name. This refers to the name of a field within a template."
+     },
+     "value": {
+      "type": "string",
+      "description": "Field Value. This is to the cleartext value that is entered into a field. This is the data that requires tokenization."
+     }
+    },
+    "description": "JSON array containing the field names (and desired values) matching the fields configured inside of the template being referenced with templateRef."
+   },
+   "TokenizeReadRequest": {
+    "required": [
+     "bfid"
+    ],
+    "type": "object",
+    "properties": {
+     "reference": {
+      "type": "string",
+      "description": "Request Reference. This is a reference value that Developers can use to track API requests and responses. It is solely for tracking purposes."
+     },
+     "bfid": {
+      "type": "string",
+      "description": "The BFID, or Bluefin ID, is the value that is created when a tokenization request is made (i.e., it is the value retrieved from an iFrame transaction, or a /tokenization/tokenize request).  The BFID refers to that specific tokenization request and is necessary for tokenization and detokenization."
+     }
+    },
+    "description": "This request (TOKENIZATION/READ) is intended to be used to read data that was entered into a ShieldConex iFrame element (this cannot be used for API only transactions). The BFID that is created during a tokenization request is used to recall the data was used during a tokenize request. The response values would be tokenized. This activity can only be performed once per BFID."
+   },
+   "TokenizeDeleteRequest": {
+    "required": [
+     "bfid"
+    ],
+    "type": "object",
+    "properties": {
+     "reference": {
+      "type": "string",
+      "description": "Request Reference. This is a reference value that Developers can use to track API requests and responses. It is solely for tracking purposes."
+     },
+     "bfid": {
+      "type": "string",
+      "description": "The BFID, or Bluefin ID, is the value that is created when a tokenization request is made (i.e., it is the value retrieved from an iFrame transaction, or a /tokenization/tokenize request).  The BFID refers to that specific tokenization request and is necessary for tokenization and detokenization."
+     }
+    },
+    "description": "Tokenized and detele data query"
+   },
+   "TokenizeBatchRequest": {
+    "required": [
+     "batches",
+     "templateRef"
+    ],
+    "type": "object",
+    "properties": {
+     "reference": {
+      "type": "string",
+      "description": "Batch Request Reference. This is a reference value that Developers can use to track API requests and responses. It is solely for tracking purposes."
+     },
+     "templateRef": {
+      "type": "string",
+      "description": "Template Reference"
+     },
+     "batches": {
+      "type": "array",
+      "items": {
+       "$ref": "#/components/schemas/TokenizeBatchRequestItemData"
+      }
+     }
+    },
+    "description": "Batch data to be tokenized"
+   },
+   "TokenizeBatchRequestItemData": {
+    "required": [
+     "values"
+    ],
+    "type": "object",
+    "properties": {
+     "reference": {
+      "type": "string",
+      "description": "Batch Item Request Reference. This is a reference value that Developers can use to track API requests and responses. It is solely for tracking purposes."
+     },
+     "values": {
+      "type": "array",
+      "items": {
+       "$ref": "#/components/schemas/TokenizeRequestItemData"
+      }
+     }
+    },
+    "description": "Batch item data to be tokenized"
+   },
+   "TokenizeReadBatchRequest": {
+    "required": [
+     "batches"
+    ],
+    "type": "object",
+    "properties": {
+     "reference": {
+      "type": "string",
+      "description": "Batch Request Reference. This is a reference value that Developers can use to track API requests and responses. It is solely for tracking purposes."
+     },
+     "batches": {
+      "type": "array",
+      "items": {
+       "$ref": "#/components/schemas/TokenizeReadBatchRequestItemData"
+      }
+     }
+    },
+    "description": "Read tokenized batch data query"
+   },
+   "TokenizeReadBatchRequestItemData": {
+    "required": [
+     "bfid"
+    ],
+    "type": "object",
+    "properties": {
+     "reference": {
+      "type": "string",
+      "description": "Batch Item Request Reference. This is a reference value that Developers can use to track API requests and responses. It is solely for tracking purposes."
+     },
+     "bfid": {
+      "type": "string",
+      "description": "The BFID, or Bluefin ID, is the value that is created when a tokenization request is made (i.e., it is the value retrieved from an iFrame transaction, or a /tokenization/tokenize request).  The BFID refers to that specific tokenization request and is necessary for tokenization and detokenization."
+     }
+    },
+    "description": "Data to be read"
+   },
+   "TokenizeDeleteBatchRequest": {
+    "required": [
+     "batches"
+    ],
+    "type": "object",
+    "properties": {
+     "reference": {
+      "type": "string",
+      "description": "Batch Request Reference. This is a reference value that Developers can use to track API requests and responses. It is solely for tracking purposes."
+     },
+     "batches": {
+      "type": "array",
+      "items": {
+       "$ref": "#/components/schemas/TokenizeDeleteBatchRequestItemData"
+      }
+     }
+    },
+    "description": "Read and delete tokenized data query"
+   },
+   "TokenizeDeleteBatchRequestItemData": {
+    "required": [
+     "bfid"
+    ],
+    "type": "object",
+    "properties": {
+     "reference": {
+      "type": "string",
+      "description": "Batch Item Request Reference. This is a reference value that Developers can use to track API requests and responses. It is solely for tracking purposes."
+     },
+     "bfid": {
+      "type": "string",
+      "description": "The BFID, or Bluefin ID, is the value that is created when a tokenization request is made (i.e., it is the value retrieved from an iFrame transaction, or a /tokenization/tokenize request).  The BFID refers to that specific tokenization request and is necessary for tokenization and detokenization."
+     }
+    },
+    "description": "Data to be read and deleted"
+   },
+   "DetokenizeRequest": {
+    "required": [
+     "bfid",
+     "values"
+    ],
+    "type": "object",
+    "properties": {
+     "reference": {
+      "type": "string",
+      "description": "Request Reference. This is a reference value that Developers can use to track API requests and responses. It is solely for tracking purposes."
+     },
+     "bfid": {
+      "type": "string",
+      "description": "The BFID, or Bluefin ID, is the value that is created when a tokenization request is made (i.e., it is the value retrieved from an iFrame transaction, or a /tokenization/tokenize request).  The BFID refers to that specific tokenization request and is necessary for tokenization and detokenization."
+     },
+     "values": {
+      "type": "array",
+      "items": {
+       "$ref": "#/components/schemas/DetokenizeRequestItemData"
+      }
+     },
+     "networkTokenBundle": {
+      "type": "object",
+      "required": [
+       "networkTokenBundleId"
+      ],
+      "properties": {
+       "networkTokenBundleId": {
+        "type": "string",
+        "description": "Network Token ID"
+       }
+      }
+     }
+    },
+    "description": "Data to be detokenized"
+   },
+   "DetokenizeRequestItemData": {
+    "type": "object",
+    "properties": {
+     "name": {
+      "type": "string",
+      "description": "Field Name. This refers to the name of a field within a template."
+     },
+     "value": {
+      "type": "string",
+      "description": "Field Value. This is to the encrypted value of a field. This is the data that requires detokenization."
+     }
+    },
+    "description": "Field Data"
+   },
+   "DetokenizeBatchRequest": {
+    "required": [
+     "batches"
+    ],
+    "type": "object",
+    "properties": {
+     "reference": {
+      "type": "string",
+      "description": "Batch Request Reference"
+     },
+     "batches": {
+      "type": "array",
+      "items": {
+       "$ref": "#/components/schemas/DetokenizeBatchRequestItemData"
+      }
+     }
+    },
+    "description": "Batch data to be detokenized"
+   },
+   "DetokenizeBatchRequestItemData": {
+    "type": "object",
+    "properties": {
+     "reference": {
+      "type": "string",
+      "description": "Batch Item Request Reference. This is a reference value that Developers can use to track API requests and responses. It is solely for tracking purposes."
+     },
+     "bfid": {
+      "type": "string",
+      "description": "The BFID, or Bluefin ID, is the value that is created when a tokenization request is made (i.e., it is the value retrieved from an iFrame transaction, or a /tokenization/tokenize request).  The BFID refers to that specific tokenization request and is necessary for tokenization and detokenization."
+     },
+     "values": {
+      "type": "array",
+      "items": {
+       "$ref": "#/components/schemas/DetokenizeRequestItemData"
+      }
+     }
+    },
+    "description": "Field Data"
+   },
+   "ValidateResponse": {
+    "type": "object",
+    "properties": {
+     "messageId": {
+      "type": "string",
+      "description": "Message Id"
+     }
+    },
+    "description": "Validation response"
+   },
+   "TokenizeResponse": {
+    "type": "object",
+    "properties": {
+     "messageId": {
+      "type": "string",
+      "description": "Message Id"
+     },
+     "bfid": {
+      "type": "string",
+      "description": "The BFID, or Bluefin ID, is the value that is created when a tokenization request is made (i.e., it is the value retrieved from an iFrame transaction, or a /tokenization/tokenize request).  The BFID refers to that specific tokenization request and is necessary for tokenization and detokenization."
+     },
+     "values": {
+      "type": "array",
+      "items": {
+       "$ref": "#/components/schemas/TokenizeResponseItemData"
+      }
+     },
+     "networkTokenBundle": {
+      "oneOf": [
+       {
+        "$ref": "#/components/schemas/NetworkTokenBundle"
+       },
+       {
+        "$ref": "#/components/schemas/NetworkTokenBundleErrorResponse"
+       }
+      ]
+     }
+    },
+    "description": "Tokenized response"
+   },
+   "TokenizeReadResponse": {
+    "type": "object",
+    "properties": {
+     "messageId": {
+      "type": "string",
+      "description": "Message Id"
+     },
+     "bfid": {
+      "type": "string",
+      "description": "The BFID, or Bluefin ID, is the value that is created when a tokenization request is made (i.e., it is the value retrieved from an iFrame transaction, or a /tokenization/tokenize request).  The BFID refers to that specific tokenization request and is necessary for tokenization and detokenization."
+     },
+     "values": {
+      "type": "array",
+      "items": {
+       "$ref": "#/components/schemas/TokenizeResponseItemData"
+      }
+     },
+     "state": {
+      "$ref": "#/components/schemas/TokenizeReadStateData"
+     }
+    },
+    "description": "Tokenized read response"
+   },
+   "TokenizeReadStateData": {
+    "type": "object",
+    "properties": {
+     "threeDs": {
+      "$ref": "#/components/schemas/TokenizeReadStateThreeDsData"
+     }
+    },
+    "description": "Tokenized State Data (if available)"
+   },
+   "TokenizeReadStateThreeDsData": {
+    "type": "object",
+    "properties": {
+     "acsTransId": {
+      "type": "string",
+      "description": "ACS Transaction"
+     },
+     "dsTransId": {
+      "type": "string",
+      "description": "DS Transaction"
+     },
+     "authenticationType": {
+      "type": "string",
+      "description": "Authentication Type"
+     },
+     "authenticationValue": {
+      "type": "string",
+      "description": "Authentication Value"
+     },
+     "eci": {
+      "type": "string",
+      "description": "ECI"
+     },
+     "status": {
+      "type": "string",
+      "description": "3DS status"
+     },
+     "protocolVersion": {
+      "type": "string",
+      "description": "Protocol Version"
+     },
+     "scaIndicator": {
+      "type": "string",
+      "description": "DS Transaction"
+     }
+    },
+    "description": "3DS State Data"
+   },
+   "TokenizeResponseItemData": {
+    "type": "object",
+    "properties": {
+     "name": {
+      "type": "string",
+      "description": "Field Name. This refers to the name of a field within a template."
+     },
+     "value": {
+      "type": "string",
+      "description": "Field Value. This is to the encrypted value of a field. This is the data that requires detokenization."
+     }
+    },
+    "description": "Tokenized Data"
+   },
+   "TokenizeBatchResponse": {
+    "type": "object",
+    "properties": {
+     "messageId": {
+      "type": "string",
+      "description": "Message Id"
+     },
+     "reference": {
+      "type": "string",
+      "description": "Request Reference. This is a reference value that Developers can use to track API requests and responses. It is solely for tracking purposes."
+     },
+     "batches": {
+      "type": "array",
+      "items": {
+       "$ref": "#/components/schemas/TokenizeBatchResponseItemData"
+      }
+     }
+    },
+    "description": "Tokenized batch response"
+   },
+   "TokenizeBatchResponseItemData": {
+    "type": "object",
+    "properties": {
+     "reference": {
+      "type": "string",
+      "description": "Batch Item Request Reference. This is a reference value that Developers can use to track API requests and responses. It is solely for tracking purposes."
+     },
+     "bfid": {
+      "type": "string",
+      "description": "The BFID, or Bluefin ID, is the value that is created when a tokenization request is made (i.e., it is the value retrieved from an iFrame transaction, or a /tokenization/tokenize request).  The BFID refers to that specific tokenization request and is necessary for tokenization and detokenization."
+     },
+     "values": {
+      "type": "array",
+      "items": {
+       "$ref": "#/components/schemas/TokenizeResponseItemData"
+      }
+     }
+    },
+    "description": "Tokenized data"
+   },
+   "DetokenizeResponse": {
+    "type": "object",
+    "properties": {
+     "messageId": {
+      "type": "string",
+      "description": "Message Id"
+     },
+     "bfid": {
+      "type": "string",
+      "description": "The BFID, or Bluefin ID, is the value that is created when a tokenization request is made (i.e., it is the value retrieved from an iFrame transaction, or a /tokenization/tokenize request).  The BFID refers to that specific tokenization request and is necessary for tokenization and detokenization."
+     },
+     "values": {
+      "type": "array",
+      "items": {
+       "$ref": "#/components/schemas/DetokenizeResponseItemData"
+      }
+     },
+     "networkTokenBundle": {
+      "oneOf": [
+       {
+        "$ref": "#/components/schemas/NetworkTokenBundle"
+       },
+       {
+        "$ref": "#/components/schemas/NetworkTokenBundleErrorResponse"
+       }
+      ]
+     }
+    },
+    "description": "Detokenize response"
+   },
+   "DetokenizeResponseItemData": {
+    "type": "object",
+    "properties": {
+     "name": {
+      "type": "string",
+      "description": "Field Name. This refers to the name of a field within a template."
+     },
+     "value": {
+      "type": "string",
+      "description": "Field Value. This is to the encrypted value of a field. This is the data that requires detokenization."
+     }
+    },
+    "description": "Detokenize Data"
+   },
+   "DetokenizeBatchResponse": {
+    "type": "object",
+    "properties": {
+     "messageId": {
+      "type": "string",
+      "description": "Message Id"
+     },
+     "reference": {
+      "type": "string",
+      "description": "Request Reference. This is a reference value that Developers can use to track API requests and responses. It is solely for tracking purposes."
+     },
+     "batches": {
+      "type": "array",
+      "items": {
+       "$ref": "#/components/schemas/DetokenizeBatchResponseItemData"
+      }
+     }
+    },
+    "description": "Detokenize batch response"
+   },
+   "DetokenizeBatchResponseItemData": {
+    "type": "object",
+    "properties": {
+     "reference": {
+      "type": "string",
+      "description": "Batch Item Request Reference. This is a reference value that Developers can use to track API requests and responses. It is solely for tracking purposes."
+     },
+     "values": {
+      "type": "array",
+      "items": {
+       "$ref": "#/components/schemas/DetokenizeResponseItemData"
+      }
+     }
+    },
+    "description": "Detokenize batch response item"
+   },
+   "ErrorResponse": {
+    "type": "object",
+    "properties": {
+     "messageId": {
+      "type": "string",
+      "description": "Message Id"
+     },
+     "errCode": {
+      "type": "number",
+      "description": "Error code"
+     },
+     "errMessage": {
+      "type": "string",
+      "description": "Error message"
+     },
+     "itemReference": {
+      "type": "string",
+      "description": "Batch Item Reference (optional)"
+     },
+     "itemIndex": {
+      "type": "number",
+      "description": "Batch Item Index (optional)"
+     }
+    },
+    "description": ""
+   },
+   "NetworkTokenBundleErrorResponse": {
+    "type": "object",
+    "properties": {
+     "success": {
+      "type": "boolean",
+      "enum": [
+       false
+      ]
+     },
+     "error": {
+      "type": "object",
+      "properties": {
+       "code": {
+        "type": "string",
+        "enum": [
+         "NETWORK_TOKEN_TIMEOUT_ERROR"
+        ]
+       },
+       "message": {
+        "type": "string",
+        "description": "Error message"
+       },
+       "details": {
+        "type": "object",
+        "additionalProperties": true,
+        "properties": {
+         "message": {
+          "type": "string",
+          "description": "Internal error message"
+         }
+        }
+       }
+      }
+     }
+    }
+   },
+   "NetworkTokenBundleCreateRequest": {
+    "type": "object",
+    "properties": {
+     "cardNumber": {
+      "type": "string",
+      "description": " "
+     },
+     "expirationMonth": {
+      "type": "string",
+      "maxLength": 2,
+      "description": "Two-digit month in which the payment card expires.\n\nFormat: `MM`.\n\nValid values: `01` through `12`. Leading 0 is required.\n\n#### Barclays and Streamline\nFor Maestro (UK Domestic) and Maestro (International) cards on Barclays and Streamline, this must be a valid value\n(`01` through `12`) but is not required to be a valid expiration date. In other words, an expiration date that is\nin the past does not cause CyberSource to reject your request. However, an invalid expiration date might cause\nthe issuer to reject your request.\n\n#### Encoded Account Numbers\nFor encoded account numbers (_type_=039), if there is no expiration date on the card, use `12`.\n\n#### FDMS Nashville\nRequired field.\n\n#### All other processors\nRequired if `pointOfSaleInformation.entryMode=keyed`. However, this field is optional if your account is configured\nfor relaxed requirements for address data and expiration date. **Important** It is your responsibility to determine\nwhether a field is required for the transaction you are requesting.\n\n#### Google Pay transactions\nFor PAN-based Google Pay transactions, this field is returned in the API response."
+     },
+     "expirationYear": {
+      "type": "string",
+      "maxLength": 4,
+      "description": "Four-digit year in which the payment card expires.\n\nFormat: `YYYY`.\n\n#### Barclays and Streamline\nFor Maestro (UK Domestic) and Maestro (International) cards on Barclays and Streamline, this must be a valid value (`1900` through `3000`) but is not required to be a valid expiration date. In other words, an expiration date that is in the past does not cause CyberSource to reject your request. However, an invalid expiration date might cause the issuer to reject your request.\n\n#### Encoded Account Numbers\nFor encoded account numbers (**_type_**`=039`), if there is no expiration date on the card, use `2021`.\n\n#### FDMS Nashville\nRequired field.\n\n#### FDC Nashville Global and FDMS South\nYou can send in 2 digits or 4 digits. If you send in 2 digits, they must be the last 2 digits of the year.\n\n#### All other processors\nRequired if `pointOfSaleInformation.entryMode=keyed`. However, this field is optional if your account is configured\nfor relaxed requirements for address data and expiration date. **Important** It is your responsibility to determine\nwhether a field is required for the transaction you are requesting.\n\n#### Google Pay transactions\nFor PAN-based Google Pay transactions, this field is returned in the API response."
+     },
+     "securityCode": {
+      "type": "string",
+      "maxLength": 4,
+      "description": " "
+     }
+    }
+   },
+   "NetworkTokenBundleCreateResponse": {
+    "type": "object",
+    "properties": {
+     "networkTokenBundleId": {
+      "type": "string",
+      "minLength": 12,
+      "maxLength": 32,
+      "description": "Unique identifier for the Network Token Bundle token used in the transaction."
+     },
+     "networkTokenBundleState": {
+      "type": "string",
+      "description": " "
+     },
+     "networkToken": {
+      "$ref": "#/components/schemas/NetworkTokenData"
+     },
+     "issuer": {
+      "$ref": "#/components/schemas/NetworkTokenBundleIssuer"
+     },
+     "metadata": {
+      "$ref": "#/components/schemas/NetworkTokenBundleMetadata"
+     }
+    }
+   },
+   "NetworkTokenBundleUpdateRequest": {
+    "type": "object",
+    "properties": {
+     "bankAccount": {
+      "type": "object",
+      "properties": {
+       "number": {
+        "type": "string",
+        "description": " "
+       },
+       "routingNumber": {
+        "type": "string",
+        "description": " "
+       }
+      }
+     },
+     "billTo": {
+      "type": "object",
+      "properties": {
+       "address1": {
+        "type": "string",
+        "description": " "
+       },
+       "address2": {
+        "type": "string",
+        "description": " "
+       },
+       "administrativeArea": {
+        "type": "string",
+        "description": " "
+       },
+       "country": {
+        "type": "string",
+        "description": " "
+       },
+       "locality": {
+        "type": "string",
+        "description": " "
+       },
+       "postalCode": {
+        "type": "string",
+        "description": " "
+       }
+      }
+     },
+     "card": {
+      "type": "object",
+      "properties": {
+       "expirationMonth": {
+        "type": "string",
+        "description": " "
+       },
+       "expirationYear": {
+        "type": "string",
+        "description": " "
+       },
+       "securityCode": {
+        "type": "string",
+        "description": " "
+       }
+      }
+     }
+    }
+   },
+   "NetworkTokenBundleUpdateResponse": {
+    "type": "object",
+    "properties": {
+     "networkTokenBundleId": {
+      "type": "string",
+      "minLength": 12,
+      "maxLength": 32,
+      "description": "Unique identifier for the Network Token Bundle token used in the transaction."
+     },
+     "networkTokenBundleState": {
+      "type": "string",
+      "description": " "
+     },
+     "networkToken": {
+      "$ref": "#/components/schemas/NetworkTokenData"
+     },
+     "issuer": {
+      "$ref": "#/components/schemas/NetworkTokenBundleIssuer"
+     },
+     "metadata": {
+      "$ref": "#/components/schemas/NetworkTokenBundleMetadata"
+     }
+    }
+   },
+   "NetworkTokenBundleDetailsResponse": {
+    "type": "object",
+    "properties": {
+     "networkTokenBundleId": {
+      "type": "string",
+      "minLength": 12,
+      "maxLength": 32,
+      "description": "Unique identifier for the Instrument Identifier token used in the transaction."
+     },
+     "networkTokenBundleState": {
+      "type": "string",
+      "description": " "
+     },
+     "networkToken": {
+      "$ref": "#/components/schemas/NetworkTokenData"
+     },
+     "issuer": {
+      "$ref": "#/components/schemas/NetworkTokenBundleIssuer"
+     }
+    }
+   },
+   "NetworkTokenBundleDeleteResponse": {
+    "type": "object",
+    "description": ""
+   },
+   "NetworkTokenData": {
+    "type": "object",
+    "properties": {
+     "networkTokenId": {
+      "type": "string",
+      "description": "Network Token Id"
+     },
+     "networkTokenState": {
+      "type": "string",
+      "description": "Network Token state"
+     },
+     "networkTokenReason": {
+      "type": "string",
+      "description": "Network Token reason"
+     },
+     "tokenizedNumber": {
+      "type": "string",
+      "maxLength": 20,
+      "description": "Card tokenized number"
+     },
+     "expirationMonth": {
+      "type": "string",
+      "maxLength": 2,
+      "description": "Two-digit month in which the payment card expires.\n\nFormat: `MM`.\n\nValid values: `01` through `12`. Leading 0 is required.\n\n#### Barclays and Streamline\nFor Maestro (UK Domestic) and Maestro (International) cards on Barclays and Streamline, this must be a valid value\n(`01` through `12`) but is not required to be a valid expiration date. In other words, an expiration date that is\nin the past does not cause CyberSource to reject your request. However, an invalid expiration date might cause\nthe issuer to reject your request.\n\n#### Encoded Account Numbers\nFor encoded account numbers (_type_=039), if there is no expiration date on the card, use `12`.\n\n#### FDMS Nashville\nRequired field.\n\n#### All other processors\nRequired if `pointOfSaleInformation.entryMode=keyed`. However, this field is optional if your account is configured\nfor relaxed requirements for address data and expiration date. **Important** It is your responsibility to determine\nwhether a field is required for the transaction you are requesting.\n\n#### Google Pay transactions\nFor PAN-based Google Pay transactions, this field is returned in the API response."
+     },
+     "expirationYear": {
+      "type": "string",
+      "maxLength": 4,
+      "description": "Four-digit year in which the payment card expires.\n\nFormat: `YYYY`.\n\n#### Barclays and Streamline\nFor Maestro (UK Domestic) and Maestro (International) cards on Barclays and Streamline, this must be a valid value (`1900` through `3000`) but is not required to be a valid expiration date. In other words, an expiration date that is in the past does not cause CyberSource to reject your request. However, an invalid expiration date might cause the issuer to reject your request.\n\n#### Encoded Account Numbers\nFor encoded account numbers (**_type_**`=039`), if there is no expiration date on the card, use `2021`.\n\n#### FDMS Nashville\nRequired field.\n\n#### FDC Nashville Global and FDMS South\nYou can send in 2 digits or 4 digits. If you send in 2 digits, they must be the last 2 digits of the year.\n\n#### All other processors\nRequired if `pointOfSaleInformation.entryMode=keyed`. However, this field is optional if your account is configured\nfor relaxed requirements for address data and expiration date. **Important** It is your responsibility to determine\nwhether a field is required for the transaction you are requesting.\n\n#### Google Pay transactions\nFor PAN-based Google Pay transactions, this field is returned in the API response."
+     },
+     "type": {
+      "type": "string",
+      "description": "Last four digits of the cardholder\u2019s account number. This field is included in the reply message when the client software\nthat is installed on the POS terminal uses the token management service (TMS) to retrieve tokenized payment details.\n\nYou must contact customer support to have your account enabled to receive these fields in the credit reply message.\n\n#### Google Pay transactions\nFor PAN-based Google Pay transactions, this field is returned in the API response.\n\n#### PIN debit\nThis field is returned only for tokenized transactions. You can use this value on the receipt that you give to the cardholder.\n\nReturned by PIN debit credit and PIN debit purchase.\n\nThis field is supported only by the following processors:\n- American Express Direct\n- Credit Mutuel-CIC\n- FDC Nashville Global\n- OmniPay Direct\n- SIX"
+     },
+     "card": {
+      "type": "object",
+      "properties": {
+       "suffix": {
+        "type": "string",
+        "description": "Last four digits of the cardholder\u2019s account number. This field is included in the reply message when the client software\nthat is installed on the POS terminal uses the token management service (TMS) to retrieve tokenized payment details.\n\nYou must contact customer support to have your account enabled to receive these fields in the credit reply message.\n\n#### Google Pay transactions\nFor PAN-based Google Pay transactions, this field is returned in the API response.\n\n#### PIN debit\nThis field is returned only for tokenized transactions. You can use this value on the receipt that you give to the cardholder.\n\nReturned by PIN debit credit and PIN debit purchase.\n\nThis field is supported only by the following processors:\n- American Express Direct\n- Credit Mutuel-CIC\n- FDC Nashville Global\n- OmniPay Direct\n- SIX"
+       },
+       "expirationMonth": {
+        "type": "string",
+        "maxLength": 2,
+        "description": "Two-digit month in which the payment card expires.\n\nFormat: `MM`.\n\nValid values: `01` through `12`. Leading 0 is required.\n\n#### Barclays and Streamline\nFor Maestro (UK Domestic) and Maestro (International) cards on Barclays and Streamline, this must be a valid value\n(`01` through `12`) but is not required to be a valid expiration date. In other words, an expiration date that is\nin the past does not cause CyberSource to reject your request. However, an invalid expiration date might cause\nthe issuer to reject your request.\n\n#### Encoded Account Numbers\nFor encoded account numbers (_type_=039), if there is no expiration date on the card, use `12`.\n\n#### FDMS Nashville\nRequired field.\n\n#### All other processors\nRequired if `pointOfSaleInformation.entryMode=keyed`. However, this field is optional if your account is configured\nfor relaxed requirements for address data and expiration date. **Important** It is your responsibility to determine\nwhether a field is required for the transaction you are requesting.\n\n#### Google Pay transactions\nFor PAN-based Google Pay transactions, this field is returned in the API response."
+       },
+       "expirationYear": {
+        "type": "string",
+        "maxLength": 4,
+        "description": "Four-digit year in which the payment card expires.\n\nFormat: `YYYY`.\n\n#### Barclays and Streamline\nFor Maestro (UK Domestic) and Maestro (International) cards on Barclays and Streamline, this must be a valid value (`1900` through `3000`) but is not required to be a valid expiration date. In other words, an expiration date that is in the past does not cause CyberSource to reject your request. However, an invalid expiration date might cause the issuer to reject your request.\n\n#### Encoded Account Numbers\nFor encoded account numbers (**_type_**`=039`), if there is no expiration date on the card, use `2021`.\n\n#### FDMS Nashville\nRequired field.\n\n#### FDC Nashville Global and FDMS South\nYou can send in 2 digits or 4 digits. If you send in 2 digits, they must be the last 2 digits of the year.\n\n#### All other processors\nRequired if `pointOfSaleInformation.entryMode=keyed`. However, this field is optional if your account is configured\nfor relaxed requirements for address data and expiration date. **Important** It is your responsibility to determine\nwhether a field is required for the transaction you are requesting.\n\n#### Google Pay transactions\nFor PAN-based Google Pay transactions, this field is returned in the API response."
+       }
+      }
+     }
+    }
+   },
+   "NetworkTokenBundleIssuer": {
+    "type": "object",
+    "properties": {
+     "paymentAccountReference": {
+      "type": "string",
+      "maxLength": 32,
+      "description": "This reference number serves as a link to the cardholder account and to all transactions for that account."
+     }
+    }
+   },
+   "NetworkTokenBundleMetadata": {
+    "type": "object",
+    "properties": {
+     "creator": {
+      "type": "string",
+      "maxLength": 32,
+      "description": "The creator of the Payment Instrument."
+     }
+    }
+   },
+   "NetworkTokenBundle": {
+    "type": "object",
+    "properties": {
+     "networkTokenBundleId": {
+      "type": "string",
+      "minLength": 12,
+      "maxLength": 32,
+      "description": "Unique identifier for the Network Token Bundle token used in the transaction."
+     },
+     "networkToken": {
+      "$ref": "#/components/schemas/NetworkTokenBundleNetworkTokenData"
+     },
+     "card": {
+      "type": "object",
+      "properties": {
+       "number": {
+        "type": "string"
+       }
+      }
+     },
+     "issuer": {
+      "$ref": "#/components/schemas/NetworkTokenBundleIssuer"
+     }
+    }
+   },
+   "NetworkTokenBundleNetworkTokenData": {
+    "allOf": [
+     {
+      "$ref": "#/components/schemas/NetworkTokenData"
+     },
+     {
+      "type": "object",
+      "properties": {
+       "cryptogram": {
+        "type": "string",
+        "maxLength": 255,
+        "description": "This field contains token information."
+       },
+       "eci": {
+        "type": "string",
+        "description": "Note This field applies only to non-U.S-issued cards.\n\nFor enroll, Numeric electronic commerce indicator (ECI) returned only for Visa, American Express, JCB,\nDiners Club, and Discover transactions when the card is not enrolled. For more information, see\n\"Interpreting the Reply,\" page 22.\n\nIf you are not using the CyberSource payment services, you must send this value to your payment\nprocessor in the subsequent request for card authorization. This field contains one of these values:\n- `06`: The card can be enrolled. Liability shift.\n- `07`: The card cannot be enrolled. No liability shift.\n\nFor validate, Numeric electronic commerce indicator (ECI) returned only for Visa, American Express, JCB,\nDiners Club, and Discover transactions. The field is absent when authentication fails.\nYou must send this value to your payment processor in the subsequent request for card authorization.\nThis field contains one of these values:\n- `05`: Successful authentication\n- `06`: Authentication attempted\n- `07`: Failed authentication (No response from the merchant because of a problem.)"
+       },
+       "requestorId": {
+        "type": "string",
+        "maxLength": 11,
+        "description": "Value that identifies your business and indicates that the cardholder\u2019s account number is tokenized. This value\nis assigned by the token service provider and is unique within the token service provider\u2019s database.\n\n**Note** This field is supported only for **CyberSource through VisaNet** and **FDC Nashville Global**.\n\n#### PIN debit\nOptional field for PIN debit credit or PIN debit purchase transactions that use payment network tokens; otherwise, not used."
+       }
+      }
+     }
+    ]
+   }
+  },
+  "responses": {
+   "400": {
+    "description": "Bad request",
+    "content": {
+     "application/json": {
+      "schema": {
+       "$ref": "#/components/schemas/ErrorResponse"
+      }
+     }
+    }
+   },
+   "401": {
+    "description": "Unauthorized",
+    "content": {
+     "application/json": {
+      "schema": {
+       "$ref": "#/components/schemas/ErrorResponse"
+      }
+     }
+    }
+   },
+   "403": {
+    "description": "Forbidden",
+    "content": {
+     "application/json": {
+      "schema": {
+       "$ref": "#/components/schemas/ErrorResponse"
+      }
+     }
+    }
+   },
+   "409": {
+    "description": "Invalid data",
+    "content": {
+     "application/json": {
+      "schema": {
+       "$ref": "#/components/schemas/ErrorResponse"
+      }
+     }
+    }
+   },
+   "500": {
+    "description": "Internal server error",
+    "content": {
+     "application/json": {
+      "schema": {
+       "$ref": "#/components/schemas/ErrorResponse"
+      }
+     }
+    }
+   }
+  },
+  "securitySchemes": {
+   "basic": {
+    "type": "http",
+    "scheme": "basic"
+   }
+  }
+ },
+ "x-readme": {
+  "explorer-enabled": true,
+  "proxy-enabled": true
+ }
+}
