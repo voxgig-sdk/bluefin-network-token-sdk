@@ -285,7 +285,7 @@ pub const NetworkTokenBundleEntity = struct {
     }
     
 
-    pub fn list(self: *EntyClass, _reqmatch: Value, _ctrl: Value) OpResult {
+    pub fn list(self: *NetworkTokenBundleEntity, _reqmatch: Value, _ctrl: Value) OpResult {
         _ = _reqmatch;
         _ = _ctrl;
         return .{ .err = h.unsupported_op("list", self.name) };
@@ -314,7 +314,7 @@ pub const NetworkTokenBundleEntity = struct {
     }
     
 
-    pub fn update(self: *EntyClass, _reqdata: Value, _ctrl: Value) OpResult {
+    pub fn update(self: *NetworkTokenBundleEntity, _reqdata: Value, _ctrl: Value) OpResult {
         _ = _reqdata;
         _ = _ctrl;
         return .{ .err = h.unsupported_op("update", self.name) };
