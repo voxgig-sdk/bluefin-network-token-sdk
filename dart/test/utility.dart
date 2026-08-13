@@ -34,8 +34,8 @@ String resolveTestPath(String rel) {
 Map<String, dynamic> envOverride(Map<String, dynamic> m) {
   final env = Platform.environment;
 
-  if ('TRUE' == env['BLUEFINNETWORKTOKEN_TEST_LIVE'] ||
-      'TRUE' == env['BLUEFINNETWORKTOKEN_TEST_OVERRIDE']) {
+  if ('TRUE' == env['BLUEFIN_NETWORK_TOKEN_TEST_LIVE'] ||
+      'TRUE' == env['BLUEFIN_NETWORK_TOKEN_TEST_OVERRIDE']) {
     for (final k in m.keys.toList()) {
       var envval = env[k];
       if (null != envval) {
@@ -45,8 +45,8 @@ Map<String, dynamic> envOverride(Map<String, dynamic> m) {
     }
   }
 
-  m['BLUEFINNETWORKTOKEN_TEST_EXPLAIN'] =
-      env['BLUEFINNETWORKTOKEN_TEST_EXPLAIN'] ?? m['BLUEFINNETWORKTOKEN_TEST_EXPLAIN'];
+  m['BLUEFIN_NETWORK_TOKEN_TEST_EXPLAIN'] =
+      env['BLUEFIN_NETWORK_TOKEN_TEST_EXPLAIN'] ?? m['BLUEFIN_NETWORK_TOKEN_TEST_EXPLAIN'];
 
   return m;
 }

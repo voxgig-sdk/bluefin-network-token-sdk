@@ -58,7 +58,7 @@ match client.network_token_bundle(Value::Noval).load(jo(vec![("id", Value::str("
 
 ```rust
 // Create — returns the bare created record
-let created = client.network_token_bundle(Value::Noval).create(jo(vec![("card", Value::empty_map()), ("card_number", Value::str("example_card_number"))]), Value::Noval).unwrap();
+let created = client.network_token_bundle(Value::Noval).create(jo(vec![("card", Value::empty_map()), ("cardNumber", Value::str("example_cardNumber"))]), Value::Noval).unwrap();
 
 // Remove
 client.network_token_bundle(Value::Noval).remove(jo(vec![("id", Value::str("example_id"))]), Value::Noval).unwrap();
@@ -252,15 +252,15 @@ On error, `ok` is `false` and `err` carries the error value.
 | Field | Description |
 | --- | --- |
 | `card` |  |
-| `card_number` |  |
-| `expiration_month` |  |
-| `expiration_year` |  |
+| `cardNumber` |  |
+| `expirationMonth` |  |
+| `expirationYear` |  |
 | `issuer` |  |
 | `metadata` |  |
-| `network_token` |  |
-| `network_token_bundle_id` |  |
-| `network_token_bundle_state` |  |
-| `security_code` |  |
+| `networkToken` |  |
+| `networkTokenBundleId` |  |
+| `networkTokenBundleState` |  |
+| `securityCode` |  |
 
 Operations: Create, Load, Remove.
 
@@ -288,15 +288,15 @@ Create an instance: `let network_token_bundle = client.network_token_bundle(Valu
 | Field | Type | Description |
 | --- | --- | --- |
 | `card` | `std::collections::HashMap<String, Value>` |  |
-| `card_number` | `String` |  |
-| `expiration_month` | `String` |  |
-| `expiration_year` | `String` |  |
+| `cardNumber` | `String` |  |
+| `expirationMonth` | `String` |  |
+| `expirationYear` | `String` |  |
 | `issuer` | `std::collections::HashMap<String, Value>` |  |
 | `metadata` | `std::collections::HashMap<String, Value>` |  |
-| `network_token` | `std::collections::HashMap<String, Value>` |  |
-| `network_token_bundle_id` | `String` |  |
-| `network_token_bundle_state` | `String` |  |
-| `security_code` | `String` |  |
+| `networkToken` | `std::collections::HashMap<String, Value>` |  |
+| `networkTokenBundleId` | `String` |  |
+| `networkTokenBundleState` | `String` |  |
+| `securityCode` | `String` |  |
 
 #### Example: Load
 

@@ -16,15 +16,15 @@ declare(strict_types=1);
 class NetworkTokenBundle
 {
     public ?array $card = null;
-    public ?string $card_number = null;
-    public ?string $expiration_month = null;
-    public ?string $expiration_year = null;
+    public ?string $cardNumber = null;
+    public ?string $expirationMonth = null;
+    public ?string $expirationYear = null;
     public ?array $issuer = null;
     public ?array $metadata = null;
-    public ?array $network_token = null;
-    public ?string $network_token_bundle_id = null;
-    public ?string $network_token_bundle_state = null;
-    public ?string $security_code = null;
+    public ?array $networkToken = null;
+    public ?string $networkTokenBundleId = null;
+    public ?string $networkTokenBundleState = null;
+    public ?string $securityCode = null;
 }
 
 /** Request payload for NetworkTokenBundle#load. */
@@ -37,15 +37,15 @@ class NetworkTokenBundleLoadMatch
 class NetworkTokenBundleCreateData
 {
     public ?array $card = null;
-    public ?string $card_number = null;
-    public ?string $expiration_month = null;
-    public ?string $expiration_year = null;
+    public ?string $cardNumber = null;
+    public ?string $expirationMonth = null;
+    public ?string $expirationYear = null;
     public ?array $issuer = null;
     public ?array $metadata = null;
-    public ?array $network_token = null;
-    public ?string $network_token_bundle_id = null;
-    public ?string $network_token_bundle_state = null;
-    public ?string $security_code = null;
+    public ?array $networkToken = null;
+    public ?string $networkTokenBundleId = null;
+    public ?string $networkTokenBundleState = null;
+    public ?string $securityCode = null;
 }
 
 /** Request payload for NetworkTokenBundle#remove. */

@@ -88,15 +88,15 @@ final network_token_bundle = client.NetworkTokenBundle();
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `card` | `Map<String, dynamic>` | No |  |
-| `card_number` | `String` | No |  |
-| `expiration_month` | `String` | No |  |
-| `expiration_year` | `String` | No |  |
+| `cardNumber` | `String` | No |  |
+| `expirationMonth` | `String` | No |  |
+| `expirationYear` | `String` | No |  |
 | `issuer` | `Map<String, dynamic>` | No |  |
 | `metadata` | `Map<String, dynamic>` | No |  |
-| `network_token` | `Map<String, dynamic>` | No |  |
-| `network_token_bundle_id` | `String` | No |  |
-| `network_token_bundle_state` | `String` | No |  |
-| `security_code` | `String` | No |  |
+| `networkToken` | `Map<String, dynamic>` | No |  |
+| `networkTokenBundleId` | `String` | No |  |
+| `networkTokenBundleState` | `String` | No |  |
+| `securityCode` | `String` | No |  |
 
 ### Operations
 

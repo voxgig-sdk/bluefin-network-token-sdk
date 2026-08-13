@@ -17,15 +17,15 @@
 // NetworkTokenBundle is the typed data model for the network_token_bundle entity.
 typedef struct {
   voxgig_value*card;  // optional
-  char*card_number;  // optional
-  char*expiration_month;  // optional
-  char*expiration_year;  // optional
+  char*cardnumber;  // optional
+  char*expirationmonth;  // optional
+  char*expirationyear;  // optional
   voxgig_value*issuer;  // optional
   voxgig_value*metadata;  // optional
-  voxgig_value*network_token;  // optional
-  char*network_token_bundle_id;  // optional
-  char*network_token_bundle_state;  // optional
-  char*security_code;  // optional
+  voxgig_value*networktoken;  // optional
+  char*networktokenbundleid;  // optional
+  char*networktokenbundlestate;  // optional
+  char*securitycode;  // optional
 } NetworkTokenBundle;
 
 // NetworkTokenBundleLoadMatch is the typed request payload for NetworkTokenBundle.load.
@@ -36,15 +36,15 @@ typedef struct {
 // NetworkTokenBundleCreateData is the typed request payload for NetworkTokenBundle.create.
 typedef struct {
   voxgig_value*card;  // optional
-  char*card_number;  // optional
-  char*expiration_month;  // optional
-  char*expiration_year;  // optional
+  char*cardnumber;  // optional
+  char*expirationmonth;  // optional
+  char*expirationyear;  // optional
   voxgig_value*issuer;  // optional
   voxgig_value*metadata;  // optional
-  voxgig_value*network_token;  // optional
-  char*network_token_bundle_id;  // optional
-  char*network_token_bundle_state;  // optional
-  char*security_code;  // optional
+  voxgig_value*networktoken;  // optional
+  char*networktokenbundleid;  // optional
+  char*networktokenbundlestate;  // optional
+  char*securitycode;  // optional
 } NetworkTokenBundleCreateData;
 
 // NetworkTokenBundleRemoveMatch is the typed request payload for NetworkTokenBundle.remove.

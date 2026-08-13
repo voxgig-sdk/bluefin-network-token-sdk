@@ -13,13 +13,13 @@
 # @!attribute [rw] card
 #   @return [Hash, nil]
 #
-# @!attribute [rw] card_number
+# @!attribute [rw] cardNumber
 #   @return [String, nil]
 #
-# @!attribute [rw] expiration_month
+# @!attribute [rw] expirationMonth
 #   @return [String, nil]
 #
-# @!attribute [rw] expiration_year
+# @!attribute [rw] expirationYear
 #   @return [String, nil]
 #
 # @!attribute [rw] issuer
@@ -28,28 +28,28 @@
 # @!attribute [rw] metadata
 #   @return [Hash, nil]
 #
-# @!attribute [rw] network_token
+# @!attribute [rw] networkToken
 #   @return [Hash, nil]
 #
-# @!attribute [rw] network_token_bundle_id
+# @!attribute [rw] networkTokenBundleId
 #   @return [String, nil]
 #
-# @!attribute [rw] network_token_bundle_state
+# @!attribute [rw] networkTokenBundleState
 #   @return [String, nil]
 #
-# @!attribute [rw] security_code
+# @!attribute [rw] securityCode
 #   @return [String, nil]
 NetworkTokenBundle = Struct.new(
   :card,
-  :card_number,
-  :expiration_month,
-  :expiration_year,
+  :cardNumber,
+  :expirationMonth,
+  :expirationYear,
   :issuer,
   :metadata,
-  :network_token,
-  :network_token_bundle_id,
-  :network_token_bundle_state,
-  :security_code,
+  :networkToken,
+  :networkTokenBundleId,
+  :networkTokenBundleState,
+  :securityCode,
   keyword_init: true
 )
 
@@ -67,13 +67,13 @@ NetworkTokenBundleLoadMatch = Struct.new(
 # @!attribute [rw] card
 #   @return [Hash, nil]
 #
-# @!attribute [rw] card_number
+# @!attribute [rw] cardNumber
 #   @return [String, nil]
 #
-# @!attribute [rw] expiration_month
+# @!attribute [rw] expirationMonth
 #   @return [String, nil]
 #
-# @!attribute [rw] expiration_year
+# @!attribute [rw] expirationYear
 #   @return [String, nil]
 #
 # @!attribute [rw] issuer
@@ -82,28 +82,28 @@ NetworkTokenBundleLoadMatch = Struct.new(
 # @!attribute [rw] metadata
 #   @return [Hash, nil]
 #
-# @!attribute [rw] network_token
+# @!attribute [rw] networkToken
 #   @return [Hash, nil]
 #
-# @!attribute [rw] network_token_bundle_id
+# @!attribute [rw] networkTokenBundleId
 #   @return [String, nil]
 #
-# @!attribute [rw] network_token_bundle_state
+# @!attribute [rw] networkTokenBundleState
 #   @return [String, nil]
 #
-# @!attribute [rw] security_code
+# @!attribute [rw] securityCode
 #   @return [String, nil]
 NetworkTokenBundleCreateData = Struct.new(
   :card,
-  :card_number,
-  :expiration_month,
-  :expiration_year,
+  :cardNumber,
+  :expirationMonth,
+  :expirationYear,
   :issuer,
   :metadata,
-  :network_token,
-  :network_token_bundle_id,
-  :network_token_bundle_state,
-  :security_code,
+  :networkToken,
+  :networkTokenBundleId,
+  :networkTokenBundleState,
+  :securityCode,
   keyword_init: true
 )
 

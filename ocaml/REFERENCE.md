@@ -88,41 +88,44 @@ let network_token_bundle = Sdk_client.network_token_bundle client Noval
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `card` | `value map` | No |  |
-| `card_number` | `string` | No |  |
-| `expiration_month` | `string` | No |  |
-| `expiration_year` | `string` | No |  |
+| `cardNumber` | `string` | No |  |
+| `expirationMonth` | `string` | No |  |
+| `expirationYear` | `string` | No |  |
 | `issuer` | `value map` | No |  |
 | `metadata` | `value map` | No |  |
-| `network_token` | `value map` | No |  |
-| `network_token_bundle_id` | `string` | No |  |
-| `network_token_bundle_state` | `string` | No |  |
-| `security_code` | `string` | No |  |
+| `networkToken` | `value map` | No |  |
+| `networkTokenBundleId` | `string` | No |  |
+| `networkTokenBundleState` | `string` | No |  |
+| `securityCode` | `string` | No |  |
 
 ### Operations
 
-#### `e_create reqdata ctrl : value`
+#### `e_create reqdata ctrl : entity_obj`
 
-Create a new entity with the given data. Returns the created entity data and raises on error.
+Create a new entity with the given data. Resolves to the ENTITY (read the record with `e_data_get`) and raises on error.
 
 ```ocaml
 let result = (Sdk_client.network_token_bundle client Noval).e_create (jo [
 ]) Noval
+let result_data = result.e_data_get ()
 ```
 
-#### `e_load reqmatch ctrl : value`
+#### `e_load reqmatch ctrl : entity_obj`
 
-Load a single entity matching the given criteria. Returns the entity data and raises on error.
+Load a single entity matching the given criteria. Resolves to the ENTITY (read the record with `e_data_get`) and raises on error.
 
 ```ocaml
 let result = (Sdk_client.network_token_bundle client Noval).e_load (jo [("id", (Str "network_token_bundle_id"))]) Noval
+let result_data = result.e_data_get ()
 ```
 
-#### `e_remove reqmatch ctrl : value`
+#### `e_remove reqmatch ctrl : entity_obj`
 
-Remove the entity matching the given criteria. Raises on error.
+Remove the entity matching the given criteria. Resolves to the ENTITY, marked deleted (`e_deleted`); it keeps the data it held. Raises on error.
 
 ```ocaml
 let result = (Sdk_client.network_token_bundle client Noval).e_remove (jo [("id", (Str "network_token_bundle_id"))]) Noval
+let result_data = result.e_data_get ()
 ```
 
 ### Common Fields

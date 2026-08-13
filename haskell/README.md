@@ -57,32 +57,34 @@ to recover from failures.
 
 ### 3. Load a networktokenbundle
 
-`eLoad ent match ctrl` returns the bare record and raises on error.
+`eLoad ent match ctrl` resolves to the ENTITY and raises on error;
+`eDataGet` gives the record.
 
 ```haskell
   ent2 <- Sdk.network_token_bundle sdk VNoval
   m <- jo [("id", VStr "example_id")]
   ctrl2 <- emptyMap
   network_token_bundle <- Sdk.eLoad ent2 m ctrl2
-  print network_token_bundle
+  print =<< Sdk.eDataGet network_token_bundle
 ```
 
 ### 4. Create, update, and remove
 
 ```haskell
   createEnt <- Sdk.network_token_bundle sdk VNoval
-  d <- jo [("card", VNoval), ("card_number", VStr "example_card_number")]
+  d <- jo [("card", VNoval), ("cardNumber", VStr "example_cardNumber")]
   cctrl <- emptyMap
   created <- Sdk.eCreate createEnt d cctrl
-  print created
+  print =<< Sdk.eDataGet created
 ```
 
 ```haskell
   removeEnt <- Sdk.network_token_bundle sdk VNoval
   rm <- jo [("id", VStr "example_id")]
   rctrl <- emptyMap
-  _ <- Sdk.eRemove removeEnt rm rctrl
-  return ()
+  -- Resolves to the entity, marked deleted; it keeps the data it held.
+  removed <- Sdk.eRemove removeEnt rm rctrl
+  print =<< readIORef (Sdk.eDeleted removed)
 ```
 
 
@@ -279,9 +281,9 @@ All entities share the same record interface (fields of the `Entity` type).
 
 | Field | Signature | Description |
 | --- | --- | --- |
-| `eLoad` | `Value -> Value -> IO Value` | Load a single entity by match criteria. Raises on error. |
-| `eCreate` | `Value -> Value -> IO Value` | Create a new entity. Raises on error. |
-| `eRemove` | `Value -> Value -> IO Value` | Remove an entity. Raises on error. |
+| `eLoad` | `Value -> Value -> IO Entity` | Load a single entity by match criteria. Resolves to the entity. Raises on error. |
+| `eCreate` | `Value -> Value -> IO Entity` | Create a new entity. Resolves to the entity. Raises on error. |
+| `eRemove` | `Value -> Value -> IO Entity` | Remove an entity. Resolves to the entity, marked deleted. Raises on error. |
 | `eDataGet` | `IO Value` | Get entity data. |
 | `eDataSet` | `Value -> IO ()` | Set entity data. |
 | `eStream` | `String -> Value -> Value -> IO [Value]` | Run an op as a lazy stream of items. |
@@ -290,9 +292,11 @@ All entities share the same record interface (fields of the `Entity` type).
 
 ### Result shape
 
-Entity operations return the bare result `Value` (a map for single-entity
-ops, a list for `eList`) and raise on error. Wrap calls in
-`Control.Exception.try` to handle failures.
+Entity operations resolve to the ENTITY, not the raw record — `eList` to
+one entity per record — and raise on error. The record is reached through
+`eDataGet`, which returns the entity's data container. `eRemove` resolves to
+the entity marked deleted (`eDeleted`); it keeps the data it held. Wrap calls
+in `Control.Exception.try` to handle failures.
 
 The `direct` escape hatch never raises — it returns a result `Value`
 you branch on via its `ok` field (read with `getp result "ok"`):
@@ -313,15 +317,15 @@ On error, `ok` is `False` and `err` carries the error value.
 | Field | Description |
 | --- | --- |
 | `card` |  |
-| `card_number` |  |
-| `expiration_month` |  |
-| `expiration_year` |  |
+| `cardNumber` |  |
+| `expirationMonth` |  |
+| `expirationYear` |  |
 | `issuer` |  |
 | `metadata` |  |
-| `network_token` |  |
-| `network_token_bundle_id` |  |
-| `network_token_bundle_state` |  |
-| `security_code` |  |
+| `networkToken` |  |
+| `networkTokenBundleId` |  |
+| `networkTokenBundleState` |  |
+| `securityCode` |  |
 
 Operations: Create, Load, Remove.
 
@@ -340,24 +344,24 @@ Create an instance: `network_token_bundle <- Sdk.network_token_bundle sdk VNoval
 
 | Method | Description |
 | --- | --- |
-| `eCreate ent data ctrl` | Create a new entity with the given data. |
-| `eLoad ent match ctrl` | Load a single entity by match criteria. |
-| `eRemove ent match ctrl` | Remove the matching entity. |
+| `eCreate ent data ctrl` | Create a new entity with the given data. Resolves to the entity. |
+| `eLoad ent match ctrl` | Load a single entity by match criteria. Resolves to the entity. |
+| `eRemove ent match ctrl` | Remove the matching entity. Resolves to the entity, marked deleted. |
 
 #### Fields
 
 | Field | Type | Description |
 | --- | --- | --- |
 | `card` | `Value` |  |
-| `card_number` | `String` |  |
-| `expiration_month` | `String` |  |
-| `expiration_year` | `String` |  |
+| `cardNumber` | `String` |  |
+| `expirationMonth` | `String` |  |
+| `expirationYear` | `String` |  |
 | `issuer` | `Value` |  |
 | `metadata` | `Value` |  |
-| `network_token` | `Value` |  |
-| `network_token_bundle_id` | `String` |  |
-| `network_token_bundle_state` | `String` |  |
-| `security_code` | `String` |  |
+| `networkToken` | `Value` |  |
+| `networkTokenBundleId` | `String` |  |
+| `networkTokenBundleState` | `String` |  |
+| `securityCode` | `String` |  |
 
 #### Example: Load
 
@@ -366,6 +370,8 @@ Create an instance: `network_token_bundle <- Sdk.network_token_bundle sdk VNoval
   match <- jo [("id", VStr "network_token_bundle_id")]
   ctrl <- emptyMap
   network_token_bundle <- Sdk.eLoad ent match ctrl
+  -- The op resolves to the ENTITY; the record is inside it.
+  network_token_bundleData <- Sdk.eDataGet network_token_bundle
 ```
 
 #### Example: Create
@@ -376,6 +382,7 @@ Create an instance: `network_token_bundle <- Sdk.network_token_bundle sdk VNoval
     []
   ctrl <- emptyMap
   network_token_bundle <- Sdk.eCreate ent d ctrl
+  network_token_bundleData <- Sdk.eDataGet network_token_bundle
 ```
 
 

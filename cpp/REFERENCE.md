@@ -92,15 +92,15 @@ auto network_token_bundle = client->network_token_bundle();
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `card` | `std::map<std::string, Value>` | No |  |
-| `card_number` | `std::string` | No |  |
-| `expiration_month` | `std::string` | No |  |
-| `expiration_year` | `std::string` | No |  |
+| `cardNumber` | `std::string` | No |  |
+| `expirationMonth` | `std::string` | No |  |
+| `expirationYear` | `std::string` | No |  |
 | `issuer` | `std::map<std::string, Value>` | No |  |
 | `metadata` | `std::map<std::string, Value>` | No |  |
-| `network_token` | `std::map<std::string, Value>` | No |  |
-| `network_token_bundle_id` | `std::string` | No |  |
-| `network_token_bundle_state` | `std::string` | No |  |
-| `security_code` | `std::string` | No |  |
+| `networkToken` | `std::map<std::string, Value>` | No |  |
+| `networkTokenBundleId` | `std::string` | No |  |
+| `networkTokenBundleState` | `std::string` | No |  |
+| `securityCode` | `std::string` | No |  |
 
 ### Operations
 

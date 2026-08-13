@@ -40,7 +40,7 @@ BluefinNetworkTokenSDK client = new BluefinNetworkTokenSDK(options);
 
 ### 3. Load a networktokenbundle
 
-`load()` returns the bare record (as `Object`) and raises on error.
+`load()` returns the ENTITY — call data() for the record — and raises on error.
 
 ```java
 try {
@@ -55,8 +55,8 @@ catch (RuntimeException err) {
 ### 4. Create, update, and remove
 
 ```java
-// Create — returns the bare created record (as Object)
-Object created = client.networkTokenBundle(null).create(Map.of("card", Map.of(), "card_number", "example_card_number"), null);
+// Create — returns the ENTITY (call data() for the record)
+Object created = client.networkTokenBundle(null).create(Map.of("card", Map.of(), "cardNumber", "example_cardNumber"), null);
 
 // Remove
 client.networkTokenBundle(null).remove(Map.of("id", "example_id"), null);
@@ -137,7 +137,8 @@ Create a mock client for unit testing — no server required:
 ```java
 BluefinNetworkTokenSDK client = BluefinNetworkTokenSDK.testSDK(null, null);
 
-// Entity ops return the bare record and raise on error.
+// Entity ops return the ENTITY and raises on error;
+// call data() for the record.
 Object networkTokenBundle = client.networkTokenBundle(null).load(Map.of("id", "test01"), null);
 // networkTokenBundle holds the mock response record
 System.out.println(networkTokenBundle);
@@ -235,7 +236,7 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return the bare result data (a `Map` for single-entity
+Entity operations return the ENTITY (call data() for the record) (a `Map` for single-entity
 ops, an aggregate `List` for `list`) as `Object` and raise on error. Wrap
 calls in `try`/`catch` to handle failures.
 
@@ -258,15 +259,15 @@ On error, `ok` is `false` and `err` contains the error value.
 | Field | Description |
 | --- | --- |
 | `card` |  |
-| `card_number` |  |
-| `expiration_month` |  |
-| `expiration_year` |  |
+| `cardNumber` |  |
+| `expirationMonth` |  |
+| `expirationYear` |  |
 | `issuer` |  |
 | `metadata` |  |
-| `network_token` |  |
-| `network_token_bundle_id` |  |
-| `network_token_bundle_state` |  |
-| `security_code` |  |
+| `networkToken` |  |
+| `networkTokenBundleId` |  |
+| `networkTokenBundleState` |  |
+| `securityCode` |  |
 
 Operations: create, load, remove.
 
@@ -294,15 +295,15 @@ Create an instance: `SdkEntity networkTokenBundle = client.networkTokenBundle(nu
 | Field | Type | Description |
 | --- | --- | --- |
 | `card` | `Map<String, Object>` |  |
-| `card_number` | `String` |  |
-| `expiration_month` | `String` |  |
-| `expiration_year` | `String` |  |
+| `cardNumber` | `String` |  |
+| `expirationMonth` | `String` |  |
+| `expirationYear` | `String` |  |
 | `issuer` | `Map<String, Object>` |  |
 | `metadata` | `Map<String, Object>` |  |
-| `network_token` | `Map<String, Object>` |  |
-| `network_token_bundle_id` | `String` |  |
-| `network_token_bundle_state` | `String` |  |
-| `security_code` | `String` |  |
+| `networkToken` | `Map<String, Object>` |  |
+| `networkTokenBundleId` | `String` |  |
+| `networkTokenBundleState` | `String` |  |
+| `securityCode` | `String` |  |
 
 #### Example: Load
 

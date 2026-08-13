@@ -11,17 +11,17 @@ main: kit: entity: network_token_bundle: {
       type: "`$OBJECT`"
     }
     {
-      name: "card_number"
+      name: "cardNumber"
       req: false
       type: "`$STRING`"
     }
     {
-      name: "expiration_month"
+      name: "expirationMonth"
       req: false
       type: "`$STRING`"
     }
     {
-      name: "expiration_year"
+      name: "expirationYear"
       req: false
       type: "`$STRING`"
     }
@@ -36,22 +36,22 @@ main: kit: entity: network_token_bundle: {
       type: "`$OBJECT`"
     }
     {
-      name: "network_token"
+      name: "networkToken"
       req: false
       type: "`$OBJECT`"
     }
     {
-      name: "network_token_bundle_id"
+      name: "networkTokenBundleId"
       req: false
       type: "`$STRING`"
     }
     {
-      name: "network_token_bundle_state"
+      name: "networkTokenBundleState"
       req: false
       type: "`$STRING`"
     }
     {
-      name: "security_code"
+      name: "securityCode"
       req: false
       type: "`$STRING`"
     }

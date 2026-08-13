@@ -44,7 +44,7 @@ func TestNetworkTokenBundleEntity(t *testing.T) {
 		// The basic flow consumes synthetic IDs from the fixture. In live mode
 		// without an *_ENTID env override, those IDs hit the live API and 4xx.
 		if setup.syntheticOnly {
-			t.Skip("live entity test uses synthetic IDs from fixture — set BLUEFINNETWORKTOKEN_TEST_NETWORK_TOKEN_BUNDLE_ENTID JSON to run live")
+			t.Skip("live entity test uses synthetic IDs from fixture — set BLUEFIN_NETWORK_TOKEN_TEST_NETWORK_TOKEN_BUNDLE_ENTID JSON to run live")
 			return
 		}
 		client := setup.client
@@ -58,7 +58,7 @@ func TestNetworkTokenBundleEntity(t *testing.T) {
 		if err != nil {
 			t.Fatalf("create failed: %v", err)
 		}
-		networkTokenBundleRef01Data = core.ToMapAny(networkTokenBundleRef01DataResult)
+		networkTokenBundleRef01Data = core.ToMapAny(entityData(networkTokenBundleRef01DataResult))
 		if networkTokenBundleRef01Data == nil {
 			t.Fatal("expected create result to be a map")
 		}
@@ -114,38 +114,38 @@ func network_token_bundleBasicSetup(extra map[string]any) *entityTestSetup {
 	// Detect ENTID env override before envOverride consumes it. When live
 	// mode is on without a real override, the basic test runs against synthetic
 	// IDs from the fixture and 4xx's. Surface this so the test can skip.
-	entidEnvRaw := os.Getenv("BLUEFINNETWORKTOKEN_TEST_NETWORK_TOKEN_BUNDLE_ENTID")
+	entidEnvRaw := os.Getenv("BLUEFIN_NETWORK_TOKEN_TEST_NETWORK_TOKEN_BUNDLE_ENTID")
 	idmapOverridden := entidEnvRaw != "" && strings.HasPrefix(strings.TrimSpace(entidEnvRaw), "{")
 
 	env := envOverride(map[string]any{
-		"BLUEFINNETWORKTOKEN_TEST_NETWORK_TOKEN_BUNDLE_ENTID": idmap,
-		"BLUEFINNETWORKTOKEN_TEST_LIVE":      "FALSE",
-		"BLUEFINNETWORKTOKEN_TEST_EXPLAIN":   "FALSE",
-		"BLUEFINNETWORKTOKEN_APIKEY":         "NONE",
+		"BLUEFIN_NETWORK_TOKEN_TEST_NETWORK_TOKEN_BUNDLE_ENTID": idmap,
+		"BLUEFIN_NETWORK_TOKEN_TEST_LIVE":      "FALSE",
+		"BLUEFIN_NETWORK_TOKEN_TEST_EXPLAIN":   "FALSE",
+		"BLUEFIN_NETWORK_TOKEN_APIKEY":         "NONE",
 	})
 
-	idmapResolved := core.ToMapAny(env["BLUEFINNETWORKTOKEN_TEST_NETWORK_TOKEN_BUNDLE_ENTID"])
+	idmapResolved := core.ToMapAny(env["BLUEFIN_NETWORK_TOKEN_TEST_NETWORK_TOKEN_BUNDLE_ENTID"])
 	if idmapResolved == nil {
 		idmapResolved = core.ToMapAny(idmap)
 	}
 
-	if env["BLUEFINNETWORKTOKEN_TEST_LIVE"] == "TRUE" {
+	if env["BLUEFIN_NETWORK_TOKEN_TEST_LIVE"] == "TRUE" {
 		mergedOpts := vs.Merge([]any{
 			map[string]any{
-				"apikey": env["BLUEFINNETWORKTOKEN_APIKEY"],
+				"apikey": env["BLUEFIN_NETWORK_TOKEN_APIKEY"],
 			},
 			extra,
 		})
 		client = sdk.NewBluefinNetworkTokenSDK(core.ToMapAny(mergedOpts))
 	}
 
-	live := env["BLUEFINNETWORKTOKEN_TEST_LIVE"] == "TRUE"
+	live := env["BLUEFIN_NETWORK_TOKEN_TEST_LIVE"] == "TRUE"
 	return &entityTestSetup{
 		client:        client,
 		data:          entityData,
 		idmap:         idmapResolved,
 		env:           env,
-		explain:       env["BLUEFINNETWORKTOKEN_TEST_EXPLAIN"] == "TRUE",
+		explain:       env["BLUEFIN_NETWORK_TOKEN_TEST_EXPLAIN"] == "TRUE",
 		live:          live,
 		syntheticOnly: live && !idmapOverridden,
 		now:           time.Now().UnixMilli(),

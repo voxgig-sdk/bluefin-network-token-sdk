@@ -35,7 +35,7 @@ object NetworkTokenBundleEntityTest {
       var networkTokenBundleRef01Data = Helpers.toMapAny(Struct.getprop(
           Struct.getpath(entityData, "new.network_token_bundle"), "network_token_bundle_ref01"))
       val networkTokenBundleRef01DataResult = networkTokenBundleRef01Ent.create(networkTokenBundleRef01Data, null)
-      networkTokenBundleRef01Data = Helpers.toMapAny(networkTokenBundleRef01DataResult)
+      networkTokenBundleRef01Data = Helpers.toMapAny(networkTokenBundleRef01DataResult match { case e: SdkEntity => e.data(); case o => o })
       rep.check("network_token_bundle.create.map", networkTokenBundleRef01Data != null, "expected create result to be a map")
 
       // LOAD

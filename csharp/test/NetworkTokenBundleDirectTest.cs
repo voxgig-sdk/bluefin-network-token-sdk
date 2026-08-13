@@ -107,22 +107,22 @@ public class NetworkTokenBundleDirectTest
 
         var env = TestRunner.EnvOverride(new Dictionary<string, object?>
         {
-            ["BLUEFINNETWORKTOKEN_TEST_NETWORK_TOKEN_BUNDLE_ENTID"] = new Dictionary<string, object?>(),
-            ["BLUEFINNETWORKTOKEN_TEST_LIVE"] = "FALSE",
-            ["BLUEFINNETWORKTOKEN_APIKEY"] = "NONE",
+            ["BLUEFIN_NETWORK_TOKEN_TEST_NETWORK_TOKEN_BUNDLE_ENTID"] = new Dictionary<string, object?>(),
+            ["BLUEFIN_NETWORK_TOKEN_TEST_LIVE"] = "FALSE",
+            ["BLUEFIN_NETWORK_TOKEN_APIKEY"] = "NONE",
         });
 
-        var live = Equals(env["BLUEFINNETWORKTOKEN_TEST_LIVE"], "TRUE");
+        var live = Equals(env["BLUEFIN_NETWORK_TOKEN_TEST_LIVE"], "TRUE");
 
         if (live)
         {
             var liveClient = new BluefinNetworkTokenSDK(new Dictionary<string, object?>
             {
-                ["apikey"] = env["BLUEFINNETWORKTOKEN_APIKEY"],
+                ["apikey"] = env["BLUEFIN_NETWORK_TOKEN_APIKEY"],
             });
 
             var idmap = new Dictionary<string, object?>();
-            var entidRaw = env["BLUEFINNETWORKTOKEN_TEST_NETWORK_TOKEN_BUNDLE_ENTID"];
+            var entidRaw = env["BLUEFIN_NETWORK_TOKEN_TEST_NETWORK_TOKEN_BUNDLE_ENTID"];
             if (entidRaw is string entidStr && entidStr.StartsWith("{"))
             {
                 try

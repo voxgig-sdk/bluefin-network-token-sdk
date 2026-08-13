@@ -9,15 +9,15 @@
 /**
  * @typedef {Object} NetworkTokenBundle
  * @property {Object} [card]
- * @property {string} [card_number]
- * @property {string} [expiration_month]
- * @property {string} [expiration_year]
+ * @property {string} [cardNumber]
+ * @property {string} [expirationMonth]
+ * @property {string} [expirationYear]
  * @property {Object} [issuer]
  * @property {Object} [metadata]
- * @property {Object} [network_token]
- * @property {string} [network_token_bundle_id]
- * @property {string} [network_token_bundle_state]
- * @property {string} [security_code]
+ * @property {Object} [networkToken]
+ * @property {string} [networkTokenBundleId]
+ * @property {string} [networkTokenBundleState]
+ * @property {string} [securityCode]
  */
 
 /**
@@ -28,15 +28,15 @@
 /**
  * @typedef {Object} NetworkTokenBundleCreateData
  * @property {Object} [card]
- * @property {string} [card_number]
- * @property {string} [expiration_month]
- * @property {string} [expiration_year]
+ * @property {string} [cardNumber]
+ * @property {string} [expirationMonth]
+ * @property {string} [expirationYear]
  * @property {Object} [issuer]
  * @property {Object} [metadata]
- * @property {Object} [network_token]
- * @property {string} [network_token_bundle_id]
- * @property {string} [network_token_bundle_state]
- * @property {string} [security_code]
+ * @property {Object} [networkToken]
+ * @property {string} [networkTokenBundleId]
+ * @property {string} [networkTokenBundleState]
+ * @property {string} [securityCode]
  */
 
 /**

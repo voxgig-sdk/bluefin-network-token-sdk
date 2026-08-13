@@ -1,4 +1,4 @@
-# ProjectName SDK exists test
+# BluefinNetworkToken SDK exists test
 
 import pytest
 from bluefinnetworktoken_sdk import BluefinNetworkTokenSDK

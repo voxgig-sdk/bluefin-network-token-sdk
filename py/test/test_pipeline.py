@@ -16,11 +16,11 @@
 import pytest
 
 from bluefinnetworktoken_sdk import BluefinNetworkTokenSDK
-from core.error import BluefinNetworkTokenError
-from core.result import BluefinNetworkTokenResult
-from core.response import BluefinNetworkTokenResponse
-from core.spec import BluefinNetworkTokenSpec
-from feature.base_feature import BluefinNetworkTokenBaseFeature
+from bluefinnetworktoken_sdk.core.error import BluefinNetworkTokenError
+from bluefinnetworktoken_sdk.core.result import BluefinNetworkTokenResult
+from bluefinnetworktoken_sdk.core.response import BluefinNetworkTokenResponse
+from bluefinnetworktoken_sdk.core.spec import BluefinNetworkTokenSpec
+from bluefinnetworktoken_sdk.feature.base_feature import BluefinNetworkTokenBaseFeature
 
 
 def _client():

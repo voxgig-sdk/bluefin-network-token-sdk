@@ -16,11 +16,11 @@ package voxgig.bluefinnetworktokensdk.core
 
 object BluefinNetworkTokenTypes {
 
-  final case class NetworkTokenBundle(card: java.util.Map[String, Object], card_number: String, expiration_month: String, expiration_year: String, issuer: java.util.Map[String, Object], metadata: java.util.Map[String, Object], network_token: java.util.Map[String, Object], network_token_bundle_id: String, network_token_bundle_state: String, security_code: String)
+  final case class NetworkTokenBundle(card: java.util.Map[String, Object], cardNumber: String, expirationMonth: String, expirationYear: String, issuer: java.util.Map[String, Object], metadata: java.util.Map[String, Object], networkToken: java.util.Map[String, Object], networkTokenBundleId: String, networkTokenBundleState: String, securityCode: String)
 
   final case class NetworkTokenBundleLoadMatch(id: String)
 
-  final case class NetworkTokenBundleCreateData(card: java.util.Map[String, Object], card_number: String, expiration_month: String, expiration_year: String, issuer: java.util.Map[String, Object], metadata: java.util.Map[String, Object], network_token: java.util.Map[String, Object], network_token_bundle_id: String, network_token_bundle_state: String, security_code: String)
+  final case class NetworkTokenBundleCreateData(card: java.util.Map[String, Object], cardNumber: String, expirationMonth: String, expirationYear: String, issuer: java.util.Map[String, Object], metadata: java.util.Map[String, Object], networkToken: java.util.Map[String, Object], networkTokenBundleId: String, networkTokenBundleState: String, securityCode: String)
 
   final case class NetworkTokenBundleRemoveMatch(id: String)
 

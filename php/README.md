@@ -37,7 +37,7 @@ $client = new BluefinNetworkTokenSDK([
 
 ```php
 try {
-    // load() returns the bare NetworkTokenBundle record (throws on error).
+    // load() returns the ENTITY — call data_get() for the NetworkTokenBundle record (throws on error).
     $networktokenbundle = $client->NetworkTokenBundle()->load(["id" => "example_id"]);
     print_r($networktokenbundle);
 } catch (\Throwable $err) {
@@ -48,8 +48,8 @@ try {
 ### 4. Create, update, and remove
 
 ```php
-// create() returns the bare created NetworkTokenBundle record.
-$created = $client->NetworkTokenBundle()->create(["card" => [], "card_number" => "example_card_number"]);
+// create() returns the ENTITY — call data_get() for the created NetworkTokenBundle record.
+$created = $client->NetworkTokenBundle()->create(["card" => [], "cardNumber" => "example_cardNumber"]);
 
 // Remove
 $client->NetworkTokenBundle()->remove(["id" => "example_id"]);
@@ -138,7 +138,8 @@ $client = BluefinNetworkTokenSDK::test([
     "entity" => ["networktokenbundle" => ["test01" => ["id" => "test01"]]],
 ]);
 
-// Entity ops return the bare mock record (throws on error).
+// Entity ops return the ENTITY (throws on error);
+// call data_get() for the mock record.
 $networktokenbundle = $client->NetworkTokenBundle()->load(["id" => "test01"]);
 print_r($networktokenbundle);
 ```
@@ -241,7 +242,7 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return the bare result data (an `array` for single-entity
+Entity operations return the ENTITY (call data_get() for the record) (an `array` for single-entity
 ops, a `list` for `list`) and throw on error. Wrap calls in
 `try`/`catch` to handle failures.
 
@@ -264,15 +265,15 @@ On error, `ok` is `false` and `$err` contains the error value.
 | Field | Description |
 | --- | --- |
 | `card` |  |
-| `card_number` |  |
-| `expiration_month` |  |
-| `expiration_year` |  |
+| `cardNumber` |  |
+| `expirationMonth` |  |
+| `expirationYear` |  |
 | `issuer` |  |
 | `metadata` |  |
-| `network_token` |  |
-| `network_token_bundle_id` |  |
-| `network_token_bundle_state` |  |
-| `security_code` |  |
+| `networkToken` |  |
+| `networkTokenBundleId` |  |
+| `networkTokenBundleState` |  |
+| `securityCode` |  |
 
 Operations: Create, Load, Remove.
 
@@ -300,20 +301,20 @@ Create an instance: `$network_token_bundle = $client->NetworkTokenBundle();`
 | Field | Type | Description |
 | --- | --- | --- |
 | `card` | `array` |  |
-| `card_number` | `string` |  |
-| `expiration_month` | `string` |  |
-| `expiration_year` | `string` |  |
+| `cardNumber` | `string` |  |
+| `expirationMonth` | `string` |  |
+| `expirationYear` | `string` |  |
 | `issuer` | `array` |  |
 | `metadata` | `array` |  |
-| `network_token` | `array` |  |
-| `network_token_bundle_id` | `string` |  |
-| `network_token_bundle_state` | `string` |  |
-| `security_code` | `string` |  |
+| `networkToken` | `array` |  |
+| `networkTokenBundleId` | `string` |  |
+| `networkTokenBundleState` | `string` |  |
+| `securityCode` | `string` |  |
 
 #### Example: Load
 
 ```php
-// load() returns the bare NetworkTokenBundle record (throws on error).
+// load() returns the ENTITY — call data_get() for the NetworkTokenBundle record (throws on error).
 $network_token_bundle = $client->NetworkTokenBundle()->load(["id" => "network_token_bundle_id"]);
 ```
 

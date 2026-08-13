@@ -41,7 +41,7 @@ client = BluefinNetworkTokenSDK({
 
 ### 3. Load a networktokenbundle
 
-`load()` returns the bare record (a `dict`) and raises on error.
+`load()` returns the ENTITY — call data_get() for the record — and raises on error.
 
 ```python
 try:
@@ -54,8 +54,8 @@ except Exception as err:
 ### 4. Create, update, and remove
 
 ```python
-# Create — returns the bare created record (a dict)
-created = client.NetworkTokenBundle().create({"card": {}, "card_number": "example_card_number"})
+# Create — returns the ENTITY (call data_get() for the record)
+created = client.NetworkTokenBundle().create({"card": {}, "cardNumber": "example_cardNumber"})
 
 # Remove
 client.NetworkTokenBundle().remove({"id": "example_id"})
@@ -135,7 +135,8 @@ Create a mock client for unit testing — no server required:
 ```python
 client = BluefinNetworkTokenSDK.test()
 
-# Entity ops return the bare record and raise on error.
+# Entity ops return the ENTITY and raises on error;
+# call data_get() for the record.
 networktokenbundle = client.NetworkTokenBundle().load({"id": "test01"})
 # networktokenbundle contains the mock response record
 ```
@@ -235,7 +236,7 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return the bare result data (a `dict` for single-entity
+Entity operations return the ENTITY (call data_get() for the record) (a `dict` for single-entity
 ops, a `list` for `list`) and raise on error. Wrap calls in
 `try`/`except` to handle failures.
 
@@ -258,15 +259,15 @@ On error, `ok` is `False` and `err` contains the error value.
 | Field | Description |
 | --- | --- |
 | `card` |  |
-| `card_number` |  |
-| `expiration_month` |  |
-| `expiration_year` |  |
+| `cardNumber` |  |
+| `expirationMonth` |  |
+| `expirationYear` |  |
 | `issuer` |  |
 | `metadata` |  |
-| `network_token` |  |
-| `network_token_bundle_id` |  |
-| `network_token_bundle_state` |  |
-| `security_code` |  |
+| `networkToken` |  |
+| `networkTokenBundleId` |  |
+| `networkTokenBundleState` |  |
+| `securityCode` |  |
 
 Operations: Create, Load, Remove.
 
@@ -294,15 +295,15 @@ Create an instance: `network_token_bundle = client.NetworkTokenBundle()`
 | Field | Type | Description |
 | --- | --- | --- |
 | `card` | `dict` |  |
-| `card_number` | `str` |  |
-| `expiration_month` | `str` |  |
-| `expiration_year` | `str` |  |
+| `cardNumber` | `str` |  |
+| `expirationMonth` | `str` |  |
+| `expirationYear` | `str` |  |
 | `issuer` | `dict` |  |
 | `metadata` | `dict` |  |
-| `network_token` | `dict` |  |
-| `network_token_bundle_id` | `str` |  |
-| `network_token_bundle_state` | `str` |  |
-| `security_code` | `str` |  |
+| `networkToken` | `dict` |  |
+| `networkTokenBundleId` | `str` |  |
+| `networkTokenBundleState` | `str` |  |
+| `securityCode` | `str` |  |
 
 #### Example: Load
 

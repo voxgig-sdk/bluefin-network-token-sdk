@@ -59,7 +59,7 @@ catch (Exception err)
 
 ```csharp
 // Create — returns the bare created record (as object?)
-var created = client.NetworkTokenBundle().Create(new Dictionary<string, object?> { ["card"] = new Dictionary<string, object?>(), ["card_number"] = "example_card_number" });
+var created = client.NetworkTokenBundle().Create(new Dictionary<string, object?> { ["card"] = new Dictionary<string, object?>(), ["cardNumber"] = "example_cardNumber" });
 
 // Remove
 client.NetworkTokenBundle().Remove(new Dictionary<string, object?> { ["id"] = "example_id" });
@@ -273,15 +273,15 @@ On error, `ok` is `false` and `err` contains the error value.
 | Field | Description |
 | --- | --- |
 | `card` |  |
-| `card_number` |  |
-| `expiration_month` |  |
-| `expiration_year` |  |
+| `cardNumber` |  |
+| `expirationMonth` |  |
+| `expirationYear` |  |
 | `issuer` |  |
 | `metadata` |  |
-| `network_token` |  |
-| `network_token_bundle_id` |  |
-| `network_token_bundle_state` |  |
-| `security_code` |  |
+| `networkToken` |  |
+| `networkTokenBundleId` |  |
+| `networkTokenBundleState` |  |
+| `securityCode` |  |
 
 Operations: Create, Load, Remove.
 
@@ -309,15 +309,15 @@ Create an instance: `var networkTokenBundle = client.NetworkTokenBundle();`
 | Field | Type | Description |
 | --- | --- | --- |
 | `card` | `Dictionary<string, object?>` |  |
-| `card_number` | `string` |  |
-| `expiration_month` | `string` |  |
-| `expiration_year` | `string` |  |
+| `cardNumber` | `string` |  |
+| `expirationMonth` | `string` |  |
+| `expirationYear` | `string` |  |
 | `issuer` | `Dictionary<string, object?>` |  |
 | `metadata` | `Dictionary<string, object?>` |  |
-| `network_token` | `Dictionary<string, object?>` |  |
-| `network_token_bundle_id` | `string` |  |
-| `network_token_bundle_state` | `string` |  |
-| `security_code` | `string` |  |
+| `networkToken` | `Dictionary<string, object?>` |  |
+| `networkTokenBundleId` | `string` |  |
+| `networkTokenBundleState` | `string` |  |
+| `securityCode` | `string` |  |
 
 #### Example: Load
 

@@ -23,8 +23,8 @@ module BluefinNetworkTokenTestRunner
   end
 
   def self.env_override(m)
-    live = getenv("BLUEFINNETWORKTOKEN_TEST_LIVE")
-    override = getenv("BLUEFINNETWORKTOKEN_TEST_OVERRIDE")
+    live = getenv("BLUEFIN_NETWORK_TOKEN_TEST_LIVE")
+    override = getenv("BLUEFIN_NETWORK_TOKEN_TEST_OVERRIDE")
 
     if live == "TRUE" || override == "TRUE"
       m.each_key do |key|
@@ -44,8 +44,8 @@ module BluefinNetworkTokenTestRunner
       end
     end
 
-    explain = getenv("BLUEFINNETWORKTOKEN_TEST_EXPLAIN")
-    m["BLUEFINNETWORKTOKEN_TEST_EXPLAIN"] = explain if explain && !explain.empty?
+    explain = getenv("BLUEFIN_NETWORK_TOKEN_TEST_EXPLAIN")
+    m["BLUEFIN_NETWORK_TOKEN_TEST_EXPLAIN"] = explain if explain && !explain.empty?
 
     m
   end

@@ -54,7 +54,7 @@ final client = BluefinNetworkTokenSDK({
 
 ### 3. Load a networktokenbundle
 
-`load()` returns the bare record (a `Map`) and throws on error.
+`load()` returns the ENTITY — call data() for the record — and throws on error.
 
 ```dart
 try {
@@ -68,8 +68,8 @@ try {
 ### 4. Create, update, and remove
 
 ```dart
-// Create — returns the bare created record (a Map)
-final created = await client.NetworkTokenBundle().create({'card': <String, dynamic>{}, 'card_number': 'example_card_number'});
+// Create — returns the ENTITY (call data() for the record)
+final created = await client.NetworkTokenBundle().create({'card': <String, dynamic>{}, 'cardNumber': 'example_cardNumber'});
 
 // Remove
 await client.NetworkTokenBundle().remove({'id': 'example_id'});
@@ -152,7 +152,8 @@ Create a mock client for unit testing — no server required:
 ```dart
 final client = BluefinNetworkTokenSDK.test();
 
-// Entity ops return the bare record and throw on error.
+// Entity ops return the ENTITY and throws on error;
+// call data() for the record.
 final networktokenbundle = await client.NetworkTokenBundle().load({'id': 'test01'});
 // networktokenbundle contains the mock response record
 print(networktokenbundle);
@@ -253,7 +254,7 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return the bare result data (a `Map` for single-entity
+Entity operations return the ENTITY (call data() for the record) (a `Map` for single-entity
 ops, a `List` of entity instances for `list`) and throw on error. Wrap calls
 in `try`/`catch` to handle failures.
 
@@ -276,15 +277,15 @@ On error, `ok` is `false` and `err` contains the error value.
 | Field | Description |
 | --- | --- |
 | `card` |  |
-| `card_number` |  |
-| `expiration_month` |  |
-| `expiration_year` |  |
+| `cardNumber` |  |
+| `expirationMonth` |  |
+| `expirationYear` |  |
 | `issuer` |  |
 | `metadata` |  |
-| `network_token` |  |
-| `network_token_bundle_id` |  |
-| `network_token_bundle_state` |  |
-| `security_code` |  |
+| `networkToken` |  |
+| `networkTokenBundleId` |  |
+| `networkTokenBundleState` |  |
+| `securityCode` |  |
 
 Operations: Create, Load, Remove.
 
@@ -312,15 +313,15 @@ Create an instance: `final network_token_bundle = client.NetworkTokenBundle();`
 | Field | Type | Description |
 | --- | --- | --- |
 | `card` | `Map<String, dynamic>` |  |
-| `card_number` | `String` |  |
-| `expiration_month` | `String` |  |
-| `expiration_year` | `String` |  |
+| `cardNumber` | `String` |  |
+| `expirationMonth` | `String` |  |
+| `expirationYear` | `String` |  |
 | `issuer` | `Map<String, dynamic>` |  |
 | `metadata` | `Map<String, dynamic>` |  |
-| `network_token` | `Map<String, dynamic>` |  |
-| `network_token_bundle_id` | `String` |  |
-| `network_token_bundle_state` | `String` |  |
-| `security_code` | `String` |  |
+| `networkToken` | `Map<String, dynamic>` |  |
+| `networkTokenBundleId` | `String` |  |
+| `networkTokenBundleState` | `String` |  |
+| `securityCode` | `String` |  |
 
 #### Example: Load
 

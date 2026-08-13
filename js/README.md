@@ -45,7 +45,7 @@ console.log(network_token_bundle)
 ```js
 const created = await client.NetworkTokenBundle().create({
   card: {},
-  card_number: 'example_card_number',
+  cardNumber: 'example_cardNumber',
 })
 console.log(created)
 ```
@@ -147,7 +147,8 @@ Create a mock client for unit testing — no server required:
 const client = BluefinNetworkTokenSDK.test()
 
 const networktokenbundle = await client.NetworkTokenBundle().load({ id: 'test01' })
-// networktokenbundle is a bare entity populated with mock response data
+// networktokenbundle is the entity, populated with mock response data
+// — call networktokenbundle.data() for the record itself
 console.log(networktokenbundle)
 ```
 
@@ -311,15 +312,15 @@ The `prepare()` method returns:
 | Field | Description |
 | --- | --- |
 | `card` |  |
-| `card_number` |  |
-| `expiration_month` |  |
-| `expiration_year` |  |
+| `cardNumber` |  |
+| `expirationMonth` |  |
+| `expirationYear` |  |
 | `issuer` |  |
 | `metadata` |  |
-| `network_token` |  |
-| `network_token_bundle_id` |  |
-| `network_token_bundle_state` |  |
-| `security_code` |  |
+| `networkToken` |  |
+| `networkTokenBundleId` |  |
+| `networkTokenBundleState` |  |
+| `securityCode` |  |
 
 Operations: create, load, remove.
 
@@ -347,15 +348,15 @@ Create an instance: `const network_token_bundle = client.NetworkTokenBundle()`
 | Field | Type | Description |
 | --- | --- | --- |
 | `card` | `Object` |  |
-| `card_number` | `string` |  |
-| `expiration_month` | `string` |  |
-| `expiration_year` | `string` |  |
+| `cardNumber` | `string` |  |
+| `expirationMonth` | `string` |  |
+| `expirationYear` | `string` |  |
 | `issuer` | `Object` |  |
 | `metadata` | `Object` |  |
-| `network_token` | `Object` |  |
-| `network_token_bundle_id` | `string` |  |
-| `network_token_bundle_state` | `string` |  |
-| `security_code` | `string` |  |
+| `networkToken` | `Object` |  |
+| `networkTokenBundleId` | `string` |  |
+| `networkTokenBundleState` | `string` |  |
+| `securityCode` | `string` |  |
 
 #### Example: Load
 

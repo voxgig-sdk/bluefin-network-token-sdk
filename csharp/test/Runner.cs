@@ -71,8 +71,8 @@ public static class TestRunner
 
     public static Dictionary<string, object?> EnvOverride(Dictionary<string, object?> m)
     {
-        if (Environment.GetEnvironmentVariable("BLUEFINNETWORKTOKEN_TEST_LIVE") == "TRUE" ||
-            Environment.GetEnvironmentVariable("BLUEFINNETWORKTOKEN_TEST_OVERRIDE") == "TRUE")
+        if (Environment.GetEnvironmentVariable("BLUEFIN_NETWORK_TOKEN_TEST_LIVE") == "TRUE" ||
+            Environment.GetEnvironmentVariable("BLUEFIN_NETWORK_TOKEN_TEST_OVERRIDE") == "TRUE")
         {
             foreach (var key in m.Keys.ToList())
             {
@@ -98,10 +98,10 @@ public static class TestRunner
             }
         }
 
-        var explain = Environment.GetEnvironmentVariable("BLUEFINNETWORKTOKEN_TEST_EXPLAIN");
+        var explain = Environment.GetEnvironmentVariable("BLUEFIN_NETWORK_TOKEN_TEST_EXPLAIN");
         if (!string.IsNullOrEmpty(explain))
         {
-            m["BLUEFINNETWORKTOKEN_TEST_EXPLAIN"] = explain;
+            m["BLUEFIN_NETWORK_TOKEN_TEST_EXPLAIN"] = explain;
         }
 
         return m;

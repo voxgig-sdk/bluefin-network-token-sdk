@@ -91,15 +91,15 @@ Prepare a fetch definition without sending. Returns the `fetchdef` and raises on
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `card` | `map` | No |  |
-| `card_number` | `string` | No |  |
-| `expiration_month` | `string` | No |  |
-| `expiration_year` | `string` | No |  |
+| `cardNumber` | `string` | No |  |
+| `expirationMonth` | `string` | No |  |
+| `expirationYear` | `string` | No |  |
 | `issuer` | `map` | No |  |
 | `metadata` | `map` | No |  |
-| `network_token` | `map` | No |  |
-| `network_token_bundle_id` | `string` | No |  |
-| `network_token_bundle_state` | `string` | No |  |
-| `security_code` | `string` | No |  |
+| `networkToken` | `map` | No |  |
+| `networkTokenBundleId` | `string` | No |  |
+| `networkTokenBundleState` | `string` | No |  |
+| `securityCode` | `string` | No |  |
 
 ### Operations
 

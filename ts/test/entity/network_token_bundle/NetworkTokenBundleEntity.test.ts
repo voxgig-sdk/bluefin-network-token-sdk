@@ -26,8 +26,8 @@ import {
 describe('NetworkTokenBundleEntity', async () => {
 
   // Per-test live pacing. Delay is read from sdk-test-control.json's
-  // `test.live.delayMs`; only sleeps when BLUEFINNETWORKTOKEN_TEST_LIVE=TRUE.
-  afterEach(liveDelay('BLUEFINNETWORKTOKEN_TEST_LIVE'))
+  // `test.live.delayMs`; only sleeps when BLUEFIN_NETWORK_TOKEN_TEST_LIVE=TRUE.
+  afterEach(liveDelay('BLUEFIN_NETWORK_TOKEN_TEST_LIVE'))
 
   test('instance', async () => {
     const testsdk = BluefinNetworkTokenSDK.test()
@@ -62,7 +62,7 @@ describe('NetworkTokenBundleEntity', async () => {
     const network_token_bundle_ref01_ent = client.NetworkTokenBundle()
     let network_token_bundle_ref01_data = setup.data.new.network_token_bundle['network_token_bundle_ref01']
 
-    network_token_bundle_ref01_data = await network_token_bundle_ref01_ent.create(network_token_bundle_ref01_data)
+    network_token_bundle_ref01_data = (await network_token_bundle_ref01_ent.create(network_token_bundle_ref01_data)).data()
     assert(null != network_token_bundle_ref01_data)
 
 

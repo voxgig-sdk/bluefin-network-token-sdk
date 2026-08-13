@@ -100,15 +100,15 @@ fmt.Println(networkTokenBundle.GetName()) // "network_token_bundle"
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `card` | `map[string]any` | No |  |
-| `card_number` | `string` | No |  |
-| `expiration_month` | `string` | No |  |
-| `expiration_year` | `string` | No |  |
+| `cardNumber` | `string` | No |  |
+| `expirationMonth` | `string` | No |  |
+| `expirationYear` | `string` | No |  |
 | `issuer` | `map[string]any` | No |  |
 | `metadata` | `map[string]any` | No |  |
-| `network_token` | `map[string]any` | No |  |
-| `network_token_bundle_id` | `string` | No |  |
-| `network_token_bundle_state` | `string` | No |  |
-| `security_code` | `string` | No |  |
+| `networkToken` | `map[string]any` | No |  |
+| `networkTokenBundleId` | `string` | No |  |
+| `networkTokenBundleState` | `string` | No |  |
+| `securityCode` | `string` | No |  |
 
 ### Operations
 

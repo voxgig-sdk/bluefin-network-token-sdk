@@ -75,16 +75,16 @@ function network_token_bundle_direct_setup($mockres)
     $calls = new \ArrayObject();
 
     $env = Runner::env_override([
-        "BLUEFINNETWORKTOKEN_TEST_NETWORK_TOKEN_BUNDLE_ENTID" => [],
-        "BLUEFINNETWORKTOKEN_TEST_LIVE" => "FALSE",
-        "BLUEFINNETWORKTOKEN_APIKEY" => "NONE",
+        "BLUEFIN_NETWORK_TOKEN_TEST_NETWORK_TOKEN_BUNDLE_ENTID" => [],
+        "BLUEFIN_NETWORK_TOKEN_TEST_LIVE" => "FALSE",
+        "BLUEFIN_NETWORK_TOKEN_APIKEY" => "NONE",
     ]);
 
-    $live = $env["BLUEFINNETWORKTOKEN_TEST_LIVE"] === "TRUE";
+    $live = $env["BLUEFIN_NETWORK_TOKEN_TEST_LIVE"] === "TRUE";
 
     if ($live) {
         $merged_opts = [
-            "apikey" => $env["BLUEFINNETWORKTOKEN_APIKEY"],
+            "apikey" => $env["BLUEFIN_NETWORK_TOKEN_APIKEY"],
         ];
         $client = new BluefinNetworkTokenSDK($merged_opts);
         return [

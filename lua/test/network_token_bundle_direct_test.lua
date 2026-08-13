@@ -70,16 +70,16 @@ function network_token_bundle_direct_setup(mockres)
   local calls = {}
 
   local env = runner.env_override({
-    ["BLUEFINNETWORKTOKEN_TEST_NETWORK_TOKEN_BUNDLE_ENTID"] = {},
-    ["BLUEFINNETWORKTOKEN_TEST_LIVE"] = "FALSE",
-    ["BLUEFINNETWORKTOKEN_APIKEY"] = "NONE",
+    ["BLUEFIN_NETWORK_TOKEN_TEST_NETWORK_TOKEN_BUNDLE_ENTID"] = {},
+    ["BLUEFIN_NETWORK_TOKEN_TEST_LIVE"] = "FALSE",
+    ["BLUEFIN_NETWORK_TOKEN_APIKEY"] = "NONE",
   })
 
-  local live = env["BLUEFINNETWORKTOKEN_TEST_LIVE"] == "TRUE"
+  local live = env["BLUEFIN_NETWORK_TOKEN_TEST_LIVE"] == "TRUE"
 
   if live then
     local merged_opts = {
-      apikey = env["BLUEFINNETWORKTOKEN_APIKEY"],
+      apikey = env["BLUEFIN_NETWORK_TOKEN_APIKEY"],
     }
     local client = sdk.new(merged_opts)
     return {

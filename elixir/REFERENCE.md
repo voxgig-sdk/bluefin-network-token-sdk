@@ -88,15 +88,15 @@ network_token_bundle = BluefinNetworkToken.network_token_bundle(sdk)
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `card` | `map()` | No |  |
-| `card_number` | `String.t()` | No |  |
-| `expiration_month` | `String.t()` | No |  |
-| `expiration_year` | `String.t()` | No |  |
+| `cardNumber` | `String.t()` | No |  |
+| `expirationMonth` | `String.t()` | No |  |
+| `expirationYear` | `String.t()` | No |  |
 | `issuer` | `map()` | No |  |
 | `metadata` | `map()` | No |  |
-| `network_token` | `map()` | No |  |
-| `network_token_bundle_id` | `String.t()` | No |  |
-| `network_token_bundle_state` | `String.t()` | No |  |
-| `security_code` | `String.t()` | No |  |
+| `networkToken` | `map()` | No |  |
+| `networkTokenBundleId` | `String.t()` | No |  |
+| `networkTokenBundleState` | `String.t()` | No |  |
+| `securityCode` | `String.t()` | No |  |
 
 ### Operations
 

@@ -47,7 +47,7 @@ void tests() {
       final network_token_bundle_ref01_ent = client.NetworkTokenBundle();
       dynamic network_token_bundle_ref01_data = setup['data']['new']['network_token_bundle']['network_token_bundle_ref01'];
 
-      network_token_bundle_ref01_data = await network_token_bundle_ref01_ent.create(network_token_bundle_ref01_data);
+      network_token_bundle_ref01_data = (await network_token_bundle_ref01_ent.create(network_token_bundle_ref01_data)).data();
       ok(null != network_token_bundle_ref01_data);
 
 

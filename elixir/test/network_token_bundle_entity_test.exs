@@ -34,7 +34,8 @@ defmodule BluefinNetworkToken.NetworkTokenBundleEntityTest do
     if id != nil do
       sdk = mk_sdk()
       ent = BluefinNetworkToken.network_token_bundle(sdk)
-      rec = BluefinNetworkToken.Entity.NetworkTokenBundle.load(ent, S.jm(["id", id]))
+      loaded = BluefinNetworkToken.Entity.NetworkTokenBundle.load(ent, S.jm(["id", id]))
+      rec = BluefinNetworkToken.EntityBase.data_get(loaded)
       assert S.ismap(rec)
       assert S.getprop(rec, "id") == id
     end
@@ -43,7 +44,8 @@ defmodule BluefinNetworkToken.NetworkTokenBundleEntityTest do
   test "should create then read back" do
     sdk = BluefinNetworkToken.test(S.jm(["entity", S.jm(["network_token_bundle", S.jm([])])]))
     ent = BluefinNetworkToken.network_token_bundle(sdk)
-    made = BluefinNetworkToken.Entity.NetworkTokenBundle.create(ent, S.jm(["name", "test-create"]))
+    created = BluefinNetworkToken.Entity.NetworkTokenBundle.create(ent, S.jm(["name", "test-create"]))
+    made = BluefinNetworkToken.EntityBase.data_get(created)
     assert S.ismap(made)
     assert S.getprop(made, "id") != nil
   end

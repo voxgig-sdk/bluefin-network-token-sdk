@@ -47,7 +47,7 @@ print(networktokenbundle)
 
 ```lua
 -- Create
-local created, err = client:NetworkTokenBundle():create({ card = {}, card_number = "example_card_number" })
+local created, err = client:NetworkTokenBundle():create({ card = {}, cardNumber = "example_cardNumber" })
 if err then error(err) end
 
 -- Remove
@@ -243,15 +243,15 @@ Only `direct()` returns a response envelope — a `table` with `ok`,
 | Field | Description |
 | --- | --- |
 | `card` |  |
-| `card_number` |  |
-| `expiration_month` |  |
-| `expiration_year` |  |
+| `cardNumber` |  |
+| `expirationMonth` |  |
+| `expirationYear` |  |
 | `issuer` |  |
 | `metadata` |  |
-| `network_token` |  |
-| `network_token_bundle_id` |  |
-| `network_token_bundle_state` |  |
-| `security_code` |  |
+| `networkToken` |  |
+| `networkTokenBundleId` |  |
+| `networkTokenBundleState` |  |
+| `securityCode` |  |
 
 Operations: Create, Load, Remove.
 
@@ -279,15 +279,15 @@ Create an instance: `local network_token_bundle = client:NetworkTokenBundle(nil)
 | Field | Type | Description |
 | --- | --- | --- |
 | `card` | `table` |  |
-| `card_number` | `string` |  |
-| `expiration_month` | `string` |  |
-| `expiration_year` | `string` |  |
+| `cardNumber` | `string` |  |
+| `expirationMonth` | `string` |  |
+| `expirationYear` | `string` |  |
 | `issuer` | `table` |  |
 | `metadata` | `table` |  |
-| `network_token` | `table` |  |
-| `network_token_bundle_id` | `string` |  |
-| `network_token_bundle_state` | `string` |  |
-| `security_code` | `string` |  |
+| `networkToken` | `table` |  |
+| `networkTokenBundleId` | `string` |  |
+| `networkTokenBundleState` | `string` |  |
+| `securityCode` | `string` |  |
 
 #### Example: Load
 

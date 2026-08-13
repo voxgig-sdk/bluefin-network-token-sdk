@@ -68,7 +68,7 @@ loading a specific record.
 
 ```clojure
 ;; Create — returns the bare created record (a map)
-(def created (e-network_token_bundle/create (api/network_token_bundle client nil) (vs/jm "card" (vs/jm) "card_number" "example_card_number") nil))
+(def created (e-network_token_bundle/create (api/network_token_bundle client nil) (vs/jm "card" (vs/jm) "cardNumber" "example_cardNumber") nil))
 
 ;; Remove
 (e-network_token_bundle/remove (api/network_token_bundle client nil) (vs/jm "id" "example_id") nil)
@@ -279,15 +279,15 @@ On error, `ok` is `false` and `err` contains the error value.
 | Field | Description |
 | --- | --- |
 | `card` |  |
-| `card_number` |  |
-| `expiration_month` |  |
-| `expiration_year` |  |
+| `cardNumber` |  |
+| `expirationMonth` |  |
+| `expirationYear` |  |
 | `issuer` |  |
 | `metadata` |  |
-| `network_token` |  |
-| `network_token_bundle_id` |  |
-| `network_token_bundle_state` |  |
-| `security_code` |  |
+| `networkToken` |  |
+| `networkTokenBundleId` |  |
+| `networkTokenBundleState` |  |
+| `securityCode` |  |
 
 Operations: Create, Load, Remove.
 
@@ -315,15 +315,15 @@ Create an instance: `(def network_token_bundle (api/network_token_bundle client 
 | Field | Type | Description |
 | --- | --- | --- |
 | `card` | `map` |  |
-| `card_number` | `string` |  |
-| `expiration_month` | `string` |  |
-| `expiration_year` | `string` |  |
+| `cardNumber` | `string` |  |
+| `expirationMonth` | `string` |  |
+| `expirationYear` | `string` |  |
 | `issuer` | `map` |  |
 | `metadata` | `map` |  |
-| `network_token` | `map` |  |
-| `network_token_bundle_id` | `string` |  |
-| `network_token_bundle_state` | `string` |  |
-| `security_code` | `string` |  |
+| `networkToken` | `map` |  |
+| `networkTokenBundleId` | `string` |  |
+| `networkTokenBundleState` | `string` |  |
+| `securityCode` | `string` |  |
 
 #### Example: Load
 

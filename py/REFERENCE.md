@@ -89,15 +89,15 @@ network_token_bundle = client.NetworkTokenBundle()
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `card` | `dict` | No |  |
-| `card_number` | `str` | No |  |
-| `expiration_month` | `str` | No |  |
-| `expiration_year` | `str` | No |  |
+| `cardNumber` | `str` | No |  |
+| `expirationMonth` | `str` | No |  |
+| `expirationYear` | `str` | No |  |
 | `issuer` | `dict` | No |  |
 | `metadata` | `dict` | No |  |
-| `network_token` | `dict` | No |  |
-| `network_token_bundle_id` | `str` | No |  |
-| `network_token_bundle_state` | `str` | No |  |
-| `security_code` | `str` | No |  |
+| `networkToken` | `dict` | No |  |
+| `networkTokenBundleId` | `str` | No |  |
+| `networkTokenBundleState` | `str` | No |  |
+| `securityCode` | `str` | No |  |
 
 ### Operations
 

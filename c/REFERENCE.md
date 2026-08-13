@@ -85,15 +85,15 @@ Entity* network_token_bundle = bluefinnetworktoken_network_token_bundle(client, 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `card` | `voxgig_value* (map)` | No |  |
-| `card_number` | `char*` | No |  |
-| `expiration_month` | `char*` | No |  |
-| `expiration_year` | `char*` | No |  |
+| `cardNumber` | `char*` | No |  |
+| `expirationMonth` | `char*` | No |  |
+| `expirationYear` | `char*` | No |  |
 | `issuer` | `voxgig_value* (map)` | No |  |
 | `metadata` | `voxgig_value* (map)` | No |  |
-| `network_token` | `voxgig_value* (map)` | No |  |
-| `network_token_bundle_id` | `char*` | No |  |
-| `network_token_bundle_state` | `char*` | No |  |
-| `security_code` | `char*` | No |  |
+| `networkToken` | `voxgig_value* (map)` | No |  |
+| `networkTokenBundleId` | `char*` | No |  |
+| `networkTokenBundleState` | `char*` | No |  |
+| `securityCode` | `char*` | No |  |
 
 ### Operations
 

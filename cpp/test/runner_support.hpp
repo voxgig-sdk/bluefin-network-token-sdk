@@ -74,8 +74,8 @@ inline std::string getenv_local(const std::string& key) {
 }
 
 inline Value env_override(Value m) {
-  std::string live = getenv_local("BLUEFINNETWORKTOKEN_TEST_LIVE");
-  std::string over = getenv_local("BLUEFINNETWORKTOKEN_TEST_OVERRIDE");
+  std::string live = getenv_local("BLUEFIN_NETWORK_TOKEN_TEST_LIVE");
+  std::string over = getenv_local("BLUEFIN_NETWORK_TOKEN_TEST_OVERRIDE");
   if (live == "TRUE" || over == "TRUE") {
     if (m.is_map()) {
       for (const auto& k : Struct::keysof(m)) {
@@ -92,8 +92,8 @@ inline Value env_override(Value m) {
       }
     }
   }
-  std::string explain = getenv_local("BLUEFINNETWORKTOKEN_TEST_EXPLAIN");
-  if (!explain.empty()) map_put(m, "BLUEFINNETWORKTOKEN_TEST_EXPLAIN", Value(explain));
+  std::string explain = getenv_local("BLUEFIN_NETWORK_TOKEN_TEST_EXPLAIN");
+  if (!explain.empty()) map_put(m, "BLUEFIN_NETWORK_TOKEN_TEST_EXPLAIN", Value(explain));
   return m;
 }
 

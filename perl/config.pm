@@ -50,21 +50,21 @@ my $CONFIG_JSON = <<'END_CONFIG_JSON';
         },
         {
           "active": true,
-          "name": "card_number",
+          "name": "cardNumber",
           "req": false,
           "type": "`$STRING`",
           "index$": 1
         },
         {
           "active": true,
-          "name": "expiration_month",
+          "name": "expirationMonth",
           "req": false,
           "type": "`$STRING`",
           "index$": 2
         },
         {
           "active": true,
-          "name": "expiration_year",
+          "name": "expirationYear",
           "req": false,
           "type": "`$STRING`",
           "index$": 3
@@ -85,28 +85,28 @@ my $CONFIG_JSON = <<'END_CONFIG_JSON';
         },
         {
           "active": true,
-          "name": "network_token",
+          "name": "networkToken",
           "req": false,
           "type": "`$OBJECT`",
           "index$": 6
         },
         {
           "active": true,
-          "name": "network_token_bundle_id",
+          "name": "networkTokenBundleId",
           "req": false,
           "type": "`$STRING`",
           "index$": 7
         },
         {
           "active": true,
-          "name": "network_token_bundle_state",
+          "name": "networkTokenBundleState",
           "req": false,
           "type": "`$STRING`",
           "index$": 8
         },
         {
           "active": true,
-          "name": "security_code",
+          "name": "securityCode",
           "req": false,
           "type": "`$STRING`",
           "index$": 9
@@ -132,6 +132,7 @@ my $CONFIG_JSON = <<'END_CONFIG_JSON';
                   }
                 ]
               },
+              "kind": "http",
               "method": "POST",
               "orig": "/network-token-bundle",
               "parts": [
@@ -180,6 +181,7 @@ my $CONFIG_JSON = <<'END_CONFIG_JSON';
                   }
                 ]
               },
+              "kind": "http",
               "method": "GET",
               "orig": "/network-token-bundle/{networkTokenBundleId}",
               "parts": [
@@ -227,6 +229,7 @@ my $CONFIG_JSON = <<'END_CONFIG_JSON';
                   }
                 ]
               },
+              "kind": "http",
               "method": "GET",
               "orig": "/network-token-bundle/{networkTokenBundleId}/payment-credentials",
               "parts": [
@@ -284,6 +287,7 @@ my $CONFIG_JSON = <<'END_CONFIG_JSON';
                   }
                 ]
               },
+              "kind": "http",
               "method": "DELETE",
               "orig": "/network-token-bundle/{networkTokenBundleId}",
               "parts": [

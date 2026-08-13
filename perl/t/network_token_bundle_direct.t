@@ -81,16 +81,16 @@ sub network_token_bundle_direct_setup {
   my $calls = [];
 
   my $env = BluefinNetworkTokenTestRunner::env_override({
-    'BLUEFINNETWORKTOKEN_TEST_NETWORK_TOKEN_BUNDLE_ENTID' => {},
-    'BLUEFINNETWORKTOKEN_TEST_LIVE' => 'FALSE',
-    'BLUEFINNETWORKTOKEN_APIKEY' => 'NONE',
+    'BLUEFIN_NETWORK_TOKEN_TEST_NETWORK_TOKEN_BUNDLE_ENTID' => {},
+    'BLUEFIN_NETWORK_TOKEN_TEST_LIVE' => 'FALSE',
+    'BLUEFIN_NETWORK_TOKEN_APIKEY' => 'NONE',
   });
 
-  my $live = ((($env->{'BLUEFINNETWORKTOKEN_TEST_LIVE'}) || '') eq 'TRUE') ? 1 : 0;
+  my $live = ((($env->{'BLUEFIN_NETWORK_TOKEN_TEST_LIVE'}) || '') eq 'TRUE') ? 1 : 0;
 
   if ($live) {
     my $client = BluefinNetworkTokenSDK->new({
-      'apikey' => $env->{'BLUEFINNETWORKTOKEN_APIKEY'},
+      'apikey' => $env->{'BLUEFIN_NETWORK_TOKEN_APIKEY'},
     });
     return {
       'client' => $client,

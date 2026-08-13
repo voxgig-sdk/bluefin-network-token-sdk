@@ -12,48 +12,48 @@ class NetworkTokenBundle {
   /// OBJECT
   Map<String, dynamic>? card;
   /// STRING
-  String? card_number;
+  String? cardNumber;
   /// STRING
-  String? expiration_month;
+  String? expirationMonth;
   /// STRING
-  String? expiration_year;
+  String? expirationYear;
   /// OBJECT
   Map<String, dynamic>? issuer;
   /// OBJECT
   Map<String, dynamic>? metadata;
   /// OBJECT
-  Map<String, dynamic>? network_token;
+  Map<String, dynamic>? networkToken;
   /// STRING
-  String? network_token_bundle_id;
+  String? networkTokenBundleId;
   /// STRING
-  String? network_token_bundle_state;
+  String? networkTokenBundleState;
   /// STRING
-  String? security_code;
+  String? securityCode;
 
   NetworkTokenBundle({
     this.card,
-    this.card_number,
-    this.expiration_month,
-    this.expiration_year,
+    this.cardNumber,
+    this.expirationMonth,
+    this.expirationYear,
     this.issuer,
     this.metadata,
-    this.network_token,
-    this.network_token_bundle_id,
-    this.network_token_bundle_state,
-    this.security_code,
+    this.networkToken,
+    this.networkTokenBundleId,
+    this.networkTokenBundleState,
+    this.securityCode,
   });
 
   factory NetworkTokenBundle.fromMap(Map<String, dynamic> m) => NetworkTokenBundle(
         card: m['card'] is Map<String, dynamic> ? m['card'] : null,
-        card_number: m['card_number'] is String ? m['card_number'] : null,
-        expiration_month: m['expiration_month'] is String ? m['expiration_month'] : null,
-        expiration_year: m['expiration_year'] is String ? m['expiration_year'] : null,
+        cardNumber: m['cardNumber'] is String ? m['cardNumber'] : null,
+        expirationMonth: m['expirationMonth'] is String ? m['expirationMonth'] : null,
+        expirationYear: m['expirationYear'] is String ? m['expirationYear'] : null,
         issuer: m['issuer'] is Map<String, dynamic> ? m['issuer'] : null,
         metadata: m['metadata'] is Map<String, dynamic> ? m['metadata'] : null,
-        network_token: m['network_token'] is Map<String, dynamic> ? m['network_token'] : null,
-        network_token_bundle_id: m['network_token_bundle_id'] is String ? m['network_token_bundle_id'] : null,
-        network_token_bundle_state: m['network_token_bundle_state'] is String ? m['network_token_bundle_state'] : null,
-        security_code: m['security_code'] is String ? m['security_code'] : null,
+        networkToken: m['networkToken'] is Map<String, dynamic> ? m['networkToken'] : null,
+        networkTokenBundleId: m['networkTokenBundleId'] is String ? m['networkTokenBundleId'] : null,
+        networkTokenBundleState: m['networkTokenBundleState'] is String ? m['networkTokenBundleState'] : null,
+        securityCode: m['securityCode'] is String ? m['securityCode'] : null,
       );
 
   Map<String, dynamic> toMap() {
@@ -61,14 +61,14 @@ class NetworkTokenBundle {
     if (null != card) {
       m['card'] = card;
     }
-    if (null != card_number) {
-      m['card_number'] = card_number;
+    if (null != cardNumber) {
+      m['cardNumber'] = cardNumber;
     }
-    if (null != expiration_month) {
-      m['expiration_month'] = expiration_month;
+    if (null != expirationMonth) {
+      m['expirationMonth'] = expirationMonth;
     }
-    if (null != expiration_year) {
-      m['expiration_year'] = expiration_year;
+    if (null != expirationYear) {
+      m['expirationYear'] = expirationYear;
     }
     if (null != issuer) {
       m['issuer'] = issuer;
@@ -76,17 +76,17 @@ class NetworkTokenBundle {
     if (null != metadata) {
       m['metadata'] = metadata;
     }
-    if (null != network_token) {
-      m['network_token'] = network_token;
+    if (null != networkToken) {
+      m['networkToken'] = networkToken;
     }
-    if (null != network_token_bundle_id) {
-      m['network_token_bundle_id'] = network_token_bundle_id;
+    if (null != networkTokenBundleId) {
+      m['networkTokenBundleId'] = networkTokenBundleId;
     }
-    if (null != network_token_bundle_state) {
-      m['network_token_bundle_state'] = network_token_bundle_state;
+    if (null != networkTokenBundleState) {
+      m['networkTokenBundleState'] = networkTokenBundleState;
     }
-    if (null != security_code) {
-      m['security_code'] = security_code;
+    if (null != securityCode) {
+      m['securityCode'] = securityCode;
     }
     return m;
   }
@@ -117,48 +117,48 @@ class NetworkTokenBundleCreateData {
   /// OBJECT
   Map<String, dynamic>? card;
   /// STRING
-  String? card_number;
+  String? cardNumber;
   /// STRING
-  String? expiration_month;
+  String? expirationMonth;
   /// STRING
-  String? expiration_year;
+  String? expirationYear;
   /// OBJECT
   Map<String, dynamic>? issuer;
   /// OBJECT
   Map<String, dynamic>? metadata;
   /// OBJECT
-  Map<String, dynamic>? network_token;
+  Map<String, dynamic>? networkToken;
   /// STRING
-  String? network_token_bundle_id;
+  String? networkTokenBundleId;
   /// STRING
-  String? network_token_bundle_state;
+  String? networkTokenBundleState;
   /// STRING
-  String? security_code;
+  String? securityCode;
 
   NetworkTokenBundleCreateData({
     this.card,
-    this.card_number,
-    this.expiration_month,
-    this.expiration_year,
+    this.cardNumber,
+    this.expirationMonth,
+    this.expirationYear,
     this.issuer,
     this.metadata,
-    this.network_token,
-    this.network_token_bundle_id,
-    this.network_token_bundle_state,
-    this.security_code,
+    this.networkToken,
+    this.networkTokenBundleId,
+    this.networkTokenBundleState,
+    this.securityCode,
   });
 
   factory NetworkTokenBundleCreateData.fromMap(Map<String, dynamic> m) => NetworkTokenBundleCreateData(
         card: m['card'] is Map<String, dynamic> ? m['card'] : null,
-        card_number: m['card_number'] is String ? m['card_number'] : null,
-        expiration_month: m['expiration_month'] is String ? m['expiration_month'] : null,
-        expiration_year: m['expiration_year'] is String ? m['expiration_year'] : null,
+        cardNumber: m['cardNumber'] is String ? m['cardNumber'] : null,
+        expirationMonth: m['expirationMonth'] is String ? m['expirationMonth'] : null,
+        expirationYear: m['expirationYear'] is String ? m['expirationYear'] : null,
         issuer: m['issuer'] is Map<String, dynamic> ? m['issuer'] : null,
         metadata: m['metadata'] is Map<String, dynamic> ? m['metadata'] : null,
-        network_token: m['network_token'] is Map<String, dynamic> ? m['network_token'] : null,
-        network_token_bundle_id: m['network_token_bundle_id'] is String ? m['network_token_bundle_id'] : null,
-        network_token_bundle_state: m['network_token_bundle_state'] is String ? m['network_token_bundle_state'] : null,
-        security_code: m['security_code'] is String ? m['security_code'] : null,
+        networkToken: m['networkToken'] is Map<String, dynamic> ? m['networkToken'] : null,
+        networkTokenBundleId: m['networkTokenBundleId'] is String ? m['networkTokenBundleId'] : null,
+        networkTokenBundleState: m['networkTokenBundleState'] is String ? m['networkTokenBundleState'] : null,
+        securityCode: m['securityCode'] is String ? m['securityCode'] : null,
       );
 
   Map<String, dynamic> toMap() {
@@ -166,14 +166,14 @@ class NetworkTokenBundleCreateData {
     if (null != card) {
       m['card'] = card;
     }
-    if (null != card_number) {
-      m['card_number'] = card_number;
+    if (null != cardNumber) {
+      m['cardNumber'] = cardNumber;
     }
-    if (null != expiration_month) {
-      m['expiration_month'] = expiration_month;
+    if (null != expirationMonth) {
+      m['expirationMonth'] = expirationMonth;
     }
-    if (null != expiration_year) {
-      m['expiration_year'] = expiration_year;
+    if (null != expirationYear) {
+      m['expirationYear'] = expirationYear;
     }
     if (null != issuer) {
       m['issuer'] = issuer;
@@ -181,17 +181,17 @@ class NetworkTokenBundleCreateData {
     if (null != metadata) {
       m['metadata'] = metadata;
     }
-    if (null != network_token) {
-      m['network_token'] = network_token;
+    if (null != networkToken) {
+      m['networkToken'] = networkToken;
     }
-    if (null != network_token_bundle_id) {
-      m['network_token_bundle_id'] = network_token_bundle_id;
+    if (null != networkTokenBundleId) {
+      m['networkTokenBundleId'] = networkTokenBundleId;
     }
-    if (null != network_token_bundle_state) {
-      m['network_token_bundle_state'] = network_token_bundle_state;
+    if (null != networkTokenBundleState) {
+      m['networkTokenBundleState'] = networkTokenBundleState;
     }
-    if (null != security_code) {
-      m['security_code'] = security_code;
+    if (null != securityCode) {
+      m['securityCode'] = securityCode;
     }
     return m;
   }

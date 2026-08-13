@@ -14,6 +14,8 @@ typedef struct network_token_bundle_entity {
   voxgig_value* data;     // Map
   voxgig_value* mtch;     // Map
   Context* entctx;
+  // Set once a successful `remove` resolves on this instance.
+  bool deleted;
 } network_token_bundle_entity;
 
 typedef void (*network_token_bundle_postdone_fn)(network_token_bundle_entity* self, Context* ctx);
@@ -24,11 +26,14 @@ static const char* network_token_bundle_get_name(Entity* e);
 static Entity* network_token_bundle_make(Entity* e);
 static voxgig_value* network_token_bundle_data(Entity* e, voxgig_value* args);
 static voxgig_value* network_token_bundle_matchv(Entity* e, voxgig_value* args);
-static voxgig_value* network_token_bundle_load(Entity* e, voxgig_value* reqmatch, voxgig_value* ctrl, PNError** err);
-static voxgig_value* network_token_bundle_list(Entity* e, voxgig_value* reqmatch, voxgig_value* ctrl, PNError** err);
-static voxgig_value* network_token_bundle_create(Entity* e, voxgig_value* reqdata, voxgig_value* ctrl, PNError** err);
-static voxgig_value* network_token_bundle_update(Entity* e, voxgig_value* reqdata, voxgig_value* ctrl, PNError** err);
-static voxgig_value* network_token_bundle_remove(Entity* e, voxgig_value* reqmatch, voxgig_value* ctrl, PNError** err);
+// Ops resolve to the ENTITY (`list` to a NULL-terminated array of them).
+static Entity* network_token_bundle_load(Entity* e, voxgig_value* reqmatch, voxgig_value* ctrl, PNError** err);
+static Entity** network_token_bundle_list(Entity* e, voxgig_value* reqmatch, voxgig_value* ctrl, PNError** err);
+static Entity* network_token_bundle_create(Entity* e, voxgig_value* reqdata, voxgig_value* ctrl, PNError** err);
+static Entity* network_token_bundle_update(Entity* e, voxgig_value* reqdata, voxgig_value* ctrl, PNError** err);
+static Entity* network_token_bundle_remove(Entity* e, voxgig_value* reqmatch, voxgig_value* ctrl, PNError** err);
+static void network_token_bundle_mark_deleted(Entity* e);
+static bool network_token_bundle_deleted(Entity* e);
 
 static Context* network_token_bundle_ent_ctx(network_token_bundle_entity* self) {
   return self->entctx;
@@ -250,7 +255,7 @@ static void network_token_bundle_load_postdone(network_token_bundle_entity* self
   }
 }
 
-static voxgig_value* network_token_bundle_load(Entity* e, voxgig_value* reqmatch, voxgig_value* ctrl, PNError** err) {
+static Entity* network_token_bundle_load(Entity* e, voxgig_value* reqmatch, voxgig_value* ctrl, PNError** err) {
   network_token_bundle_entity* self = (network_token_bundle_entity*)e;
   CtxSpec cs;
   memset(&cs, 0, sizeof(cs));
@@ -260,11 +265,18 @@ static voxgig_value* network_token_bundle_load(Entity* e, voxgig_value* reqmatch
   cs.data = self->data;
   cs.reqmatch = reqmatch;
   Context* ctx = make_context_util(cs, network_token_bundle_ent_ctx(self));
-  return network_token_bundle_run_op(self, ctx, network_token_bundle_load_postdone, err);
+  network_token_bundle_run_op(self, ctx, network_token_bundle_load_postdone, err);
+  if (*err) return NULL;
+
+  // The operation resolves to THIS entity: run_op has just absorbed the
+  // result into it, and the caller reaches the record through vt->data.
+  // See AGENTS.md "Entity operations return ENTITIES".
+
+  return e;
 }
 
 
-static voxgig_value* network_token_bundle_list(Entity* e, voxgig_value* reqarg, voxgig_value* ctrl, PNError** err) {
+static Entity** network_token_bundle_list(Entity* e, voxgig_value* reqarg, voxgig_value* ctrl, PNError** err) {
   (void)e; (void)reqarg; (void)ctrl;
   *err = unsupported_op("list", "network_token_bundle");
   return NULL;
@@ -282,7 +294,7 @@ static void network_token_bundle_create_postdone(network_token_bundle_entity* se
   }
 }
 
-static voxgig_value* network_token_bundle_create(Entity* e, voxgig_value* reqdata, voxgig_value* ctrl, PNError** err) {
+static Entity* network_token_bundle_create(Entity* e, voxgig_value* reqdata, voxgig_value* ctrl, PNError** err) {
   network_token_bundle_entity* self = (network_token_bundle_entity*)e;
   CtxSpec cs;
   memset(&cs, 0, sizeof(cs));
@@ -292,11 +304,18 @@ static voxgig_value* network_token_bundle_create(Entity* e, voxgig_value* reqdat
   cs.data = self->data;
   cs.reqdata = reqdata;
   Context* ctx = make_context_util(cs, network_token_bundle_ent_ctx(self));
-  return network_token_bundle_run_op(self, ctx, network_token_bundle_create_postdone, err);
+  network_token_bundle_run_op(self, ctx, network_token_bundle_create_postdone, err);
+  if (*err) return NULL;
+
+  // The operation resolves to THIS entity: run_op has just absorbed the
+  // result into it, and the caller reaches the record through vt->data.
+  // See AGENTS.md "Entity operations return ENTITIES".
+
+  return e;
 }
 
 
-static voxgig_value* network_token_bundle_update(Entity* e, voxgig_value* reqarg, voxgig_value* ctrl, PNError** err) {
+static Entity* network_token_bundle_update(Entity* e, voxgig_value* reqarg, voxgig_value* ctrl, PNError** err) {
   (void)e; (void)reqarg; (void)ctrl;
   *err = unsupported_op("update", "network_token_bundle");
   return NULL;
@@ -316,7 +335,7 @@ static void network_token_bundle_remove_postdone(network_token_bundle_entity* se
   }
 }
 
-static voxgig_value* network_token_bundle_remove(Entity* e, voxgig_value* reqmatch, voxgig_value* ctrl, PNError** err) {
+static Entity* network_token_bundle_remove(Entity* e, voxgig_value* reqmatch, voxgig_value* ctrl, PNError** err) {
   network_token_bundle_entity* self = (network_token_bundle_entity*)e;
   CtxSpec cs;
   memset(&cs, 0, sizeof(cs));
@@ -326,15 +345,38 @@ static voxgig_value* network_token_bundle_remove(Entity* e, voxgig_value* reqmat
   cs.data = self->data;
   cs.reqmatch = reqmatch;
   Context* ctx = make_context_util(cs, network_token_bundle_ent_ctx(self));
-  return network_token_bundle_run_op(self, ctx, network_token_bundle_remove_postdone, err);
+  network_token_bundle_run_op(self, ctx, network_token_bundle_remove_postdone, err);
+  if (*err) return NULL;
+
+  // The operation resolves to THIS entity: run_op has just absorbed the
+  // result into it, and the caller reaches the record through vt->data.
+  // See AGENTS.md "Entity operations return ENTITIES".
+
+  // A removed entity keeps its data but is no longer a live record.
+  self->deleted = true;
+
+  return e;
 }
 
+
+// `remove` resolves to the entity, marked. The instance KEEPS the data it
+// held - a caller can still read what was deleted - but it is no longer a
+// live record.
+static void network_token_bundle_mark_deleted(Entity* e) {
+  ((network_token_bundle_entity*)e)->deleted = true;
+}
+
+static bool network_token_bundle_deleted(Entity* e) {
+  return ((network_token_bundle_entity*)e)->deleted;
+}
 
 static const EntityVT network_token_bundle_VT = {
   network_token_bundle_get_name,
   network_token_bundle_make,
   network_token_bundle_data,
   network_token_bundle_matchv,
+  network_token_bundle_mark_deleted,
+  network_token_bundle_deleted,
   network_token_bundle_load,
   network_token_bundle_list,
   network_token_bundle_create,

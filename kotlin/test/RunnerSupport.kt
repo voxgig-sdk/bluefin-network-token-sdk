@@ -63,7 +63,7 @@ object RunnerSupport {
   }
 
   fun envOverride(m: MutableMap<String, Any?>): MutableMap<String, Any?> {
-    if ("TRUE" == getenv("BLUEFINNETWORKTOKEN_TEST_LIVE") || "TRUE" == getenv("BLUEFINNETWORKTOKEN_TEST_OVERRIDE")) {
+    if ("TRUE" == getenv("BLUEFIN_NETWORK_TOKEN_TEST_LIVE") || "TRUE" == getenv("BLUEFIN_NETWORK_TOKEN_TEST_OVERRIDE")) {
       for (key in ArrayList(m.keys)) {
         var envval = getenv(key)
         if (envval != null && envval.isNotEmpty()) {
@@ -80,9 +80,9 @@ object RunnerSupport {
       }
     }
 
-    val explain = getenv("BLUEFINNETWORKTOKEN_TEST_EXPLAIN")
+    val explain = getenv("BLUEFIN_NETWORK_TOKEN_TEST_EXPLAIN")
     if (explain != null && explain.isNotEmpty()) {
-      m["BLUEFINNETWORKTOKEN_TEST_EXPLAIN"] = explain
+      m["BLUEFIN_NETWORK_TOKEN_TEST_EXPLAIN"] = explain
     }
 
     return m

@@ -5,6 +5,10 @@
       "desc": ""
     },
     "kit": {
+      "author": {
+        "name": "",
+        "url": ""
+      },
       "config": {
         "docs_order": [
           "ts",
@@ -18,6 +22,7 @@
           "content-type": "application/json"
         }
       },
+      "contributor": {},
       "entity": {
         "network_token_bundle": {
           "active": true,
@@ -33,19 +38,19 @@
             },
             {
               "active": true,
-              "name": "card_number",
+              "name": "cardNumber",
               "req": false,
               "type": "`$STRING`"
             },
             {
               "active": true,
-              "name": "expiration_month",
+              "name": "expirationMonth",
               "req": false,
               "type": "`$STRING`"
             },
             {
               "active": true,
-              "name": "expiration_year",
+              "name": "expirationYear",
               "req": false,
               "type": "`$STRING`"
             },
@@ -63,25 +68,25 @@
             },
             {
               "active": true,
-              "name": "network_token",
+              "name": "networkToken",
               "req": false,
               "type": "`$OBJECT`"
             },
             {
               "active": true,
-              "name": "network_token_bundle_id",
+              "name": "networkTokenBundleId",
               "req": false,
               "type": "`$STRING`"
             },
             {
               "active": true,
-              "name": "network_token_bundle_state",
+              "name": "networkTokenBundleState",
               "req": false,
               "type": "`$STRING`"
             },
             {
               "active": true,
-              "name": "security_code",
+              "name": "securityCode",
               "req": false,
               "type": "`$STRING`"
             }
@@ -106,6 +111,7 @@
                       }
                     ]
                   },
+                  "kind": "http",
                   "method": "POST",
                   "orig": "/network-token-bundle",
                   "parts": [
@@ -151,6 +157,7 @@
                       }
                     ]
                   },
+                  "kind": "http",
                   "method": "GET",
                   "orig": "/network-token-bundle/{networkTokenBundleId}",
                   "parts": [
@@ -197,6 +204,7 @@
                       }
                     ]
                   },
+                  "kind": "http",
                   "method": "GET",
                   "orig": "/network-token-bundle/{networkTokenBundleId}/payment-credentials",
                   "parts": [
@@ -251,6 +259,7 @@
                       }
                     ]
                   },
+                  "kind": "http",
                   "method": "DELETE",
                   "orig": "/network-token-bundle/{networkTokenBundleId}",
                   "parts": [
@@ -505,18 +514,42 @@
         "website": "https://secure-cert.shieldconex.com"
       },
       "option": {},
+      "repo": {
+        "host": "github.com",
+        "path": ""
+      },
       "target": {
         "c": {
           "active": true,
+          "author": {
+            "name": "",
+            "url": ""
+          },
           "comment": {
             "line": "//"
           },
           "deps": {},
           "ext": "c",
+          "feature": {
+            "fullset": [
+              "tests/feature_test.c",
+              "tests/sdk_pipeline_test.c"
+            ],
+            "trim": true
+          },
           "module": {
-            "name": "bluefin-network-token"
+            "goversion": "",
+            "name": "bluefin-network-token",
+            "package": "",
+            "path": ""
           },
           "name": "c",
+          "output": {
+            "adopt": false,
+            "path": "",
+            "repo": "",
+            "sdkrel": ""
+          },
           "publish": {
             "registry": {
               "active": false,
@@ -538,22 +571,40 @@
                 "recipe": "github"
               },
               "via": "port"
-            }
+            },
+            "version": "0.0.1"
           },
           "srcfeature": false,
           "title": "C"
         },
         "clojure": {
           "active": true,
+          "author": {
+            "name": "",
+            "url": ""
+          },
           "comment": {
             "line": ";"
           },
           "deps": {},
           "ext": "clj",
+          "feature": {
+            "fullset": [],
+            "trim": false
+          },
           "module": {
-            "name": "bluefin-network-token"
+            "goversion": "",
+            "name": "bluefin-network-token",
+            "package": "",
+            "path": ""
           },
           "name": "clojure",
+          "output": {
+            "adopt": false,
+            "path": "",
+            "repo": "",
+            "sdkrel": ""
+          },
           "publish": {
             "registry": {
               "active": false,
@@ -575,22 +626,42 @@
                 "recipe": "github"
               },
               "via": "port"
-            }
+            },
+            "version": "0.0.1"
           },
           "srcfeature": false,
           "title": "Clojure"
         },
         "cpp": {
           "active": true,
+          "author": {
+            "name": "",
+            "url": ""
+          },
           "comment": {
             "line": "//"
           },
           "deps": {},
           "ext": "hpp",
+          "feature": {
+            "fullset": [
+              "test/feature_test.cpp"
+            ],
+            "trim": true
+          },
           "module": {
-            "name": "bluefin-network-token"
+            "goversion": "",
+            "name": "bluefin-network-token",
+            "package": "",
+            "path": ""
           },
           "name": "cpp",
+          "output": {
+            "adopt": false,
+            "path": "",
+            "repo": "",
+            "sdkrel": ""
+          },
           "publish": {
             "registry": {
               "active": false,
@@ -612,23 +683,43 @@
                 "recipe": "github"
               },
               "via": "port"
-            }
+            },
+            "version": "0.0.1"
           },
           "srcfeature": false,
           "title": "C++"
         },
         "csharp": {
           "active": true,
+          "author": {
+            "name": "",
+            "url": ""
+          },
           "base": "node_modules/@voxgig/sdkgen/project/.sdk",
           "comment": {
             "line": "//"
           },
           "deps": {},
           "ext": "cs",
+          "feature": {
+            "fullset": [
+              "test/FeatureTest.cs"
+            ],
+            "trim": true
+          },
           "module": {
-            "name": "bluefin-network-token"
+            "goversion": "",
+            "name": "bluefin-network-token",
+            "package": "",
+            "path": ""
           },
           "name": "csharp",
+          "output": {
+            "adopt": false,
+            "path": "",
+            "repo": "",
+            "sdkrel": ""
+          },
           "publish": {
             "registry": {
               "active": false,
@@ -650,22 +741,40 @@
                 "recipe": "github"
               },
               "via": "port"
-            }
+            },
+            "version": "0.0.1"
           },
           "srcfeature": false,
           "title": "C#"
         },
         "dart": {
           "active": true,
+          "author": {
+            "name": "",
+            "url": ""
+          },
           "comment": {
             "line": "//"
           },
           "deps": {},
           "ext": "dart",
+          "feature": {
+            "fullset": [],
+            "trim": true
+          },
           "module": {
-            "name": "bluefin-network-token"
+            "goversion": "",
+            "name": "bluefin-network-token",
+            "package": "",
+            "path": ""
           },
           "name": "dart",
+          "output": {
+            "adopt": false,
+            "path": "",
+            "repo": "",
+            "sdkrel": ""
+          },
           "publish": {
             "registry": {
               "active": false,
@@ -687,22 +796,40 @@
                 "recipe": "github"
               },
               "via": "port"
-            }
+            },
+            "version": "0.0.1"
           },
           "srcfeature": false,
           "title": "Dart"
         },
         "elixir": {
           "active": true,
+          "author": {
+            "name": "",
+            "url": ""
+          },
           "comment": {
             "line": "#"
           },
           "deps": {},
           "ext": "ex",
+          "feature": {
+            "fullset": [],
+            "trim": true
+          },
           "module": {
-            "name": "bluefin-network-token"
+            "goversion": "",
+            "name": "bluefin-network-token",
+            "package": "",
+            "path": ""
           },
           "name": "elixir",
+          "output": {
+            "adopt": false,
+            "path": "",
+            "repo": "",
+            "sdkrel": ""
+          },
           "publish": {
             "registry": {
               "active": false,
@@ -724,22 +851,42 @@
                 "recipe": "github"
               },
               "via": "port"
-            }
+            },
+            "version": "0.0.1"
           },
           "srcfeature": false,
           "title": "Elixir"
         },
         "go": {
           "active": true,
+          "author": {
+            "name": "",
+            "url": ""
+          },
           "comment": {
             "line": "//"
           },
           "deps": {},
           "ext": "go",
+          "feature": {
+            "fullset": [
+              "test/feature_test.go"
+            ],
+            "trim": true
+          },
           "module": {
-            "name": "bluefin-network-token"
+            "goversion": "",
+            "name": "bluefin-network-token",
+            "package": "",
+            "path": ""
           },
           "name": "go",
+          "output": {
+            "adopt": false,
+            "path": "",
+            "repo": "",
+            "sdkrel": ""
+          },
           "publish": {
             "registry": {
               "active": false,
@@ -761,22 +908,40 @@
                 "recipe": "github"
               },
               "via": "port"
-            }
+            },
+            "version": "0.0.1"
           },
           "srcfeature": false,
           "title": "Golang"
         },
         "go-cli": {
           "active": true,
+          "author": {
+            "name": "",
+            "url": ""
+          },
           "comment": {
             "line": "//"
           },
           "deps": {},
           "ext": "go",
+          "feature": {
+            "fullset": [],
+            "trim": true
+          },
           "module": {
-            "name": "bluefin-network-token"
+            "goversion": "",
+            "name": "bluefin-network-token",
+            "package": "",
+            "path": ""
           },
           "name": "go-cli",
+          "output": {
+            "adopt": false,
+            "path": "",
+            "repo": "",
+            "sdkrel": ""
+          },
           "phase": {
             "agentguide": {
               "active": false
@@ -815,21 +980,39 @@
                 "recipe": "github"
               },
               "via": "root"
-            }
+            },
+            "version": "0.0.1"
           },
           "title": "Go CLI"
         },
         "go-mcp": {
           "active": true,
+          "author": {
+            "name": "",
+            "url": ""
+          },
           "comment": {
             "line": "//"
           },
           "deps": {},
           "ext": "go",
+          "feature": {
+            "fullset": [],
+            "trim": true
+          },
           "module": {
-            "name": "bluefin-network-token"
+            "goversion": "",
+            "name": "bluefin-network-token",
+            "package": "",
+            "path": ""
           },
           "name": "go-mcp",
+          "output": {
+            "adopt": false,
+            "path": "",
+            "repo": "",
+            "sdkrel": ""
+          },
           "phase": {
             "agentguide": {
               "active": false
@@ -868,21 +1051,39 @@
                 "recipe": "github"
               },
               "via": "root"
-            }
+            },
+            "version": "0.0.1"
           },
           "title": "Go MCP server"
         },
         "haskell": {
           "active": true,
+          "author": {
+            "name": "",
+            "url": ""
+          },
           "comment": {
             "line": "--"
           },
           "deps": {},
           "ext": "hs",
+          "feature": {
+            "fullset": [],
+            "trim": false
+          },
           "module": {
-            "name": "bluefin-network-token"
+            "goversion": "",
+            "name": "bluefin-network-token",
+            "package": "",
+            "path": ""
           },
           "name": "haskell",
+          "output": {
+            "adopt": false,
+            "path": "",
+            "repo": "",
+            "sdkrel": ""
+          },
           "phase": {
             "agentguide": {
               "active": true
@@ -921,22 +1122,42 @@
                 "recipe": "github"
               },
               "via": "port"
-            }
+            },
+            "version": "0.0.1"
           },
           "srcfeature": false,
           "title": "Haskell"
         },
         "java": {
           "active": true,
+          "author": {
+            "name": "",
+            "url": ""
+          },
           "comment": {
             "line": "//"
           },
           "deps": {},
           "ext": "java",
+          "feature": {
+            "fullset": [
+              "test/FeatureTest.java"
+            ],
+            "trim": true
+          },
           "module": {
-            "name": "bluefin-network-token"
+            "goversion": "",
+            "name": "bluefin-network-token",
+            "package": "",
+            "path": ""
           },
           "name": "java",
+          "output": {
+            "adopt": false,
+            "path": "",
+            "repo": "",
+            "sdkrel": ""
+          },
           "publish": {
             "registry": {
               "active": false,
@@ -958,13 +1179,18 @@
                 "recipe": "github"
               },
               "via": "port"
-            }
+            },
+            "version": "0.0.1"
           },
           "srcfeature": false,
           "title": "Java"
         },
         "js": {
           "active": true,
+          "author": {
+            "name": "",
+            "url": ""
+          },
           "comment": {
             "line": "//"
           },
@@ -976,10 +1202,23 @@
             }
           },
           "ext": "js",
+          "feature": {
+            "fullset": [],
+            "trim": true
+          },
           "module": {
-            "name": "bluefin-network-token"
+            "goversion": "",
+            "name": "bluefin-network-token",
+            "package": "",
+            "path": ""
           },
           "name": "js",
+          "output": {
+            "adopt": false,
+            "path": "",
+            "repo": "",
+            "sdkrel": ""
+          },
           "publish": {
             "registry": {
               "active": false,
@@ -1001,21 +1240,41 @@
                 "recipe": "github"
               },
               "via": "port"
-            }
+            },
+            "version": "0.0.1"
           },
           "title": "JavaScript"
         },
         "kotlin": {
           "active": true,
+          "author": {
+            "name": "",
+            "url": ""
+          },
           "comment": {
             "line": "//"
           },
           "deps": {},
           "ext": "kt",
+          "feature": {
+            "fullset": [
+              "test/FeatureTest.kt"
+            ],
+            "trim": true
+          },
           "module": {
-            "name": "bluefin-network-token"
+            "goversion": "",
+            "name": "bluefin-network-token",
+            "package": "",
+            "path": ""
           },
           "name": "kotlin",
+          "output": {
+            "adopt": false,
+            "path": "",
+            "repo": "",
+            "sdkrel": ""
+          },
           "publish": {
             "registry": {
               "active": false,
@@ -1037,13 +1296,18 @@
                 "recipe": "github"
               },
               "via": "port"
-            }
+            },
+            "version": "0.0.1"
           },
           "srcfeature": false,
           "title": "Kotlin"
         },
         "lua": {
           "active": true,
+          "author": {
+            "name": "",
+            "url": ""
+          },
           "comment": {
             "line": "--"
           },
@@ -1055,10 +1319,23 @@
             }
           },
           "ext": "lua",
+          "feature": {
+            "fullset": [],
+            "trim": true
+          },
           "module": {
-            "name": "bluefin-network-token"
+            "goversion": "",
+            "name": "bluefin-network-token",
+            "package": "",
+            "path": ""
           },
           "name": "lua",
+          "output": {
+            "adopt": false,
+            "path": "",
+            "repo": "",
+            "sdkrel": ""
+          },
           "publish": {
             "registry": {
               "active": false,
@@ -1080,22 +1357,40 @@
                 "recipe": "github"
               },
               "via": "port"
-            }
+            },
+            "version": "0.0.1"
           },
           "srcfeature": false,
           "title": "Lua"
         },
         "ocaml": {
           "active": true,
+          "author": {
+            "name": "",
+            "url": ""
+          },
           "comment": {
             "line": "//"
           },
           "deps": {},
           "ext": "ml",
+          "feature": {
+            "fullset": [],
+            "trim": false
+          },
           "module": {
-            "name": "bluefin-network-token"
+            "goversion": "",
+            "name": "bluefin-network-token",
+            "package": "",
+            "path": ""
           },
           "name": "ocaml",
+          "output": {
+            "adopt": false,
+            "path": "",
+            "repo": "",
+            "sdkrel": ""
+          },
           "publish": {
             "registry": {
               "active": false,
@@ -1117,22 +1412,40 @@
                 "recipe": "github"
               },
               "via": "port"
-            }
+            },
+            "version": "0.0.1"
           },
           "srcfeature": false,
           "title": "OCaml"
         },
         "perl": {
           "active": true,
+          "author": {
+            "name": "",
+            "url": ""
+          },
           "comment": {
             "line": "#"
           },
           "deps": {},
           "ext": "pl",
+          "feature": {
+            "fullset": [],
+            "trim": true
+          },
           "module": {
-            "name": "bluefin-network-token"
+            "goversion": "",
+            "name": "bluefin-network-token",
+            "package": "",
+            "path": ""
           },
           "name": "perl",
+          "output": {
+            "adopt": false,
+            "path": "",
+            "repo": "",
+            "sdkrel": ""
+          },
           "publish": {
             "registry": {
               "active": false,
@@ -1154,22 +1467,40 @@
                 "recipe": "github"
               },
               "via": "port"
-            }
+            },
+            "version": "0.0.1"
           },
           "srcfeature": false,
           "title": "Perl"
         },
         "php": {
           "active": true,
+          "author": {
+            "name": "",
+            "url": ""
+          },
           "comment": {
             "line": "//"
           },
           "deps": {},
           "ext": "php",
+          "feature": {
+            "fullset": [],
+            "trim": true
+          },
           "module": {
-            "name": "bluefin-network-token"
+            "goversion": "",
+            "name": "bluefin-network-token",
+            "package": "",
+            "path": ""
           },
           "name": "php",
+          "output": {
+            "adopt": false,
+            "path": "",
+            "repo": "",
+            "sdkrel": ""
+          },
           "publish": {
             "registry": {
               "active": false,
@@ -1191,13 +1522,18 @@
                 "recipe": "github"
               },
               "via": "port"
-            }
+            },
+            "version": "0.0.1"
           },
           "srcfeature": false,
           "title": "PHP"
         },
         "py": {
           "active": true,
+          "author": {
+            "name": "",
+            "url": ""
+          },
           "comment": {
             "line": "#"
           },
@@ -1209,10 +1545,23 @@
             }
           },
           "ext": "py",
+          "feature": {
+            "fullset": [],
+            "trim": true
+          },
           "module": {
-            "name": "bluefin-network-token"
+            "goversion": "",
+            "name": "bluefin-network-token",
+            "package": "",
+            "path": ""
           },
           "name": "py",
+          "output": {
+            "adopt": false,
+            "path": "",
+            "repo": "",
+            "sdkrel": ""
+          },
           "publish": {
             "registry": {
               "active": false,
@@ -1234,13 +1583,18 @@
                 "recipe": "github"
               },
               "via": "port"
-            }
+            },
+            "version": "0.0.1"
           },
           "srcfeature": false,
           "title": "Python"
         },
         "rb": {
           "active": true,
+          "author": {
+            "name": "",
+            "url": ""
+          },
           "comment": {
             "line": "#"
           },
@@ -1257,10 +1611,23 @@
             }
           },
           "ext": "rb",
+          "feature": {
+            "fullset": [],
+            "trim": true
+          },
           "module": {
-            "name": "bluefin-network-token"
+            "goversion": "",
+            "name": "bluefin-network-token",
+            "package": "",
+            "path": ""
           },
           "name": "rb",
+          "output": {
+            "adopt": false,
+            "path": "",
+            "repo": "",
+            "sdkrel": ""
+          },
           "publish": {
             "registry": {
               "active": false,
@@ -1282,13 +1649,18 @@
                 "recipe": "github"
               },
               "via": "port"
-            }
+            },
+            "version": "0.0.1"
           },
           "srcfeature": false,
           "title": "Ruby"
         },
         "rust": {
           "active": true,
+          "author": {
+            "name": "",
+            "url": ""
+          },
           "comment": {
             "line": "//"
           },
@@ -1300,10 +1672,25 @@
             }
           },
           "ext": "rs",
+          "feature": {
+            "fullset": [
+              "tests/feature_test.rs"
+            ],
+            "trim": true
+          },
           "module": {
-            "name": "bluefin-network-token"
+            "goversion": "",
+            "name": "bluefin-network-token",
+            "package": "",
+            "path": ""
           },
           "name": "rust",
+          "output": {
+            "adopt": false,
+            "path": "",
+            "repo": "",
+            "sdkrel": ""
+          },
           "publish": {
             "registry": {
               "active": false,
@@ -1325,22 +1712,40 @@
                 "recipe": "github"
               },
               "via": "port"
-            }
+            },
+            "version": "0.0.1"
           },
           "srcfeature": false,
           "title": "Rust"
         },
         "scala": {
           "active": true,
+          "author": {
+            "name": "",
+            "url": ""
+          },
           "comment": {
             "line": "//"
           },
           "deps": {},
           "ext": "scala",
+          "feature": {
+            "fullset": [],
+            "trim": false
+          },
           "module": {
-            "name": "bluefin-network-token"
+            "goversion": "",
+            "name": "bluefin-network-token",
+            "package": "",
+            "path": ""
           },
           "name": "scala",
+          "output": {
+            "adopt": false,
+            "path": "",
+            "repo": "",
+            "sdkrel": ""
+          },
           "publish": {
             "registry": {
               "active": false,
@@ -1362,23 +1767,43 @@
                 "recipe": "github"
               },
               "via": "port"
-            }
+            },
+            "version": "0.0.1"
           },
           "srcfeature": false,
           "title": "Scala"
         },
         "swift": {
           "active": true,
+          "author": {
+            "name": "",
+            "url": ""
+          },
           "base": "node_modules/@voxgig/sdkgen/project/.sdk",
           "comment": {
             "line": "//"
           },
           "deps": {},
           "ext": "swift",
+          "feature": {
+            "fullset": [
+              "Tests/ProjectNameSDKTests/FeatureTest.swift"
+            ],
+            "trim": true
+          },
           "module": {
-            "name": "bluefin-network-token"
+            "goversion": "",
+            "name": "bluefin-network-token",
+            "package": "",
+            "path": ""
           },
           "name": "swift",
+          "output": {
+            "adopt": false,
+            "path": "",
+            "repo": "",
+            "sdkrel": ""
+          },
           "publish": {
             "registry": {
               "active": false,
@@ -1400,13 +1825,18 @@
                 "recipe": "github"
               },
               "via": "port"
-            }
+            },
+            "version": "0.0.1"
           },
           "srcfeature": false,
           "title": "Swift"
         },
         "ts": {
           "active": true,
+          "author": {
+            "name": "",
+            "url": ""
+          },
           "base": "node_modules/@voxgig/sdkgen/project/.sdk",
           "comment": {
             "line": "//"
@@ -1429,10 +1859,23 @@
             }
           },
           "ext": "ts",
+          "feature": {
+            "fullset": [],
+            "trim": true
+          },
           "module": {
-            "name": "bluefin-network-token"
+            "goversion": "",
+            "name": "bluefin-network-token",
+            "package": "",
+            "path": ""
           },
           "name": "ts",
+          "output": {
+            "adopt": false,
+            "path": "",
+            "repo": "",
+            "sdkrel": ""
+          },
           "publish": {
             "registry": {
               "active": false,
@@ -1454,21 +1897,39 @@
                 "recipe": "github"
               },
               "via": "port"
-            }
+            },
+            "version": "0.0.1"
           },
           "title": "TypeScript"
         },
         "zig": {
           "active": true,
+          "author": {
+            "name": "",
+            "url": ""
+          },
           "comment": {
             "line": "//"
           },
           "deps": {},
           "ext": "zig",
+          "feature": {
+            "fullset": [],
+            "trim": false
+          },
           "module": {
-            "name": "bluefin-network-token"
+            "goversion": "",
+            "name": "bluefin-network-token",
+            "package": "",
+            "path": ""
           },
           "name": "zig",
+          "output": {
+            "adopt": false,
+            "path": "",
+            "repo": "",
+            "sdkrel": ""
+          },
           "publish": {
             "registry": {
               "active": false,
@@ -1490,10 +1951,18 @@
                 "recipe": "github"
               },
               "via": "port"
-            }
+            },
+            "version": "0.0.1"
           },
           "srcfeature": false,
           "title": "Zig"
+        }
+      },
+      "test": {
+        "live": {
+          "app": false,
+          "base": "",
+          "strict": false
         }
       }
     }

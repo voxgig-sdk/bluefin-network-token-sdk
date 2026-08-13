@@ -24,6 +24,7 @@ require_relative 'prepare_method'
 require_relative 'prepare_params'
 require_relative 'prepare_path'
 require_relative 'prepare_query'
+require_relative 'graphql'
 require_relative 'result_basic'
 require_relative 'result_body'
 require_relative 'result_headers'
@@ -55,6 +56,8 @@ BluefinNetworkTokenUtility.registrar = ->(u) {
   u.prepare_params = BluefinNetworkTokenUtilities::PrepareParams
   u.prepare_path = BluefinNetworkTokenUtilities::PreparePath
   u.prepare_query = BluefinNetworkTokenUtilities::PrepareQuery
+  u.graphql_body = BluefinNetworkTokenUtilities::GraphqlBody
+  u.graphql_errors = BluefinNetworkTokenUtilities::GraphqlErrors
   u.result_basic = BluefinNetworkTokenUtilities::ResultBasic
   u.result_body = BluefinNetworkTokenUtilities::ResultBody
   u.result_headers = BluefinNetworkTokenUtilities::ResultHeaders

@@ -35,7 +35,7 @@ public class NetworkTokenBundleEntityTest
         }
         // The basic flow consumes synthetic IDs from the fixture. In live
         // mode without an *_ENTID env override, those IDs hit the live API
-        // and 4xx; set BLUEFINNETWORKTOKEN_TEST_NETWORK_TOKEN_BUNDLE_ENTID JSON to run live.
+        // and 4xx; set BLUEFIN_NETWORK_TOKEN_TEST_NETWORK_TOKEN_BUNDLE_ENTID JSON to run live.
         if (setup.SyntheticOnly)
         {
             return;
@@ -49,7 +49,7 @@ public class NetworkTokenBundleEntityTest
             "network_token_bundle_ref01"));
 
         var networkTokenBundleRef01DataResult = networkTokenBundleRef01Ent.Create(networkTokenBundleRef01Data, null);
-        networkTokenBundleRef01Data = Helpers.ToMapAny(networkTokenBundleRef01DataResult);
+        networkTokenBundleRef01Data = Helpers.ToMapAny(networkTokenBundleRef01DataResult is IEntity ce ? ce.Data() : networkTokenBundleRef01DataResult);
         Assert.True(networkTokenBundleRef01Data != null, "expected create result to be a map");
 
         // LOAD
@@ -109,43 +109,43 @@ public class NetworkTokenBundleEntityTest
         // live mode is on without a real override, the basic test runs
         // against synthetic IDs from the fixture and 4xx's.
         var entidEnvRaw = Environment.GetEnvironmentVariable(
-            "BLUEFINNETWORKTOKEN_TEST_NETWORK_TOKEN_BUNDLE_ENTID") ?? "";
+            "BLUEFIN_NETWORK_TOKEN_TEST_NETWORK_TOKEN_BUNDLE_ENTID") ?? "";
         var idmapOverridden = entidEnvRaw != "" &&
             entidEnvRaw.Trim().StartsWith("{");
 
         var env = TestRunner.EnvOverride(new Dictionary<string, object?>
         {
-            ["BLUEFINNETWORKTOKEN_TEST_NETWORK_TOKEN_BUNDLE_ENTID"] = idmap,
-            ["BLUEFINNETWORKTOKEN_TEST_LIVE"] = "FALSE",
-            ["BLUEFINNETWORKTOKEN_TEST_EXPLAIN"] = "FALSE",
-            ["BLUEFINNETWORKTOKEN_APIKEY"] = "NONE",
+            ["BLUEFIN_NETWORK_TOKEN_TEST_NETWORK_TOKEN_BUNDLE_ENTID"] = idmap,
+            ["BLUEFIN_NETWORK_TOKEN_TEST_LIVE"] = "FALSE",
+            ["BLUEFIN_NETWORK_TOKEN_TEST_EXPLAIN"] = "FALSE",
+            ["BLUEFIN_NETWORK_TOKEN_APIKEY"] = "NONE",
         });
 
-        var idmapResolved = Helpers.ToMapAny(env["BLUEFINNETWORKTOKEN_TEST_NETWORK_TOKEN_BUNDLE_ENTID"])
+        var idmapResolved = Helpers.ToMapAny(env["BLUEFIN_NETWORK_TOKEN_TEST_NETWORK_TOKEN_BUNDLE_ENTID"])
             ?? Helpers.ToMapAny(idmap)
             ?? new Dictionary<string, object?>();
 
-        if (Equals(env["BLUEFINNETWORKTOKEN_TEST_LIVE"], "TRUE"))
+        if (Equals(env["BLUEFIN_NETWORK_TOKEN_TEST_LIVE"], "TRUE"))
         {
             var mergedOpts = StructUtils.Merge(new List<object?>
             {
                 new Dictionary<string, object?>
                 {
-                    ["apikey"] = env["BLUEFINNETWORKTOKEN_APIKEY"],
+                    ["apikey"] = env["BLUEFIN_NETWORK_TOKEN_APIKEY"],
                 },
                 extra,
             });
             client = new BluefinNetworkTokenSDK(Helpers.ToMapAny(mergedOpts));
         }
 
-        var live = Equals(env["BLUEFINNETWORKTOKEN_TEST_LIVE"], "TRUE");
+        var live = Equals(env["BLUEFIN_NETWORK_TOKEN_TEST_LIVE"], "TRUE");
         return new EntityTestSetup
         {
             Client = client,
             Data = entityData,
             Idmap = idmapResolved,
             Env = env,
-            Explain = Equals(env["BLUEFINNETWORKTOKEN_TEST_EXPLAIN"], "TRUE"),
+            Explain = Equals(env["BLUEFIN_NETWORK_TOKEN_TEST_EXPLAIN"], "TRUE"),
             Live = live,
             SyntheticOnly = live && !idmapOverridden,
             Now = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds(),

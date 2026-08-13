@@ -66,7 +66,7 @@ if (err) {
 
 ```c
 // Create — returns the bare created record
-voxgig_value* created = network_token_bundle->vt->create(network_token_bundle, cmap(2, "card", v_map(), "card_number", v_str("example_card_number")), NULL, &err);
+voxgig_value* created = network_token_bundle->vt->create(network_token_bundle, cmap(2, "card", v_map(), "cardNumber", v_str("example_cardNumber")), NULL, &err);
 
 // Remove
 network_token_bundle->vt->remove(network_token_bundle, cmap(1, "id", v_str("example_id")), NULL, &err);
@@ -280,15 +280,15 @@ On error, `ok` is `false` and `err` carries the error value.
 | Field | Description |
 | --- | --- |
 | `card` |  |
-| `card_number` |  |
-| `expiration_month` |  |
-| `expiration_year` |  |
+| `cardNumber` |  |
+| `expirationMonth` |  |
+| `expirationYear` |  |
 | `issuer` |  |
 | `metadata` |  |
-| `network_token` |  |
-| `network_token_bundle_id` |  |
-| `network_token_bundle_state` |  |
-| `security_code` |  |
+| `networkToken` |  |
+| `networkTokenBundleId` |  |
+| `networkTokenBundleState` |  |
+| `securityCode` |  |
 
 Operations: Create, Load, Remove.
 
@@ -316,15 +316,15 @@ Create an instance: `Entity* network_token_bundle = bluefinnetworktoken_network_
 | Field | Type | Description |
 | --- | --- | --- |
 | `card` | `voxgig_value* (map)` |  |
-| `card_number` | `char*` |  |
-| `expiration_month` | `char*` |  |
-| `expiration_year` | `char*` |  |
+| `cardNumber` | `char*` |  |
+| `expirationMonth` | `char*` |  |
+| `expirationYear` | `char*` |  |
 | `issuer` | `voxgig_value* (map)` |  |
 | `metadata` | `voxgig_value* (map)` |  |
-| `network_token` | `voxgig_value* (map)` |  |
-| `network_token_bundle_id` | `char*` |  |
-| `network_token_bundle_state` | `char*` |  |
-| `security_code` | `char*` |  |
+| `networkToken` | `voxgig_value* (map)` |  |
+| `networkTokenBundleId` | `char*` |  |
+| `networkTokenBundleState` | `char*` |  |
+| `securityCode` | `char*` |  |
 
 #### Example: Load
 

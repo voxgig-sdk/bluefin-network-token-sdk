@@ -8,30 +8,30 @@
 
 ---@class NetworkTokenBundle
 ---@field card? table
----@field card_number? string
----@field expiration_month? string
----@field expiration_year? string
+---@field cardNumber? string
+---@field expirationMonth? string
+---@field expirationYear? string
 ---@field issuer? table
 ---@field metadata? table
----@field network_token? table
----@field network_token_bundle_id? string
----@field network_token_bundle_state? string
----@field security_code? string
+---@field networkToken? table
+---@field networkTokenBundleId? string
+---@field networkTokenBundleState? string
+---@field securityCode? string
 
 ---@class NetworkTokenBundleLoadMatch
 ---@field id string
 
 ---@class NetworkTokenBundleCreateData
 ---@field card? table
----@field card_number? string
----@field expiration_month? string
----@field expiration_year? string
+---@field cardNumber? string
+---@field expirationMonth? string
+---@field expirationYear? string
 ---@field issuer? table
 ---@field metadata? table
----@field network_token? table
----@field network_token_bundle_id? string
----@field network_token_bundle_state? string
----@field security_code? string
+---@field networkToken? table
+---@field networkTokenBundleId? string
+---@field networkTokenBundleState? string
+---@field securityCode? string
 
 ---@class NetworkTokenBundleRemoveMatch
 ---@field id string

@@ -94,15 +94,15 @@ const network_token_bundle = client.network_token_bundle(h.vnull());
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `card` | `Value (object)` | No |  |
-| `card_number` | `[]const u8` | No |  |
-| `expiration_month` | `[]const u8` | No |  |
-| `expiration_year` | `[]const u8` | No |  |
+| `cardNumber` | `[]const u8` | No |  |
+| `expirationMonth` | `[]const u8` | No |  |
+| `expirationYear` | `[]const u8` | No |  |
 | `issuer` | `Value (object)` | No |  |
 | `metadata` | `Value (object)` | No |  |
-| `network_token` | `Value (object)` | No |  |
-| `network_token_bundle_id` | `[]const u8` | No |  |
-| `network_token_bundle_state` | `[]const u8` | No |  |
-| `security_code` | `[]const u8` | No |  |
+| `networkToken` | `Value (object)` | No |  |
+| `networkTokenBundleId` | `[]const u8` | No |  |
+| `networkTokenBundleState` | `[]const u8` | No |  |
+| `securityCode` | `[]const u8` | No |  |
 
 ### Operations
 

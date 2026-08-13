@@ -70,26 +70,33 @@ network_token_bundleBasicTest c = do
       (id0 : _) -> do
         m <- jo [("id", VStr id0)]; ctrl <- emptyMap
         loaded <- eLoad ent m ctrl
-        lid <- getp loaded "id"
-        pure (ismap loaded && vstring lid == id0)
+        ld <- eDataGet loaded
+        lid <- getp ld "id"
+        pure (ismap ld && vstring lid == id0)
   runTest c "network_token_bundle.create" $ do
     sdk <- C.testSdk opts VNoval
     ent <- C.network_token_bundle sdk VNoval
     d <- newRefData fixture "network_token_bundle"
     ctrl <- emptyMap
     created <- eCreate ent d ctrl
-    cid <- getp created "id"
-    pure (ismap created && not (isNoval cid))
+    cd <- eDataGet created
+    cid <- getp cd "id"
+    pure (ismap cd && not (isNoval cid))
   runTest c "network_token_bundle.remove" $ do
     sdk <- C.testSdk opts VNoval
     ent <- C.network_token_bundle sdk VNoval
     d <- newRefData fixture "network_token_bundle"
     ctrl <- emptyMap
     created <- eCreate ent d ctrl
-    cid <- getp created "id"
+    cd <- eDataGet created
+    cid <- getp cd "id"
     rm <- jo [("id", cid)]; ctrl2 <- emptyMap
-    _ <- eRemove ent rm ctrl2
-    pure True
+    -- `remove` resolves to the entity, marked. It KEEPS the data it held.
+    removed <- eRemove ent rm ctrl2
+    gone <- readIORef (eDeleted removed)
+    rd <- eDataGet removed
+    rid <- getp rd "id"
+    pure (gone && vstring rid == vstring cid)
 
 network_token_bundleDirectTest :: Counters -> IO ()
 network_token_bundleDirectTest c = runTest c "network_token_bundle.direct" $ do

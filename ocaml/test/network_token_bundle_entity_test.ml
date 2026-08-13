@@ -20,5 +20,6 @@ let () =
       let ent = Sdk_client.network_token_bundle client Noval in
       ignore ent;
       let loaded = ent.e_load (jo [("id", Str "network_token_bundle01")]) Noval in
-      check "load is a map" (ismap loaded);
+      let loaded_data = loaded.e_data_get () in
+      check "load data is a map" (ismap loaded_data);
       ())

@@ -40,7 +40,7 @@ class NetworkTokenBundleEntityTest {
     }
     Assumptions.assumeFalse(
       setup.syntheticOnly,
-      "live entity test uses synthetic IDs from fixture — set BLUEFINNETWORKTOKEN_TEST_NETWORK_TOKEN_BUNDLE_ENTID JSON to run live",
+      "live entity test uses synthetic IDs from fixture — set BLUEFIN_NETWORK_TOKEN_TEST_NETWORK_TOKEN_BUNDLE_ENTID JSON to run live",
     )
     val client = setup.client
 
@@ -50,7 +50,7 @@ class NetworkTokenBundleEntityTest {
         Struct.getpath(setup.data, "new.network_token_bundle"), "network_token_bundle_ref01")) ?: linkedMapOf())
 
     val networkTokenBundleRef01DataResult = networkTokenBundleRef01Ent.create(networkTokenBundleRef01Data, null)
-    networkTokenBundleRef01Data = Helpers.toMapAny(networkTokenBundleRef01DataResult) ?: linkedMapOf()
+    networkTokenBundleRef01Data = Helpers.toMapAny(if (networkTokenBundleRef01DataResult is SdkEntity) networkTokenBundleRef01DataResult.data() else networkTokenBundleRef01DataResult) ?: linkedMapOf()
     assertNotNull(networkTokenBundleRef01Data, "expected create result to be a map")
 
     // LOAD
@@ -95,25 +95,25 @@ class NetworkTokenBundleEntityTest {
           "}]}"))
 
       // Detect ENTID env override before envOverride consumes it.
-      val entidEnvRaw = RunnerSupport.getenv("BLUEFINNETWORKTOKEN_TEST_NETWORK_TOKEN_BUNDLE_ENTID")
+      val entidEnvRaw = RunnerSupport.getenv("BLUEFIN_NETWORK_TOKEN_TEST_NETWORK_TOKEN_BUNDLE_ENTID")
       val idmapOverridden = entidEnvRaw != null && entidEnvRaw.trim().startsWith("{")
 
       val envm = linkedMapOf<String, Any?>()
-      envm["BLUEFINNETWORKTOKEN_TEST_NETWORK_TOKEN_BUNDLE_ENTID"] = idmap
-      envm["BLUEFINNETWORKTOKEN_TEST_LIVE"] = "FALSE"
-      envm["BLUEFINNETWORKTOKEN_TEST_EXPLAIN"] = "FALSE"
-      envm["BLUEFINNETWORKTOKEN_APIKEY"] = "NONE"
+      envm["BLUEFIN_NETWORK_TOKEN_TEST_NETWORK_TOKEN_BUNDLE_ENTID"] = idmap
+      envm["BLUEFIN_NETWORK_TOKEN_TEST_LIVE"] = "FALSE"
+      envm["BLUEFIN_NETWORK_TOKEN_TEST_EXPLAIN"] = "FALSE"
+      envm["BLUEFIN_NETWORK_TOKEN_APIKEY"] = "NONE"
       val env = RunnerSupport.envOverride(envm)
 
-      var idmapResolved = Helpers.toMapAny(env["BLUEFINNETWORKTOKEN_TEST_NETWORK_TOKEN_BUNDLE_ENTID"])
+      var idmapResolved = Helpers.toMapAny(env["BLUEFIN_NETWORK_TOKEN_TEST_NETWORK_TOKEN_BUNDLE_ENTID"])
       if (idmapResolved == null) {
         idmapResolved = Helpers.toMapAny(idmap) ?: linkedMapOf()
       }
 
-      val live = "TRUE" == env["BLUEFINNETWORKTOKEN_TEST_LIVE"]
+      val live = "TRUE" == env["BLUEFIN_NETWORK_TOKEN_TEST_LIVE"]
       if (live) {
         val liveOpts = linkedMapOf<String, Any?>()
-        liveOpts["apikey"] = env["BLUEFINNETWORKTOKEN_APIKEY"]
+        liveOpts["apikey"] = env["BLUEFIN_NETWORK_TOKEN_APIKEY"]
         val mergedOpts = Struct.merge(Struct.jt(liveOpts, extra))
         client = BluefinNetworkTokenSDK(Helpers.toMapAny(mergedOpts))
       }
@@ -123,7 +123,7 @@ class NetworkTokenBundleEntityTest {
       setup.data = entityData
       setup.idmap = idmapResolved
       setup.env = env
-      setup.explain = "TRUE" == env["BLUEFINNETWORKTOKEN_TEST_EXPLAIN"]
+      setup.explain = "TRUE" == env["BLUEFIN_NETWORK_TOKEN_TEST_EXPLAIN"]
       setup.live = live
       setup.syntheticOnly = live && !idmapOverridden
       setup.now = System.currentTimeMillis()

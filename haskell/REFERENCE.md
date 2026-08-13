@@ -94,33 +94,34 @@ Prepare a fetch definition without sending. Returns the `fetchdef` and raises on
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `card` | `Value` | No |  |
-| `card_number` | `String` | No |  |
-| `expiration_month` | `String` | No |  |
-| `expiration_year` | `String` | No |  |
+| `cardNumber` | `String` | No |  |
+| `expirationMonth` | `String` | No |  |
+| `expirationYear` | `String` | No |  |
 | `issuer` | `Value` | No |  |
 | `metadata` | `Value` | No |  |
-| `network_token` | `Value` | No |  |
-| `network_token_bundle_id` | `String` | No |  |
-| `network_token_bundle_state` | `String` | No |  |
-| `security_code` | `String` | No |  |
+| `networkToken` | `Value` | No |  |
+| `networkTokenBundleId` | `String` | No |  |
+| `networkTokenBundleState` | `String` | No |  |
+| `securityCode` | `String` | No |  |
 
 ### Operations
 
-#### `eCreate ent data ctrl :: IO Value`
+#### `eCreate ent data ctrl :: IO Entity`
 
-Create a new entity with the given data. Returns the created entity data and raises on error.
+Create a new entity with the given data. Resolves to the ENTITY (read the record with `eDataGet`) and raises on error.
 
 ```haskell
   ent <- Sdk.network_token_bundle sdk VNoval
   d <- jo
     []
   ctrl <- emptyMap
-  result <- Sdk.eCreate ent d ctrl
+  result <- Sdk.eCreate ent d ctrl   -- the ENTITY
+  d2 <- Sdk.eDataGet result
 ```
 
-#### `eLoad ent match ctrl :: IO Value`
+#### `eLoad ent match ctrl :: IO Entity`
 
-Load a single entity matching the given criteria. Returns the entity data and raises on error.
+Load a single entity matching the given criteria. Resolves to the ENTITY (read the record with `eDataGet`) and raises on error.
 
 ```haskell
   ent <- Sdk.network_token_bundle sdk VNoval
@@ -129,9 +130,9 @@ Load a single entity matching the given criteria. Returns the entity data and ra
   result <- Sdk.eLoad ent match ctrl
 ```
 
-#### `eRemove ent match ctrl :: IO Value`
+#### `eRemove ent match ctrl :: IO Entity`
 
-Remove the entity matching the given criteria. Raises on error.
+Remove the entity matching the given criteria. Resolves to the ENTITY, marked deleted (`eDeleted`); it keeps the data it held. Raises on error.
 
 ```haskell
   ent <- Sdk.network_token_bundle sdk VNoval

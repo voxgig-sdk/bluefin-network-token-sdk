@@ -73,19 +73,19 @@ Map<String, dynamic> directSetup([dynamic mockres]) {
   final calls = <Map<String, dynamic>>[];
 
   final env = envOverride({
-    'BLUEFINNETWORKTOKEN_TEST_NETWORK_TOKEN_BUNDLE_ENTID': <String, dynamic>{},
-    'BLUEFINNETWORKTOKEN_TEST_LIVE': 'FALSE',
-    'BLUEFINNETWORKTOKEN_APIKEY': 'NONE',
+    'BLUEFIN_NETWORK_TOKEN_TEST_NETWORK_TOKEN_BUNDLE_ENTID': <String, dynamic>{},
+    'BLUEFIN_NETWORK_TOKEN_TEST_LIVE': 'FALSE',
+    'BLUEFIN_NETWORK_TOKEN_APIKEY': 'NONE',
   });
 
-  final live = 'TRUE' == env['BLUEFINNETWORKTOKEN_TEST_LIVE'];
+  final live = 'TRUE' == env['BLUEFIN_NETWORK_TOKEN_TEST_LIVE'];
 
   if (live) {
     final client = BluefinNetworkTokenSDK({
-      'apikey': env['BLUEFINNETWORKTOKEN_APIKEY'],
+      'apikey': env['BLUEFIN_NETWORK_TOKEN_APIKEY'],
     });
 
-    dynamic idmap = env['BLUEFINNETWORKTOKEN_TEST_NETWORK_TOKEN_BUNDLE_ENTID'];
+    dynamic idmap = env['BLUEFIN_NETWORK_TOKEN_TEST_NETWORK_TOKEN_BUNDLE_ENTID'];
     if (idmap is String && idmap.startsWith('{')) {
       idmap = jsonDecode(idmap);
     }

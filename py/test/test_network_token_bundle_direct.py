@@ -3,9 +3,9 @@
 import json
 import pytest
 
-from utility.voxgig_struct import voxgig_struct as vs
+from bluefinnetworktoken_sdk.utility.voxgig_struct import voxgig_struct as vs
 from bluefinnetworktoken_sdk import BluefinNetworkTokenSDK
-from core import helpers
+from bluefinnetworktoken_sdk.core import helpers
 from test import runner
 
 
@@ -66,16 +66,16 @@ def _network_token_bundle_direct_setup(mockres):
     calls = []
 
     env = runner.env_override({
-        "BLUEFINNETWORKTOKEN_TEST_NETWORK_TOKEN_BUNDLE_ENTID": {},
-        "BLUEFINNETWORKTOKEN_TEST_LIVE": "FALSE",
-        "BLUEFINNETWORKTOKEN_APIKEY": "NONE",
+        "BLUEFIN_NETWORK_TOKEN_TEST_NETWORK_TOKEN_BUNDLE_ENTID": {},
+        "BLUEFIN_NETWORK_TOKEN_TEST_LIVE": "FALSE",
+        "BLUEFIN_NETWORK_TOKEN_APIKEY": "NONE",
     })
 
-    live = env.get("BLUEFINNETWORKTOKEN_TEST_LIVE") == "TRUE"
+    live = env.get("BLUEFIN_NETWORK_TOKEN_TEST_LIVE") == "TRUE"
 
     if live:
         merged_opts = {
-            "apikey": env.get("BLUEFINNETWORKTOKEN_APIKEY"),
+            "apikey": env.get("BLUEFIN_NETWORK_TOKEN_APIKEY"),
         }
         client = BluefinNetworkTokenSDK(merged_opts)
         return {

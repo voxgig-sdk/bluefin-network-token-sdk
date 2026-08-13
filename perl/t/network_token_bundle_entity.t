@@ -33,7 +33,7 @@ BASIC_FLOW: {
   # The basic flow consumes synthetic IDs from the fixture. In live mode
   # without an *_ENTID env override, those IDs hit the live API and 4xx.
   if ($setup->{synthetic_only}) {
-    note('live entity test uses synthetic IDs from fixture - set BLUEFINNETWORKTOKEN_TEST_NETWORK_TOKEN_BUNDLE_ENTID JSON to run live');
+    note('live entity test uses synthetic IDs from fixture - set BLUEFIN_NETWORK_TOKEN_TEST_NETWORK_TOKEN_BUNDLE_ENTID JSON to run live');
     pass('network_token_bundle: basic flow skipped (synthetic IDs only)');
     last BASIC_FLOW;
   }
@@ -46,7 +46,7 @@ BASIC_FLOW: {
     BluefinNetworkTokenHelpers::gpath($setup->{data}, 'new.network_token_bundle'), 'network_token_bundle_ref01'));
 
   $V{network_token_bundle_ref01_data_result} = $V{network_token_bundle_ref01_ent}->create($V{network_token_bundle_ref01_data}, undef);
-  $V{network_token_bundle_ref01_data} = BluefinNetworkTokenHelpers::to_map($V{network_token_bundle_ref01_data_result});
+  $V{network_token_bundle_ref01_data} = BluefinNetworkTokenHelpers::to_map(ref($V{network_token_bundle_ref01_data_result}) && $V{network_token_bundle_ref01_data_result}->can('data_get') ? $V{network_token_bundle_ref01_data_result}->data_get : $V{network_token_bundle_ref01_data_result});
   ok(defined $V{network_token_bundle_ref01_data}, 'network_token_bundle create: data');
 
   # LOAD
@@ -95,38 +95,38 @@ sub network_token_bundle_basic_setup {
   # mode is on without a real override, the basic test runs against
   # synthetic IDs from the fixture and 4xx's. Surface this so the test can
   # skip.
-  my $entid_env_raw = $ENV{'BLUEFINNETWORKTOKEN_TEST_NETWORK_TOKEN_BUNDLE_ENTID'};
+  my $entid_env_raw = $ENV{'BLUEFIN_NETWORK_TOKEN_TEST_NETWORK_TOKEN_BUNDLE_ENTID'};
   my $idmap_overridden = (defined $entid_env_raw && $entid_env_raw =~ /^\s*\{/) ? 1 : 0;
 
   my $env = BluefinNetworkTokenTestRunner::env_override({
-    'BLUEFINNETWORKTOKEN_TEST_NETWORK_TOKEN_BUNDLE_ENTID' => $idmap,
-    'BLUEFINNETWORKTOKEN_TEST_LIVE' => 'FALSE',
-    'BLUEFINNETWORKTOKEN_TEST_EXPLAIN' => 'FALSE',
-    'BLUEFINNETWORKTOKEN_APIKEY' => 'NONE',
+    'BLUEFIN_NETWORK_TOKEN_TEST_NETWORK_TOKEN_BUNDLE_ENTID' => $idmap,
+    'BLUEFIN_NETWORK_TOKEN_TEST_LIVE' => 'FALSE',
+    'BLUEFIN_NETWORK_TOKEN_TEST_EXPLAIN' => 'FALSE',
+    'BLUEFIN_NETWORK_TOKEN_APIKEY' => 'NONE',
   });
 
-  my $idmap_resolved = BluefinNetworkTokenHelpers::to_map($env->{'BLUEFINNETWORKTOKEN_TEST_NETWORK_TOKEN_BUNDLE_ENTID'});
+  my $idmap_resolved = BluefinNetworkTokenHelpers::to_map($env->{'BLUEFIN_NETWORK_TOKEN_TEST_NETWORK_TOKEN_BUNDLE_ENTID'});
   if (!defined $idmap_resolved) {
     $idmap_resolved = BluefinNetworkTokenHelpers::to_map($idmap);
   }
 
-  if ((($env->{'BLUEFINNETWORKTOKEN_TEST_LIVE'}) || '') eq 'TRUE') {
+  if ((($env->{'BLUEFIN_NETWORK_TOKEN_TEST_LIVE'}) || '') eq 'TRUE') {
     my $merged_opts = Voxgig::Struct::merge([
       {
-        'apikey' => $env->{'BLUEFINNETWORKTOKEN_APIKEY'},
+        'apikey' => $env->{'BLUEFIN_NETWORK_TOKEN_APIKEY'},
       },
       (Voxgig::Struct::ismap($extra) ? $extra : {}),
     ]);
     $client = BluefinNetworkTokenSDK->new(BluefinNetworkTokenHelpers::to_map($merged_opts));
   }
 
-  my $live = ((($env->{'BLUEFINNETWORKTOKEN_TEST_LIVE'}) || '') eq 'TRUE') ? 1 : 0;
+  my $live = ((($env->{'BLUEFIN_NETWORK_TOKEN_TEST_LIVE'}) || '') eq 'TRUE') ? 1 : 0;
   return {
     'client' => $client,
     'data' => $entity_data,
     'idmap' => $idmap_resolved,
     'env' => $env,
-    'explain' => ((($env->{'BLUEFINNETWORKTOKEN_TEST_EXPLAIN'}) || '') eq 'TRUE') ? 1 : 0,
+    'explain' => ((($env->{'BLUEFIN_NETWORK_TOKEN_TEST_EXPLAIN'}) || '') eq 'TRUE') ? 1 : 0,
     'live' => $live,
     'synthetic_only' => ($live && !$idmap_overridden) ? 1 : 0,
     'now' => BluefinNetworkTokenHelpers::now_ms(),

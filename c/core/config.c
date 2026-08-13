@@ -31,19 +31,19 @@ voxgig_value* make_config(void) {
             "index$", v_num(0)),
           cmap(5,
             "active", v_bool(true),
-            "name", v_str("card_number"),
+            "name", v_str("cardNumber"),
             "req", v_bool(false),
             "type", v_str("`$STRING`"),
             "index$", v_num(1)),
           cmap(5,
             "active", v_bool(true),
-            "name", v_str("expiration_month"),
+            "name", v_str("expirationMonth"),
             "req", v_bool(false),
             "type", v_str("`$STRING`"),
             "index$", v_num(2)),
           cmap(5,
             "active", v_bool(true),
-            "name", v_str("expiration_year"),
+            "name", v_str("expirationYear"),
             "req", v_bool(false),
             "type", v_str("`$STRING`"),
             "index$", v_num(3)),
@@ -61,35 +61,35 @@ voxgig_value* make_config(void) {
             "index$", v_num(5)),
           cmap(5,
             "active", v_bool(true),
-            "name", v_str("network_token"),
+            "name", v_str("networkToken"),
             "req", v_bool(false),
             "type", v_str("`$OBJECT`"),
             "index$", v_num(6)),
           cmap(5,
             "active", v_bool(true),
-            "name", v_str("network_token_bundle_id"),
+            "name", v_str("networkTokenBundleId"),
             "req", v_bool(false),
             "type", v_str("`$STRING`"),
             "index$", v_num(7)),
           cmap(5,
             "active", v_bool(true),
-            "name", v_str("network_token_bundle_state"),
+            "name", v_str("networkTokenBundleState"),
             "req", v_bool(false),
             "type", v_str("`$STRING`"),
             "index$", v_num(8)),
           cmap(5,
             "active", v_bool(true),
-            "name", v_str("security_code"),
+            "name", v_str("securityCode"),
             "req", v_bool(false),
             "type", v_str("`$STRING`"),
             "index$", v_num(9))),
         "name", v_str("network_token_bundle"),
         "op", cmap(3,
-          "create", cmap(4,
+          "create", cmap(3,
             "input", v_str("data"),
             "name", v_str("create"),
             "points", clist(1,
-              cmap(8,
+              cmap(9,
                 "active", v_bool(true),
                 "args", cmap(1,
                   "header", clist(1,
@@ -100,6 +100,7 @@ voxgig_value* make_config(void) {
                       "orig", v_str("scx_client_reference"),
                       "reqd", v_bool(true),
                       "type", v_str("`$STRING`")))),
+                "kind", v_str("http"),
                 "method", v_str("POST"),
                 "orig", v_str("/network-token-bundle"),
                 "parts", clist(1,
@@ -110,13 +111,12 @@ voxgig_value* make_config(void) {
                 "transform", cmap(2,
                   "req", v_str("`reqdata`"),
                   "res", v_str("`body`")),
-                "index$", v_num(0))),
-            "key$", v_str("create")),
-          "load", cmap(4,
+                "index$", v_num(0)))),
+          "load", cmap(3,
             "input", v_str("data"),
             "name", v_str("load"),
             "points", clist(2,
-              cmap(9,
+              cmap(10,
                 "active", v_bool(true),
                 "args", cmap(2,
                   "header", clist(1,
@@ -136,6 +136,7 @@ voxgig_value* make_config(void) {
                       "reqd", v_bool(true),
                       "type", v_str("`$STRING`"),
                       "index$", v_num(0)))),
+                "kind", v_str("http"),
                 "method", v_str("GET"),
                 "orig", v_str("/network-token-bundle/{networkTokenBundleId}"),
                 "parts", clist(2,
@@ -152,7 +153,7 @@ voxgig_value* make_config(void) {
                   "req", v_str("`reqdata`"),
                   "res", v_str("`body`")),
                 "index$", v_num(0)),
-              cmap(9,
+              cmap(10,
                 "active", v_bool(true),
                 "args", cmap(2,
                   "header", clist(1,
@@ -171,6 +172,7 @@ voxgig_value* make_config(void) {
                       "orig", v_str("network_token_bundle_id"),
                       "reqd", v_bool(true),
                       "type", v_str("`$STRING`")))),
+                "kind", v_str("http"),
                 "method", v_str("GET"),
                 "orig", v_str("/network-token-bundle/{networkTokenBundleId}/payment-credentials"),
                 "parts", clist(3,
@@ -188,9 +190,8 @@ voxgig_value* make_config(void) {
                 "transform", cmap(2,
                   "req", v_str("`reqdata`"),
                   "res", v_str("`body`")),
-                "index$", v_num(1))),
-            "key$", v_str("load")),
-          "remove", cmap(4,
+                "index$", v_num(1)))),
+          "remove", cmap(3,
             "input", v_str("data"),
             "name", v_str("remove"),
             "points", clist(1,
@@ -213,6 +214,7 @@ voxgig_value* make_config(void) {
                       "orig", v_str("network_token_bundle_id"),
                       "reqd", v_bool(true),
                       "type", v_str("`$STRING`")))),
+                "kind", v_str("http"),
                 "method", v_str("DELETE"),
                 "orig", v_str("/network-token-bundle/{networkTokenBundleId}"),
                 "parts", clist(2,
@@ -227,30 +229,12 @@ voxgig_value* make_config(void) {
                     v_str("scx_client_reference"))),
                 "transform", cmap(2,
                   "req", v_str("`reqdata`"),
-                  "res", v_str("`body`")),
-                "index$", v_num(0))),
-            "key$", v_str("remove"))),
+                  "res", v_str("`body`")))))),
         "relations", cmap(1,
           "ancestors", v_list()))));
 }
 
 Feature* make_feature(const char* name) {
-  if (strcmp(name, "audit") == 0) return feature_audit_new();
-  if (strcmp(name, "cache") == 0) return feature_cache_new();
-  if (strcmp(name, "clienttrack") == 0) return feature_clienttrack_new();
-  if (strcmp(name, "debug") == 0) return feature_debug_new();
-  if (strcmp(name, "idempotency") == 0) return feature_idempotency_new();
-  if (strcmp(name, "log") == 0) return feature_log_new();
-  if (strcmp(name, "metrics") == 0) return feature_metrics_new();
-  if (strcmp(name, "netsim") == 0) return feature_netsim_new();
-  if (strcmp(name, "paging") == 0) return feature_paging_new();
-  if (strcmp(name, "proxy") == 0) return feature_proxy_new();
-  if (strcmp(name, "ratelimit") == 0) return feature_ratelimit_new();
-  if (strcmp(name, "rbac") == 0) return feature_rbac_new();
-  if (strcmp(name, "retry") == 0) return feature_retry_new();
-  if (strcmp(name, "streaming") == 0) return feature_streaming_new();
-  if (strcmp(name, "telemetry") == 0) return feature_telemetry_new();
   if (strcmp(name, "test") == 0) return feature_test_new();
-  if (strcmp(name, "timeout") == 0) return feature_timeout_new();
   return feature_base_new();
 }

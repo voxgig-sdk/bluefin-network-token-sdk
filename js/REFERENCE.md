@@ -118,15 +118,15 @@ const network_token_bundle = client.NetworkTokenBundle()
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `card` | `Object` | No |  |
-| `card_number` | `string` | No |  |
-| `expiration_month` | `string` | No |  |
-| `expiration_year` | `string` | No |  |
+| `cardNumber` | `string` | No |  |
+| `expirationMonth` | `string` | No |  |
+| `expirationYear` | `string` | No |  |
 | `issuer` | `Object` | No |  |
 | `metadata` | `Object` | No |  |
-| `network_token` | `Object` | No |  |
-| `network_token_bundle_id` | `string` | No |  |
-| `network_token_bundle_state` | `string` | No |  |
-| `security_code` | `string` | No |  |
+| `networkToken` | `Object` | No |  |
+| `networkTokenBundleId` | `string` | No |  |
+| `networkTokenBundleState` | `string` | No |  |
+| `securityCode` | `string` | No |  |
 
 ### Operations
 

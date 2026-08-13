@@ -91,15 +91,15 @@ val networkTokenBundle = client.networkTokenBundle(null)
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `card` | `Map<String, Any?>?` | No |  |
-| `card_number` | `String?` | No |  |
-| `expiration_month` | `String?` | No |  |
-| `expiration_year` | `String?` | No |  |
+| `cardNumber` | `String?` | No |  |
+| `expirationMonth` | `String?` | No |  |
+| `expirationYear` | `String?` | No |  |
 | `issuer` | `Map<String, Any?>?` | No |  |
 | `metadata` | `Map<String, Any?>?` | No |  |
-| `network_token` | `Map<String, Any?>?` | No |  |
-| `network_token_bundle_id` | `String?` | No |  |
-| `network_token_bundle_state` | `String?` | No |  |
-| `security_code` | `String?` | No |  |
+| `networkToken` | `Map<String, Any?>?` | No |  |
+| `networkTokenBundleId` | `String?` | No |  |
+| `networkTokenBundleState` | `String?` | No |  |
+| `securityCode` | `String?` | No |  |
 
 ### Operations
 

@@ -52,7 +52,7 @@ let client = BluefinNetworkTokenSDK(options)
 
 ### 3. Load a networktokenbundle
 
-`load()` returns the bare record (a `Value`) and throws on error.
+`load()` returns the ENTITY — call data() for the record — and throws on error.
 
 ```swift
 do {
@@ -67,8 +67,8 @@ catch {
 ### 4. Create, update, and remove
 
 ```swift
-// Create — returns the bare created record (a Value)
-let created = try client.NetworkTokenBundle().create(VMap([("card", .map(VMap())), ("card_number", .string("example_card_number"))]), nil)
+// Create — returns the ENTITY (call data() for the record)
+let created = try client.NetworkTokenBundle().create(VMap([("card", .map(VMap())), ("cardNumber", .string("example_cardNumber"))]), nil)
 
 // Remove
 _ = try client.NetworkTokenBundle().remove(VMap([("id", .string("example_id"))]), nil)
@@ -151,7 +151,8 @@ Create a mock client for unit testing — no server required:
 ```swift
 let client = BluefinNetworkTokenSDK.testSDK(nil, nil)
 
-// Entity ops return the bare record and throw on error.
+// Entity ops return the ENTITY and throws on error;
+// call data() for the record.
 let networkTokenBundle = try client.NetworkTokenBundle().load(VMap([("id", .string("test01"))]), nil)
 // networkTokenBundle holds the mock response record
 print(networkTokenBundle)
@@ -249,7 +250,7 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return the bare result data (a `Value` map for
+Entity operations return the ENTITY (call data() for the record) (a `Value` map for
 single-entity ops, a `Value` list for `list`) and throw on error. Wrap
 calls in `do`/`catch` to handle failures.
 
@@ -272,15 +273,15 @@ On error, `ok` is `false` and `err` contains the error value.
 | Field | Description |
 | --- | --- |
 | `card` |  |
-| `card_number` |  |
-| `expiration_month` |  |
-| `expiration_year` |  |
+| `cardNumber` |  |
+| `expirationMonth` |  |
+| `expirationYear` |  |
 | `issuer` |  |
 | `metadata` |  |
-| `network_token` |  |
-| `network_token_bundle_id` |  |
-| `network_token_bundle_state` |  |
-| `security_code` |  |
+| `networkToken` |  |
+| `networkTokenBundleId` |  |
+| `networkTokenBundleState` |  |
+| `securityCode` |  |
 
 Operations: Create, Load, Remove.
 
@@ -308,15 +309,15 @@ Create an instance: `let networkTokenBundle = client.NetworkTokenBundle()`
 | Field | Type | Description |
 | --- | --- | --- |
 | `card` | `VMap` |  |
-| `card_number` | `String` |  |
-| `expiration_month` | `String` |  |
-| `expiration_year` | `String` |  |
+| `cardNumber` | `String` |  |
+| `expirationMonth` | `String` |  |
+| `expirationYear` | `String` |  |
 | `issuer` | `VMap` |  |
 | `metadata` | `VMap` |  |
-| `network_token` | `VMap` |  |
-| `network_token_bundle_id` | `String` |  |
-| `network_token_bundle_state` | `String` |  |
-| `security_code` | `String` |  |
+| `networkToken` | `VMap` |  |
+| `networkTokenBundleId` | `String` |  |
+| `networkTokenBundleState` | `String` |  |
+| `securityCode` | `String` |  |
 
 #### Example: Load
 

@@ -98,24 +98,24 @@ class NetworkTokenBundleDirectTest {
       val calls = mutableListOf<MutableMap<String, Any?>>()
 
       val envm = linkedMapOf<String, Any?>()
-      envm["BLUEFINNETWORKTOKEN_TEST_NETWORK_TOKEN_BUNDLE_ENTID"] = linkedMapOf<String, Any?>()
-      envm["BLUEFINNETWORKTOKEN_TEST_LIVE"] = "FALSE"
-      envm["BLUEFINNETWORKTOKEN_APIKEY"] = "NONE"
+      envm["BLUEFIN_NETWORK_TOKEN_TEST_NETWORK_TOKEN_BUNDLE_ENTID"] = linkedMapOf<String, Any?>()
+      envm["BLUEFIN_NETWORK_TOKEN_TEST_LIVE"] = "FALSE"
+      envm["BLUEFIN_NETWORK_TOKEN_APIKEY"] = "NONE"
       val env = RunnerSupport.envOverride(envm)
 
-      val live = "TRUE" == env["BLUEFINNETWORKTOKEN_TEST_LIVE"]
+      val live = "TRUE" == env["BLUEFIN_NETWORK_TOKEN_TEST_LIVE"]
 
       val setup = DirectSetup()
       setup.calls = calls
 
       if (live) {
         val mergedOpts = linkedMapOf<String, Any?>()
-        mergedOpts["apikey"] = env["BLUEFINNETWORKTOKEN_APIKEY"]
+        mergedOpts["apikey"] = env["BLUEFIN_NETWORK_TOKEN_APIKEY"]
         setup.client = BluefinNetworkTokenSDK(mergedOpts)
         setup.live = true
 
         var idmap: MutableMap<String, Any?> = linkedMapOf()
-        val entidRaw = env["BLUEFINNETWORKTOKEN_TEST_NETWORK_TOKEN_BUNDLE_ENTID"]
+        val entidRaw = env["BLUEFIN_NETWORK_TOKEN_TEST_NETWORK_TOKEN_BUNDLE_ENTID"]
         if (entidRaw is String && entidRaw.startsWith("{")) {
           val parsed = Helpers.toMapAny(Json.parseOrNull(entidRaw))
           if (parsed != null) {

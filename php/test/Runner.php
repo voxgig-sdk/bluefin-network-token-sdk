@@ -43,8 +43,8 @@ class BluefinNetworkTokenTestRunner
 
     public static function env_override(array $m): array
     {
-        $live = self::getenv('BLUEFINNETWORKTOKEN_TEST_LIVE');
-        $override = self::getenv('BLUEFINNETWORKTOKEN_TEST_OVERRIDE');
+        $live = self::getenv('BLUEFIN_NETWORK_TOKEN_TEST_LIVE');
+        $override = self::getenv('BLUEFIN_NETWORK_TOKEN_TEST_OVERRIDE');
 
         if ($live === 'TRUE' || $override === 'TRUE') {
             foreach (array_keys($m) as $key) {
@@ -63,9 +63,9 @@ class BluefinNetworkTokenTestRunner
             }
         }
 
-        $explain = self::getenv('BLUEFINNETWORKTOKEN_TEST_EXPLAIN');
+        $explain = self::getenv('BLUEFIN_NETWORK_TOKEN_TEST_EXPLAIN');
         if ($explain !== null && $explain !== '') {
-            $m['BLUEFINNETWORKTOKEN_TEST_EXPLAIN'] = $explain;
+            $m['BLUEFIN_NETWORK_TOKEN_TEST_EXPLAIN'] = $explain;
         }
 
         return $m;

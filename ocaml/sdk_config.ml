@@ -35,19 +35,19 @@ let make_config () : value =
             ("index$", (Num (0.))) ]);
           (jo [
             ("active", (Bool true));
-            ("name", (Str "card_number"));
+            ("name", (Str "cardNumber"));
             ("req", (Bool false));
             ("type", (Str "`$STRING`"));
             ("index$", (Num (1.))) ]);
           (jo [
             ("active", (Bool true));
-            ("name", (Str "expiration_month"));
+            ("name", (Str "expirationMonth"));
             ("req", (Bool false));
             ("type", (Str "`$STRING`"));
             ("index$", (Num (2.))) ]);
           (jo [
             ("active", (Bool true));
-            ("name", (Str "expiration_year"));
+            ("name", (Str "expirationYear"));
             ("req", (Bool false));
             ("type", (Str "`$STRING`"));
             ("index$", (Num (3.))) ]);
@@ -65,25 +65,25 @@ let make_config () : value =
             ("index$", (Num (5.))) ]);
           (jo [
             ("active", (Bool true));
-            ("name", (Str "network_token"));
+            ("name", (Str "networkToken"));
             ("req", (Bool false));
             ("type", (Str "`$OBJECT`"));
             ("index$", (Num (6.))) ]);
           (jo [
             ("active", (Bool true));
-            ("name", (Str "network_token_bundle_id"));
+            ("name", (Str "networkTokenBundleId"));
             ("req", (Bool false));
             ("type", (Str "`$STRING`"));
             ("index$", (Num (7.))) ]);
           (jo [
             ("active", (Bool true));
-            ("name", (Str "network_token_bundle_state"));
+            ("name", (Str "networkTokenBundleState"));
             ("req", (Bool false));
             ("type", (Str "`$STRING`"));
             ("index$", (Num (8.))) ]);
           (jo [
             ("active", (Bool true));
-            ("name", (Str "security_code"));
+            ("name", (Str "securityCode"));
             ("req", (Bool false));
             ("type", (Str "`$STRING`"));
             ("index$", (Num (9.))) ]) ]));
@@ -104,6 +104,7 @@ let make_config () : value =
                       ("orig", (Str "scx_client_reference"));
                       ("reqd", (Bool true));
                       ("type", (Str "`$STRING`")) ]) ])) ]));
+                ("kind", (Str "http"));
                 ("method", (Str "POST"));
                 ("orig", (Str "/network-token-bundle"));
                 ("parts", (ja [
@@ -140,6 +141,7 @@ let make_config () : value =
                       ("reqd", (Bool true));
                       ("type", (Str "`$STRING`"));
                       ("index$", (Num (0.))) ]) ])) ]));
+                ("kind", (Str "http"));
                 ("method", (Str "GET"));
                 ("orig", (Str "/network-token-bundle/{networkTokenBundleId}"));
                 ("parts", (ja [
@@ -175,6 +177,7 @@ let make_config () : value =
                       ("orig", (Str "network_token_bundle_id"));
                       ("reqd", (Bool true));
                       ("type", (Str "`$STRING`")) ]) ])) ]));
+                ("kind", (Str "http"));
                 ("method", (Str "GET"));
                 ("orig", (Str "/network-token-bundle/{networkTokenBundleId}/payment-credentials"));
                 ("parts", (ja [
@@ -218,6 +221,7 @@ let make_config () : value =
                       ("reqd", (Bool true));
                       ("type", (Str "`$STRING`"));
                       ("index$", (Num (0.))) ]) ])) ]));
+                ("kind", (Str "http"));
                 ("method", (Str "DELETE"));
                 ("orig", (Str "/network-token-bundle/{networkTokenBundleId}"));
                 ("parts", (ja [

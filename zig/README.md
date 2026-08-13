@@ -67,7 +67,7 @@ switch (client.network_token_bundle(h.vnull()).load(h.jo(&.{.{ "id", h.vstr("exa
 
 ```zig
 // Create — .ok carries the created record
-switch (client.network_token_bundle(h.vnull()).create(h.jo(&.{.{ "card", h.omap() }, .{ "card_number", h.vstr("example_card_number") }}), h.vnull())) {
+switch (client.network_token_bundle(h.vnull()).create(h.jo(&.{.{ "card", h.omap() }, .{ "cardNumber", h.vstr("example_cardNumber") }}), h.vnull())) {
     .ok => |created| std.debug.print("{s}\n", .{h.stringify(created)}),
     .err => |e| std.debug.print("create failed: {s}\n", .{e.msg}),
 }
@@ -269,15 +269,15 @@ On error, `ok` is `false` and `err` carries the error message.
 | Field | Description |
 | --- | --- |
 | `card` |  |
-| `card_number` |  |
-| `expiration_month` |  |
-| `expiration_year` |  |
+| `cardNumber` |  |
+| `expirationMonth` |  |
+| `expirationYear` |  |
 | `issuer` |  |
 | `metadata` |  |
-| `network_token` |  |
-| `network_token_bundle_id` |  |
-| `network_token_bundle_state` |  |
-| `security_code` |  |
+| `networkToken` |  |
+| `networkTokenBundleId` |  |
+| `networkTokenBundleState` |  |
+| `securityCode` |  |
 
 Operations: Create, Load, Remove.
 
@@ -308,15 +308,15 @@ carries the result `Value`, `.err => |e|` carries the branded error.
 | Field | Type | Description |
 | --- | --- | --- |
 | `card` | `Value (object)` |  |
-| `card_number` | `[]const u8` |  |
-| `expiration_month` | `[]const u8` |  |
-| `expiration_year` | `[]const u8` |  |
+| `cardNumber` | `[]const u8` |  |
+| `expirationMonth` | `[]const u8` |  |
+| `expirationYear` | `[]const u8` |  |
 | `issuer` | `Value (object)` |  |
 | `metadata` | `Value (object)` |  |
-| `network_token` | `Value (object)` |  |
-| `network_token_bundle_id` | `[]const u8` |  |
-| `network_token_bundle_state` | `[]const u8` |  |
-| `security_code` | `[]const u8` |  |
+| `networkToken` | `Value (object)` |  |
+| `networkTokenBundleId` | `[]const u8` |  |
+| `networkTokenBundleState` | `[]const u8` |  |
+| `securityCode` | `[]const u8` |  |
 
 #### Example: Load
 

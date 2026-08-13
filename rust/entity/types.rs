@@ -15,15 +15,15 @@ use crate::utility::voxgigstruct::Value;
 #[derive(Debug, Clone)]
 pub struct NetworkTokenBundle {
     pub card: Option<std::collections::HashMap<String, Value>>,
-    pub card_number: Option<String>,
-    pub expiration_month: Option<String>,
-    pub expiration_year: Option<String>,
+    pub cardnumber: Option<String>,
+    pub expirationmonth: Option<String>,
+    pub expirationyear: Option<String>,
     pub issuer: Option<std::collections::HashMap<String, Value>>,
     pub metadata: Option<std::collections::HashMap<String, Value>>,
-    pub network_token: Option<std::collections::HashMap<String, Value>>,
-    pub network_token_bundle_id: Option<String>,
-    pub network_token_bundle_state: Option<String>,
-    pub security_code: Option<String>,
+    pub networktoken: Option<std::collections::HashMap<String, Value>>,
+    pub networktokenbundleid: Option<String>,
+    pub networktokenbundlestate: Option<String>,
+    pub securitycode: Option<String>,
 }
 
 /// NetworkTokenBundleLoadMatch is the typed request payload for NetworkTokenBundle.load.
@@ -36,15 +36,15 @@ pub struct NetworkTokenBundleLoadMatch {
 #[derive(Debug, Clone)]
 pub struct NetworkTokenBundleCreateData {
     pub card: Option<std::collections::HashMap<String, Value>>,
-    pub card_number: Option<String>,
-    pub expiration_month: Option<String>,
-    pub expiration_year: Option<String>,
+    pub cardnumber: Option<String>,
+    pub expirationmonth: Option<String>,
+    pub expirationyear: Option<String>,
     pub issuer: Option<std::collections::HashMap<String, Value>>,
     pub metadata: Option<std::collections::HashMap<String, Value>>,
-    pub network_token: Option<std::collections::HashMap<String, Value>>,
-    pub network_token_bundle_id: Option<String>,
-    pub network_token_bundle_state: Option<String>,
-    pub security_code: Option<String>,
+    pub networktoken: Option<std::collections::HashMap<String, Value>>,
+    pub networktokenbundleid: Option<String>,
+    pub networktokenbundlestate: Option<String>,
+    pub securitycode: Option<String>,
 }
 
 /// NetworkTokenBundleRemoveMatch is the typed request payload for NetworkTokenBundle.remove.

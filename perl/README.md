@@ -46,7 +46,7 @@ my $client = BluefinNetworkTokenSDK->new({
 
 ### 3. Load a networktokenbundle
 
-`load()` returns the bare record (a `hashref`) and dies on error.
+`load()` returns the ENTITY — call data_get for the record — and dies on error.
 
 ```perl
 my $networktokenbundle = eval { $client->NetworkTokenBundle->load({ 'id' => 'example_id' }) };
@@ -61,8 +61,8 @@ else {
 ### 4. Create, update, and remove
 
 ```perl
-# Create — returns the bare created record (a hashref)
-my $created = $client->NetworkTokenBundle->create({ 'card' => {}, 'card_number' => 'example_card_number' });
+# Create — returns the ENTITY (call data_get for the record)
+my $created = $client->NetworkTokenBundle->create({ 'card' => {}, 'cardNumber' => 'example_cardNumber' });
 
 # Remove
 $client->NetworkTokenBundle->remove({ 'id' => 'example_id' });
@@ -145,7 +145,8 @@ Create a mock client for unit testing — no server required:
 ```perl
 my $client = BluefinNetworkTokenSDK->test(undef, undef);
 
-# Entity ops return the bare record and die on error.
+# Entity ops return the ENTITY and dies on error;
+# call data_get for the record.
 my $networktokenbundle = $client->NetworkTokenBundle->load({ 'id' => 'test01' });
 # $networktokenbundle contains the mock response record
 ```
@@ -246,7 +247,7 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return the bare result data (a `hashref` for single-entity
+Entity operations return the ENTITY (call data_get for the record) (a `hashref` for single-entity
 ops, an `arrayref` for `list`) and die on error. Wrap calls in
 `eval { ... }` and inspect `$@` to handle failures.
 
@@ -269,15 +270,15 @@ On error, `ok` is false and `err` contains the error value.
 | Field | Description |
 | --- | --- |
 | `card` |  |
-| `card_number` |  |
-| `expiration_month` |  |
-| `expiration_year` |  |
+| `cardNumber` |  |
+| `expirationMonth` |  |
+| `expirationYear` |  |
 | `issuer` |  |
 | `metadata` |  |
-| `network_token` |  |
-| `network_token_bundle_id` |  |
-| `network_token_bundle_state` |  |
-| `security_code` |  |
+| `networkToken` |  |
+| `networkTokenBundleId` |  |
+| `networkTokenBundleState` |  |
+| `securityCode` |  |
 
 Operations: Create, Load, Remove.
 
@@ -305,15 +306,15 @@ Create an instance: `my $network_token_bundle = $client->NetworkTokenBundle;`
 | Field | Type | Description |
 | --- | --- | --- |
 | `card` | `hashref` |  |
-| `card_number` | `string` |  |
-| `expiration_month` | `string` |  |
-| `expiration_year` | `string` |  |
+| `cardNumber` | `string` |  |
+| `expirationMonth` | `string` |  |
+| `expirationYear` | `string` |  |
 | `issuer` | `hashref` |  |
 | `metadata` | `hashref` |  |
-| `network_token` | `hashref` |  |
-| `network_token_bundle_id` | `string` |  |
-| `network_token_bundle_state` | `string` |  |
-| `security_code` | `string` |  |
+| `networkToken` | `hashref` |  |
+| `networkTokenBundleId` | `string` |  |
+| `networkTokenBundleState` | `string` |  |
+| `securityCode` | `string` |  |
 
 #### Example: Load
 

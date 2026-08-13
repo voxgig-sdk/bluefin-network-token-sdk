@@ -73,7 +73,7 @@ end
 network_token_bundle = BluefinNetworkToken.network_token_bundle(sdk)
 
 # Create — returns the bare created record
-created = BluefinNetworkToken.Entity.NetworkTokenBundle.create(network_token_bundle, H.deep(%{"card" => %{}, "card_number" => "example_card_number"}))
+created = BluefinNetworkToken.Entity.NetworkTokenBundle.create(network_token_bundle, H.deep(%{"card" => %{}, "cardNumber" => "example_cardNumber"}))
 
 # Remove
 BluefinNetworkToken.Entity.NetworkTokenBundle.remove(network_token_bundle, H.deep(%{"id" => "example_id"}))
@@ -288,15 +288,15 @@ On error, `ok` is `false` and `err` carries the error value.
 | Field | Description |
 | --- | --- |
 | `card` |  |
-| `card_number` |  |
-| `expiration_month` |  |
-| `expiration_year` |  |
+| `cardNumber` |  |
+| `expirationMonth` |  |
+| `expirationYear` |  |
 | `issuer` |  |
 | `metadata` |  |
-| `network_token` |  |
-| `network_token_bundle_id` |  |
-| `network_token_bundle_state` |  |
-| `security_code` |  |
+| `networkToken` |  |
+| `networkTokenBundleId` |  |
+| `networkTokenBundleState` |  |
+| `securityCode` |  |
 
 Operations: Create, Load, Remove.
 
@@ -327,15 +327,15 @@ Create a handle: `network_token_bundle = BluefinNetworkToken.network_token_bundl
 | Field | Type | Description |
 | --- | --- | --- |
 | `card` | `map()` |  |
-| `card_number` | `String.t()` |  |
-| `expiration_month` | `String.t()` |  |
-| `expiration_year` | `String.t()` |  |
+| `cardNumber` | `String.t()` |  |
+| `expirationMonth` | `String.t()` |  |
+| `expirationYear` | `String.t()` |  |
 | `issuer` | `map()` |  |
 | `metadata` | `map()` |  |
-| `network_token` | `map()` |  |
-| `network_token_bundle_id` | `String.t()` |  |
-| `network_token_bundle_state` | `String.t()` |  |
-| `security_code` | `String.t()` |  |
+| `networkToken` | `map()` |  |
+| `networkTokenBundleId` | `String.t()` |  |
+| `networkTokenBundleState` | `String.t()` |  |
+| `securityCode` | `String.t()` |  |
 
 #### Example: Load
 

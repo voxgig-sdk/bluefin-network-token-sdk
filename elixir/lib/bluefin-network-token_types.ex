@@ -20,15 +20,15 @@ defmodule BluefinNetworkToken.Types do
 
   Members:
     * `"card"` — map() (optional)
-    * `"card_number"` — String.t() (optional)
-    * `"expiration_month"` — String.t() (optional)
-    * `"expiration_year"` — String.t() (optional)
+    * `"cardNumber"` — String.t() (optional)
+    * `"expirationMonth"` — String.t() (optional)
+    * `"expirationYear"` — String.t() (optional)
     * `"issuer"` — map() (optional)
     * `"metadata"` — map() (optional)
-    * `"network_token"` — map() (optional)
-    * `"network_token_bundle_id"` — String.t() (optional)
-    * `"network_token_bundle_state"` — String.t() (optional)
-    * `"security_code"` — String.t() (optional)
+    * `"networkToken"` — map() (optional)
+    * `"networkTokenBundleId"` — String.t() (optional)
+    * `"networkTokenBundleState"` — String.t() (optional)
+    * `"securityCode"` — String.t() (optional)
   """
   @type network_token_bundle :: %{optional(String.t()) => any()}
 
@@ -45,15 +45,15 @@ defmodule BluefinNetworkToken.Types do
 
   Members:
     * `"card"` — map() (optional)
-    * `"card_number"` — String.t() (optional)
-    * `"expiration_month"` — String.t() (optional)
-    * `"expiration_year"` — String.t() (optional)
+    * `"cardNumber"` — String.t() (optional)
+    * `"expirationMonth"` — String.t() (optional)
+    * `"expirationYear"` — String.t() (optional)
     * `"issuer"` — map() (optional)
     * `"metadata"` — map() (optional)
-    * `"network_token"` — map() (optional)
-    * `"network_token_bundle_id"` — String.t() (optional)
-    * `"network_token_bundle_state"` — String.t() (optional)
-    * `"security_code"` — String.t() (optional)
+    * `"networkToken"` — map() (optional)
+    * `"networkTokenBundleId"` — String.t() (optional)
+    * `"networkTokenBundleState"` — String.t() (optional)
+    * `"securityCode"` — String.t() (optional)
   """
   @type network_token_bundle_create_data :: %{optional(String.t()) => any()}
 

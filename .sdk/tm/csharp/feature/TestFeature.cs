@@ -6,13 +6,13 @@
 
 using Voxgig.Struct;
 
-using static BluefinNetworkTokenSdk.Feature.FeatureOptions;
+using static ProjectNameSdk.Feature.FeatureOptions;
 
-namespace BluefinNetworkTokenSdk.Feature;
+namespace ProjectNameSdk.Feature;
 
 public class TestFeature : BaseFeature
 {
-    private BluefinNetworkTokenSDK? _client;
+    private ProjectNameSDK? _client;
     private Dictionary<string, object?>? _options;
     private int _netcalls;
 

@@ -23,6 +23,7 @@ require_once __DIR__ . '/MakeUrl.php';
 require_once __DIR__ . '/Param.php';
 require_once __DIR__ . '/PrepareAuth.php';
 require_once __DIR__ . '/PrepareBody.php';
+require_once __DIR__ . '/Graphql.php';
 require_once __DIR__ . '/PrepareHeaders.php';
 require_once __DIR__ . '/PrepareMethod.php';
 require_once __DIR__ . '/PrepareParams.php';
@@ -59,6 +60,8 @@ BluefinNetworkTokenUtility::setRegistrar(function (BluefinNetworkTokenUtility $u
     $u->prepare_params = [BluefinNetworkTokenPrepareParams::class, 'call'];
     $u->prepare_path = [BluefinNetworkTokenPreparePath::class, 'call'];
     $u->prepare_query = [BluefinNetworkTokenPrepareQuery::class, 'call'];
+    $u->graphql_body = [BluefinNetworkTokenGraphql::class, 'body'];
+    $u->graphql_errors = [BluefinNetworkTokenGraphql::class, 'errors'];
     $u->result_basic = [BluefinNetworkTokenResultBasic::class, 'call'];
     $u->result_body = [BluefinNetworkTokenResultBody::class, 'call'];
     $u->result_headers = [BluefinNetworkTokenResultHeaders::class, 'call'];

@@ -14,12 +14,12 @@ from __future__ import annotations
 
 from urllib.parse import quote
 
-from config import make_config
-from features import _make_feature
-from core.control import BluefinNetworkTokenControl
-from core.error import BluefinNetworkTokenError
-from core.result import BluefinNetworkTokenResult
-from core.spec import BluefinNetworkTokenSpec
+from projectname_sdk.config import make_config
+from projectname_sdk.features import _make_feature
+from projectname_sdk.core.control import BluefinNetworkTokenControl
+from projectname_sdk.core.error import BluefinNetworkTokenError
+from projectname_sdk.core.result import BluefinNetworkTokenResult
+from projectname_sdk.core.spec import BluefinNetworkTokenSpec
 
 
 # True when this SDK was generated with the named feature.

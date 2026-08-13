@@ -6,9 +6,9 @@ import time
 
 import pytest
 
-from utility.voxgig_struct import voxgig_struct as vs
+from bluefinnetworktoken_sdk.utility.voxgig_struct import voxgig_struct as vs
 from bluefinnetworktoken_sdk import BluefinNetworkTokenSDK
-from core import helpers
+from bluefinnetworktoken_sdk.core import helpers
 
 _TEST_DIR = os.path.dirname(os.path.abspath(__file__))
 from test import runner
@@ -36,7 +36,7 @@ class TestNetworkTokenBundleEntity:
         # without an *_ENTID env override, those IDs hit the live API and 4xx.
         if setup.get("synthetic_only"):
             pytest.skip("live entity test uses synthetic IDs from fixture — "
-                        "set BLUEFINNETWORKTOKEN_TEST_NETWORK_TOKEN_BUNDLE_ENTID JSON to run live")
+                        "set BLUEFIN_NETWORK_TOKEN_TEST_NETWORK_TOKEN_BUNDLE_ENTID JSON to run live")
         client = setup["client"]
 
         # CREATE
@@ -44,7 +44,7 @@ class TestNetworkTokenBundleEntity:
         network_token_bundle_ref01_data = helpers.to_map(vs.getprop(
             vs.getpath(setup["data"], "new.network_token_bundle"), "network_token_bundle_ref01"))
 
-        network_token_bundle_ref01_data = helpers.to_map(network_token_bundle_ref01_ent.create(network_token_bundle_ref01_data, None))
+        network_token_bundle_ref01_data = helpers.to_map(runner.entity_data(network_token_bundle_ref01_ent.create(network_token_bundle_ref01_data, None)))
         assert network_token_bundle_ref01_data is not None
 
         # LOAD
@@ -84,37 +84,37 @@ def _network_token_bundle_basic_setup(extra):
     # mode is on without a real override, the basic test runs against synthetic
     # IDs from the fixture and 4xx's. We surface this so the test can skip.
     _entid_env_raw = os.environ.get(
-        "BLUEFINNETWORKTOKEN_TEST_NETWORK_TOKEN_BUNDLE_ENTID")
+        "BLUEFIN_NETWORK_TOKEN_TEST_NETWORK_TOKEN_BUNDLE_ENTID")
     _idmap_overridden = _entid_env_raw is not None and _entid_env_raw.strip().startswith("{")
 
     env = runner.env_override({
-        "BLUEFINNETWORKTOKEN_TEST_NETWORK_TOKEN_BUNDLE_ENTID": idmap,
-        "BLUEFINNETWORKTOKEN_TEST_LIVE": "FALSE",
-        "BLUEFINNETWORKTOKEN_TEST_EXPLAIN": "FALSE",
-        "BLUEFINNETWORKTOKEN_APIKEY": "NONE",
+        "BLUEFIN_NETWORK_TOKEN_TEST_NETWORK_TOKEN_BUNDLE_ENTID": idmap,
+        "BLUEFIN_NETWORK_TOKEN_TEST_LIVE": "FALSE",
+        "BLUEFIN_NETWORK_TOKEN_TEST_EXPLAIN": "FALSE",
+        "BLUEFIN_NETWORK_TOKEN_APIKEY": "NONE",
     })
 
     idmap_resolved = helpers.to_map(
-        env.get("BLUEFINNETWORKTOKEN_TEST_NETWORK_TOKEN_BUNDLE_ENTID"))
+        env.get("BLUEFIN_NETWORK_TOKEN_TEST_NETWORK_TOKEN_BUNDLE_ENTID"))
     if idmap_resolved is None:
         idmap_resolved = helpers.to_map(idmap)
 
-    if env.get("BLUEFINNETWORKTOKEN_TEST_LIVE") == "TRUE":
+    if env.get("BLUEFIN_NETWORK_TOKEN_TEST_LIVE") == "TRUE":
         merged_opts = vs.merge([
             {
-                "apikey": env.get("BLUEFINNETWORKTOKEN_APIKEY"),
+                "apikey": env.get("BLUEFIN_NETWORK_TOKEN_APIKEY"),
             },
             extra or {},
         ])
         client = BluefinNetworkTokenSDK(helpers.to_map(merged_opts))
 
-    _live = env.get("BLUEFINNETWORKTOKEN_TEST_LIVE") == "TRUE"
+    _live = env.get("BLUEFIN_NETWORK_TOKEN_TEST_LIVE") == "TRUE"
     return {
         "client": client,
         "data": entity_data,
         "idmap": idmap_resolved,
         "env": env,
-        "explain": env.get("BLUEFINNETWORKTOKEN_TEST_EXPLAIN") == "TRUE",
+        "explain": env.get("BLUEFIN_NETWORK_TOKEN_TEST_EXPLAIN") == "TRUE",
         "live": _live,
         "synthetic_only": _live and not _idmap_overridden,
         "now": int(time.time() * 1000),

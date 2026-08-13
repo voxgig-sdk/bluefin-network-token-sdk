@@ -75,7 +75,7 @@ try {
 
 ```cpp
 // Create — returns the bare created record.
-Value created = client->network_token_bundle()->create(vmap({{"card", vmap()}, {"card_number", Value("example_card_number")}}), Value::undef());
+Value created = client->network_token_bundle()->create(vmap({{"card", vmap()}, {"cardNumber", Value("example_cardNumber")}}), Value::undef());
 
 // Remove
 client->network_token_bundle()->remove(vmap({{"id", Value("example_id")}}), Value::undef());
@@ -269,15 +269,15 @@ On error, `ok` is `false` and `err` contains the error value.
 | Field | Description |
 | --- | --- |
 | `card` |  |
-| `card_number` |  |
-| `expiration_month` |  |
-| `expiration_year` |  |
+| `cardNumber` |  |
+| `expirationMonth` |  |
+| `expirationYear` |  |
 | `issuer` |  |
 | `metadata` |  |
-| `network_token` |  |
-| `network_token_bundle_id` |  |
-| `network_token_bundle_state` |  |
-| `security_code` |  |
+| `networkToken` |  |
+| `networkTokenBundleId` |  |
+| `networkTokenBundleState` |  |
+| `securityCode` |  |
 
 Operations: Create, Load, Remove.
 
@@ -305,15 +305,15 @@ Create an instance: `auto network_token_bundle = client->network_token_bundle();
 | Field | Type | Description |
 | --- | --- | --- |
 | `card` | `std::map<std::string, Value>` |  |
-| `card_number` | `std::string` |  |
-| `expiration_month` | `std::string` |  |
-| `expiration_year` | `std::string` |  |
+| `cardNumber` | `std::string` |  |
+| `expirationMonth` | `std::string` |  |
+| `expirationYear` | `std::string` |  |
 | `issuer` | `std::map<std::string, Value>` |  |
 | `metadata` | `std::map<std::string, Value>` |  |
-| `network_token` | `std::map<std::string, Value>` |  |
-| `network_token_bundle_id` | `std::string` |  |
-| `network_token_bundle_state` | `std::string` |  |
-| `security_code` | `std::string` |  |
+| `networkToken` | `std::map<std::string, Value>` |  |
+| `networkTokenBundleId` | `std::string` |  |
+| `networkTokenBundleState` | `std::string` |  |
+| `securityCode` | `std::string` |  |
 
 #### Example: Load
 

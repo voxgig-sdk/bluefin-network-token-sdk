@@ -118,15 +118,35 @@ const network_token_bundle = client.NetworkTokenBundle()
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `card` | `Record<string, any>` | No |  |
-| `card_number` | `string` | No |  |
-| `expiration_month` | `string` | No |  |
-| `expiration_year` | `string` | No |  |
+| `cardNumber` | `string` | No |  |
+| `expirationMonth` | `string` | No |  |
+| `expirationYear` | `string` | No |  |
 | `issuer` | `Record<string, any>` | No |  |
 | `metadata` | `Record<string, any>` | No |  |
-| `network_token` | `Record<string, any>` | No |  |
-| `network_token_bundle_id` | `string` | No |  |
-| `network_token_bundle_state` | `string` | No |  |
-| `security_code` | `string` | No |  |
+| `networkToken` | `Record<string, any>` | No |  |
+| `networkTokenBundleId` | `string` | No |  |
+| `networkTokenBundleState` | `string` | No |  |
+| `securityCode` | `string` | No |  |
+
+### Actions
+
+This entity exposes custom API actions in addition to the standard
+operations. Select one with `$action` in the call's argument; the
+remaining keys are sent as that action's payload.
+
+| Action | Route | Call |
+| --- | --- | --- |
+| `payment_credential` | `/network-token-bundle/{networkTokenBundleId}/payment-credentials` | `client.NetworkTokenBundle().load({ $action: 'payment_credential', ... })` |
+
+An action returns that action's OWN response, which is not necessarily a
+NetworkTokenBundle record — check the API definition for its shape.
+
+```ts
+const result = await client.NetworkTokenBundle().load({
+  $action: 'payment_credential',
+  /* ...the action's own arguments */
+})
+```
 
 ### Operations
 

@@ -94,15 +94,15 @@ var networkTokenBundle = client.NetworkTokenBundle();
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `card` | `Dictionary<string, object?>` | No |  |
-| `card_number` | `string` | No |  |
-| `expiration_month` | `string` | No |  |
-| `expiration_year` | `string` | No |  |
+| `cardNumber` | `string` | No |  |
+| `expirationMonth` | `string` | No |  |
+| `expirationYear` | `string` | No |  |
 | `issuer` | `Dictionary<string, object?>` | No |  |
 | `metadata` | `Dictionary<string, object?>` | No |  |
-| `network_token` | `Dictionary<string, object?>` | No |  |
-| `network_token_bundle_id` | `string` | No |  |
-| `network_token_bundle_state` | `string` | No |  |
-| `security_code` | `string` | No |  |
+| `networkToken` | `Dictionary<string, object?>` | No |  |
+| `networkTokenBundleId` | `string` | No |  |
+| `networkTokenBundleState` | `string` | No |  |
+| `securityCode` | `string` | No |  |
 
 ### Operations
 

@@ -36,7 +36,7 @@ client = BluefinNetworkTokenSDK.new({
 
 ```ruby
 begin
-  # load returns the bare NetworkTokenBundle record (raises on error).
+  # load returns the ENTITY — call data_get for the NetworkTokenBundle record (raises on error).
   networktokenbundle = client.NetworkTokenBundle.load({ "id" => "example_id" })
   puts networktokenbundle
 rescue => err
@@ -47,8 +47,8 @@ end
 ### 4. Create, update, and remove
 
 ```ruby
-# create returns the bare created NetworkTokenBundle record.
-created = client.NetworkTokenBundle.create({ "card" => {}, "card_number" => "example_card_number" })
+# create returns the ENTITY — call data_get for the created NetworkTokenBundle record.
+created = client.NetworkTokenBundle.create({ "card" => {}, "cardNumber" => "example_cardNumber" })
 
 # Remove
 client.NetworkTokenBundle.remove({ "id" => "example_id" })
@@ -132,7 +132,8 @@ client = BluefinNetworkTokenSDK.test({
   "entity" => { "networktokenbundle" => { "test01" => { "id" => "test01" } } },
 })
 
-# Entity ops return the bare mock record (raises on error).
+# Entity ops return the ENTITY (raises on error);
+# call data_get for the mock record.
 networktokenbundle = client.NetworkTokenBundle.load({ "id" => "test01" })
 puts networktokenbundle
 ```
@@ -254,15 +255,15 @@ returns a result `Hash` with these keys:
 | Field | Description |
 | --- | --- |
 | `card` |  |
-| `card_number` |  |
-| `expiration_month` |  |
-| `expiration_year` |  |
+| `cardNumber` |  |
+| `expirationMonth` |  |
+| `expirationYear` |  |
 | `issuer` |  |
 | `metadata` |  |
-| `network_token` |  |
-| `network_token_bundle_id` |  |
-| `network_token_bundle_state` |  |
-| `security_code` |  |
+| `networkToken` |  |
+| `networkTokenBundleId` |  |
+| `networkTokenBundleState` |  |
+| `securityCode` |  |
 
 Operations: Create, Load, Remove.
 
@@ -290,20 +291,20 @@ Create an instance: `network_token_bundle = client.NetworkTokenBundle`
 | Field | Type | Description |
 | --- | --- | --- |
 | `card` | `Hash` |  |
-| `card_number` | `String` |  |
-| `expiration_month` | `String` |  |
-| `expiration_year` | `String` |  |
+| `cardNumber` | `String` |  |
+| `expirationMonth` | `String` |  |
+| `expirationYear` | `String` |  |
 | `issuer` | `Hash` |  |
 | `metadata` | `Hash` |  |
-| `network_token` | `Hash` |  |
-| `network_token_bundle_id` | `String` |  |
-| `network_token_bundle_state` | `String` |  |
-| `security_code` | `String` |  |
+| `networkToken` | `Hash` |  |
+| `networkTokenBundleId` | `String` |  |
+| `networkTokenBundleState` | `String` |  |
+| `securityCode` | `String` |  |
 
 #### Example: Load
 
 ```ruby
-# load returns the bare NetworkTokenBundle record (raises on error).
+# load returns the ENTITY — call data_get for the NetworkTokenBundle record (raises on error).
 network_token_bundle = client.NetworkTokenBundle.load({ "id" => "network_token_bundle_id" })
 ```
 

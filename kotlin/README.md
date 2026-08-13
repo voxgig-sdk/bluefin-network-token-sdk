@@ -40,7 +40,7 @@ val client = BluefinNetworkTokenSDK(mutableMapOf<String, Any?>(
 
 ### 3. Load a networktokenbundle
 
-`load()` returns the bare record (as `Any?`) and raises on error.
+`load()` returns the ENTITY — call data() for the record — and raises on error.
 
 ```kotlin
 try {
@@ -55,8 +55,8 @@ catch (err: RuntimeException) {
 ### 4. Create, update, and remove
 
 ```kotlin
-// Create — returns the bare created record (as Any?)
-val created = client.networkTokenBundle(null).create(mutableMapOf<String, Any?>("card" to mapOf<String, Any?>(), "card_number" to "example_card_number"), null)
+// Create — returns the ENTITY (call data() for the record)
+val created = client.networkTokenBundle(null).create(mutableMapOf<String, Any?>("card" to mapOf<String, Any?>(), "cardNumber" to "example_cardNumber"), null)
 
 // Remove
 client.networkTokenBundle(null).remove(mutableMapOf<String, Any?>("id" to "example_id"), null)
@@ -137,7 +137,8 @@ Create a mock client for unit testing — no server required:
 ```kotlin
 val client = BluefinNetworkTokenSDK.testSDK(null, null)
 
-// Entity ops return the bare record and raise on error.
+// Entity ops return the ENTITY and raises on error;
+// call data() for the record.
 val networkTokenBundle = client.networkTokenBundle(null).load(mutableMapOf<String, Any?>("id" to "test01"), null)
 // networkTokenBundle holds the mock response record
 println(networkTokenBundle)
@@ -233,7 +234,7 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return the bare result data (a `Map` for single-entity
+Entity operations return the ENTITY (call data() for the record) (a `Map` for single-entity
 ops, an aggregate `List` for `list`) as `Any?` and raise on error. Wrap
 calls in `try`/`catch` to handle failures.
 
@@ -256,15 +257,15 @@ On error, `ok` is `false` and `err` contains the error value.
 | Field | Description |
 | --- | --- |
 | `card` |  |
-| `card_number` |  |
-| `expiration_month` |  |
-| `expiration_year` |  |
+| `cardNumber` |  |
+| `expirationMonth` |  |
+| `expirationYear` |  |
 | `issuer` |  |
 | `metadata` |  |
-| `network_token` |  |
-| `network_token_bundle_id` |  |
-| `network_token_bundle_state` |  |
-| `security_code` |  |
+| `networkToken` |  |
+| `networkTokenBundleId` |  |
+| `networkTokenBundleState` |  |
+| `securityCode` |  |
 
 Operations: create, load, remove.
 
@@ -292,15 +293,15 @@ Create an instance: `val networkTokenBundle = client.networkTokenBundle(null)`
 | Field | Type | Description |
 | --- | --- | --- |
 | `card` | `Map<String, Any?>?` |  |
-| `card_number` | `String?` |  |
-| `expiration_month` | `String?` |  |
-| `expiration_year` | `String?` |  |
+| `cardNumber` | `String?` |  |
+| `expirationMonth` | `String?` |  |
+| `expirationYear` | `String?` |  |
 | `issuer` | `Map<String, Any?>?` |  |
 | `metadata` | `Map<String, Any?>?` |  |
-| `network_token` | `Map<String, Any?>?` |  |
-| `network_token_bundle_id` | `String?` |  |
-| `network_token_bundle_state` | `String?` |  |
-| `security_code` | `String?` |  |
+| `networkToken` | `Map<String, Any?>?` |  |
+| `networkTokenBundleId` | `String?` |  |
+| `networkTokenBundleState` | `String?` |  |
+| `securityCode` | `String?` |  |
 
 #### Example: Load
 

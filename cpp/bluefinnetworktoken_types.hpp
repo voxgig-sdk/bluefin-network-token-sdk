@@ -23,15 +23,15 @@ namespace types {
 
 struct NetworkTokenBundle {
   std::map<std::string, Value> card;  // optional
-  std::string card_number;  // optional
-  std::string expiration_month;  // optional
-  std::string expiration_year;  // optional
+  std::string cardNumber;  // optional
+  std::string expirationMonth;  // optional
+  std::string expirationYear;  // optional
   std::map<std::string, Value> issuer;  // optional
   std::map<std::string, Value> metadata;  // optional
-  std::map<std::string, Value> network_token;  // optional
-  std::string network_token_bundle_id;  // optional
-  std::string network_token_bundle_state;  // optional
-  std::string security_code;  // optional
+  std::map<std::string, Value> networkToken;  // optional
+  std::string networkTokenBundleId;  // optional
+  std::string networkTokenBundleState;  // optional
+  std::string securityCode;  // optional
 };
 
 struct NetworkTokenBundleLoadMatch {
@@ -40,15 +40,15 @@ struct NetworkTokenBundleLoadMatch {
 
 struct NetworkTokenBundleCreateData {
   std::map<std::string, Value> card;  // optional
-  std::string card_number;  // optional
-  std::string expiration_month;  // optional
-  std::string expiration_year;  // optional
+  std::string cardNumber;  // optional
+  std::string expirationMonth;  // optional
+  std::string expirationYear;  // optional
   std::map<std::string, Value> issuer;  // optional
   std::map<std::string, Value> metadata;  // optional
-  std::map<std::string, Value> network_token;  // optional
-  std::string network_token_bundle_id;  // optional
-  std::string network_token_bundle_state;  // optional
-  std::string security_code;  // optional
+  std::map<std::string, Value> networkToken;  // optional
+  std::string networkTokenBundleId;  // optional
+  std::string networkTokenBundleState;  // optional
+  std::string securityCode;  // optional
 };
 
 struct NetworkTokenBundleRemoveMatch {

@@ -105,24 +105,24 @@ public class NetworkTokenBundleDirectTest {
     final List<Map<String, Object>> calls = new ArrayList<>();
 
     Map<String, Object> envm = new LinkedHashMap<>();
-    envm.put("BLUEFINNETWORKTOKEN_TEST_NETWORK_TOKEN_BUNDLE_ENTID", new LinkedHashMap<>());
-    envm.put("BLUEFINNETWORKTOKEN_TEST_LIVE", "FALSE");
-    envm.put("BLUEFINNETWORKTOKEN_APIKEY", "NONE");
+    envm.put("BLUEFIN_NETWORK_TOKEN_TEST_NETWORK_TOKEN_BUNDLE_ENTID", new LinkedHashMap<>());
+    envm.put("BLUEFIN_NETWORK_TOKEN_TEST_LIVE", "FALSE");
+    envm.put("BLUEFIN_NETWORK_TOKEN_APIKEY", "NONE");
     Map<String, Object> env = RunnerSupport.envOverride(envm);
 
-    boolean live = "TRUE".equals(env.get("BLUEFINNETWORKTOKEN_TEST_LIVE"));
+    boolean live = "TRUE".equals(env.get("BLUEFIN_NETWORK_TOKEN_TEST_LIVE"));
 
     DirectSetup setup = new DirectSetup();
     setup.calls = calls;
 
     if (live) {
       Map<String, Object> mergedOpts = new LinkedHashMap<>();
-      mergedOpts.put("apikey", env.get("BLUEFINNETWORKTOKEN_APIKEY"));
+      mergedOpts.put("apikey", env.get("BLUEFIN_NETWORK_TOKEN_APIKEY"));
       setup.client = new BluefinNetworkTokenSDK(mergedOpts);
       setup.live = true;
 
       Map<String, Object> idmap = new LinkedHashMap<>();
-      Object entidRaw = env.get("BLUEFINNETWORKTOKEN_TEST_NETWORK_TOKEN_BUNDLE_ENTID");
+      Object entidRaw = env.get("BLUEFIN_NETWORK_TOKEN_TEST_NETWORK_TOKEN_BUNDLE_ENTID");
       if (entidRaw instanceof String && ((String) entidRaw).startsWith("{")) {
         Map<String, Object> parsed = Helpers.toMapAny(Json.parseOrNull((String) entidRaw));
         if (parsed != null) {

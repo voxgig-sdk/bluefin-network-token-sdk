@@ -94,15 +94,15 @@ let network_token_bundle = client.network_token_bundle(Value::Noval);
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `card` | `std::collections::HashMap<String, Value>` | No |  |
-| `card_number` | `String` | No |  |
-| `expiration_month` | `String` | No |  |
-| `expiration_year` | `String` | No |  |
+| `cardNumber` | `String` | No |  |
+| `expirationMonth` | `String` | No |  |
+| `expirationYear` | `String` | No |  |
 | `issuer` | `std::collections::HashMap<String, Value>` | No |  |
 | `metadata` | `std::collections::HashMap<String, Value>` | No |  |
-| `network_token` | `std::collections::HashMap<String, Value>` | No |  |
-| `network_token_bundle_id` | `String` | No |  |
-| `network_token_bundle_state` | `String` | No |  |
-| `security_code` | `String` | No |  |
+| `networkToken` | `std::collections::HashMap<String, Value>` | No |  |
+| `networkTokenBundleId` | `String` | No |  |
+| `networkTokenBundleState` | `String` | No |  |
+| `securityCode` | `String` | No |  |
 
 ### Operations
 

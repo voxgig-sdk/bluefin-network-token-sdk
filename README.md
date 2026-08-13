@@ -21,7 +21,7 @@ support (`load`, `create`, `remove`):
 
 ```ts
 const client = new BluefinNetworkTokenSDK()
-const networktokenbundle = await client.NetworkTokenBundle().load()
+const networktokenbundle = await client.NetworkTokenBundle().load({ id: "example_id" })
 ```
 
 Thinking in entities keeps the mental model small — for people and AI agents alike —
@@ -36,9 +36,18 @@ network, and no credentials:
 ### TypeScript
 
 ```ts
-const client = BluefinNetworkTokenSDK.test()
+// The offline mock starts EMPTY — seed it with the records the test needs.
+// Shape: { entity: { <entity-name>: { <id>: <record> } } }
+const client = BluefinNetworkTokenSDK.test({
+  entity: {
+    network_token_bundle: {
+      test01: { id: 'test01' },
+    },
+  },
+})
 const networktokenbundle = await client.NetworkTokenBundle().load({ id: 'test01' })
-// networktokenbundle is a bare NetworkTokenBundle populated with mock data
+// networktokenbundle is the NetworkTokenBundle entity, populated with mock data
+// — call networktokenbundle.data() for the record itself
 console.log(networktokenbundle)
 ```
 
@@ -179,7 +188,8 @@ System.out.println(networkTokenBundle);
 ```js
 const client = BluefinNetworkTokenSDK.test()
 const networktokenbundle = await client.NetworkTokenBundle().load({ id: 'test01' })
-// networktokenbundle is a bare entity populated with mock data
+// networktokenbundle is the entity, populated with mock data
+// — call networktokenbundle.data() for the record itself
 console.log(networktokenbundle)
 ```
 
@@ -197,7 +207,7 @@ println(networkTokenBundle)
 let () =
   let client = Sdk_client.test () in
   let result = (Sdk_client.network_token_bundle client Noval).e_load (jo [("id", (Str "test01"))]) Noval in
-  print_endline (stringify result)
+  print_endline (stringify (result.e_data_get ()))
 ```
 
 ### Perl
@@ -334,7 +344,7 @@ The API exposes one entity:
 
 | Entity | Description | API path |
 | --- | --- | --- |
-| **NetworkTokenBundle** | The NetworkTokenBundle entity (create, load, remove). | `/network-token-bundle` |
+| **NetworkTokenBundle** | The NetworkTokenBundle entity (create, load, remove). | `/network-token-bundle/{networkTokenBundleId}` |
 
 The operations available across these entities are **load**, **create**, **remove** — see each entity's
 own list above for exactly which it supports.
@@ -368,7 +378,7 @@ $client = new BluefinNetworkTokenSDK([
 ]);
 
 
-// Load a specific networktokenbundle (returns the bare record; throws on error)
+// Load a specific networktokenbundle (returns the ENTITY; call data_get() for the record; throws on error)
 $networktokenbundle = $client->NetworkTokenBundle()->load(["id" => "example_id"]);
 print_r($networktokenbundle);
 ```
@@ -400,7 +410,7 @@ client = BluefinNetworkTokenSDK.new({
 })
 
 
-# Load a specific networktokenbundle (returns the bare record; raises on error)
+# Load a specific networktokenbundle (returns the ENTITY; call data_get for the record)
 networktokenbundle = client.NetworkTokenBundle.load({ "id" => "example_id" })
 puts networktokenbundle
 ```
@@ -532,12 +542,12 @@ main = do
   opts <- jo [("apikey", maybe VNoval VStr mkey)]
   sdk <- Sdk.newSdk opts
 
-  -- Load a specific networktokenbundle (returns the record, raises on error)
+  -- Load a specific networktokenbundle (returns the ENTITY, raises on error)
   ent2 <- Sdk.network_token_bundle sdk VNoval
   m <- jo [("id", VStr "example_id")]
   ctrl2 <- emptyMap
   network_token_bundle <- Sdk.eLoad ent2 m ctrl2
-  print network_token_bundle
+  print =<< Sdk.eDataGet network_token_bundle
 ```
 
 ### Java
@@ -589,9 +599,9 @@ open Sdk_helpers
 
 let () =
   let client = Sdk_client.make (jo [("apikey", Str (Sys.getenv "BLUEFIN_NETWORK_TOKEN_APIKEY"))]) in
-  (* Load a specific network_token_bundle (returns the record; raises on error) *)
+  (* Load a specific network_token_bundle (returns the ENTITY; raises on error) *)
   let network_token_bundle = (Sdk_client.network_token_bundle client Noval).e_load (jo [("id", (Str "example_id"))]) Noval in
-  print_endline (stringify network_token_bundle)
+  print_endline (stringify (network_token_bundle.e_data_get ()))
 ```
 
 ### Perl
@@ -605,7 +615,7 @@ my $client = BluefinNetworkTokenSDK->new({
 });
 
 
-# Load a specific networktokenbundle (returns the bare record; dies on error)
+# Load a specific networktokenbundle (returns the ENTITY; call data_get for the record; dies on error)
 my $networktokenbundle = $client->NetworkTokenBundle->load({ 'id' => 'example_id' });
 print "$networktokenbundle->{id}\n";
 ```
@@ -961,6 +971,9 @@ Pass custom features via the `extend` option at construction time.
 
 This SDK is generated from the upstream OpenAPI specification. It is an
 unofficial client and is not affiliated with the API provider.
+
+The OpenAPI spec(s) this SDK was generated from are kept in the
+[`.sdk/def/`](.sdk/def/) folder.
 
 - Upstream API: [https://secure-cert.shieldconex.com/api](https://secure-cert.shieldconex.com/api)
 

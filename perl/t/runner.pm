@@ -44,8 +44,8 @@ sub getenv {
 
 sub env_override {
   my ($m) = @_;
-  my $live = getenv('BLUEFINNETWORKTOKEN_TEST_LIVE');
-  my $override = getenv('BLUEFINNETWORKTOKEN_TEST_OVERRIDE');
+  my $live = getenv('BLUEFIN_NETWORK_TOKEN_TEST_LIVE');
+  my $override = getenv('BLUEFIN_NETWORK_TOKEN_TEST_OVERRIDE');
 
   if ((defined $live && 'TRUE' eq $live)
     || (defined $override && 'TRUE' eq $override)) {
@@ -65,8 +65,8 @@ sub env_override {
     }
   }
 
-  my $explain = getenv('BLUEFINNETWORKTOKEN_TEST_EXPLAIN');
-  $m->{'BLUEFINNETWORKTOKEN_TEST_EXPLAIN'} = $explain if defined $explain && '' ne $explain;
+  my $explain = getenv('BLUEFIN_NETWORK_TOKEN_TEST_EXPLAIN');
+  $m->{'BLUEFIN_NETWORK_TOKEN_TEST_EXPLAIN'} = $explain if defined $explain && '' ne $explain;
 
   return $m;
 }

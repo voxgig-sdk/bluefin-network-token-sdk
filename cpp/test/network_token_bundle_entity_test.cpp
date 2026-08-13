@@ -38,15 +38,15 @@ static NetworkTokenBundleSetup network_token_bundle_basic_setup(const Value& ext
   if (!idmap.is_map()) idmap = vmap();
 
   Value env = env_override(vmap({
-    {"BLUEFINNETWORKTOKEN_TEST_NETWORK_TOKEN_BUNDLE_ENTID", idmap},
-    {"BLUEFINNETWORKTOKEN_TEST_LIVE", Value("FALSE")},
-    {"BLUEFINNETWORKTOKEN_TEST_EXPLAIN", Value("FALSE")}
+    {"BLUEFIN_NETWORK_TOKEN_TEST_NETWORK_TOKEN_BUNDLE_ENTID", idmap},
+    {"BLUEFIN_NETWORK_TOKEN_TEST_LIVE", Value("FALSE")},
+    {"BLUEFIN_NETWORK_TOKEN_TEST_EXPLAIN", Value("FALSE")}
   }));
 
-  Value idmap_resolved = Helpers::toMapAny(getp(env, "BLUEFINNETWORKTOKEN_TEST_NETWORK_TOKEN_BUNDLE_ENTID"));
+  Value idmap_resolved = Helpers::toMapAny(getp(env, "BLUEFIN_NETWORK_TOKEN_TEST_NETWORK_TOKEN_BUNDLE_ENTID"));
   if (!idmap_resolved.is_map()) idmap_resolved = idmap;
 
-  bool live = getp(env, "BLUEFINNETWORKTOKEN_TEST_LIVE") == Value("TRUE");
+  bool live = getp(env, "BLUEFIN_NETWORK_TOKEN_TEST_LIVE") == Value("TRUE");
 
   NetworkTokenBundleSetup s;
   s.client = client;
@@ -65,27 +65,6 @@ static void network_token_bundle_entity_instance() {
   ASSERT_EQ(ent->getName(), std::string("network_token_bundle"), "entity name");
 }
 
-static void network_token_bundle_entity_stream() {
-  // stream() runs the list op through the full pipeline and returns the
-  // result items. Seed two entities via test mode; with the streaming feature
-  // active it yields the feature's incremental items, else it falls back to
-  // the materialised items — either way every item is yielded.
-  Value seed = vmap({{"entity", vmap({{"network_token_bundle", vmap({
-      {"strm01", vmap({{"id", Value("strm01")}})},
-      {"strm02", vmap({{"id", Value("strm02")}})}})}})}});
-  Value sdkopts = vmap({{"feature",
-      vmap({{"streaming", vmap({{"active", Value(true)}})}})}});
-
-  auto strsdk = BluefinNetworkTokenSDK::testSDK(seed, sdkopts);
-  auto se = strsdk->network_token_bundle();
-  std::vector<Value> items = se->stream("list", Value::undef(), Value::undef());
-  ASSERT_EQ((int)items.size(), 2, "stream yields both seeded items");
-
-  auto plainsdk = BluefinNetworkTokenSDK::testSDK(seed, Value::undef());
-  auto pe = plainsdk->network_token_bundle();
-  std::vector<Value> pitems = pe->stream("list", Value::undef(), Value::undef());
-  ASSERT_EQ((int)pitems.size(), 2, "fallback stream yields both items");
-}
 
 static void network_token_bundle_entity_basic() {
   auto setup = network_token_bundle_basic_setup(Value::undef());
@@ -100,7 +79,7 @@ static void network_token_bundle_entity_basic() {
   Value network_token_bundle_ref01_data = Helpers::toMapAny(getp(Struct::getpath(setup.data, {"new", "network_token_bundle"}), "network_token_bundle_ref01"));
   if (!network_token_bundle_ref01_data.is_map()) network_token_bundle_ref01_data = vmap();
   {
-    Value network_token_bundle_ref01_data_result = network_token_bundle_ref01_ent->create(Struct::clone(network_token_bundle_ref01_data), Value::undef());
+    Value network_token_bundle_ref01_data_result = network_token_bundle_ref01_ent->create(Struct::clone(network_token_bundle_ref01_data), Value::undef())->data();
     network_token_bundle_ref01_data = Helpers::toMapAny(network_token_bundle_ref01_data_result);
     if (!network_token_bundle_ref01_data.is_map()) network_token_bundle_ref01_data = vmap();
     ASSERT_TRUE(network_token_bundle_ref01_data.is_map(), "expected create result to be a map");
@@ -108,7 +87,7 @@ static void network_token_bundle_entity_basic() {
 
   // LOAD
   Value network_token_bundle_ref01_match_dt0 = vmap();
-  Value network_token_bundle_ref01_data_dt0_loaded = network_token_bundle_ref01_ent->load(network_token_bundle_ref01_match_dt0, Value::undef());
+  Value network_token_bundle_ref01_data_dt0_loaded = network_token_bundle_ref01_ent->load(network_token_bundle_ref01_match_dt0, Value::undef())->data();
   ASSERT_TRUE(!network_token_bundle_ref01_data_dt0_loaded.is_undef(), "expected load result to be non-nil");
 
   // REMOVE
@@ -121,7 +100,6 @@ static void network_token_bundle_entity_basic() {
 
 int main() {
   T_RUN(network_token_bundle_entity_instance);
-  T_RUN(network_token_bundle_entity_stream);
   T_RUN(network_token_bundle_entity_basic);
   return sdktest::summary("network_token_bundle_entity_test");
 }

@@ -61,7 +61,7 @@ func main() {
     fmt.Println(networkTokenBundle)
 
     // Create a networkTokenBundle.
-    created, err := client.NetworkTokenBundle(nil).Create(map[string]any{"card": map[string]any{}, "card_number": "example_card_number"}, nil)
+    created, err := client.NetworkTokenBundle(nil).Create(map[string]any{"card": map[string]any{}, "cardNumber": "example_cardNumber"}, nil)
     if err != nil {
         panic(err)
     }
@@ -280,15 +280,15 @@ Only `Direct()` returns a response envelope — a `map[string]any` with
 | Field | Description |
 | --- | --- |
 | `"card"` |  |
-| `"card_number"` |  |
-| `"expiration_month"` |  |
-| `"expiration_year"` |  |
+| `"cardNumber"` |  |
+| `"expirationMonth"` |  |
+| `"expirationYear"` |  |
 | `"issuer"` |  |
 | `"metadata"` |  |
-| `"network_token"` |  |
-| `"network_token_bundle_id"` |  |
-| `"network_token_bundle_state"` |  |
-| `"security_code"` |  |
+| `"networkToken"` |  |
+| `"networkTokenBundleId"` |  |
+| `"networkTokenBundleState"` |  |
+| `"securityCode"` |  |
 
 Operations: Create, Load, Remove.
 
@@ -316,15 +316,15 @@ Create an instance: `networkTokenBundle := client.NetworkTokenBundle(nil)`
 | Field | Type | Description |
 | --- | --- | --- |
 | `card` | `map[string]any` |  |
-| `card_number` | `string` |  |
-| `expiration_month` | `string` |  |
-| `expiration_year` | `string` |  |
+| `cardNumber` | `string` |  |
+| `expirationMonth` | `string` |  |
+| `expirationYear` | `string` |  |
 | `issuer` | `map[string]any` |  |
 | `metadata` | `map[string]any` |  |
-| `network_token` | `map[string]any` |  |
-| `network_token_bundle_id` | `string` |  |
-| `network_token_bundle_state` | `string` |  |
-| `security_code` | `string` |  |
+| `networkToken` | `map[string]any` |  |
+| `networkTokenBundleId` | `string` |  |
+| `networkTokenBundleState` | `string` |  |
+| `securityCode` | `string` |  |
 
 #### Example: Load
 

@@ -90,15 +90,15 @@ let networkTokenBundle = client.NetworkTokenBundle()
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `card` | `VMap` | No |  |
-| `card_number` | `String` | No |  |
-| `expiration_month` | `String` | No |  |
-| `expiration_year` | `String` | No |  |
+| `cardNumber` | `String` | No |  |
+| `expirationMonth` | `String` | No |  |
+| `expirationYear` | `String` | No |  |
 | `issuer` | `VMap` | No |  |
 | `metadata` | `VMap` | No |  |
-| `network_token` | `VMap` | No |  |
-| `network_token_bundle_id` | `String` | No |  |
-| `network_token_bundle_state` | `String` | No |  |
-| `security_code` | `String` | No |  |
+| `networkToken` | `VMap` | No |  |
+| `networkTokenBundleId` | `String` | No |  |
+| `networkTokenBundleState` | `String` | No |  |
+| `securityCode` | `String` | No |  |
 
 ### Operations
 

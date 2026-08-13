@@ -16,15 +16,15 @@ namespace BluefinNetworkTokenSdk.Types;
 public record NetworkTokenBundle
 {
     public Dictionary<string, object?>? card { get; init; }
-    public string? card_number { get; init; }
-    public string? expiration_month { get; init; }
-    public string? expiration_year { get; init; }
+    public string? cardNumber { get; init; }
+    public string? expirationMonth { get; init; }
+    public string? expirationYear { get; init; }
     public Dictionary<string, object?>? issuer { get; init; }
     public Dictionary<string, object?>? metadata { get; init; }
-    public Dictionary<string, object?>? network_token { get; init; }
-    public string? network_token_bundle_id { get; init; }
-    public string? network_token_bundle_state { get; init; }
-    public string? security_code { get; init; }
+    public Dictionary<string, object?>? networkToken { get; init; }
+    public string? networkTokenBundleId { get; init; }
+    public string? networkTokenBundleState { get; init; }
+    public string? securityCode { get; init; }
 }
 
 public record NetworkTokenBundleLoadMatch
@@ -35,15 +35,15 @@ public record NetworkTokenBundleLoadMatch
 public record NetworkTokenBundleCreateData
 {
     public Dictionary<string, object?>? card { get; init; }
-    public string? card_number { get; init; }
-    public string? expiration_month { get; init; }
-    public string? expiration_year { get; init; }
+    public string? cardNumber { get; init; }
+    public string? expirationMonth { get; init; }
+    public string? expirationYear { get; init; }
     public Dictionary<string, object?>? issuer { get; init; }
     public Dictionary<string, object?>? metadata { get; init; }
-    public Dictionary<string, object?>? network_token { get; init; }
-    public string? network_token_bundle_id { get; init; }
-    public string? network_token_bundle_state { get; init; }
-    public string? security_code { get; init; }
+    public Dictionary<string, object?>? networkToken { get; init; }
+    public string? networkTokenBundleId { get; init; }
+    public string? networkTokenBundleState { get; init; }
+    public string? securityCode { get; init; }
 }
 
 public record NetworkTokenBundleRemoveMatch
