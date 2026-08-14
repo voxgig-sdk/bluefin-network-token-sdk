@@ -52,74 +52,44 @@ class Config {
     'network_token_bundle': <String, dynamic>{
       'fields': <dynamic>[
         <String, dynamic>{
-          'active': true,
           'name': 'card',
-          'req': false,
           'type': '`\$OBJECT`',
-          'index\$': 0,
         },
         <String, dynamic>{
-          'active': true,
           'name': 'cardNumber',
-          'req': false,
           'type': '`\$STRING`',
-          'index\$': 1,
         },
         <String, dynamic>{
-          'active': true,
           'name': 'expirationMonth',
-          'req': false,
           'type': '`\$STRING`',
-          'index\$': 2,
         },
         <String, dynamic>{
-          'active': true,
           'name': 'expirationYear',
-          'req': false,
           'type': '`\$STRING`',
-          'index\$': 3,
         },
         <String, dynamic>{
-          'active': true,
           'name': 'issuer',
-          'req': false,
           'type': '`\$OBJECT`',
-          'index\$': 4,
         },
         <String, dynamic>{
-          'active': true,
           'name': 'metadata',
-          'req': false,
           'type': '`\$OBJECT`',
-          'index\$': 5,
         },
         <String, dynamic>{
-          'active': true,
           'name': 'networkToken',
-          'req': false,
           'type': '`\$OBJECT`',
-          'index\$': 6,
         },
         <String, dynamic>{
-          'active': true,
           'name': 'networkTokenBundleId',
-          'req': false,
           'type': '`\$STRING`',
-          'index\$': 7,
         },
         <String, dynamic>{
-          'active': true,
           'name': 'networkTokenBundleState',
-          'req': false,
           'type': '`\$STRING`',
-          'index\$': 8,
         },
         <String, dynamic>{
-          'active': true,
           'name': 'securityCode',
-          'req': false,
           'type': '`\$STRING`',
-          'index\$': 9,
         },
       ],
       'name': 'network_token_bundle',
@@ -129,11 +99,9 @@ class Config {
           'name': 'create',
           'points': <dynamic>[
             <String, dynamic>{
-              'active': true,
               'args': <String, dynamic>{
                 'header': <dynamic>[
                   <String, dynamic>{
-                    'active': true,
                     'kind': 'header',
                     'name': 'scx_client_reference',
                     'orig': 'scx_client_reference',
@@ -157,21 +125,17 @@ class Config {
                 'req': '`reqdata`',
                 'res': '`body`',
               },
-              'index\$': 0,
             },
           ],
-          'key\$': 'create',
         },
         'load': <String, dynamic>{
           'input': 'data',
           'name': 'load',
           'points': <dynamic>[
             <String, dynamic>{
-              'active': true,
               'args': <String, dynamic>{
                 'header': <dynamic>[
                   <String, dynamic>{
-                    'active': true,
                     'kind': 'header',
                     'name': 'scx_client_reference',
                     'orig': 'scx_client_reference',
@@ -181,13 +145,11 @@ class Config {
                 ],
                 'params': <dynamic>[
                   <String, dynamic>{
-                    'active': true,
                     'kind': 'param',
                     'name': 'id',
                     'orig': 'network_token_bundle_id',
                     'reqd': true,
                     'type': '`\$STRING`',
-                    'index\$': 0,
                   },
                 ],
               },
@@ -213,14 +175,11 @@ class Config {
                 'req': '`reqdata`',
                 'res': '`body`',
               },
-              'index\$': 0,
             },
             <String, dynamic>{
-              'active': true,
               'args': <String, dynamic>{
                 'header': <dynamic>[
                   <String, dynamic>{
-                    'active': true,
                     'kind': 'header',
                     'name': 'scx_client_reference',
                     'orig': 'scx_client_reference',
@@ -230,7 +189,6 @@ class Config {
                 ],
                 'params': <dynamic>[
                   <String, dynamic>{
-                    'active': true,
                     'kind': 'param',
                     'name': 'id',
                     'orig': 'network_token_bundle_id',
@@ -263,21 +221,17 @@ class Config {
                 'req': '`reqdata`',
                 'res': '`body`',
               },
-              'index\$': 1,
             },
           ],
-          'key\$': 'load',
         },
         'remove': <String, dynamic>{
           'input': 'data',
           'name': 'remove',
           'points': <dynamic>[
             <String, dynamic>{
-              'active': true,
               'args': <String, dynamic>{
                 'header': <dynamic>[
                   <String, dynamic>{
-                    'active': true,
                     'kind': 'header',
                     'name': 'scx_client_reference',
                     'orig': 'scx_client_reference',
@@ -287,13 +241,11 @@ class Config {
                 ],
                 'params': <dynamic>[
                   <String, dynamic>{
-                    'active': true,
                     'kind': 'param',
                     'name': 'id',
                     'orig': 'network_token_bundle_id',
                     'reqd': true,
                     'type': '`\$STRING`',
-                    'index\$': 0,
                   },
                 ],
               },
@@ -319,10 +271,8 @@ class Config {
                 'req': '`reqdata`',
                 'res': '`body`',
               },
-              'index\$': 0,
             },
           ],
-          'key\$': 'remove',
         },
       },
       'relations': <String, dynamic>{

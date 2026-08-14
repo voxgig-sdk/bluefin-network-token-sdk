@@ -28,7 +28,7 @@ class BluefinNetworkTokenSDK
     utility = BluefinNetworkTokenUtility.new
     @_utility = utility
 
-    config = BluefinNetworkTokenConfig.make_config
+    config = BluefinNetworkTokenConfig.shared_config
 
     @_rootctx = utility.make_context.call({
       "client" => self,

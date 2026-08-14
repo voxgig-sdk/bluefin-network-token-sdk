@@ -40,7 +40,7 @@ class BluefinNetworkTokenSDK
         $utility = new BluefinNetworkTokenUtility();
         $this->_utility = $utility;
 
-        $config = BluefinNetworkTokenConfig::make_config();
+        $config = BluefinNetworkTokenConfig::shared_config();
 
         $this->_rootctx = ($utility->make_context)([
             "client" => $this,

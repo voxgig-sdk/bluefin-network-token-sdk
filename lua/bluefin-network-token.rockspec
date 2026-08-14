@@ -23,6 +23,7 @@ build = {
   modules = {
     ["bluefin-network-token_sdk"] = "bluefin-network-token_sdk.lua",
     ["config"] = "config.lua",
+    ["config_shared"] = "config_shared.lua",
     ["features"] = "features.lua",
   }
 }

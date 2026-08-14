@@ -28,65 +28,35 @@ let make_config () : value =
       ("network_token_bundle", (jo [
         ("fields", (ja [
           (jo [
-            ("active", (Bool true));
             ("name", (Str "card"));
-            ("req", (Bool false));
-            ("type", (Str "`$OBJECT`"));
-            ("index$", (Num (0.))) ]);
+            ("type", (Str "`$OBJECT`")) ]);
           (jo [
-            ("active", (Bool true));
             ("name", (Str "cardNumber"));
-            ("req", (Bool false));
-            ("type", (Str "`$STRING`"));
-            ("index$", (Num (1.))) ]);
+            ("type", (Str "`$STRING`")) ]);
           (jo [
-            ("active", (Bool true));
             ("name", (Str "expirationMonth"));
-            ("req", (Bool false));
-            ("type", (Str "`$STRING`"));
-            ("index$", (Num (2.))) ]);
+            ("type", (Str "`$STRING`")) ]);
           (jo [
-            ("active", (Bool true));
             ("name", (Str "expirationYear"));
-            ("req", (Bool false));
-            ("type", (Str "`$STRING`"));
-            ("index$", (Num (3.))) ]);
+            ("type", (Str "`$STRING`")) ]);
           (jo [
-            ("active", (Bool true));
             ("name", (Str "issuer"));
-            ("req", (Bool false));
-            ("type", (Str "`$OBJECT`"));
-            ("index$", (Num (4.))) ]);
+            ("type", (Str "`$OBJECT`")) ]);
           (jo [
-            ("active", (Bool true));
             ("name", (Str "metadata"));
-            ("req", (Bool false));
-            ("type", (Str "`$OBJECT`"));
-            ("index$", (Num (5.))) ]);
+            ("type", (Str "`$OBJECT`")) ]);
           (jo [
-            ("active", (Bool true));
             ("name", (Str "networkToken"));
-            ("req", (Bool false));
-            ("type", (Str "`$OBJECT`"));
-            ("index$", (Num (6.))) ]);
+            ("type", (Str "`$OBJECT`")) ]);
           (jo [
-            ("active", (Bool true));
             ("name", (Str "networkTokenBundleId"));
-            ("req", (Bool false));
-            ("type", (Str "`$STRING`"));
-            ("index$", (Num (7.))) ]);
+            ("type", (Str "`$STRING`")) ]);
           (jo [
-            ("active", (Bool true));
             ("name", (Str "networkTokenBundleState"));
-            ("req", (Bool false));
-            ("type", (Str "`$STRING`"));
-            ("index$", (Num (8.))) ]);
+            ("type", (Str "`$STRING`")) ]);
           (jo [
-            ("active", (Bool true));
             ("name", (Str "securityCode"));
-            ("req", (Bool false));
-            ("type", (Str "`$STRING`"));
-            ("index$", (Num (9.))) ]) ]));
+            ("type", (Str "`$STRING`")) ]) ]));
         ("name", (Str "network_token_bundle"));
         ("op", (jo [
           ("create", (jo [
@@ -94,11 +64,9 @@ let make_config () : value =
             ("name", (Str "create"));
             ("points", (ja [
               (jo [
-                ("active", (Bool true));
                 ("args", (jo [
                   ("header", (ja [
                     (jo [
-                      ("active", (Bool true));
                       ("kind", (Str "header"));
                       ("name", (Str "scx_client_reference"));
                       ("orig", (Str "scx_client_reference"));
@@ -114,19 +82,15 @@ let make_config () : value =
                     (Str "scx_client_reference") ])) ]));
                 ("transform", (jo [
                   ("req", (Str "`reqdata`"));
-                  ("res", (Str "`body`")) ]));
-                ("index$", (Num (0.))) ]) ]));
-            ("key$", (Str "create")) ]));
+                  ("res", (Str "`body`")) ])) ]) ])) ]));
           ("load", (jo [
             ("input", (Str "data"));
             ("name", (Str "load"));
             ("points", (ja [
               (jo [
-                ("active", (Bool true));
                 ("args", (jo [
                   ("header", (ja [
                     (jo [
-                      ("active", (Bool true));
                       ("kind", (Str "header"));
                       ("name", (Str "scx_client_reference"));
                       ("orig", (Str "scx_client_reference"));
@@ -134,13 +98,11 @@ let make_config () : value =
                       ("type", (Str "`$STRING`")) ]) ]));
                   ("params", (ja [
                     (jo [
-                      ("active", (Bool true));
                       ("kind", (Str "param"));
                       ("name", (Str "id"));
                       ("orig", (Str "network_token_bundle_id"));
                       ("reqd", (Bool true));
-                      ("type", (Str "`$STRING`"));
-                      ("index$", (Num (0.))) ]) ])) ]));
+                      ("type", (Str "`$STRING`")) ]) ])) ]));
                 ("kind", (Str "http"));
                 ("method", (Str "GET"));
                 ("orig", (Str "/network-token-bundle/{networkTokenBundleId}"));
@@ -156,14 +118,11 @@ let make_config () : value =
                     (Str "scx_client_reference") ])) ]));
                 ("transform", (jo [
                   ("req", (Str "`reqdata`"));
-                  ("res", (Str "`body`")) ]));
-                ("index$", (Num (0.))) ]);
+                  ("res", (Str "`body`")) ])) ]);
               (jo [
-                ("active", (Bool true));
                 ("args", (jo [
                   ("header", (ja [
                     (jo [
-                      ("active", (Bool true));
                       ("kind", (Str "header"));
                       ("name", (Str "scx_client_reference"));
                       ("orig", (Str "scx_client_reference"));
@@ -171,7 +130,6 @@ let make_config () : value =
                       ("type", (Str "`$STRING`")) ]) ]));
                   ("params", (ja [
                     (jo [
-                      ("active", (Bool true));
                       ("kind", (Str "param"));
                       ("name", (Str "id"));
                       ("orig", (Str "network_token_bundle_id"));
@@ -194,19 +152,15 @@ let make_config () : value =
                     (Str "scx_client_reference") ])) ]));
                 ("transform", (jo [
                   ("req", (Str "`reqdata`"));
-                  ("res", (Str "`body`")) ]));
-                ("index$", (Num (1.))) ]) ]));
-            ("key$", (Str "load")) ]));
+                  ("res", (Str "`body`")) ])) ]) ])) ]));
           ("remove", (jo [
             ("input", (Str "data"));
             ("name", (Str "remove"));
             ("points", (ja [
               (jo [
-                ("active", (Bool true));
                 ("args", (jo [
                   ("header", (ja [
                     (jo [
-                      ("active", (Bool true));
                       ("kind", (Str "header"));
                       ("name", (Str "scx_client_reference"));
                       ("orig", (Str "scx_client_reference"));
@@ -214,13 +168,11 @@ let make_config () : value =
                       ("type", (Str "`$STRING`")) ]) ]));
                   ("params", (ja [
                     (jo [
-                      ("active", (Bool true));
                       ("kind", (Str "param"));
                       ("name", (Str "id"));
                       ("orig", (Str "network_token_bundle_id"));
                       ("reqd", (Bool true));
-                      ("type", (Str "`$STRING`"));
-                      ("index$", (Num (0.))) ]) ])) ]));
+                      ("type", (Str "`$STRING`")) ]) ])) ]));
                 ("kind", (Str "http"));
                 ("method", (Str "DELETE"));
                 ("orig", (Str "/network-token-bundle/{networkTokenBundleId}"));
@@ -236,9 +188,7 @@ let make_config () : value =
                     (Str "scx_client_reference") ])) ]));
                 ("transform", (jo [
                   ("req", (Str "`reqdata`"));
-                  ("res", (Str "`body`")) ]));
-                ("index$", (Num (0.))) ]) ]));
-            ("key$", (Str "remove")) ])) ]));
+                  ("res", (Str "`body`")) ])) ]) ])) ])) ]));
         ("relations", (jo [
           ("ancestors", (empty_list ())) ])) ])) ])) ])
 

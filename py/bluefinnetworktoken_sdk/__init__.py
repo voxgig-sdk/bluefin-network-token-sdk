@@ -23,8 +23,8 @@ class BluefinNetworkTokenSDK:
         utility = BluefinNetworkTokenUtility()
         self._utility = utility
 
-        from bluefinnetworktoken_sdk.config import make_config
-        config = make_config()
+        from bluefinnetworktoken_sdk.config import shared_config
+        config = shared_config()
 
         self._rootctx = utility.make_context({
             "client": self,
