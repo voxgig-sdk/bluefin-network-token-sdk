@@ -1,7 +1,7 @@
 name: bluefin_network_token_sdk
 description: >-
   Unofficial generated dart SDK for the Network Token Bundle public API. Not affiliated with or endorsed by the upstream API provider.
-version: 0.0.1
+version: 0.1.1
 homepage: https://github.com/voxgig-sdk/bluefin-network-token-sdk
 repository: https://github.com/voxgig-sdk/bluefin-network-token-sdk
 issue_tracker: https://github.com/voxgig-sdk/bluefin-network-token-sdk/issues

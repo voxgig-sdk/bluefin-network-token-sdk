@@ -13,7 +13,7 @@ public static class SdkConfig
             {
                 ["name"] = "BluefinNetworkToken",
                 ["slug"] = "bluefin-network-token",
-                ["version"] = "0.0.1",
+                ["version"] = "0.1.1",
                 ["target"] = "csharp",
             },
             ["feature"] = new Dictionary<string, object?>

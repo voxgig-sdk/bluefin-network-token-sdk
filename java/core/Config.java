@@ -50,7 +50,7 @@ public final class Config {
     b.append(" \"main\": {");
     b.append("  \"name\": \"BluefinNetworkToken\",");
     b.append("  \"slug\": \"bluefin-network-token\",");
-    b.append("  \"version\": \"0.0.1\",");
+    b.append("  \"version\": \"0.1.1\",");
     b.append("  \"target\": \"java\"");
     b.append(" },");
     b.append(" \"feature\": {");
