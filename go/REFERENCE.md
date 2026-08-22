@@ -101,12 +101,12 @@ fmt.Println(networkTokenBundle.GetName()) // "network_token_bundle"
 | --- | --- | --- | --- |
 | `card` | `map[string]any` | No |  |
 | `cardNumber` | `string` | No |  |
-| `expirationMonth` | `string` | No |  |
-| `expirationYear` | `string` | No |  |
+| `expirationMonth` | `string` | No | Two-digit month in which the payment card expires. |
+| `expirationYear` | `string` | No | Four-digit year in which the payment card expires. |
 | `issuer` | `map[string]any` | No |  |
 | `metadata` | `map[string]any` | No |  |
 | `networkToken` | `map[string]any` | No |  |
-| `networkTokenBundleId` | `string` | No |  |
+| `networkTokenBundleId` | `string` | No | Unique identifier for the Instrument Identifier token used in the transaction. |
 | `networkTokenBundleState` | `string` | No |  |
 | `securityCode` | `string` | No |  |
 

@@ -28,6 +28,9 @@ def make_config():
     return {
         "main": {
             "name": "BluefinNetworkToken",
+            "slug": "bluefin-network-token",
+            "version": "0.0.1",
+            "target": "py",
         },
         "feature": {
             "test": {
@@ -61,10 +64,12 @@ def make_config():
           },
           {
             "name": "expirationMonth",
+            "short": "Two-digit month in which the payment card expires.",
             "type": "`$STRING`",
           },
           {
             "name": "expirationYear",
+            "short": "Four-digit year in which the payment card expires.",
             "type": "`$STRING`",
           },
           {
@@ -81,6 +86,7 @@ def make_config():
           },
           {
             "name": "networkTokenBundleId",
+            "short": "Unique identifier for the Instrument Identifier token used in the transaction.",
             "type": "`$STRING`",
           },
           {

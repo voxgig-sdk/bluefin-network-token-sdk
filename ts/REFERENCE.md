@@ -119,12 +119,12 @@ const network_token_bundle = client.NetworkTokenBundle()
 | --- | --- | --- | --- |
 | `card` | `Record<string, any>` | No |  |
 | `cardNumber` | `string` | No |  |
-| `expirationMonth` | `string` | No |  |
-| `expirationYear` | `string` | No |  |
+| `expirationMonth` | `string` | No | Two-digit month in which the payment card expires. |
+| `expirationYear` | `string` | No | Four-digit year in which the payment card expires. |
 | `issuer` | `Record<string, any>` | No |  |
 | `metadata` | `Record<string, any>` | No |  |
 | `networkToken` | `Record<string, any>` | No |  |
-| `networkTokenBundleId` | `string` | No |  |
+| `networkTokenBundleId` | `string` | No | Unique identifier for the Instrument Identifier token used in the transaction. |
 | `networkTokenBundleState` | `string` | No |  |
 | `securityCode` | `string` | No |  |
 

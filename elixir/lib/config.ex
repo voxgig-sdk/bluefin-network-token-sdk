@@ -6,7 +6,12 @@
 defmodule BluefinNetworkToken.Config do
   def make_config do
     BluefinNetworkToken.Helpers.deep(%{
-      "main" => %{"name" => "BluefinNetworkToken"},
+      "main" => %{
+        "name" => "BluefinNetworkToken",
+        "slug" => "bluefin-network-token",
+        "version" => "0.0.1",
+        "target" => "elixir"
+      },
       "feature" => %{
         "test" => %{
           "options" => %{
@@ -16,12 +21,14 @@ defmodule BluefinNetworkToken.Config do
       },
       "options" => %{
         "base" => "https://secure-cert.shieldconex.com/api",
-        "auth" => %{"prefix" => "Basic"},
+        "auth" => %{
+          "prefix" => "Basic"
+        },
         "headers" => %{
           "content-type" => "application/json"
         },
         "entity" => %{
-          "network_token_bundle" => %{},
+          "network_token_bundle" => %{}
         }
       },
       "entity" => %{
@@ -37,10 +44,12 @@ defmodule BluefinNetworkToken.Config do
             },
             %{
               "name" => "expirationMonth",
+              "short" => "Two-digit month in which the payment card expires.",
               "type" => "`$STRING`"
             },
             %{
               "name" => "expirationYear",
+              "short" => "Four-digit year in which the payment card expires.",
               "type" => "`$STRING`"
             },
             %{
@@ -57,6 +66,7 @@ defmodule BluefinNetworkToken.Config do
             },
             %{
               "name" => "networkTokenBundleId",
+              "short" => "Unique identifier for the Instrument Identifier token used in the transaction.",
               "type" => "`$STRING`"
             },
             %{
@@ -257,5 +267,31 @@ defmodule BluefinNetworkToken.Config do
         }
       }
     })
+  end
+
+  # SHARED CONFIG (sdkgen rung L2). See the data branch for the rationale, and
+  # for why the cached handle is validated on read.
+  @shared_key {__MODULE__, :shared_config}
+
+  # The process-wide config, built once on first use. The returned node is
+  # SHARED: treat it as read-only. Callers that need to mutate should use
+  # make_config, which always returns a fresh copy.
+  def shared_config do
+    cached = :persistent_term.get(@shared_key, nil)
+
+    if cached != nil and usable?(cached) do
+      cached
+    else
+      cfg = make_config()
+      :persistent_term.put(@shared_key, cfg)
+      cfg
+    end
+  end
+
+  defp usable?(cfg) do
+    Voxgig.Struct.getprop(cfg, "main")
+    true
+  rescue
+    ArgumentError -> false
   end
 end

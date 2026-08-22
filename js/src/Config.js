@@ -19,9 +19,20 @@ class Config {
     return fi
   }
 
+  // False for a feature added at runtime via options.extend (station's
+  // adopt path) - the constructor uses this to skip makeFeature for names
+  // no generated class backs.
+  hasFeature(fn) {
+    return null != FEATURE_CLASS[fn]
+  }
+
 
   main = {
     name: 'BluefinNetworkToken',
+        slug: "bluefin-network-token",
+    version: "0.0.1",
+    target: "js",
+
   }
 
 
@@ -36,7 +47,7 @@ class Config {
 
 
   options = {
-    base: 'https://secure-cert.shieldconex.com/api',
+    base: "https://secure-cert.shieldconex.com/api",
 
     auth: {
       prefix: 'Basic',
@@ -68,10 +79,12 @@ class Config {
         },
         {
           "name": "expirationMonth",
+          "short": "Two-digit month in which the payment card expires.",
           "type": "`$STRING`"
         },
         {
           "name": "expirationYear",
+          "short": "Four-digit year in which the payment card expires.",
           "type": "`$STRING`"
         },
         {
@@ -88,6 +101,7 @@ class Config {
         },
         {
           "name": "networkTokenBundleId",
+          "short": "Unique identifier for the Instrument Identifier token used in the transaction.",
           "type": "`$STRING`"
         },
         {

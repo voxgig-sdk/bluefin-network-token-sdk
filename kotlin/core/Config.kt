@@ -10,6 +10,21 @@ object Config {
     return Json.parse(configJson()) as MutableMap<String, Any?>
   }
 
+  // SHARED CONFIG (sdkgen rung L2).
+  //
+  // The SDK reads the config on every request and never writes to it, so one
+  // instance is shared by every client rather than rebuilt per client - the
+  // difference between parsing the embedded JSON once and once per client.
+  //
+  // 'by lazy' defaults to LazyThreadSafetyMode.SYNCHRONIZED, so concurrent
+  // first calls build it exactly once.
+  //
+  // The returned map is SHARED: treat it as read-only. Callers that need to
+  // mutate should use makeConfig, which always parses a fresh copy.
+  private val sharedConfigVal: MutableMap<String, Any?> by lazy { makeConfig() }
+
+  fun sharedConfig(): MutableMap<String, Any?> = sharedConfigVal
+
   fun makeFeature(name: String): Feature {
     return when (name) {
       "test" -> voxgig.bluefinnetworktokensdk.feature.TestFeature()
@@ -21,7 +36,10 @@ object Config {
     val b = StringBuilder()
     b.append("{")
     b.append(" \"main\": {")
-    b.append("  \"name\": \"BluefinNetworkToken\"")
+    b.append("  \"name\": \"BluefinNetworkToken\",")
+    b.append("  \"slug\": \"bluefin-network-token\",")
+    b.append("  \"version\": \"0.0.1\",")
+    b.append("  \"target\": \"kotlin\"")
     b.append(" },")
     b.append(" \"feature\": {")
     b.append("  \"test\": {")
@@ -55,10 +73,12 @@ object Config {
     b.append("    },")
     b.append("    {")
     b.append("     \"name\": \"expirationMonth\",")
+    b.append("     \"short\": \"Two-digit month in which the payment card expires.\",")
     b.append("     \"type\": \"`\$STRING`\"")
     b.append("    },")
     b.append("    {")
     b.append("     \"name\": \"expirationYear\",")
+    b.append("     \"short\": \"Four-digit year in which the payment card expires.\",")
     b.append("     \"type\": \"`\$STRING`\"")
     b.append("    },")
     b.append("    {")
@@ -75,6 +95,7 @@ object Config {
     b.append("    },")
     b.append("    {")
     b.append("     \"name\": \"networkTokenBundleId\",")
+    b.append("     \"short\": \"Unique identifier for the Instrument Identifier token used in the transaction.\",")
     b.append("     \"type\": \"`\$STRING`\"")
     b.append("    },")
     b.append("    {")

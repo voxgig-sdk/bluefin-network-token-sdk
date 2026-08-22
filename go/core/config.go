@@ -11,6 +11,9 @@ func MakeConfig() map[string]any {
 	return map[string]any{
 		"main": map[string]any{
 			"name": "BluefinNetworkToken",
+			"slug": "bluefin-network-token",
+			"version": "0.0.1",
+			"target": "go",
 		},
 		"feature": map[string]any{
 			"test": map[string]any{
@@ -44,10 +47,12 @@ func MakeConfig() map[string]any {
 					},
 					map[string]any{
 						"name": "expirationMonth",
+						"short": "Two-digit month in which the payment card expires.",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "expirationYear",
+						"short": "Four-digit year in which the payment card expires.",
 						"type": "`$STRING`",
 					},
 					map[string]any{
@@ -64,6 +69,7 @@ func MakeConfig() map[string]any {
 					},
 					map[string]any{
 						"name": "networkTokenBundleId",
+						"short": "Unique identifier for the Instrument Identifier token used in the transaction.",
 						"type": "`$STRING`",
 					},
 					map[string]any{

@@ -266,12 +266,12 @@ On error, `ok` is `false` and `$err` contains the error value.
 | --- | --- |
 | `card` |  |
 | `cardNumber` |  |
-| `expirationMonth` |  |
-| `expirationYear` |  |
+| `expirationMonth` | Two-digit month in which the payment card expires. |
+| `expirationYear` | Four-digit year in which the payment card expires. |
 | `issuer` |  |
 | `metadata` |  |
 | `networkToken` |  |
-| `networkTokenBundleId` |  |
+| `networkTokenBundleId` | Unique identifier for the Instrument Identifier token used in the transaction. |
 | `networkTokenBundleState` |  |
 | `securityCode` |  |
 
@@ -302,12 +302,12 @@ Create an instance: `$network_token_bundle = $client->NetworkTokenBundle();`
 | --- | --- | --- |
 | `card` | `array` |  |
 | `cardNumber` | `string` |  |
-| `expirationMonth` | `string` |  |
-| `expirationYear` | `string` |  |
+| `expirationMonth` | `string` | Two-digit month in which the payment card expires. |
+| `expirationYear` | `string` | Four-digit year in which the payment card expires. |
 | `issuer` | `array` |  |
 | `metadata` | `array` |  |
 | `networkToken` | `array` |  |
-| `networkTokenBundleId` | `string` |  |
+| `networkTokenBundleId` | `string` | Unique identifier for the Instrument Identifier token used in the transaction. |
 | `networkTokenBundleState` | `string` |  |
 | `securityCode` | `string` |  |
 

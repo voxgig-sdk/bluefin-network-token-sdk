@@ -93,12 +93,12 @@ auto network_token_bundle = client->network_token_bundle();
 | --- | --- | --- | --- |
 | `card` | `std::map<std::string, Value>` | No |  |
 | `cardNumber` | `std::string` | No |  |
-| `expirationMonth` | `std::string` | No |  |
-| `expirationYear` | `std::string` | No |  |
+| `expirationMonth` | `std::string` | No | Two-digit month in which the payment card expires. |
+| `expirationYear` | `std::string` | No | Four-digit year in which the payment card expires. |
 | `issuer` | `std::map<std::string, Value>` | No |  |
 | `metadata` | `std::map<std::string, Value>` | No |  |
 | `networkToken` | `std::map<std::string, Value>` | No |  |
-| `networkTokenBundleId` | `std::string` | No |  |
+| `networkTokenBundleId` | `std::string` | No | Unique identifier for the Instrument Identifier token used in the transaction. |
 | `networkTokenBundleState` | `std::string` | No |  |
 | `securityCode` | `std::string` | No |  |
 

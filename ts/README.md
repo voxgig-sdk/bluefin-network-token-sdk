@@ -9,7 +9,7 @@ The API is exposed as capitalised, semantic **Entities** — e.g.
 instead of raw URL paths and query parameters. This keeps the surface
 predictable and low-friction for both humans and AI agents.
 
-> Other languages, the CLI, and MCP server live alongside this one — see
+> Also generated from this model: `c`, `clojure`, `cpp`, `csharp`, `dart`, `elixir`, `go`, `go-cli`, `go-mcp`, `java`, `js`, `kotlin`, `lua`, `ocaml`, `perl`, `php`, `py`, `rb`, `rust`, `scala`, `swift`, `zig` — see
 > the [top-level README](../README.md).
 
 
@@ -311,12 +311,12 @@ The `prepare()` method returns:
 | --- | --- |
 | `card` |  |
 | `cardNumber` |  |
-| `expirationMonth` |  |
-| `expirationYear` |  |
+| `expirationMonth` | Two-digit month in which the payment card expires. |
+| `expirationYear` | Four-digit year in which the payment card expires. |
 | `issuer` |  |
 | `metadata` |  |
 | `networkToken` |  |
-| `networkTokenBundleId` |  |
+| `networkTokenBundleId` | Unique identifier for the Instrument Identifier token used in the transaction. |
 | `networkTokenBundleState` |  |
 | `securityCode` |  |
 
@@ -347,12 +347,12 @@ Create an instance: `const network_token_bundle = client.NetworkTokenBundle()`
 | --- | --- | --- |
 | `card` | `Record<string, any>` |  |
 | `cardNumber` | `string` |  |
-| `expirationMonth` | `string` |  |
-| `expirationYear` | `string` |  |
+| `expirationMonth` | `string` | Two-digit month in which the payment card expires. |
+| `expirationYear` | `string` | Four-digit year in which the payment card expires. |
 | `issuer` | `Record<string, any>` |  |
 | `metadata` | `Record<string, any>` |  |
 | `networkToken` | `Record<string, any>` |  |
-| `networkTokenBundleId` | `string` |  |
+| `networkTokenBundleId` | `string` | Unique identifier for the Instrument Identifier token used in the transaction. |
 | `networkTokenBundleState` | `string` |  |
 | `securityCode` | `string` |  |
 

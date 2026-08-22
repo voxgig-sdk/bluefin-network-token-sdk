@@ -270,12 +270,12 @@ On error, `ok` is `false` and `err` carries the error message.
 | --- | --- |
 | `card` |  |
 | `cardNumber` |  |
-| `expirationMonth` |  |
-| `expirationYear` |  |
+| `expirationMonth` | Two-digit month in which the payment card expires. |
+| `expirationYear` | Four-digit year in which the payment card expires. |
 | `issuer` |  |
 | `metadata` |  |
 | `networkToken` |  |
-| `networkTokenBundleId` |  |
+| `networkTokenBundleId` | Unique identifier for the Instrument Identifier token used in the transaction. |
 | `networkTokenBundleState` |  |
 | `securityCode` |  |
 
@@ -309,12 +309,12 @@ carries the result `Value`, `.err => |e|` carries the branded error.
 | --- | --- | --- |
 | `card` | `Value (object)` |  |
 | `cardNumber` | `[]const u8` |  |
-| `expirationMonth` | `[]const u8` |  |
-| `expirationYear` | `[]const u8` |  |
+| `expirationMonth` | `[]const u8` | Two-digit month in which the payment card expires. |
+| `expirationYear` | `[]const u8` | Four-digit year in which the payment card expires. |
 | `issuer` | `Value (object)` |  |
 | `metadata` | `Value (object)` |  |
 | `networkToken` | `Value (object)` |  |
-| `networkTokenBundleId` | `[]const u8` |  |
+| `networkTokenBundleId` | `[]const u8` | Unique identifier for the Instrument Identifier token used in the transaction. |
 | `networkTokenBundleState` | `[]const u8` |  |
 | `securityCode` | `[]const u8` |  |
 

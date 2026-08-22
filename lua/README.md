@@ -244,12 +244,12 @@ Only `direct()` returns a response envelope — a `table` with `ok`,
 | --- | --- |
 | `card` |  |
 | `cardNumber` |  |
-| `expirationMonth` |  |
-| `expirationYear` |  |
+| `expirationMonth` | Two-digit month in which the payment card expires. |
+| `expirationYear` | Four-digit year in which the payment card expires. |
 | `issuer` |  |
 | `metadata` |  |
 | `networkToken` |  |
-| `networkTokenBundleId` |  |
+| `networkTokenBundleId` | Unique identifier for the Instrument Identifier token used in the transaction. |
 | `networkTokenBundleState` |  |
 | `securityCode` |  |
 
@@ -280,12 +280,12 @@ Create an instance: `local network_token_bundle = client:NetworkTokenBundle(nil)
 | --- | --- | --- |
 | `card` | `table` |  |
 | `cardNumber` | `string` |  |
-| `expirationMonth` | `string` |  |
-| `expirationYear` | `string` |  |
+| `expirationMonth` | `string` | Two-digit month in which the payment card expires. |
+| `expirationYear` | `string` | Four-digit year in which the payment card expires. |
 | `issuer` | `table` |  |
 | `metadata` | `table` |  |
 | `networkToken` | `table` |  |
-| `networkTokenBundleId` | `string` |  |
+| `networkTokenBundleId` | `string` | Unique identifier for the Instrument Identifier token used in the transaction. |
 | `networkTokenBundleState` | `string` |  |
 | `securityCode` | `string` |  |
 

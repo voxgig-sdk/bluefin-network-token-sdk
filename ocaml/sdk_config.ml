@@ -18,12 +18,12 @@ let make_config () : value =
           ("active", (Bool false)) ])) ])) ]));
     ("options", (jo [
       ("base", (Str "https://secure-cert.shieldconex.com/api"));
+      ("auth", (jo [
+        ("prefix", (Str "Basic")) ]));
       ("headers", (jo [
         ("content-type", (Str "application/json")) ]));
       ("entity", (jo [
-        ("network_token_bundle", (empty_map ())) ]));
-      ("auth", (jo [
-        ("prefix", (Str "Basic")) ])) ]));
+        ("network_token_bundle", (empty_map ())) ])) ]));
     ("entity", (jo [
       ("network_token_bundle", (jo [
         ("fields", (ja [
@@ -35,9 +35,11 @@ let make_config () : value =
             ("type", (Str "`$STRING`")) ]);
           (jo [
             ("name", (Str "expirationMonth"));
+            ("short", (Str "Two-digit month in which the payment card expires."));
             ("type", (Str "`$STRING`")) ]);
           (jo [
             ("name", (Str "expirationYear"));
+            ("short", (Str "Four-digit year in which the payment card expires."));
             ("type", (Str "`$STRING`")) ]);
           (jo [
             ("name", (Str "issuer"));
@@ -50,6 +52,7 @@ let make_config () : value =
             ("type", (Str "`$OBJECT`")) ]);
           (jo [
             ("name", (Str "networkTokenBundleId"));
+            ("short", (Str "Unique identifier for the Instrument Identifier token used in the transaction."));
             ("type", (Str "`$STRING`")) ]);
           (jo [
             ("name", (Str "networkTokenBundleState"));

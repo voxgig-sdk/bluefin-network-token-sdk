@@ -95,12 +95,12 @@ let network_token_bundle = client.network_token_bundle(Value::Noval);
 | --- | --- | --- | --- |
 | `card` | `std::collections::HashMap<String, Value>` | No |  |
 | `cardNumber` | `String` | No |  |
-| `expirationMonth` | `String` | No |  |
-| `expirationYear` | `String` | No |  |
+| `expirationMonth` | `String` | No | Two-digit month in which the payment card expires. |
+| `expirationYear` | `String` | No | Four-digit year in which the payment card expires. |
 | `issuer` | `std::collections::HashMap<String, Value>` | No |  |
 | `metadata` | `std::collections::HashMap<String, Value>` | No |  |
 | `networkToken` | `std::collections::HashMap<String, Value>` | No |  |
-| `networkTokenBundleId` | `String` | No |  |
+| `networkTokenBundleId` | `String` | No | Unique identifier for the Instrument Identifier token used in the transaction. |
 | `networkTokenBundleState` | `String` | No |  |
 | `securityCode` | `String` | No |  |
 

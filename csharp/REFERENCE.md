@@ -95,12 +95,12 @@ var networkTokenBundle = client.NetworkTokenBundle();
 | --- | --- | --- | --- |
 | `card` | `Dictionary<string, object?>` | No |  |
 | `cardNumber` | `string` | No |  |
-| `expirationMonth` | `string` | No |  |
-| `expirationYear` | `string` | No |  |
+| `expirationMonth` | `string` | No | Two-digit month in which the payment card expires. |
+| `expirationYear` | `string` | No | Four-digit year in which the payment card expires. |
 | `issuer` | `Dictionary<string, object?>` | No |  |
 | `metadata` | `Dictionary<string, object?>` | No |  |
 | `networkToken` | `Dictionary<string, object?>` | No |  |
-| `networkTokenBundleId` | `string` | No |  |
+| `networkTokenBundleId` | `string` | No | Unique identifier for the Instrument Identifier token used in the transaction. |
 | `networkTokenBundleState` | `string` | No |  |
 | `securityCode` | `string` | No |  |
 

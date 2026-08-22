@@ -89,12 +89,12 @@ let network_token_bundle = Sdk_client.network_token_bundle client Noval
 | --- | --- | --- | --- |
 | `card` | `value map` | No |  |
 | `cardNumber` | `string` | No |  |
-| `expirationMonth` | `string` | No |  |
-| `expirationYear` | `string` | No |  |
+| `expirationMonth` | `string` | No | Two-digit month in which the payment card expires. |
+| `expirationYear` | `string` | No | Four-digit year in which the payment card expires. |
 | `issuer` | `value map` | No |  |
 | `metadata` | `value map` | No |  |
 | `networkToken` | `value map` | No |  |
-| `networkTokenBundleId` | `string` | No |  |
+| `networkTokenBundleId` | `string` | No | Unique identifier for the Instrument Identifier token used in the transaction. |
 | `networkTokenBundleState` | `string` | No |  |
 | `securityCode` | `string` | No |  |
 

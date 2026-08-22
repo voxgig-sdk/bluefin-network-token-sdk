@@ -253,12 +253,12 @@ On error, `ok` is `false` and `err` carries the error value.
 | --- | --- |
 | `card` |  |
 | `cardNumber` |  |
-| `expirationMonth` |  |
-| `expirationYear` |  |
+| `expirationMonth` | Two-digit month in which the payment card expires. |
+| `expirationYear` | Four-digit year in which the payment card expires. |
 | `issuer` |  |
 | `metadata` |  |
 | `networkToken` |  |
-| `networkTokenBundleId` |  |
+| `networkTokenBundleId` | Unique identifier for the Instrument Identifier token used in the transaction. |
 | `networkTokenBundleState` |  |
 | `securityCode` |  |
 
@@ -289,12 +289,12 @@ Create an instance: `let network_token_bundle = client.network_token_bundle(Valu
 | --- | --- | --- |
 | `card` | `std::collections::HashMap<String, Value>` |  |
 | `cardNumber` | `String` |  |
-| `expirationMonth` | `String` |  |
-| `expirationYear` | `String` |  |
+| `expirationMonth` | `String` | Two-digit month in which the payment card expires. |
+| `expirationYear` | `String` | Four-digit year in which the payment card expires. |
 | `issuer` | `std::collections::HashMap<String, Value>` |  |
 | `metadata` | `std::collections::HashMap<String, Value>` |  |
 | `networkToken` | `std::collections::HashMap<String, Value>` |  |
-| `networkTokenBundleId` | `String` |  |
+| `networkTokenBundleId` | `String` | Unique identifier for the Instrument Identifier token used in the transaction. |
 | `networkTokenBundleState` | `String` |  |
 | `securityCode` | `String` |  |
 

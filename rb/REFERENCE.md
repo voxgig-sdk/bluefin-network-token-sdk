@@ -96,12 +96,12 @@ network_token_bundle = client.NetworkTokenBundle
 | --- | --- | --- | --- |
 | `card` | `Hash` | No |  |
 | `cardNumber` | `String` | No |  |
-| `expirationMonth` | `String` | No |  |
-| `expirationYear` | `String` | No |  |
+| `expirationMonth` | `String` | No | Two-digit month in which the payment card expires. |
+| `expirationYear` | `String` | No | Four-digit year in which the payment card expires. |
 | `issuer` | `Hash` | No |  |
 | `metadata` | `Hash` | No |  |
 | `networkToken` | `Hash` | No |  |
-| `networkTokenBundleId` | `String` | No |  |
+| `networkTokenBundleId` | `String` | No | Unique identifier for the Instrument Identifier token used in the transaction. |
 | `networkTokenBundleState` | `String` | No |  |
 | `securityCode` | `String` | No |  |
 

@@ -86,12 +86,12 @@ Entity* network_token_bundle = bluefinnetworktoken_network_token_bundle(client, 
 | --- | --- | --- | --- |
 | `card` | `voxgig_value* (map)` | No |  |
 | `cardNumber` | `char*` | No |  |
-| `expirationMonth` | `char*` | No |  |
-| `expirationYear` | `char*` | No |  |
+| `expirationMonth` | `char*` | No | Two-digit month in which the payment card expires. |
+| `expirationYear` | `char*` | No | Four-digit year in which the payment card expires. |
 | `issuer` | `voxgig_value* (map)` | No |  |
 | `metadata` | `voxgig_value* (map)` | No |  |
 | `networkToken` | `voxgig_value* (map)` | No |  |
-| `networkTokenBundleId` | `char*` | No |  |
+| `networkTokenBundleId` | `char*` | No | Unique identifier for the Instrument Identifier token used in the transaction. |
 | `networkTokenBundleState` | `char*` | No |  |
 | `securityCode` | `char*` | No |  |
 

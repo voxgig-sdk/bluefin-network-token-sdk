@@ -6,7 +6,7 @@ The Golang SDK for the BluefinNetworkToken API — an entity-oriented client usi
 
 It exposes the API as capitalised, semantic **Entities** — e.g. `client.NetworkTokenBundle(nil)` — each with the same small set of operations (`Load`, `Create`, `Remove`) instead of raw URL paths and query strings. You call meaning, not endpoints, which keeps the cognitive load low.
 
-> Other languages, the CLI, and MCP server live alongside this one — see
+> Also generated from this model: `c`, `clojure`, `cpp`, `csharp`, `dart`, `elixir`, `go-cli`, `go-mcp`, `java`, `js`, `kotlin`, `lua`, `ocaml`, `perl`, `php`, `py`, `rb`, `rust`, `scala`, `swift`, `ts`, `zig` — see
 > the [top-level README](../README.md).
 
 
@@ -281,12 +281,12 @@ Only `Direct()` returns a response envelope — a `map[string]any` with
 | --- | --- |
 | `"card"` |  |
 | `"cardNumber"` |  |
-| `"expirationMonth"` |  |
-| `"expirationYear"` |  |
+| `"expirationMonth"` | Two-digit month in which the payment card expires. |
+| `"expirationYear"` | Four-digit year in which the payment card expires. |
 | `"issuer"` |  |
 | `"metadata"` |  |
 | `"networkToken"` |  |
-| `"networkTokenBundleId"` |  |
+| `"networkTokenBundleId"` | Unique identifier for the Instrument Identifier token used in the transaction. |
 | `"networkTokenBundleState"` |  |
 | `"securityCode"` |  |
 
@@ -317,12 +317,12 @@ Create an instance: `networkTokenBundle := client.NetworkTokenBundle(nil)`
 | --- | --- | --- |
 | `card` | `map[string]any` |  |
 | `cardNumber` | `string` |  |
-| `expirationMonth` | `string` |  |
-| `expirationYear` | `string` |  |
+| `expirationMonth` | `string` | Two-digit month in which the payment card expires. |
+| `expirationYear` | `string` | Four-digit year in which the payment card expires. |
 | `issuer` | `map[string]any` |  |
 | `metadata` | `map[string]any` |  |
 | `networkToken` | `map[string]any` |  |
-| `networkTokenBundleId` | `string` |  |
+| `networkTokenBundleId` | `string` | Unique identifier for the Instrument Identifier token used in the transaction. |
 | `networkTokenBundleState` | `string` |  |
 | `securityCode` | `string` |  |
 

@@ -95,12 +95,12 @@ const network_token_bundle = client.network_token_bundle(h.vnull());
 | --- | --- | --- | --- |
 | `card` | `Value (object)` | No |  |
 | `cardNumber` | `[]const u8` | No |  |
-| `expirationMonth` | `[]const u8` | No |  |
-| `expirationYear` | `[]const u8` | No |  |
+| `expirationMonth` | `[]const u8` | No | Two-digit month in which the payment card expires. |
+| `expirationYear` | `[]const u8` | No | Four-digit year in which the payment card expires. |
 | `issuer` | `Value (object)` | No |  |
 | `metadata` | `Value (object)` | No |  |
 | `networkToken` | `Value (object)` | No |  |
-| `networkTokenBundleId` | `[]const u8` | No |  |
+| `networkTokenBundleId` | `[]const u8` | No | Unique identifier for the Instrument Identifier token used in the transaction. |
 | `networkTokenBundleState` | `[]const u8` | No |  |
 | `securityCode` | `[]const u8` | No |  |
 

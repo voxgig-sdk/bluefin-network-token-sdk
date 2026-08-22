@@ -18,8 +18,17 @@ class Config {
     return fc();
   }
 
+  // False for a feature added at runtime via options.extend (station's
+  // adopt path) - the constructor uses this to skip makeFeature for names
+  // no generated class backs.
+  bool hasFeature(String fn) => null != FEATURE_CLASS[fn];
+
   final Map<String, dynamic> main = <String, dynamic>{
     'name': 'BluefinNetworkToken',
+        'slug': 'bluefin-network-token',
+    'version': '0.0.1',
+    'target': 'dart',
+
   };
 
   final Map<String, dynamic> feature = <String, dynamic>{
@@ -31,21 +40,22 @@ class Config {
 
   };
 
+  // Rendered whole from the canonical config definition rather than assembled
+  // slot by slot. Assembling it here meant `options.server` - the OpenAPI
+  // server-variable defaults - was simply absent from this branch, so a
+  // templated server URL produced a different config either side of the
+  // threshold.
   final Map<String, dynamic> options = <String, dynamic>{
     'base': 'https://secure-cert.shieldconex.com/api',
-
     'auth': <String, dynamic>{
       'prefix': 'Basic',
     },
-
     'headers': <String, dynamic>{
       'content-type': 'application/json',
     },
-
     'entity': <String, dynamic>{
-            'network_token_bundle': <String, dynamic>{},
-
-    }
+      'network_token_bundle': <String, dynamic>{},
+    },
   };
 
   final Map<String, dynamic> entity = <String, dynamic>{
@@ -61,10 +71,12 @@ class Config {
         },
         <String, dynamic>{
           'name': 'expirationMonth',
+          'short': 'Two-digit month in which the payment card expires.',
           'type': '`\$STRING`',
         },
         <String, dynamic>{
           'name': 'expirationYear',
+          'short': 'Four-digit year in which the payment card expires.',
           'type': '`\$STRING`',
         },
         <String, dynamic>{
@@ -81,6 +93,7 @@ class Config {
         },
         <String, dynamic>{
           'name': 'networkTokenBundleId',
+          'short': 'Unique identifier for the Instrument Identifier token used in the transaction.',
           'type': '`\$STRING`',
         },
         <String, dynamic>{

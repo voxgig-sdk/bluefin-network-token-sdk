@@ -270,12 +270,12 @@ On error, `ok` is `false` and `err` contains the error value.
 | --- | --- |
 | `card` |  |
 | `cardNumber` |  |
-| `expirationMonth` |  |
-| `expirationYear` |  |
+| `expirationMonth` | Two-digit month in which the payment card expires. |
+| `expirationYear` | Four-digit year in which the payment card expires. |
 | `issuer` |  |
 | `metadata` |  |
 | `networkToken` |  |
-| `networkTokenBundleId` |  |
+| `networkTokenBundleId` | Unique identifier for the Instrument Identifier token used in the transaction. |
 | `networkTokenBundleState` |  |
 | `securityCode` |  |
 
@@ -306,12 +306,12 @@ Create an instance: `auto network_token_bundle = client->network_token_bundle();
 | --- | --- | --- |
 | `card` | `std::map<std::string, Value>` |  |
 | `cardNumber` | `std::string` |  |
-| `expirationMonth` | `std::string` |  |
-| `expirationYear` | `std::string` |  |
+| `expirationMonth` | `std::string` | Two-digit month in which the payment card expires. |
+| `expirationYear` | `std::string` | Four-digit year in which the payment card expires. |
 | `issuer` | `std::map<std::string, Value>` |  |
 | `metadata` | `std::map<std::string, Value>` |  |
 | `networkToken` | `std::map<std::string, Value>` |  |
-| `networkTokenBundleId` | `std::string` |  |
+| `networkTokenBundleId` | `std::string` | Unique identifier for the Instrument Identifier token used in the transaction. |
 | `networkTokenBundleState` | `std::string` |  |
 | `securityCode` | `std::string` |  |
 

@@ -256,12 +256,12 @@ returns a result `Hash` with these keys:
 | --- | --- |
 | `card` |  |
 | `cardNumber` |  |
-| `expirationMonth` |  |
-| `expirationYear` |  |
+| `expirationMonth` | Two-digit month in which the payment card expires. |
+| `expirationYear` | Four-digit year in which the payment card expires. |
 | `issuer` |  |
 | `metadata` |  |
 | `networkToken` |  |
-| `networkTokenBundleId` |  |
+| `networkTokenBundleId` | Unique identifier for the Instrument Identifier token used in the transaction. |
 | `networkTokenBundleState` |  |
 | `securityCode` |  |
 
@@ -292,12 +292,12 @@ Create an instance: `network_token_bundle = client.NetworkTokenBundle`
 | --- | --- | --- |
 | `card` | `Hash` |  |
 | `cardNumber` | `String` |  |
-| `expirationMonth` | `String` |  |
-| `expirationYear` | `String` |  |
+| `expirationMonth` | `String` | Two-digit month in which the payment card expires. |
+| `expirationYear` | `String` | Four-digit year in which the payment card expires. |
 | `issuer` | `Hash` |  |
 | `metadata` | `Hash` |  |
 | `networkToken` | `Hash` |  |
-| `networkTokenBundleId` | `String` |  |
+| `networkTokenBundleId` | `String` | Unique identifier for the Instrument Identifier token used in the transaction. |
 | `networkTokenBundleState` | `String` |  |
 | `securityCode` | `String` |  |
 

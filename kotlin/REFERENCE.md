@@ -92,12 +92,12 @@ val networkTokenBundle = client.networkTokenBundle(null)
 | --- | --- | --- | --- |
 | `card` | `Map<String, Any?>?` | No |  |
 | `cardNumber` | `String?` | No |  |
-| `expirationMonth` | `String?` | No |  |
-| `expirationYear` | `String?` | No |  |
+| `expirationMonth` | `String?` | No | Two-digit month in which the payment card expires. |
+| `expirationYear` | `String?` | No | Four-digit year in which the payment card expires. |
 | `issuer` | `Map<String, Any?>?` | No |  |
 | `metadata` | `Map<String, Any?>?` | No |  |
 | `networkToken` | `Map<String, Any?>?` | No |  |
-| `networkTokenBundleId` | `String?` | No |  |
+| `networkTokenBundleId` | `String?` | No | Unique identifier for the Instrument Identifier token used in the transaction. |
 | `networkTokenBundleState` | `String?` | No |  |
 | `securityCode` | `String?` | No |  |
 

@@ -92,12 +92,12 @@ Prepare a fetch definition without sending. Returns the `fetchdef` and raises on
 | --- | --- | --- | --- |
 | `card` | `map` | No |  |
 | `cardNumber` | `string` | No |  |
-| `expirationMonth` | `string` | No |  |
-| `expirationYear` | `string` | No |  |
+| `expirationMonth` | `string` | No | Two-digit month in which the payment card expires. |
+| `expirationYear` | `string` | No | Four-digit year in which the payment card expires. |
 | `issuer` | `map` | No |  |
 | `metadata` | `map` | No |  |
 | `networkToken` | `map` | No |  |
-| `networkTokenBundleId` | `string` | No |  |
+| `networkTokenBundleId` | `string` | No | Unique identifier for the Instrument Identifier token used in the transaction. |
 | `networkTokenBundleState` | `string` | No |  |
 | `securityCode` | `string` | No |  |
 

@@ -10,6 +10,9 @@ pub fn make_config() -> Value {
     Value::map_of([
         ("main".to_string(), Value::map_of([
             ("name".to_string(), Value::str("BluefinNetworkToken")),
+            ("slug".to_string(), Value::str("bluefin-network-token")),
+            ("version".to_string(), Value::str("0.0.1")),
+            ("target".to_string(), Value::str("rust")),
         ])),
         ("feature".to_string(), Value::map_of([
             ("test".to_string(), Value::map_of([
@@ -20,14 +23,14 @@ pub fn make_config() -> Value {
         ])),
         ("options".to_string(), Value::map_of([
             ("base".to_string(), Value::str("https://secure-cert.shieldconex.com/api")),
+            ("auth".to_string(), Value::map_of([
+                ("prefix".to_string(), Value::str("Basic")),
+            ])),
             ("headers".to_string(), Value::map_of([
                 ("content-type".to_string(), Value::str("application/json")),
             ])),
             ("entity".to_string(), Value::map_of([
                 ("network_token_bundle".to_string(), Value::empty_map()),
-            ])),
-            ("auth".to_string(), Value::map_of([
-                ("prefix".to_string(), Value::str("Basic")),
             ])),
         ])),
         ("entity".to_string(), Value::map_of([
@@ -43,10 +46,12 @@ pub fn make_config() -> Value {
                     ]),
                     Value::map_of([
                         ("name".to_string(), Value::str("expirationMonth")),
+                        ("short".to_string(), Value::str("Two-digit month in which the payment card expires.")),
                         ("type".to_string(), Value::str("`$STRING`")),
                     ]),
                     Value::map_of([
                         ("name".to_string(), Value::str("expirationYear")),
+                        ("short".to_string(), Value::str("Four-digit year in which the payment card expires.")),
                         ("type".to_string(), Value::str("`$STRING`")),
                     ]),
                     Value::map_of([
@@ -63,6 +68,7 @@ pub fn make_config() -> Value {
                     ]),
                     Value::map_of([
                         ("name".to_string(), Value::str("networkTokenBundleId")),
+                        ("short".to_string(), Value::str("Unique identifier for the Instrument Identifier token used in the transaction.")),
                         ("type".to_string(), Value::str("`$STRING`")),
                     ]),
                     Value::map_of([
@@ -263,6 +269,28 @@ pub fn make_config() -> Value {
             ])),
         ])),
     ])
+}
+
+// SHARED CONFIG (sdkgen rung L2).
+//
+// The SDK reads the config on every request and never writes to it, so one
+// instance is shared by every client rather than rebuilt per client. Above the
+// size threshold make_config re-parses the whole embedded JSON, so this is the
+// difference between parsing the model once and once per client.
+//
+// THREAD-LOCAL, not a global: Value is Rc/RefCell-backed and so is neither
+// Send nor Sync. One config per thread is the widest scope that is sound here,
+// and the clone is an Rc bump, not a deep copy.
+thread_local! {
+    static SHARED_CONFIG: Value = make_config();
+}
+
+/// The per-thread config, built once on first use.
+///
+/// The returned Value SHARES its nodes: treat it as read-only. Callers that
+/// need to mutate should use make_config, which always returns a fresh copy.
+pub fn shared_config() -> Value {
+    SHARED_CONFIG.with(|c| c.clone())
 }
 
 pub fn make_feature(name: &str) -> FeatureRef {

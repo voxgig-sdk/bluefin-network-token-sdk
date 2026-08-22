@@ -274,12 +274,12 @@ On error, `ok` is `false` and `err` contains the error value.
 | --- | --- |
 | `card` |  |
 | `cardNumber` |  |
-| `expirationMonth` |  |
-| `expirationYear` |  |
+| `expirationMonth` | Two-digit month in which the payment card expires. |
+| `expirationYear` | Four-digit year in which the payment card expires. |
 | `issuer` |  |
 | `metadata` |  |
 | `networkToken` |  |
-| `networkTokenBundleId` |  |
+| `networkTokenBundleId` | Unique identifier for the Instrument Identifier token used in the transaction. |
 | `networkTokenBundleState` |  |
 | `securityCode` |  |
 
@@ -310,12 +310,12 @@ Create an instance: `var networkTokenBundle = client.NetworkTokenBundle();`
 | --- | --- | --- |
 | `card` | `Dictionary<string, object?>` |  |
 | `cardNumber` | `string` |  |
-| `expirationMonth` | `string` |  |
-| `expirationYear` | `string` |  |
+| `expirationMonth` | `string` | Two-digit month in which the payment card expires. |
+| `expirationYear` | `string` | Four-digit year in which the payment card expires. |
 | `issuer` | `Dictionary<string, object?>` |  |
 | `metadata` | `Dictionary<string, object?>` |  |
 | `networkToken` | `Dictionary<string, object?>` |  |
-| `networkTokenBundleId` | `string` |  |
+| `networkTokenBundleId` | `string` | Unique identifier for the Instrument Identifier token used in the transaction. |
 | `networkTokenBundleState` | `string` |  |
 | `securityCode` | `string` |  |
 

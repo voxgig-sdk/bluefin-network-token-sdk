@@ -20,14 +20,14 @@ pub fn make_config() Value {
         }) },
         .{ "options", h.jo(&.{
             .{ "base", h.vstr("https://secure-cert.shieldconex.com/api") },
+            .{ "auth", h.jo(&.{
+                .{ "prefix", h.vstr("Basic") },
+            }) },
             .{ "headers", h.jo(&.{
                 .{ "content-type", h.vstr("application/json") },
             }) },
             .{ "entity", h.jo(&.{
                 .{ "network_token_bundle", h.omap() },
-            }) },
-            .{ "auth", h.jo(&.{
-                .{ "prefix", h.vstr("Basic") },
             }) },
         }) },
         .{ "entity", h.jo(&.{
@@ -43,10 +43,12 @@ pub fn make_config() Value {
                     }),
                     h.jo(&.{
                         .{ "name", h.vstr("expirationMonth") },
+                        .{ "short", h.vstr("Two-digit month in which the payment card expires.") },
                         .{ "type", h.vstr("`$STRING`") },
                     }),
                     h.jo(&.{
                         .{ "name", h.vstr("expirationYear") },
+                        .{ "short", h.vstr("Four-digit year in which the payment card expires.") },
                         .{ "type", h.vstr("`$STRING`") },
                     }),
                     h.jo(&.{
@@ -63,6 +65,7 @@ pub fn make_config() Value {
                     }),
                     h.jo(&.{
                         .{ "name", h.vstr("networkTokenBundleId") },
+                        .{ "short", h.vstr("Unique identifier for the Instrument Identifier token used in the transaction.") },
                         .{ "type", h.vstr("`$STRING`") },
                     }),
                     h.jo(&.{
@@ -263,6 +266,28 @@ pub fn make_config() Value {
             }) },
         }) },
     });
+}
+
+// SHARED CONFIG (sdkgen rung L2).
+//
+// The SDK reads the config on every request and never writes to it, so one
+// instance is shared by every client rather than rebuilt per client. Above the
+// size threshold make_config re-parses the whole embedded JSON, so this is the
+// difference between parsing the model once and once per client.
+//
+// Value nodes are arena-allocated and reference-stable, so the shared value is
+// genuinely one structure, not a copy.
+var shared_config_val: ?Value = null;
+
+/// The process-wide config, built once on first use.
+///
+/// The returned Value SHARES its nodes: treat it as read-only. Callers that
+/// need to mutate should use make_config, which always returns a fresh copy.
+pub fn shared_config() Value {
+    if (shared_config_val) |c| return c;
+    const c = make_config();
+    shared_config_val = c;
+    return c;
 }
 
 pub fn make_feature(name: []const u8) Feature {

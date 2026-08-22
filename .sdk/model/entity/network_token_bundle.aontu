@@ -18,11 +18,13 @@ main: kit: entity: network_token_bundle: {
     {
       name: "expirationMonth"
       req: false
+      short: "Two-digit month in which the payment card expires."
       type: "`$STRING`"
     }
     {
       name: "expirationYear"
       req: false
+      short: "Four-digit year in which the payment card expires."
       type: "`$STRING`"
     }
     {
@@ -43,6 +45,7 @@ main: kit: entity: network_token_bundle: {
     {
       name: "networkTokenBundleId"
       req: false
+      short: "Unique identifier for the Instrument Identifier token used in the transaction."
       type: "`$STRING`"
     }
     {

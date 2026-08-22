@@ -90,12 +90,12 @@ network_token_bundle = client.NetworkTokenBundle()
 | --- | --- | --- | --- |
 | `card` | `dict` | No |  |
 | `cardNumber` | `str` | No |  |
-| `expirationMonth` | `str` | No |  |
-| `expirationYear` | `str` | No |  |
+| `expirationMonth` | `str` | No | Two-digit month in which the payment card expires. |
+| `expirationYear` | `str` | No | Four-digit year in which the payment card expires. |
 | `issuer` | `dict` | No |  |
 | `metadata` | `dict` | No |  |
 | `networkToken` | `dict` | No |  |
-| `networkTokenBundleId` | `str` | No |  |
+| `networkTokenBundleId` | `str` | No | Unique identifier for the Instrument Identifier token used in the transaction. |
 | `networkTokenBundleState` | `str` | No |  |
 | `securityCode` | `str` | No |  |
 

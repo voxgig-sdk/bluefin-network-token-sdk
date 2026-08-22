@@ -17,7 +17,10 @@ package BluefinNetworkTokenConfig;
 my $CONFIG_JSON = <<'END_CONFIG_JSON';
 {
   "main": {
-    "name": "BluefinNetworkToken"
+    "name": "BluefinNetworkToken",
+    "slug": "bluefin-network-token",
+    "version": "0.0.1",
+    "target": "perl"
   },
   "feature": {
     "test": {
@@ -51,10 +54,12 @@ my $CONFIG_JSON = <<'END_CONFIG_JSON';
         },
         {
           "name": "expirationMonth",
+          "short": "Two-digit month in which the payment card expires.",
           "type": "`$STRING`"
         },
         {
           "name": "expirationYear",
+          "short": "Four-digit year in which the payment card expires.",
           "type": "`$STRING`"
         },
         {
@@ -71,6 +76,7 @@ my $CONFIG_JSON = <<'END_CONFIG_JSON';
         },
         {
           "name": "networkTokenBundleId",
+          "short": "Unique identifier for the Instrument Identifier token used in the transaction.",
           "type": "`$STRING`"
         },
         {
@@ -275,6 +281,21 @@ END_CONFIG_JSON
 
 sub make_config {
   return Voxgig::Struct::parse_json($CONFIG_JSON);
+}
+
+# SHARED CONFIG (sdkgen rung L2).
+#
+# The SDK reads the config on every request and never writes to it, so one
+# instance is shared by every client rather than rebuilt per client - the
+# difference between parsing the embedded JSON once and once per client.
+#
+# The returned structure is SHARED: treat it as read-only. Callers that need to
+# mutate should use make_config, which always parses a fresh copy.
+my $SHARED_CONFIG;
+
+sub shared_config {
+  $SHARED_CONFIG = make_config() unless defined $SHARED_CONFIG;
+  return $SHARED_CONFIG;
 }
 
 sub make_feature {

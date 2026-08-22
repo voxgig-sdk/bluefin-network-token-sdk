@@ -89,12 +89,12 @@ network_token_bundle = BluefinNetworkToken.network_token_bundle(sdk)
 | --- | --- | --- | --- |
 | `card` | `map()` | No |  |
 | `cardNumber` | `String.t()` | No |  |
-| `expirationMonth` | `String.t()` | No |  |
-| `expirationYear` | `String.t()` | No |  |
+| `expirationMonth` | `String.t()` | No | Two-digit month in which the payment card expires. |
+| `expirationYear` | `String.t()` | No | Four-digit year in which the payment card expires. |
 | `issuer` | `map()` | No |  |
 | `metadata` | `map()` | No |  |
 | `networkToken` | `map()` | No |  |
-| `networkTokenBundleId` | `String.t()` | No |  |
+| `networkTokenBundleId` | `String.t()` | No | Unique identifier for the Instrument Identifier token used in the transaction. |
 | `networkTokenBundleState` | `String.t()` | No |  |
 | `securityCode` | `String.t()` | No |  |
 

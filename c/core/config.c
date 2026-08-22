@@ -6,8 +6,11 @@
 
 voxgig_value* make_config(void) {
   return cmap(4,
-    "main", cmap(1,
-      "name", v_str("BluefinNetworkToken")),
+    "main", cmap(4,
+      "name", v_str("BluefinNetworkToken"),
+      "slug", v_str("bluefin-network-token"),
+      "version", v_str("0.0.1"),
+      "target", v_str("c")),
     "feature", cmap(1,
       "test", cmap(1,
         "options", cmap(1,
@@ -29,11 +32,13 @@ voxgig_value* make_config(void) {
           cmap(2,
             "name", v_str("cardNumber"),
             "type", v_str("`$STRING`")),
-          cmap(2,
+          cmap(3,
             "name", v_str("expirationMonth"),
+            "short", v_str("Two-digit month in which the payment card expires."),
             "type", v_str("`$STRING`")),
-          cmap(2,
+          cmap(3,
             "name", v_str("expirationYear"),
+            "short", v_str("Four-digit year in which the payment card expires."),
             "type", v_str("`$STRING`")),
           cmap(2,
             "name", v_str("issuer"),
@@ -44,8 +49,9 @@ voxgig_value* make_config(void) {
           cmap(2,
             "name", v_str("networkToken"),
             "type", v_str("`$OBJECT`")),
-          cmap(2,
+          cmap(3,
             "name", v_str("networkTokenBundleId"),
+            "short", v_str("Unique identifier for the Instrument Identifier token used in the transaction."),
             "type", v_str("`$STRING`")),
           cmap(2,
             "name", v_str("networkTokenBundleState"),
@@ -188,6 +194,30 @@ voxgig_value* make_config(void) {
         "relations", cmap(1,
           "ancestors", v_list()))));
 }
+
+// SHARED CONFIG (sdkgen rung L2).
+//
+// The SDK reads the config on every request and never writes to it, so one
+// instance is shared by every client rather than rebuilt per client. Above the
+// size threshold make_config re-parses the whole embedded JSON, so this is the
+// difference between parsing the model once and once per client.
+//
+// Deliberately never freed: it lives for the life of the process, like any
+// other program-lifetime singleton.
+static voxgig_value* shared_config_val = NULL;
+
+// The process-wide config, built once on first use.
+//
+// The returned value is SHARED: treat it as read-only. Callers that need to
+// mutate should use make_config, which always returns a fresh copy.
+voxgig_value* shared_config(void) {
+  if (NULL == shared_config_val) {
+    shared_config_val = make_config();
+  }
+  return shared_config_val;
+}
+
+Feature* feature_test_new(void);
 
 Feature* make_feature(const char* name) {
   if (strcmp(name, "test") == 0) return feature_test_new();

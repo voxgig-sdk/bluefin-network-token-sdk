@@ -281,12 +281,12 @@ On error, `ok` is `false` and `err` carries the error value.
 | --- | --- |
 | `card` |  |
 | `cardNumber` |  |
-| `expirationMonth` |  |
-| `expirationYear` |  |
+| `expirationMonth` | Two-digit month in which the payment card expires. |
+| `expirationYear` | Four-digit year in which the payment card expires. |
 | `issuer` |  |
 | `metadata` |  |
 | `networkToken` |  |
-| `networkTokenBundleId` |  |
+| `networkTokenBundleId` | Unique identifier for the Instrument Identifier token used in the transaction. |
 | `networkTokenBundleState` |  |
 | `securityCode` |  |
 
@@ -317,12 +317,12 @@ Create an instance: `Entity* network_token_bundle = bluefinnetworktoken_network_
 | --- | --- | --- |
 | `card` | `voxgig_value* (map)` |  |
 | `cardNumber` | `char*` |  |
-| `expirationMonth` | `char*` |  |
-| `expirationYear` | `char*` |  |
+| `expirationMonth` | `char*` | Two-digit month in which the payment card expires. |
+| `expirationYear` | `char*` | Four-digit year in which the payment card expires. |
 | `issuer` | `voxgig_value* (map)` |  |
 | `metadata` | `voxgig_value* (map)` |  |
 | `networkToken` | `voxgig_value* (map)` |  |
-| `networkTokenBundleId` | `char*` |  |
+| `networkTokenBundleId` | `char*` | Unique identifier for the Instrument Identifier token used in the transaction. |
 | `networkTokenBundleState` | `char*` |  |
 | `securityCode` | `char*` |  |
 

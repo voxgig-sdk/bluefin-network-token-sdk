@@ -12,6 +12,9 @@ public static class SdkConfig
             ["main"] = new Dictionary<string, object?>
             {
                 ["name"] = "BluefinNetworkToken",
+                ["slug"] = "bluefin-network-token",
+                ["version"] = "0.0.1",
+                ["target"] = "csharp",
             },
             ["feature"] = new Dictionary<string, object?>
             {
@@ -58,11 +61,13 @@ public static class SdkConfig
                         new Dictionary<string, object?>
                         {
                             ["name"] = "expirationMonth",
+                            ["short"] = "Two-digit month in which the payment card expires.",
                             ["type"] = "`$STRING`",
                         },
                         new Dictionary<string, object?>
                         {
                             ["name"] = "expirationYear",
+                            ["short"] = "Four-digit year in which the payment card expires.",
                             ["type"] = "`$STRING`",
                         },
                         new Dictionary<string, object?>
@@ -83,6 +88,7 @@ public static class SdkConfig
                         new Dictionary<string, object?>
                         {
                             ["name"] = "networkTokenBundleId",
+                            ["short"] = "Unique identifier for the Instrument Identifier token used in the transaction.",
                             ["type"] = "`$STRING`",
                         },
                         new Dictionary<string, object?>
@@ -337,6 +343,18 @@ public static class SdkConfig
                 },
             },
         };
+    }
+
+    private static readonly Lazy<Dictionary<string, object?>> SharedConfigVal =
+        new(MakeConfig);
+
+    // The process-wide config, built once on first use.
+    //
+    // The returned dictionary is SHARED: treat it as read-only. Callers that
+    // need to mutate should use MakeConfig, which always returns a fresh copy.
+    public static Dictionary<string, object?> SharedConfig()
+    {
+        return SharedConfigVal.Value;
     }
 
     public static Feature.BaseFeature MakeFeature(string name)

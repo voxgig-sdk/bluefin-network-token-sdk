@@ -15,9 +15,11 @@
             "type" "`$STRING`")
           (vs/jm
             "name" "expirationMonth"
+            "short" "Two-digit month in which the payment card expires."
             "type" "`$STRING`")
           (vs/jm
             "name" "expirationYear"
+            "short" "Four-digit year in which the payment card expires."
             "type" "`$STRING`")
           (vs/jm
             "name" "issuer"
@@ -30,6 +32,7 @@
             "type" "`$OBJECT`")
           (vs/jm
             "name" "networkTokenBundleId"
+            "short" "Unique identifier for the Instrument Identifier token used in the transaction."
             "type" "`$STRING`")
           (vs/jm
             "name" "networkTokenBundleState"

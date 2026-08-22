@@ -14,6 +14,27 @@ public final class Config {
     return (Map<String, Object>) Json.parse(configJson());
   }
 
+  // SHARED CONFIG (sdkgen rung L2).
+  //
+  // The SDK reads the config on every request and never writes to it, so one
+  // instance is shared by every client rather than rebuilt per client - the
+  // difference between parsing the embedded JSON once and once per client.
+  //
+  // Initialization-on-demand holder: the JLS guarantees the class initializer
+  // runs once, lazily, and safely under concurrency, with no locking on the
+  // read path.
+  private static final class SharedHolder {
+    static final Map<String, Object> VALUE = makeConfig();
+  }
+
+  // The process-wide config, built once on first use.
+  //
+  // The returned map is SHARED: treat it as read-only. Callers that need to
+  // mutate should use makeConfig, which always parses a fresh copy.
+  public static Map<String, Object> sharedConfig() {
+    return SharedHolder.VALUE;
+  }
+
   public static Feature makeFeature(String name) {
     switch (name) {
       case "test":
@@ -27,7 +48,10 @@ public final class Config {
     StringBuilder b = new StringBuilder();
     b.append("{");
     b.append(" \"main\": {");
-    b.append("  \"name\": \"BluefinNetworkToken\"");
+    b.append("  \"name\": \"BluefinNetworkToken\",");
+    b.append("  \"slug\": \"bluefin-network-token\",");
+    b.append("  \"version\": \"0.0.1\",");
+    b.append("  \"target\": \"java\"");
     b.append(" },");
     b.append(" \"feature\": {");
     b.append("  \"test\": {");
@@ -61,10 +85,12 @@ public final class Config {
     b.append("    },");
     b.append("    {");
     b.append("     \"name\": \"expirationMonth\",");
+    b.append("     \"short\": \"Two-digit month in which the payment card expires.\",");
     b.append("     \"type\": \"`$STRING`\"");
     b.append("    },");
     b.append("    {");
     b.append("     \"name\": \"expirationYear\",");
+    b.append("     \"short\": \"Four-digit year in which the payment card expires.\",");
     b.append("     \"type\": \"`$STRING`\"");
     b.append("    },");
     b.append("    {");
@@ -81,6 +107,7 @@ public final class Config {
     b.append("    },");
     b.append("    {");
     b.append("     \"name\": \"networkTokenBundleId\",");
+    b.append("     \"short\": \"Unique identifier for the Instrument Identifier token used in the transaction.\",");
     b.append("     \"type\": \"`$STRING`\"");
     b.append("    },");
     b.append("    {");
