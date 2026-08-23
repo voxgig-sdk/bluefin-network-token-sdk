@@ -6,7 +6,7 @@
 import java.util.{ArrayList, LinkedHashMap, List => JList, Map => JMap}
 import java.util.function.{BiFunction, Supplier}
 
-import voxgig.bluefinnetworktokensdk.core.{Helpers, BluefinNetworkTokenSDK}
+import voxgig.bluefinnetworktokensdk.core.{Helpers, SdkEntity, BluefinNetworkTokenSDK}
 
 object NetworkTokenBundleDirectTest {
 

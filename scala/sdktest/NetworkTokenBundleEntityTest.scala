@@ -5,7 +5,7 @@
 
 import java.util.{ArrayList, LinkedHashMap, List => JList, Map => JMap}
 
-import voxgig.bluefinnetworktokensdk.core.{Helpers, BluefinNetworkTokenSDK}
+import voxgig.bluefinnetworktokensdk.core.{Helpers, SdkEntity, BluefinNetworkTokenSDK}
 import voxgig.bluefinnetworktokensdk.utility.struct.Struct
 
 object NetworkTokenBundleEntityTest {
