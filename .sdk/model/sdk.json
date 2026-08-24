@@ -1,15 +1,6 @@
 {
-  "NAME": "BLUEFIN-NETWORK-TOKEN",
-  "Name": "BluefinNetworkToken",
   "def": "network-token-openapi.json",
   "main": {
-    "api": {
-      "entity": {},
-      "guide": {}
-    },
-    "custom": {
-      "plurals": {}
-    },
     "def": {
       "desc": ""
     },
@@ -1976,8 +1967,5 @@
     }
   },
   "name": "bluefin-network-token",
-  "name-": "bluefin-network-token",
-  "name_": "bluefin_network_token",
-  "name__orig": "bluefin-network-token",
   "origin": "voxgig-sdk"
 }
