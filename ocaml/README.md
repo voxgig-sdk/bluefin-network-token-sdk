@@ -60,7 +60,7 @@ let created = (Sdk_client.network_token_bundle client Noval).e_create (jo [("car
 print_endline (stringify (created.e_data_get ()));
 
 (* Remove — resolves to the entity, marked deleted; it keeps its data *)
-let removed = (Sdk_client.network_token_bundle client Noval).e_remove (jo [("id", (Str "example_id"))]) Noval in
+let removed = (Sdk_client.network_token_bundle client Noval).e_remove (jo [("id", (getp created "id"))]) Noval in
 Printf.printf "deleted: %b\n" removed.e_deleted
 ```
 
@@ -263,6 +263,7 @@ On error, `ok` is `Bool false` and `err` carries the error value.
 | `cardNumber` |  |
 | `expirationMonth` | Two-digit month in which the payment card expires. |
 | `expirationYear` | Four-digit year in which the payment card expires. |
+| `id` |  |
 | `issuer` |  |
 | `metadata` |  |
 | `networkToken` |  |
@@ -299,6 +300,7 @@ Create an instance: `let network_token_bundle = Sdk_client.network_token_bundle 
 | `cardNumber` | `string` |  |
 | `expirationMonth` | `string` | Two-digit month in which the payment card expires. |
 | `expirationYear` | `string` | Four-digit year in which the payment card expires. |
+| `id` | `string` |  |
 | `issuer` | `value map` |  |
 | `metadata` | `value map` |  |
 | `networkToken` | `value map` |  |

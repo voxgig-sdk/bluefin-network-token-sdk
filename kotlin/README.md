@@ -260,6 +260,7 @@ On error, `ok` is `false` and `err` contains the error value.
 | `cardNumber` |  |
 | `expirationMonth` | Two-digit month in which the payment card expires. |
 | `expirationYear` | Four-digit year in which the payment card expires. |
+| `id` |  |
 | `issuer` |  |
 | `metadata` |  |
 | `networkToken` |  |
@@ -296,6 +297,7 @@ Create an instance: `val networkTokenBundle = client.networkTokenBundle(null)`
 | `cardNumber` | `String?` |  |
 | `expirationMonth` | `String?` | Two-digit month in which the payment card expires. |
 | `expirationYear` | `String?` | Four-digit year in which the payment card expires. |
+| `id` | `String?` |  |
 | `issuer` | `Map<String, Any?>?` |  |
 | `metadata` | `Map<String, Any?>?` |  |
 | `networkToken` | `Map<String, Any?>?` |  |

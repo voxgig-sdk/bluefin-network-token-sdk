@@ -83,12 +83,15 @@ static void network_token_bundle_entity_basic() {
     network_token_bundle_ref01_data = Helpers::toMapAny(network_token_bundle_ref01_data_result);
     if (!network_token_bundle_ref01_data.is_map()) network_token_bundle_ref01_data = vmap();
     ASSERT_TRUE(network_token_bundle_ref01_data.is_map(), "expected create result to be a map");
+    ASSERT_TRUE(!getp(network_token_bundle_ref01_data, "id").is_undef(), "expected created entity to have an id");
   }
 
   // LOAD
-  Value network_token_bundle_ref01_match_dt0 = vmap();
-  Value network_token_bundle_ref01_data_dt0_loaded = network_token_bundle_ref01_ent->load(network_token_bundle_ref01_match_dt0, Value::undef())->data();
-  ASSERT_TRUE(!network_token_bundle_ref01_data_dt0_loaded.is_undef(), "expected load result to be non-nil");
+  Value network_token_bundle_ref01_match_dt0 = vmap({{"id", getp(network_token_bundle_ref01_data, "id")}});
+  Value network_token_bundle_ref01_data_dt0_loaded = network_token_bundle_ref01_ent->load(Struct::clone(network_token_bundle_ref01_match_dt0), Value::undef())->data();
+  Value network_token_bundle_ref01_data_dt0_load_result = Helpers::toMapAny(network_token_bundle_ref01_data_dt0_loaded);
+  ASSERT_TRUE(network_token_bundle_ref01_data_dt0_load_result.is_map(), "expected load result to be a map");
+  ASSERT_EQ_VAL(getp(network_token_bundle_ref01_data_dt0_load_result, "id"), getp(network_token_bundle_ref01_data, "id"), "expected load result id to match");
 
   // REMOVE
   {

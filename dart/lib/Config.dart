@@ -81,6 +81,10 @@ class Config {
           'type': '`\$STRING`',
         },
         <String, dynamic>{
+          'name': 'id',
+          'type': '`\$STRING`',
+        },
+        <String, dynamic>{
           'name': 'issuer',
           'type': '`\$OBJECT`',
         },

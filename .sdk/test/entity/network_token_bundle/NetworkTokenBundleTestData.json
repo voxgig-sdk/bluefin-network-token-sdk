@@ -3,42 +3,42 @@
     "network_token_bundle": {
       "NETWORK_TOKEN_BUNDLE00": {
         "card": {},
-        "cardNumber": "s65",
-        "expirationMonth": "s66",
-        "expirationYear": "s67",
+        "cardNumber": "s6f",
+        "expirationMonth": "s70",
+        "expirationYear": "s71",
+        "id": "NETWORK_TOKEN_BUNDLE00",
         "issuer": {},
         "metadata": {},
         "networkToken": {},
-        "networkTokenBundleId": "s6b",
-        "networkTokenBundleState": "s6c",
-        "securityCode": "s6d",
-        "id": "NETWORK_TOKEN_BUNDLE00"
+        "networkTokenBundleId": "s76",
+        "networkTokenBundleState": "s77",
+        "securityCode": "s78"
       },
       "NETWORK_TOKEN_BUNDLE01": {
         "card": {},
-        "cardNumber": "sc9",
-        "expirationMonth": "sca",
-        "expirationYear": "scb",
+        "cardNumber": "sdd",
+        "expirationMonth": "sde",
+        "expirationYear": "sdf",
+        "id": "NETWORK_TOKEN_BUNDLE01",
         "issuer": {},
         "metadata": {},
         "networkToken": {},
-        "networkTokenBundleId": "scf",
-        "networkTokenBundleState": "sd0",
-        "securityCode": "sd1",
-        "id": "NETWORK_TOKEN_BUNDLE01"
+        "networkTokenBundleId": "se4",
+        "networkTokenBundleState": "se5",
+        "securityCode": "se6"
       },
       "NETWORK_TOKEN_BUNDLE02": {
         "card": {},
-        "cardNumber": "s12d",
-        "expirationMonth": "s12e",
-        "expirationYear": "s12f",
+        "cardNumber": "s14b",
+        "expirationMonth": "s14c",
+        "expirationYear": "s14d",
+        "id": "NETWORK_TOKEN_BUNDLE02",
         "issuer": {},
         "metadata": {},
         "networkToken": {},
-        "networkTokenBundleId": "s133",
-        "networkTokenBundleState": "s134",
-        "securityCode": "s135",
-        "id": "NETWORK_TOKEN_BUNDLE02"
+        "networkTokenBundleId": "s152",
+        "networkTokenBundleState": "s153",
+        "securityCode": "s154"
       }
     }
   },
@@ -46,15 +46,15 @@
     "network_token_bundle": {
       "network_token_bundle_ref01": {
         "card": {},
-        "cardNumber": "s191",
-        "expirationMonth": "s192",
-        "expirationYear": "s193",
+        "cardNumber": "s1b9",
+        "expirationMonth": "s1ba",
+        "expirationYear": "s1bb",
         "issuer": {},
         "metadata": {},
         "networkToken": {},
-        "networkTokenBundleId": "s197",
-        "networkTokenBundleState": "s198",
-        "securityCode": "s199"
+        "networkTokenBundleId": "s1c0",
+        "networkTokenBundleState": "s1c1",
+        "securityCode": "s1c2"
       }
     }
   }

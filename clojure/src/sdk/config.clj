@@ -22,6 +22,9 @@
             "short" "Four-digit year in which the payment card expires."
             "type" "`$STRING`")
           (vs/jm
+            "name" "id"
+            "type" "`$STRING`")
+          (vs/jm
             "name" "issuer"
             "type" "`$OBJECT`")
           (vs/jm

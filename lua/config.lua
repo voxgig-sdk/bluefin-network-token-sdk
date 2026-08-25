@@ -53,6 +53,10 @@ local function make_config()
             ["type"] = "`$STRING`",
           },
           {
+            ["name"] = "id",
+            ["type"] = "`$STRING`",
+          },
+          {
             ["name"] = "issuer",
             ["type"] = "`$OBJECT`",
           },

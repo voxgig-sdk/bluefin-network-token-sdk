@@ -39,12 +39,22 @@ class NetworkTokenBundleEntityTest < Minitest::Test
     network_token_bundle_ref01_data_result = network_token_bundle_ref01_ent.create(network_token_bundle_ref01_data, nil)
     network_token_bundle_ref01_data = Helpers.to_map(network_token_bundle_ref01_data_result.respond_to?(:data_get) ? network_token_bundle_ref01_data_result.data_get : network_token_bundle_ref01_data_result)
     assert !network_token_bundle_ref01_data.nil?
+    assert !network_token_bundle_ref01_data["id"].nil?
 
     # LOAD
-    network_token_bundle_ref01_match_dt0 = {}
+    network_token_bundle_ref01_match_dt0 = {
+      "id" => network_token_bundle_ref01_data["id"],
+    }
     network_token_bundle_ref01_data_dt0_loaded = network_token_bundle_ref01_ent.load(network_token_bundle_ref01_match_dt0, nil)
-    assert !network_token_bundle_ref01_data_dt0_loaded.nil?
+    network_token_bundle_ref01_data_dt0_load_result = Helpers.to_map(network_token_bundle_ref01_data_dt0_loaded.respond_to?(:data_get) ? network_token_bundle_ref01_data_dt0_loaded.data_get : network_token_bundle_ref01_data_dt0_loaded)
+    assert !network_token_bundle_ref01_data_dt0_load_result.nil?
+    assert_equal network_token_bundle_ref01_data_dt0_load_result["id"], network_token_bundle_ref01_data["id"]
 
+    # REMOVE
+    network_token_bundle_ref01_match_rm0 = {
+      "id" => network_token_bundle_ref01_data["id"],
+    }
+    network_token_bundle_ref01_ent.remove(network_token_bundle_ref01_match_rm0, nil)
 
   end
 end

@@ -71,7 +71,7 @@ loading a specific record.
 (def created (e-network_token_bundle/create (api/network_token_bundle client nil) (vs/jm "card" (vs/jm) "cardNumber" "example_cardNumber") nil))
 
 ;; Remove
-(e-network_token_bundle/remove (api/network_token_bundle client nil) (vs/jm "id" "example_id") nil)
+(e-network_token_bundle/remove (api/network_token_bundle client nil) (vs/jm "id" (vs/getprop created "id")) nil)
 ```
 
 
@@ -282,6 +282,7 @@ On error, `ok` is `false` and `err` contains the error value.
 | `cardNumber` |  |
 | `expirationMonth` | Two-digit month in which the payment card expires. |
 | `expirationYear` | Four-digit year in which the payment card expires. |
+| `id` |  |
 | `issuer` |  |
 | `metadata` |  |
 | `networkToken` |  |
@@ -318,6 +319,7 @@ Create an instance: `(def network_token_bundle (api/network_token_bundle client 
 | `cardNumber` | `string` |  |
 | `expirationMonth` | `string` | Two-digit month in which the payment card expires. |
 | `expirationYear` | `string` | Four-digit year in which the payment card expires. |
+| `id` | `string` |  |
 | `issuer` | `map` |  |
 | `metadata` | `map` |  |
 | `networkToken` | `map` |  |

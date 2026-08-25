@@ -18,6 +18,7 @@ type NetworkTokenBundle struct {
 	CardNumber *string `json:"cardNumber,omitempty"`
 	ExpirationMonth *string `json:"expirationMonth,omitempty"`
 	ExpirationYear *string `json:"expirationYear,omitempty"`
+	Id *string `json:"id,omitempty"`
 	Issuer *map[string]any `json:"issuer,omitempty"`
 	Metadata *map[string]any `json:"metadata,omitempty"`
 	NetworkToken *map[string]any `json:"networkToken,omitempty"`
@@ -37,6 +38,7 @@ type NetworkTokenBundleCreateData struct {
 	CardNumber *string `json:"cardNumber,omitempty"`
 	ExpirationMonth *string `json:"expirationMonth,omitempty"`
 	ExpirationYear *string `json:"expirationYear,omitempty"`
+	Id *string `json:"id,omitempty"`
 	Issuer *map[string]any `json:"issuer,omitempty"`
 	Metadata *map[string]any `json:"metadata,omitempty"`
 	NetworkToken *map[string]any `json:"networkToken,omitempty"`

@@ -22,6 +22,9 @@
 # @!attribute [rw] expirationYear
 #   @return [String, nil]
 #
+# @!attribute [rw] id
+#   @return [String, nil]
+#
 # @!attribute [rw] issuer
 #   @return [Hash, nil]
 #
@@ -44,6 +47,7 @@ NetworkTokenBundle = Struct.new(
   :cardNumber,
   :expirationMonth,
   :expirationYear,
+  :id,
   :issuer,
   :metadata,
   :networkToken,
@@ -76,6 +80,9 @@ NetworkTokenBundleLoadMatch = Struct.new(
 # @!attribute [rw] expirationYear
 #   @return [String, nil]
 #
+# @!attribute [rw] id
+#   @return [String, nil]
+#
 # @!attribute [rw] issuer
 #   @return [Hash, nil]
 #
@@ -98,6 +105,7 @@ NetworkTokenBundleCreateData = Struct.new(
   :cardNumber,
   :expirationMonth,
   :expirationYear,
+  :id,
   :issuer,
   :metadata,
   :networkToken,

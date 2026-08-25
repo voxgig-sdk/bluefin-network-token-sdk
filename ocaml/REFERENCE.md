@@ -91,6 +91,7 @@ let network_token_bundle = Sdk_client.network_token_bundle client Noval
 | `cardNumber` | `string` | No |  |
 | `expirationMonth` | `string` | No | Two-digit month in which the payment card expires. |
 | `expirationYear` | `string` | No | Four-digit year in which the payment card expires. |
+| `id` | `string` | No |  |
 | `issuer` | `value map` | No |  |
 | `metadata` | `value map` | No |  |
 | `networkToken` | `value map` | No |  |

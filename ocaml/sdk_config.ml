@@ -46,6 +46,9 @@ let make_config () : value =
             ("short", (Str "Four-digit year in which the payment card expires."));
             ("type", (Str "`$STRING`")) ]);
           (jo [
+            ("name", (Str "id"));
+            ("type", (Str "`$STRING`")) ]);
+          (jo [
             ("name", (Str "issuer"));
             ("type", (Str "`$OBJECT`")) ]);
           (jo [

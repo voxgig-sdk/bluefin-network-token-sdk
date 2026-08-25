@@ -20,6 +20,7 @@ typedef struct {
   char*cardnumber;  // optional
   char*expirationmonth;  // optional
   char*expirationyear;  // optional
+  char*id;  // optional
   voxgig_value*issuer;  // optional
   voxgig_value*metadata;  // optional
   voxgig_value*networktoken;  // optional
@@ -39,6 +40,7 @@ typedef struct {
   char*cardnumber;  // optional
   char*expirationmonth;  // optional
   char*expirationyear;  // optional
+  char*id;  // optional
   voxgig_value*issuer;  // optional
   voxgig_value*metadata;  // optional
   voxgig_value*networktoken;  // optional

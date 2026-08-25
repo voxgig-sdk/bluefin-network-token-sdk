@@ -54,6 +54,10 @@ defmodule BluefinNetworkToken.Config do
               "type" => "`$STRING`"
             },
             %{
+              "name" => "id",
+              "type" => "`$STRING`"
+            },
+            %{
               "name" => "issuer",
               "type" => "`$OBJECT`"
             },

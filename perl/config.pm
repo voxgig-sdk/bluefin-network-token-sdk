@@ -64,6 +64,10 @@ my $CONFIG_JSON = <<'END_CONFIG_JSON';
           "type": "`$STRING`"
         },
         {
+          "name": "id",
+          "type": "`$STRING`"
+        },
+        {
           "name": "issuer",
           "type": "`$OBJECT`"
         },

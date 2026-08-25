@@ -103,6 +103,7 @@ fmt.Println(networkTokenBundle.GetName()) // "network_token_bundle"
 | `cardNumber` | `string` | No |  |
 | `expirationMonth` | `string` | No | Two-digit month in which the payment card expires. |
 | `expirationYear` | `string` | No | Four-digit year in which the payment card expires. |
+| `id` | `string` | No |  |
 | `issuer` | `map[string]any` | No |  |
 | `metadata` | `map[string]any` | No |  |
 | `networkToken` | `map[string]any` | No |  |

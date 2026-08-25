@@ -276,6 +276,7 @@ On error, `ok` is `false` and `err` contains the error value.
 | `cardNumber` |  |
 | `expirationMonth` | Two-digit month in which the payment card expires. |
 | `expirationYear` | Four-digit year in which the payment card expires. |
+| `id` |  |
 | `issuer` |  |
 | `metadata` |  |
 | `networkToken` |  |
@@ -312,6 +313,7 @@ Create an instance: `let networkTokenBundle = client.NetworkTokenBundle()`
 | `cardNumber` | `String` |  |
 | `expirationMonth` | `String` | Two-digit month in which the payment card expires. |
 | `expirationYear` | `String` | Four-digit year in which the payment card expires. |
+| `id` | `String` |  |
 | `issuer` | `VMap` |  |
 | `metadata` | `VMap` |  |
 | `networkToken` | `VMap` |  |

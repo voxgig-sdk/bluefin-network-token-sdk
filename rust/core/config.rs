@@ -56,6 +56,10 @@ pub fn make_config() -> Value {
                         ("type".to_string(), Value::str("`$STRING`")),
                     ]),
                     Value::map_of([
+                        ("name".to_string(), Value::str("id")),
+                        ("type".to_string(), Value::str("`$STRING`")),
+                    ]),
+                    Value::map_of([
                         ("name".to_string(), Value::str("issuer")),
                         ("type".to_string(), Value::str("`$OBJECT`")),
                     ]),

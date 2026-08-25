@@ -63,10 +63,20 @@ describe('NetworkTokenBundleEntity', async () => {
     let network_token_bundle_ref01_data = setup.data.new.network_token_bundle['network_token_bundle_ref01']
 
     network_token_bundle_ref01_data = (await network_token_bundle_ref01_ent.create(network_token_bundle_ref01_data)).data()
-    assert(null != network_token_bundle_ref01_data)
+    assert(null != network_token_bundle_ref01_data.id)
 
 
+    // LOAD
+    const network_token_bundle_ref01_match_dt0: any = {}
+    network_token_bundle_ref01_match_dt0.id = network_token_bundle_ref01_data.id
+    const network_token_bundle_ref01_data_dt0 = (await network_token_bundle_ref01_ent.load(network_token_bundle_ref01_match_dt0)).data()
+    assert(network_token_bundle_ref01_data_dt0.id === network_token_bundle_ref01_data.id)
 
+
+    // REMOVE
+    const network_token_bundle_ref01_match_rm0: any = { id: network_token_bundle_ref01_data.id }
+    await network_token_bundle_ref01_ent.remove(network_token_bundle_ref01_match_rm0)
+  
 
   })
 })

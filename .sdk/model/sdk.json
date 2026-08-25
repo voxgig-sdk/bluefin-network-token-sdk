@@ -60,6 +60,12 @@
             },
             {
               "active": true,
+              "name": "id",
+              "req": false,
+              "type": "`$STRING`"
+            },
+            {
+              "active": true,
               "name": "issuer",
               "req": false,
               "type": "`$OBJECT`"
@@ -96,6 +102,10 @@
               "type": "`$STRING`"
             }
           ],
+          "id": {
+            "field": "id",
+            "name": "id"
+          },
           "name": "network_token_bundle",
           "op": {
             "create": {

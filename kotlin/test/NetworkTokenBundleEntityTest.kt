@@ -52,11 +52,16 @@ class NetworkTokenBundleEntityTest {
     val networkTokenBundleRef01DataResult = networkTokenBundleRef01Ent.create(networkTokenBundleRef01Data, null)
     networkTokenBundleRef01Data = Helpers.toMapAny(if (networkTokenBundleRef01DataResult is SdkEntity) networkTokenBundleRef01DataResult.data() else networkTokenBundleRef01DataResult) ?: linkedMapOf()
     assertNotNull(networkTokenBundleRef01Data, "expected create result to be a map")
+    assertNotNull(networkTokenBundleRef01Data["id"], "expected created entity to have an id")
 
     // LOAD
     val networkTokenBundleRef01MatchDt0 = linkedMapOf<String, Any?>()
+    networkTokenBundleRef01MatchDt0["id"] = networkTokenBundleRef01Data["id"]
     val networkTokenBundleRef01DataDt0Loaded = networkTokenBundleRef01Ent.load(networkTokenBundleRef01MatchDt0, null)
-    assertNotNull(networkTokenBundleRef01DataDt0Loaded, "expected load result to be non-null")
+    val networkTokenBundleRef01DataDt0LoadResult = Helpers.toMapAny(if (networkTokenBundleRef01DataDt0Loaded is SdkEntity) networkTokenBundleRef01DataDt0Loaded.data() else networkTokenBundleRef01DataDt0Loaded) ?: linkedMapOf()
+    assertNotNull(networkTokenBundleRef01DataDt0LoadResult, "expected load result to be a map")
+    assertEquals(networkTokenBundleRef01Data["id"], networkTokenBundleRef01DataDt0LoadResult["id"],
+        "expected load result id to match")
 
     // REMOVE
     val networkTokenBundleRef01MatchRm0 = linkedMapOf<String, Any?>()

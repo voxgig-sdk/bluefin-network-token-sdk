@@ -92,6 +92,7 @@ network_token_bundle = client.NetworkTokenBundle()
 | `cardNumber` | `str` | No |  |
 | `expirationMonth` | `str` | No | Two-digit month in which the payment card expires. |
 | `expirationYear` | `str` | No | Four-digit year in which the payment card expires. |
+| `id` | `str` | No |  |
 | `issuer` | `dict` | No |  |
 | `metadata` | `dict` | No |  |
 | `networkToken` | `dict` | No |  |

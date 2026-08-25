@@ -94,6 +94,7 @@ Prepare a fetch definition without sending. Returns the `fetchdef` and raises on
 | `cardNumber` | `string` | No |  |
 | `expirationMonth` | `string` | No | Two-digit month in which the payment card expires. |
 | `expirationYear` | `string` | No | Four-digit year in which the payment card expires. |
+| `id` | `string` | No |  |
 | `issuer` | `map` | No |  |
 | `metadata` | `map` | No |  |
 | `networkToken` | `map` | No |  |

@@ -48,11 +48,16 @@ BASIC_FLOW: {
   $V{network_token_bundle_ref01_data_result} = $V{network_token_bundle_ref01_ent}->create($V{network_token_bundle_ref01_data}, undef);
   $V{network_token_bundle_ref01_data} = BluefinNetworkTokenHelpers::to_map(ref($V{network_token_bundle_ref01_data_result}) && $V{network_token_bundle_ref01_data_result}->can('data_get') ? $V{network_token_bundle_ref01_data_result}->data_get : $V{network_token_bundle_ref01_data_result});
   ok(defined $V{network_token_bundle_ref01_data}, 'network_token_bundle create: data');
+  ok(defined $V{network_token_bundle_ref01_data}{id}, 'network_token_bundle create: id');
 
   # LOAD
-  $V{network_token_bundle_ref01_match_dt0} = {};
+  $V{network_token_bundle_ref01_match_dt0} = {
+    'id' => $V{network_token_bundle_ref01_data}{id},
+  };
   $V{network_token_bundle_ref01_data_dt0_loaded} = $V{network_token_bundle_ref01_ent}->load($V{network_token_bundle_ref01_match_dt0}, undef);
-  ok(defined $V{network_token_bundle_ref01_data_dt0_loaded}, 'network_token_bundle load: data');
+  $V{network_token_bundle_ref01_data_dt0_load_result} = BluefinNetworkTokenHelpers::to_map(ref($V{network_token_bundle_ref01_data_dt0_loaded}) && $V{network_token_bundle_ref01_data_dt0_loaded}->can('data_get') ? $V{network_token_bundle_ref01_data_dt0_loaded}->data_get : $V{network_token_bundle_ref01_data_dt0_loaded});
+  ok(defined $V{network_token_bundle_ref01_data_dt0_load_result}, 'network_token_bundle load: data');
+  is($V{network_token_bundle_ref01_data_dt0_load_result}{id}, $V{network_token_bundle_ref01_data}{id}, 'network_token_bundle load: id');
 
   # REMOVE
   $V{network_token_bundle_ref01_match_rm0} = {

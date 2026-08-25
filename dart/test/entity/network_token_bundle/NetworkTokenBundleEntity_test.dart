@@ -48,8 +48,14 @@ void tests() {
       dynamic network_token_bundle_ref01_data = setup['data']['new']['network_token_bundle']['network_token_bundle_ref01'];
 
       network_token_bundle_ref01_data = (await network_token_bundle_ref01_ent.create(network_token_bundle_ref01_data)).data();
-      ok(null != network_token_bundle_ref01_data);
+      ok(null != network_token_bundle_ref01_data['id']);
 
+
+      // LOAD
+      final network_token_bundle_ref01_match_dt0 = <String, dynamic>{};
+      network_token_bundle_ref01_match_dt0['id'] = network_token_bundle_ref01_data['id'];
+      final network_token_bundle_ref01_data_dt0 = (await network_token_bundle_ref01_ent.load(network_token_bundle_ref01_match_dt0)).data();
+      ok(network_token_bundle_ref01_data_dt0['id'] == network_token_bundle_ref01_data['id']);
 
 
       // REMOVE

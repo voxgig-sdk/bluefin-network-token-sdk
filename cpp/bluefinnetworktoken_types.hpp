@@ -26,6 +26,7 @@ struct NetworkTokenBundle {
   std::string cardNumber;  // optional
   std::string expirationMonth;  // optional
   std::string expirationYear;  // optional
+  std::string id;  // optional
   std::map<std::string, Value> issuer;  // optional
   std::map<std::string, Value> metadata;  // optional
   std::map<std::string, Value> networkToken;  // optional
@@ -43,6 +44,7 @@ struct NetworkTokenBundleCreateData {
   std::string cardNumber;  // optional
   std::string expirationMonth;  // optional
   std::string expirationYear;  // optional
+  std::string id;  // optional
   std::map<std::string, Value> issuer;  // optional
   std::map<std::string, Value> metadata;  // optional
   std::map<std::string, Value> networkToken;  // optional

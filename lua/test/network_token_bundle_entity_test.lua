@@ -43,13 +43,24 @@ describe("NetworkTokenBundleEntity", function()
     assert.is_nil(err)
     network_token_bundle_ref01_data = helpers.to_map(type(network_token_bundle_ref01_data_result) == 'table' and network_token_bundle_ref01_data_result.data_get and network_token_bundle_ref01_data_result:data_get() or network_token_bundle_ref01_data_result)
     assert.is_not_nil(network_token_bundle_ref01_data)
+    assert.is_not_nil(network_token_bundle_ref01_data["id"])
 
     -- LOAD
-    local network_token_bundle_ref01_match_dt0 = {}
+    local network_token_bundle_ref01_match_dt0 = {
+      id = network_token_bundle_ref01_data["id"],
+    }
     local network_token_bundle_ref01_data_dt0_loaded, err = network_token_bundle_ref01_ent:load(network_token_bundle_ref01_match_dt0, nil)
     assert.is_nil(err)
-    assert.is_not_nil(network_token_bundle_ref01_data_dt0_loaded)
+    local network_token_bundle_ref01_data_dt0_load_result = helpers.to_map(type(network_token_bundle_ref01_data_dt0_loaded) == 'table' and network_token_bundle_ref01_data_dt0_loaded.data_get and network_token_bundle_ref01_data_dt0_loaded:data_get() or network_token_bundle_ref01_data_dt0_loaded)
+    assert.is_not_nil(network_token_bundle_ref01_data_dt0_load_result)
+    assert.are.equal(network_token_bundle_ref01_data_dt0_load_result["id"], network_token_bundle_ref01_data["id"])
 
+    -- REMOVE
+    local network_token_bundle_ref01_match_rm0 = {
+      id = network_token_bundle_ref01_data["id"],
+    }
+    local _, err = network_token_bundle_ref01_ent:remove(network_token_bundle_ref01_match_rm0, nil)
+    assert.is_nil(err)
 
   end)
 end)

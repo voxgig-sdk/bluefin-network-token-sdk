@@ -73,6 +73,11 @@ public static class SdkConfig
                         },
                         new Dictionary<string, object?>
                         {
+                            ["name"] = "id",
+                            ["type"] = "`$STRING`",
+                        },
+                        new Dictionary<string, object?>
+                        {
                             ["name"] = "issuer",
                             ["type"] = "`$OBJECT`",
                         },

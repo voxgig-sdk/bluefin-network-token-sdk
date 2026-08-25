@@ -19,6 +19,7 @@ public record NetworkTokenBundle
     public string? cardNumber { get; init; }
     public string? expirationMonth { get; init; }
     public string? expirationYear { get; init; }
+    public string? id { get; init; }
     public Dictionary<string, object?>? issuer { get; init; }
     public Dictionary<string, object?>? metadata { get; init; }
     public Dictionary<string, object?>? networkToken { get; init; }
@@ -38,6 +39,7 @@ public record NetworkTokenBundleCreateData
     public string? cardNumber { get; init; }
     public string? expirationMonth { get; init; }
     public string? expirationYear { get; init; }
+    public string? id { get; init; }
     public Dictionary<string, object?>? issuer { get; init; }
     public Dictionary<string, object?>? metadata { get; init; }
     public Dictionary<string, object?>? networkToken { get; init; }

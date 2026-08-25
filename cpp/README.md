@@ -78,7 +78,7 @@ try {
 Value created = client->network_token_bundle()->create(vmap({{"card", vmap()}, {"cardNumber", Value("example_cardNumber")}}), Value::undef());
 
 // Remove
-client->network_token_bundle()->remove(vmap({{"id", Value("example_id")}}), Value::undef());
+client->network_token_bundle()->remove(vmap({{"id", getp(created, "id")}}), Value::undef());
 ```
 
 
@@ -272,6 +272,7 @@ On error, `ok` is `false` and `err` contains the error value.
 | `cardNumber` |  |
 | `expirationMonth` | Two-digit month in which the payment card expires. |
 | `expirationYear` | Four-digit year in which the payment card expires. |
+| `id` |  |
 | `issuer` |  |
 | `metadata` |  |
 | `networkToken` |  |
@@ -308,6 +309,7 @@ Create an instance: `auto network_token_bundle = client->network_token_bundle();
 | `cardNumber` | `std::string` |  |
 | `expirationMonth` | `std::string` | Two-digit month in which the payment card expires. |
 | `expirationYear` | `std::string` | Four-digit year in which the payment card expires. |
+| `id` | `std::string` |  |
 | `issuer` | `std::map<std::string, Value>` |  |
 | `metadata` | `std::map<std::string, Value>` |  |
 | `networkToken` | `std::map<std::string, Value>` |  |

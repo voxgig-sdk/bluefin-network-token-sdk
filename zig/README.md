@@ -272,6 +272,7 @@ On error, `ok` is `false` and `err` carries the error message.
 | `cardNumber` |  |
 | `expirationMonth` | Two-digit month in which the payment card expires. |
 | `expirationYear` | Four-digit year in which the payment card expires. |
+| `id` |  |
 | `issuer` |  |
 | `metadata` |  |
 | `networkToken` |  |
@@ -311,6 +312,7 @@ carries the result `Value`, `.err => |e|` carries the branded error.
 | `cardNumber` | `[]const u8` |  |
 | `expirationMonth` | `[]const u8` | Two-digit month in which the payment card expires. |
 | `expirationYear` | `[]const u8` | Four-digit year in which the payment card expires. |
+| `id` | `[]const u8` |  |
 | `issuer` | `Value (object)` |  |
 | `metadata` | `Value (object)` |  |
 | `networkToken` | `Value (object)` |  |

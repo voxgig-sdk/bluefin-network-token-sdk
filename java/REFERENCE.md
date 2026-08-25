@@ -94,6 +94,7 @@ SdkEntity networkTokenBundle = client.networkTokenBundle(null);
 | `cardNumber` | `String` | No |  |
 | `expirationMonth` | `String` | No | Two-digit month in which the payment card expires. |
 | `expirationYear` | `String` | No | Four-digit year in which the payment card expires. |
+| `id` | `String` | No |  |
 | `issuer` | `Map<String, Object>` | No |  |
 | `metadata` | `Map<String, Object>` | No |  |
 | `networkToken` | `Map<String, Object>` | No |  |

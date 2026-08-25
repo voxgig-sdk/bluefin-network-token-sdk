@@ -97,6 +97,7 @@ var networkTokenBundle = client.NetworkTokenBundle();
 | `cardNumber` | `string` | No |  |
 | `expirationMonth` | `string` | No | Two-digit month in which the payment card expires. |
 | `expirationYear` | `string` | No | Four-digit year in which the payment card expires. |
+| `id` | `string` | No |  |
 | `issuer` | `Dictionary<string, object?>` | No |  |
 | `metadata` | `Dictionary<string, object?>` | No |  |
 | `networkToken` | `Dictionary<string, object?>` | No |  |

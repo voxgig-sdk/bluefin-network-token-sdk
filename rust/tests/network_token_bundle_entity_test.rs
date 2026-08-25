@@ -60,16 +60,25 @@ fn network_token_bundle_entity_basic() {
         matches!(network_token_bundle_ref01_data, Value::Map(_)),
         "expected create result to be a map"
     );
+    assert!(
+        !getp(&network_token_bundle_ref01_data, "id").is_noval(),
+        "expected created entity to have an id"
+    );
 
     // LOAD
-    let network_token_bundle_ref01_match_dt0 = Value::empty_map();
+    let network_token_bundle_ref01_match_dt0 = jo(vec![("id", getp(&network_token_bundle_ref01_data, "id"))]);
     let network_token_bundle_ref01_data_dt0_loaded = network_token_bundle_ref01_ent
         .load(network_token_bundle_ref01_match_dt0.clone(), Value::Noval)
         .expect("load failed");
-    // load resolves to the ENTITY; the record is reached through data().
+    let network_token_bundle_ref01_data_dt0_load_result = to_map(&network_token_bundle_ref01_data_dt0_loaded.data(None));
     assert!(
-        !network_token_bundle_ref01_data_dt0_loaded.data(None).is_noval(),
-        "expected load result to carry data"
+        matches!(network_token_bundle_ref01_data_dt0_load_result, Value::Map(_)),
+        "expected load result to be a map"
+    );
+    assert_eq!(
+        getp(&network_token_bundle_ref01_data_dt0_load_result, "id"),
+        getp(&network_token_bundle_ref01_data, "id"),
+        "expected load result id to match"
     );
 
     // REMOVE

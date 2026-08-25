@@ -51,11 +51,18 @@ public class NetworkTokenBundleEntityTest
         var networkTokenBundleRef01DataResult = networkTokenBundleRef01Ent.Create(networkTokenBundleRef01Data, null);
         networkTokenBundleRef01Data = Helpers.ToMapAny(networkTokenBundleRef01DataResult is IEntity ce ? ce.Data() : networkTokenBundleRef01DataResult);
         Assert.True(networkTokenBundleRef01Data != null, "expected create result to be a map");
+        Assert.True(networkTokenBundleRef01Data!["id"] != null, "expected created entity to have an id");
 
         // LOAD
-        var networkTokenBundleRef01MatchDt0 = new Dictionary<string, object?>();
+        var networkTokenBundleRef01MatchDt0 = new Dictionary<string, object?>
+        {
+            ["id"] = networkTokenBundleRef01Data!["id"],
+        };
         var networkTokenBundleRef01DataDt0Loaded = networkTokenBundleRef01Ent.Load(networkTokenBundleRef01MatchDt0, null);
-        Assert.True(networkTokenBundleRef01DataDt0Loaded != null, "expected load result to be non-null");
+        var networkTokenBundleRef01DataDt0LoadResult = Helpers.ToMapAny(networkTokenBundleRef01DataDt0Loaded is IEntity le ? le.Data() : networkTokenBundleRef01DataDt0Loaded);
+        Assert.True(networkTokenBundleRef01DataDt0LoadResult != null, "expected load result to be a map");
+        Assert.True(StructRunner.DeepEqual(networkTokenBundleRef01DataDt0LoadResult!["id"], networkTokenBundleRef01Data["id"]),
+            "expected load result id to match");
 
         // REMOVE
         var networkTokenBundleRef01MatchRm0 = new Dictionary<string, object?>

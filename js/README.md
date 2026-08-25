@@ -171,7 +171,7 @@ await entity.load({ id: 'example' })
 
 // Subsequent calls reuse the stored state
 const data = entity.data()
-console.log(data)
+console.log(data.id)
 ```
 
 ### Add custom middleware
@@ -315,6 +315,7 @@ The `prepare()` method returns:
 | `cardNumber` |  |
 | `expirationMonth` | Two-digit month in which the payment card expires. |
 | `expirationYear` | Four-digit year in which the payment card expires. |
+| `id` |  |
 | `issuer` |  |
 | `metadata` |  |
 | `networkToken` |  |
@@ -351,6 +352,7 @@ Create an instance: `const network_token_bundle = client.NetworkTokenBundle()`
 | `cardNumber` | `string` |  |
 | `expirationMonth` | `string` | Two-digit month in which the payment card expires. |
 | `expirationYear` | `string` | Four-digit year in which the payment card expires. |
+| `id` | `string` |  |
 | `issuer` | `Object` |  |
 | `metadata` | `Object` |  |
 | `networkToken` | `Object` |  |

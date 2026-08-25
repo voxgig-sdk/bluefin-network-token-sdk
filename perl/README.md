@@ -65,7 +65,7 @@ else {
 my $created = $client->NetworkTokenBundle->create({ 'card' => {}, 'cardNumber' => 'example_cardNumber' });
 
 # Remove
-$client->NetworkTokenBundle->remove({ 'id' => 'example_id' });
+$client->NetworkTokenBundle->remove({ 'id' => $created->{id} });
 ```
 
 
@@ -273,6 +273,7 @@ On error, `ok` is false and `err` contains the error value.
 | `cardNumber` |  |
 | `expirationMonth` | Two-digit month in which the payment card expires. |
 | `expirationYear` | Four-digit year in which the payment card expires. |
+| `id` |  |
 | `issuer` |  |
 | `metadata` |  |
 | `networkToken` |  |
@@ -309,6 +310,7 @@ Create an instance: `my $network_token_bundle = $client->NetworkTokenBundle;`
 | `cardNumber` | `string` |  |
 | `expirationMonth` | `string` | Two-digit month in which the payment card expires. |
 | `expirationYear` | `string` | Four-digit year in which the payment card expires. |
+| `id` | `string` |  |
 | `issuer` | `hashref` |  |
 | `metadata` | `hashref` |  |
 | `networkToken` | `hashref` |  |

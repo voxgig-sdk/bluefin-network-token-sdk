@@ -19,6 +19,7 @@ class NetworkTokenBundle
     public ?string $cardNumber = null;
     public ?string $expirationMonth = null;
     public ?string $expirationYear = null;
+    public ?string $id = null;
     public ?array $issuer = null;
     public ?array $metadata = null;
     public ?array $networkToken = null;
@@ -40,6 +41,7 @@ class NetworkTokenBundleCreateData
     public ?string $cardNumber = null;
     public ?string $expirationMonth = null;
     public ?string $expirationYear = null;
+    public ?string $id = null;
     public ?array $issuer = null;
     public ?array $metadata = null;
     public ?array $networkToken = null;

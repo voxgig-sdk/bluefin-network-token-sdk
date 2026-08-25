@@ -62,17 +62,34 @@ func TestNetworkTokenBundleEntity(t *testing.T) {
 		if networkTokenBundleRef01Data == nil {
 			t.Fatal("expected create result to be a map")
 		}
+		if networkTokenBundleRef01Data["id"] == nil {
+			t.Fatal("expected created entity to have an id")
+		}
 
 		// LOAD
-		networkTokenBundleRef01MatchDt0 := map[string]any{}
+		networkTokenBundleRef01MatchDt0 := map[string]any{
+			"id": networkTokenBundleRef01Data["id"],
+		}
 		networkTokenBundleRef01DataDt0Loaded, err := networkTokenBundleRef01Ent.Load(networkTokenBundleRef01MatchDt0, nil)
 		if err != nil {
 			t.Fatalf("load failed: %v", err)
 		}
-		if networkTokenBundleRef01DataDt0Loaded == nil {
-			t.Fatal("expected load result to be non-nil")
+		networkTokenBundleRef01DataDt0LoadResult := core.ToMapAny(entityData(networkTokenBundleRef01DataDt0Loaded))
+		if networkTokenBundleRef01DataDt0LoadResult == nil {
+			t.Fatal("expected load result to be a map")
+		}
+		if networkTokenBundleRef01DataDt0LoadResult["id"] != networkTokenBundleRef01Data["id"] {
+			t.Fatal("expected load result id to match")
 		}
 
+		// REMOVE
+		networkTokenBundleRef01MatchRm0 := map[string]any{
+			"id": networkTokenBundleRef01Data["id"],
+		}
+		_, err = networkTokenBundleRef01Ent.Remove(networkTokenBundleRef01MatchRm0, nil)
+		if err != nil {
+			t.Fatalf("remove failed: %v", err)
+		}
 
 	})
 }

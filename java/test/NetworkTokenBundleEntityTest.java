@@ -58,11 +58,16 @@ public class NetworkTokenBundleEntityTest {
     Object networkTokenBundleRef01DataResult = networkTokenBundleRef01Ent.create(networkTokenBundleRef01Data, null);
     networkTokenBundleRef01Data = Helpers.toMapAny(networkTokenBundleRef01DataResult instanceof SdkEntity ? ((SdkEntity) networkTokenBundleRef01DataResult).data() : networkTokenBundleRef01DataResult);
     assertNotNull(networkTokenBundleRef01Data, "expected create result to be a map");
+    assertNotNull(networkTokenBundleRef01Data.get("id"), "expected created entity to have an id");
 
     // LOAD
     Map<String, Object> networkTokenBundleRef01MatchDt0 = new LinkedHashMap<>();
+    networkTokenBundleRef01MatchDt0.put("id", networkTokenBundleRef01Data.get("id"));
     Object networkTokenBundleRef01DataDt0Loaded = networkTokenBundleRef01Ent.load(networkTokenBundleRef01MatchDt0, null);
-    assertNotNull(networkTokenBundleRef01DataDt0Loaded, "expected load result to be non-null");
+    Map<String, Object> networkTokenBundleRef01DataDt0LoadResult = Helpers.toMapAny(networkTokenBundleRef01DataDt0Loaded instanceof SdkEntity ? ((SdkEntity) networkTokenBundleRef01DataDt0Loaded).data() : networkTokenBundleRef01DataDt0Loaded);
+    assertNotNull(networkTokenBundleRef01DataDt0LoadResult, "expected load result to be a map");
+    assertEquals(networkTokenBundleRef01Data.get("id"), networkTokenBundleRef01DataDt0LoadResult.get("id"),
+        "expected load result id to match");
 
     // REMOVE
     Map<String, Object> networkTokenBundleRef01MatchRm0 = new LinkedHashMap<>();

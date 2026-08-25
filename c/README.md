@@ -69,7 +69,7 @@ if (err) {
 voxgig_value* created = network_token_bundle->vt->create(network_token_bundle, cmap(2, "card", v_map(), "cardNumber", v_str("example_cardNumber")), NULL, &err);
 
 // Remove
-network_token_bundle->vt->remove(network_token_bundle, cmap(1, "id", v_str("example_id")), NULL, &err);
+network_token_bundle->vt->remove(network_token_bundle, cmap(1, "id", getp(created, "id")), NULL, &err);
 ```
 
 
@@ -283,6 +283,7 @@ On error, `ok` is `false` and `err` carries the error value.
 | `cardNumber` |  |
 | `expirationMonth` | Two-digit month in which the payment card expires. |
 | `expirationYear` | Four-digit year in which the payment card expires. |
+| `id` |  |
 | `issuer` |  |
 | `metadata` |  |
 | `networkToken` |  |
@@ -319,6 +320,7 @@ Create an instance: `Entity* network_token_bundle = bluefinnetworktoken_network_
 | `cardNumber` | `char*` |  |
 | `expirationMonth` | `char*` | Two-digit month in which the payment card expires. |
 | `expirationYear` | `char*` | Four-digit year in which the payment card expires. |
+| `id` | `char*` |  |
 | `issuer` | `voxgig_value* (map)` |  |
 | `metadata` | `voxgig_value* (map)` |  |
 | `networkToken` | `voxgig_value* (map)` |  |

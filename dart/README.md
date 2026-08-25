@@ -72,7 +72,7 @@ try {
 final created = await client.NetworkTokenBundle().create({'card': <String, dynamic>{}, 'cardNumber': 'example_cardNumber'});
 
 // Remove
-await client.NetworkTokenBundle().remove({'id': 'example_id'});
+await client.NetworkTokenBundle().remove({'id': created.data()['id']});
 ```
 
 
@@ -280,6 +280,7 @@ On error, `ok` is `false` and `err` contains the error value.
 | `cardNumber` |  |
 | `expirationMonth` | Two-digit month in which the payment card expires. |
 | `expirationYear` | Four-digit year in which the payment card expires. |
+| `id` |  |
 | `issuer` |  |
 | `metadata` |  |
 | `networkToken` |  |
@@ -316,6 +317,7 @@ Create an instance: `final network_token_bundle = client.NetworkTokenBundle();`
 | `cardNumber` | `String` |  |
 | `expirationMonth` | `String` | Two-digit month in which the payment card expires. |
 | `expirationYear` | `String` | Four-digit year in which the payment card expires. |
+| `id` | `String` |  |
 | `issuer` | `Map<String, dynamic>` |  |
 | `metadata` | `Map<String, dynamic>` |  |
 | `networkToken` | `Map<String, dynamic>` |  |

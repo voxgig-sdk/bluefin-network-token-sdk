@@ -11,6 +11,7 @@
 ---@field cardNumber? string
 ---@field expirationMonth? string
 ---@field expirationYear? string
+---@field id? string
 ---@field issuer? table
 ---@field metadata? table
 ---@field networkToken? table
@@ -26,6 +27,7 @@
 ---@field cardNumber? string
 ---@field expirationMonth? string
 ---@field expirationYear? string
+---@field id? string
 ---@field issuer? table
 ---@field metadata? table
 ---@field networkToken? table

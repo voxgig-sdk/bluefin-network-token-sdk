@@ -28,6 +28,11 @@ main: kit: entity: network_token_bundle: {
       type: "`$STRING`"
     }
     {
+      name: "id"
+      req: false
+      type: "`$STRING`"
+    }
+    {
       name: "issuer"
       req: false
       type: "`$OBJECT`"
@@ -59,6 +64,11 @@ main: kit: entity: network_token_bundle: {
       type: "`$STRING`"
     }
   ]
+
+  id: {
+    field: "id"
+    name: "id"
+  }
 
   name: "network_token_bundle"
   op: {

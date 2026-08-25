@@ -94,6 +94,7 @@ val networkTokenBundle = client.networkTokenBundle(null)
 | `cardNumber` | `String` | No |  |
 | `expirationMonth` | `String` | No | Two-digit month in which the payment card expires. |
 | `expirationYear` | `String` | No | Four-digit year in which the payment card expires. |
+| `id` | `String` | No |  |
 | `issuer` | `java.util.Map[String, Object]` | No |  |
 | `metadata` | `java.util.Map[String, Object]` | No |  |
 | `networkToken` | `java.util.Map[String, Object]` | No |  |

@@ -88,6 +88,7 @@ Entity* network_token_bundle = bluefinnetworktoken_network_token_bundle(client, 
 | `cardNumber` | `char*` | No |  |
 | `expirationMonth` | `char*` | No | Two-digit month in which the payment card expires. |
 | `expirationYear` | `char*` | No | Four-digit year in which the payment card expires. |
+| `id` | `char*` | No |  |
 | `issuer` | `voxgig_value* (map)` | No |  |
 | `metadata` | `voxgig_value* (map)` | No |  |
 | `networkToken` | `voxgig_value* (map)` | No |  |

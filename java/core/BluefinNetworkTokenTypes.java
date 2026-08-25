@@ -20,11 +20,11 @@ public final class BluefinNetworkTokenTypes {
 
   private BluefinNetworkTokenTypes() {}
 
-  public record NetworkTokenBundle(Map<String, Object> card, String cardNumber, String expirationMonth, String expirationYear, Map<String, Object> issuer, Map<String, Object> metadata, Map<String, Object> networkToken, String networkTokenBundleId, String networkTokenBundleState, String securityCode) {}
+  public record NetworkTokenBundle(Map<String, Object> card, String cardNumber, String expirationMonth, String expirationYear, String id, Map<String, Object> issuer, Map<String, Object> metadata, Map<String, Object> networkToken, String networkTokenBundleId, String networkTokenBundleState, String securityCode) {}
 
   public record NetworkTokenBundleLoadMatch(String id) {}
 
-  public record NetworkTokenBundleCreateData(Map<String, Object> card, String cardNumber, String expirationMonth, String expirationYear, Map<String, Object> issuer, Map<String, Object> metadata, Map<String, Object> networkToken, String networkTokenBundleId, String networkTokenBundleState, String securityCode) {}
+  public record NetworkTokenBundleCreateData(Map<String, Object> card, String cardNumber, String expirationMonth, String expirationYear, String id, Map<String, Object> issuer, Map<String, Object> metadata, Map<String, Object> networkToken, String networkTokenBundleId, String networkTokenBundleState, String securityCode) {}
 
   public record NetworkTokenBundleRemoveMatch(String id) {}
 

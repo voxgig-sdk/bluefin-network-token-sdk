@@ -37,12 +37,20 @@ object NetworkTokenBundleEntityTest {
       val networkTokenBundleRef01DataResult = networkTokenBundleRef01Ent.create(networkTokenBundleRef01Data, null)
       networkTokenBundleRef01Data = Helpers.toMapAny(networkTokenBundleRef01DataResult match { case e: SdkEntity => e.data(); case o => o })
       rep.check("network_token_bundle.create.map", networkTokenBundleRef01Data != null, "expected create result to be a map")
+      rep.check("network_token_bundle.create.id", networkTokenBundleRef01Data != null && networkTokenBundleRef01Data.get("id") != null, "expected created entity to have an id")
 
       // LOAD
       val networkTokenBundleRef01MatchDt0 = new LinkedHashMap[String, Object]()
+      networkTokenBundleRef01MatchDt0.put("id", networkTokenBundleRef01Data.get("id"))
       val networkTokenBundleRef01DataDt0Loaded = networkTokenBundleRef01Ent.load(networkTokenBundleRef01MatchDt0, null)
-      rep.check("network_token_bundle.load.nonnull", networkTokenBundleRef01DataDt0Loaded != null, "expected load result to be non-null")
+      val networkTokenBundleRef01DataDt0LoadResult = Helpers.toMapAny(networkTokenBundleRef01DataDt0Loaded match { case e: SdkEntity => e.data(); case o => o })
+      rep.check("network_token_bundle.load.map", networkTokenBundleRef01DataDt0LoadResult != null, "expected load result to be a map")
+      rep.eq("network_token_bundle.load.id", networkTokenBundleRef01Data.get("id"), networkTokenBundleRef01DataDt0LoadResult.get("id"))
 
+      // REMOVE
+      val networkTokenBundleRef01MatchRm0 = new LinkedHashMap[String, Object]()
+      networkTokenBundleRef01MatchRm0.put("id", networkTokenBundleRef01Data.get("id"))
+      networkTokenBundleRef01Ent.remove(networkTokenBundleRef01MatchRm0, null)
     }
   }
 }

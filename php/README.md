@@ -52,7 +52,7 @@ try {
 $created = $client->NetworkTokenBundle()->create(["card" => [], "cardNumber" => "example_cardNumber"]);
 
 // Remove
-$client->NetworkTokenBundle()->remove(["id" => "example_id"]);
+$client->NetworkTokenBundle()->remove(["id" => $created->data_get()["id"]]);
 ```
 
 
@@ -268,6 +268,7 @@ On error, `ok` is `false` and `$err` contains the error value.
 | `cardNumber` |  |
 | `expirationMonth` | Two-digit month in which the payment card expires. |
 | `expirationYear` | Four-digit year in which the payment card expires. |
+| `id` |  |
 | `issuer` |  |
 | `metadata` |  |
 | `networkToken` |  |
@@ -304,6 +305,7 @@ Create an instance: `$network_token_bundle = $client->NetworkTokenBundle();`
 | `cardNumber` | `string` |  |
 | `expirationMonth` | `string` | Two-digit month in which the payment card expires. |
 | `expirationYear` | `string` | Four-digit year in which the payment card expires. |
+| `id` | `string` |  |
 | `issuer` | `array` |  |
 | `metadata` | `array` |  |
 | `networkToken` | `array` |  |

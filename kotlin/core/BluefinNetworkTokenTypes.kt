@@ -16,11 +16,11 @@ package voxgig.bluefinnetworktokensdk.core
 @Suppress("unused")
 object BluefinNetworkTokenTypes {
 
-  data class NetworkTokenBundle(val card: Map<String, Any?>?, val cardNumber: String?, val expirationMonth: String?, val expirationYear: String?, val issuer: Map<String, Any?>?, val metadata: Map<String, Any?>?, val networkToken: Map<String, Any?>?, val networkTokenBundleId: String?, val networkTokenBundleState: String?, val securityCode: String?)
+  data class NetworkTokenBundle(val card: Map<String, Any?>?, val cardNumber: String?, val expirationMonth: String?, val expirationYear: String?, val id: String?, val issuer: Map<String, Any?>?, val metadata: Map<String, Any?>?, val networkToken: Map<String, Any?>?, val networkTokenBundleId: String?, val networkTokenBundleState: String?, val securityCode: String?)
 
   data class NetworkTokenBundleLoadMatch(val id: String?)
 
-  data class NetworkTokenBundleCreateData(val card: Map<String, Any?>?, val cardNumber: String?, val expirationMonth: String?, val expirationYear: String?, val issuer: Map<String, Any?>?, val metadata: Map<String, Any?>?, val networkToken: Map<String, Any?>?, val networkTokenBundleId: String?, val networkTokenBundleState: String?, val securityCode: String?)
+  data class NetworkTokenBundleCreateData(val card: Map<String, Any?>?, val cardNumber: String?, val expirationMonth: String?, val expirationYear: String?, val id: String?, val issuer: Map<String, Any?>?, val metadata: Map<String, Any?>?, val networkToken: Map<String, Any?>?, val networkTokenBundleId: String?, val networkTokenBundleState: String?, val securityCode: String?)
 
   data class NetworkTokenBundleRemoveMatch(val id: String?)
 

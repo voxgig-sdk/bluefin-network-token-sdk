@@ -51,7 +51,7 @@ local created, err = client:NetworkTokenBundle():create({ card = {}, cardNumber 
 if err then error(err) end
 
 -- Remove
-client:NetworkTokenBundle():remove({ id = "example_id" })
+client:NetworkTokenBundle():remove({ id = created:data_get()["id"] })
 ```
 
 
@@ -246,6 +246,7 @@ Only `direct()` returns a response envelope — a `table` with `ok`,
 | `cardNumber` |  |
 | `expirationMonth` | Two-digit month in which the payment card expires. |
 | `expirationYear` | Four-digit year in which the payment card expires. |
+| `id` |  |
 | `issuer` |  |
 | `metadata` |  |
 | `networkToken` |  |
@@ -282,6 +283,7 @@ Create an instance: `local network_token_bundle = client:NetworkTokenBundle(nil)
 | `cardNumber` | `string` |  |
 | `expirationMonth` | `string` | Two-digit month in which the payment card expires. |
 | `expirationYear` | `string` | Four-digit year in which the payment card expires. |
+| `id` | `string` |  |
 | `issuer` | `table` |  |
 | `metadata` | `table` |  |
 | `networkToken` | `table` |  |

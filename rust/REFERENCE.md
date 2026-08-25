@@ -97,6 +97,7 @@ let network_token_bundle = client.network_token_bundle(Value::Noval);
 | `cardNumber` | `String` | No |  |
 | `expirationMonth` | `String` | No | Two-digit month in which the payment card expires. |
 | `expirationYear` | `String` | No | Four-digit year in which the payment card expires. |
+| `id` | `String` | No |  |
 | `issuer` | `std::collections::HashMap<String, Value>` | No |  |
 | `metadata` | `std::collections::HashMap<String, Value>` | No |  |
 | `networkToken` | `std::collections::HashMap<String, Value>` | No |  |

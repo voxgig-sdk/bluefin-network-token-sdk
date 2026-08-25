@@ -21,6 +21,7 @@ class NetworkTokenBundle(TypedDict, total=False):
     cardNumber: str
     expirationMonth: str
     expirationYear: str
+    id: str
     issuer: dict
     metadata: dict
     networkToken: dict
@@ -38,6 +39,7 @@ class NetworkTokenBundleCreateData(TypedDict, total=False):
     cardNumber: str
     expirationMonth: str
     expirationYear: str
+    id: str
     issuer: dict
     metadata: dict
     networkToken: dict

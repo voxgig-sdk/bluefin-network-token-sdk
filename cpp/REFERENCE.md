@@ -95,6 +95,7 @@ auto network_token_bundle = client->network_token_bundle();
 | `cardNumber` | `std::string` | No |  |
 | `expirationMonth` | `std::string` | No | Two-digit month in which the payment card expires. |
 | `expirationYear` | `std::string` | No | Four-digit year in which the payment card expires. |
+| `id` | `std::string` | No |  |
 | `issuer` | `std::map<std::string, Value>` | No |  |
 | `metadata` | `std::map<std::string, Value>` | No |  |
 | `networkToken` | `std::map<std::string, Value>` | No |  |

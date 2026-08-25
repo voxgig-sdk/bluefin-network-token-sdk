@@ -3,6 +3,7 @@ export interface NetworkTokenBundle {
     cardNumber?: string;
     expirationMonth?: string;
     expirationYear?: string;
+    id?: string;
     issuer?: Record<string, any>;
     metadata?: Record<string, any>;
     networkToken?: Record<string, any>;
@@ -20,6 +21,7 @@ export interface NetworkTokenBundleCreateData {
     cardNumber?: string;
     expirationMonth?: string;
     expirationYear?: string;
+    id?: string;
     issuer?: Record<string, any>;
     metadata?: Record<string, any>;
     networkToken?: Record<string, any>;

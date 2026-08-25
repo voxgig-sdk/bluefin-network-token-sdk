@@ -66,6 +66,10 @@ class Config {
                     "type": "`$STRING`"
                 },
                 {
+                    "name": "id",
+                    "type": "`$STRING`"
+                },
+                {
                     "name": "issuer",
                     "type": "`$OBJECT`"
                 },

@@ -46,12 +46,22 @@ class TestNetworkTokenBundleEntity:
 
         network_token_bundle_ref01_data = helpers.to_map(runner.entity_data(network_token_bundle_ref01_ent.create(network_token_bundle_ref01_data, None)))
         assert network_token_bundle_ref01_data is not None
+        assert network_token_bundle_ref01_data["id"] is not None
 
         # LOAD
-        network_token_bundle_ref01_match_dt0 = {}
+        network_token_bundle_ref01_match_dt0 = {
+            "id": network_token_bundle_ref01_data["id"],
+        }
         network_token_bundle_ref01_data_dt0_loaded = network_token_bundle_ref01_ent.load(network_token_bundle_ref01_match_dt0, None)
-        assert network_token_bundle_ref01_data_dt0_loaded is not None
+        network_token_bundle_ref01_data_dt0_load_result = helpers.to_map(runner.entity_data(network_token_bundle_ref01_data_dt0_loaded))
+        assert network_token_bundle_ref01_data_dt0_load_result is not None
+        assert network_token_bundle_ref01_data_dt0_load_result["id"] == network_token_bundle_ref01_data["id"]
 
+        # REMOVE
+        network_token_bundle_ref01_match_rm0 = {
+            "id": network_token_bundle_ref01_data["id"],
+        }
+        network_token_bundle_ref01_ent.remove(network_token_bundle_ref01_match_rm0, None)
 
 
 

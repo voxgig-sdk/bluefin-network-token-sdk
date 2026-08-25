@@ -95,6 +95,10 @@ public final class Config {
     b.append("     \"type\": \"`$STRING`\"");
     b.append("    },");
     b.append("    {");
+    b.append("     \"name\": \"id\",");
+    b.append("     \"type\": \"`$STRING`\"");
+    b.append("    },");
+    b.append("    {");
     b.append("     \"name\": \"issuer\",");
     b.append("     \"type\": \"`$OBJECT`\"");
     b.append("    },");

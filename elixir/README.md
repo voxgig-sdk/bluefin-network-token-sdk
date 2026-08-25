@@ -76,7 +76,7 @@ network_token_bundle = BluefinNetworkToken.network_token_bundle(sdk)
 created = BluefinNetworkToken.Entity.NetworkTokenBundle.create(network_token_bundle, H.deep(%{"card" => %{}, "cardNumber" => "example_cardNumber"}))
 
 # Remove
-BluefinNetworkToken.Entity.NetworkTokenBundle.remove(network_token_bundle, H.deep(%{"id" => "example_id"}))
+BluefinNetworkToken.Entity.NetworkTokenBundle.remove(network_token_bundle, H.deep(%{"id" => Voxgig.Struct.getprop(created, "id")}))
 ```
 
 
@@ -291,6 +291,7 @@ On error, `ok` is `false` and `err` carries the error value.
 | `cardNumber` |  |
 | `expirationMonth` | Two-digit month in which the payment card expires. |
 | `expirationYear` | Four-digit year in which the payment card expires. |
+| `id` |  |
 | `issuer` |  |
 | `metadata` |  |
 | `networkToken` |  |
@@ -330,6 +331,7 @@ Create a handle: `network_token_bundle = BluefinNetworkToken.network_token_bundl
 | `cardNumber` | `String.t()` |  |
 | `expirationMonth` | `String.t()` | Two-digit month in which the payment card expires. |
 | `expirationYear` | `String.t()` | Four-digit year in which the payment card expires. |
+| `id` | `String.t()` |  |
 | `issuer` | `map()` |  |
 | `metadata` | `map()` |  |
 | `networkToken` | `map()` |  |

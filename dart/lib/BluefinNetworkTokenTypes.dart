@@ -17,6 +17,8 @@ class NetworkTokenBundle {
   String? expirationMonth;
   /// STRING
   String? expirationYear;
+  /// STRING
+  String? id;
   /// OBJECT
   Map<String, dynamic>? issuer;
   /// OBJECT
@@ -35,6 +37,7 @@ class NetworkTokenBundle {
     this.cardNumber,
     this.expirationMonth,
     this.expirationYear,
+    this.id,
     this.issuer,
     this.metadata,
     this.networkToken,
@@ -48,6 +51,7 @@ class NetworkTokenBundle {
         cardNumber: m['cardNumber'] is String ? m['cardNumber'] : null,
         expirationMonth: m['expirationMonth'] is String ? m['expirationMonth'] : null,
         expirationYear: m['expirationYear'] is String ? m['expirationYear'] : null,
+        id: m['id'] is String ? m['id'] : null,
         issuer: m['issuer'] is Map<String, dynamic> ? m['issuer'] : null,
         metadata: m['metadata'] is Map<String, dynamic> ? m['metadata'] : null,
         networkToken: m['networkToken'] is Map<String, dynamic> ? m['networkToken'] : null,
@@ -69,6 +73,9 @@ class NetworkTokenBundle {
     }
     if (null != expirationYear) {
       m['expirationYear'] = expirationYear;
+    }
+    if (null != id) {
+      m['id'] = id;
     }
     if (null != issuer) {
       m['issuer'] = issuer;
@@ -122,6 +129,8 @@ class NetworkTokenBundleCreateData {
   String? expirationMonth;
   /// STRING
   String? expirationYear;
+  /// STRING
+  String? id;
   /// OBJECT
   Map<String, dynamic>? issuer;
   /// OBJECT
@@ -140,6 +149,7 @@ class NetworkTokenBundleCreateData {
     this.cardNumber,
     this.expirationMonth,
     this.expirationYear,
+    this.id,
     this.issuer,
     this.metadata,
     this.networkToken,
@@ -153,6 +163,7 @@ class NetworkTokenBundleCreateData {
         cardNumber: m['cardNumber'] is String ? m['cardNumber'] : null,
         expirationMonth: m['expirationMonth'] is String ? m['expirationMonth'] : null,
         expirationYear: m['expirationYear'] is String ? m['expirationYear'] : null,
+        id: m['id'] is String ? m['id'] : null,
         issuer: m['issuer'] is Map<String, dynamic> ? m['issuer'] : null,
         metadata: m['metadata'] is Map<String, dynamic> ? m['metadata'] : null,
         networkToken: m['networkToken'] is Map<String, dynamic> ? m['networkToken'] : null,
@@ -174,6 +185,9 @@ class NetworkTokenBundleCreateData {
     }
     if (null != expirationYear) {
       m['expirationYear'] = expirationYear;
+    }
+    if (null != id) {
+      m['id'] = id;
     }
     if (null != issuer) {
       m['issuer'] = issuer;

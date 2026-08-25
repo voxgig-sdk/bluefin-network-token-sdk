@@ -121,6 +121,7 @@ const network_token_bundle = client.NetworkTokenBundle()
 | `cardNumber` | `string` | No |  |
 | `expirationMonth` | `string` | No | Two-digit month in which the payment card expires. |
 | `expirationYear` | `string` | No | Four-digit year in which the payment card expires. |
+| `id` | `string` | No |  |
 | `issuer` | `Record<string, any>` | No |  |
 | `metadata` | `Record<string, any>` | No |  |
 | `networkToken` | `Record<string, any>` | No |  |

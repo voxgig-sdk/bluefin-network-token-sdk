@@ -61,7 +61,7 @@ match client.network_token_bundle(Value::Noval).load(jo(vec![("id", Value::str("
 let created = client.network_token_bundle(Value::Noval).create(jo(vec![("card", Value::empty_map()), ("cardNumber", Value::str("example_cardNumber"))]), Value::Noval).unwrap();
 
 // Remove
-client.network_token_bundle(Value::Noval).remove(jo(vec![("id", Value::str("example_id"))]), Value::Noval).unwrap();
+client.network_token_bundle(Value::Noval).remove(jo(vec![("id", getp(&created, "id"))]), Value::Noval).unwrap();
 ```
 
 
@@ -255,6 +255,7 @@ On error, `ok` is `false` and `err` carries the error value.
 | `cardNumber` |  |
 | `expirationMonth` | Two-digit month in which the payment card expires. |
 | `expirationYear` | Four-digit year in which the payment card expires. |
+| `id` |  |
 | `issuer` |  |
 | `metadata` |  |
 | `networkToken` |  |
@@ -291,6 +292,7 @@ Create an instance: `let network_token_bundle = client.network_token_bundle(Valu
 | `cardNumber` | `String` |  |
 | `expirationMonth` | `String` | Two-digit month in which the payment card expires. |
 | `expirationYear` | `String` | Four-digit year in which the payment card expires. |
+| `id` | `String` |  |
 | `issuer` | `std::collections::HashMap<String, Value>` |  |
 | `metadata` | `std::collections::HashMap<String, Value>` |  |
 | `networkToken` | `std::collections::HashMap<String, Value>` |  |

@@ -97,6 +97,7 @@ const network_token_bundle = client.network_token_bundle(h.vnull());
 | `cardNumber` | `[]const u8` | No |  |
 | `expirationMonth` | `[]const u8` | No | Two-digit month in which the payment card expires. |
 | `expirationYear` | `[]const u8` | No | Four-digit year in which the payment card expires. |
+| `id` | `[]const u8` | No |  |
 | `issuer` | `Value (object)` | No |  |
 | `metadata` | `Value (object)` | No |  |
 | `networkToken` | `Value (object)` | No |  |

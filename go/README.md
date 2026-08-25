@@ -283,6 +283,7 @@ Only `Direct()` returns a response envelope — a `map[string]any` with
 | `"cardNumber"` |  |
 | `"expirationMonth"` | Two-digit month in which the payment card expires. |
 | `"expirationYear"` | Four-digit year in which the payment card expires. |
+| `"id"` |  |
 | `"issuer"` |  |
 | `"metadata"` |  |
 | `"networkToken"` |  |
@@ -319,6 +320,7 @@ Create an instance: `networkTokenBundle := client.NetworkTokenBundle(nil)`
 | `cardNumber` | `string` |  |
 | `expirationMonth` | `string` | Two-digit month in which the payment card expires. |
 | `expirationYear` | `string` | Four-digit year in which the payment card expires. |
+| `id` | `string` |  |
 | `issuer` | `map[string]any` |  |
 | `metadata` | `map[string]any` |  |
 | `networkToken` | `map[string]any` |  |

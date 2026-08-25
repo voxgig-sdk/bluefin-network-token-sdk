@@ -91,6 +91,7 @@ network_token_bundle = BluefinNetworkToken.network_token_bundle(sdk)
 | `cardNumber` | `String.t()` | No |  |
 | `expirationMonth` | `String.t()` | No | Two-digit month in which the payment card expires. |
 | `expirationYear` | `String.t()` | No | Four-digit year in which the payment card expires. |
+| `id` | `String.t()` | No |  |
 | `issuer` | `map()` | No |  |
 | `metadata` | `map()` | No |  |
 | `networkToken` | `map()` | No |  |

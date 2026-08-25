@@ -16,6 +16,7 @@ public struct NetworkTokenBundle {
   public var cardNumber: String?
   public var expirationMonth: String?
   public var expirationYear: String?
+  public var id: String?
   public var issuer: VMap?
   public var metadata: VMap?
   public var networkToken: VMap?
@@ -35,6 +36,7 @@ public struct NetworkTokenBundleCreateData {
   public var cardNumber: String?
   public var expirationMonth: String?
   public var expirationYear: String?
+  public var id: String?
   public var issuer: VMap?
   public var metadata: VMap?
   public var networkToken: VMap?
