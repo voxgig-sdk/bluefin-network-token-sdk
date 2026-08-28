@@ -69,11 +69,13 @@ function directSetup(mockres) {
         'BLUEFIN_NETWORK_TOKEN_TEST_NETWORK_TOKEN_BUNDLE_ENTID': {},
         'BLUEFIN_NETWORK_TOKEN_TEST_LIVE': 'FALSE',
         'BLUEFIN_NETWORK_TOKEN_APIKEY': 'NONE',
+        'BLUEFIN_NETWORK_TOKEN_SECRET': 'NONE',
     });
     const live = 'TRUE' === env.BLUEFIN_NETWORK_TOKEN_TEST_LIVE;
     if (live) {
         const client = new __1.BluefinNetworkTokenSDK({
             apikey: env.BLUEFIN_NETWORK_TOKEN_APIKEY,
+            secret: env.BLUEFIN_NETWORK_TOKEN_SECRET,
         });
         let idmap = env['BLUEFIN_NETWORK_TOKEN_TEST_NETWORK_TOKEN_BUNDLE_ENTID'];
         if ('string' === typeof idmap && idmap.startsWith('{')) {

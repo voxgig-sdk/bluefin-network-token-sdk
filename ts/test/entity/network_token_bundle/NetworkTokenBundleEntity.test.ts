@@ -126,6 +126,7 @@ function basicSetup(extra?: any) {
     'BLUEFIN_NETWORK_TOKEN_TEST_LIVE': 'FALSE',
     'BLUEFIN_NETWORK_TOKEN_TEST_EXPLAIN': 'FALSE',
     'BLUEFIN_NETWORK_TOKEN_APIKEY': 'NONE',
+    'BLUEFIN_NETWORK_TOKEN_SECRET': 'NONE',
   })
 
   idmap = env['BLUEFIN_NETWORK_TOKEN_TEST_NETWORK_TOKEN_BUNDLE_ENTID']
@@ -136,6 +137,7 @@ function basicSetup(extra?: any) {
     client = new BluefinNetworkTokenSDK(merge([
       {
         apikey: env.BLUEFIN_NETWORK_TOKEN_APIKEY,
+        secret: env.BLUEFIN_NETWORK_TOKEN_SECRET,
       },
       extra
     ]))

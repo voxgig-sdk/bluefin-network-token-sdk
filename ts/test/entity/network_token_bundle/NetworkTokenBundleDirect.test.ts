@@ -85,6 +85,7 @@ function directSetup(mockres?: any) {
     'BLUEFIN_NETWORK_TOKEN_TEST_NETWORK_TOKEN_BUNDLE_ENTID': {},
     'BLUEFIN_NETWORK_TOKEN_TEST_LIVE': 'FALSE',
     'BLUEFIN_NETWORK_TOKEN_APIKEY': 'NONE',
+    'BLUEFIN_NETWORK_TOKEN_SECRET': 'NONE',
   })
 
   const live = 'TRUE' === env.BLUEFIN_NETWORK_TOKEN_TEST_LIVE
@@ -92,6 +93,7 @@ function directSetup(mockres?: any) {
   if (live) {
     const client = new BluefinNetworkTokenSDK({
       apikey: env.BLUEFIN_NETWORK_TOKEN_APIKEY,
+      secret: env.BLUEFIN_NETWORK_TOKEN_SECRET,
     })
 
     let idmap: any = env['BLUEFIN_NETWORK_TOKEN_TEST_NETWORK_TOKEN_BUNDLE_ENTID']
