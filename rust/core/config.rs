@@ -183,6 +183,10 @@ pub fn make_config() -> Value {
                         ("type".to_string(), Value::str("`$STRING`")),
                     ]),
                 ])),
+                ("id".to_string(), Value::map_of([
+                    ("field".to_string(), Value::str("id")),
+                    ("name".to_string(), Value::str("id")),
+                ])),
                 ("name".to_string(), Value::str("network_token_bundle")),
                 ("op".to_string(), Value::map_of([
                     ("create".to_string(), Value::map_of([
@@ -204,8 +208,10 @@ pub fn make_config() -> Value {
                                 ("kind".to_string(), Value::str("http")),
                                 ("method".to_string(), Value::str("POST")),
                                 ("orig".to_string(), Value::str("/network-token-bundle")),
-                                ("parts".to_string(), Value::list(vec![
-                                    Value::str("network-token-bundle"),
+                                ("segments".to_string(), Value::list(vec![
+                                    Value::map_of([
+                                        ("lit".to_string(), Value::str("network-token-bundle")),
+                                    ]),
                                 ])),
                                 ("select".to_string(), Value::map_of([
                                     ("exist".to_string(), Value::list(vec![
@@ -215,6 +221,9 @@ pub fn make_config() -> Value {
                                 ("transform".to_string(), Value::map_of([
                                     ("req".to_string(), Value::str("`reqdata`")),
                                     ("res".to_string(), Value::str("`body`")),
+                                ])),
+                                ("parts".to_string(), Value::list(vec![
+                                    Value::str("network-token-bundle"),
                                 ])),
                             ]),
                         ])),
@@ -247,14 +256,18 @@ pub fn make_config() -> Value {
                                 ("kind".to_string(), Value::str("http")),
                                 ("method".to_string(), Value::str("GET")),
                                 ("orig".to_string(), Value::str("/network-token-bundle/{networkTokenBundleId}")),
-                                ("parts".to_string(), Value::list(vec![
-                                    Value::str("network-token-bundle"),
-                                    Value::str("{id}"),
-                                ])),
                                 ("rename".to_string(), Value::map_of([
                                     ("param".to_string(), Value::map_of([
                                         ("networkTokenBundleId".to_string(), Value::str("id")),
                                     ])),
+                                ])),
+                                ("segments".to_string(), Value::list(vec![
+                                    Value::map_of([
+                                        ("lit".to_string(), Value::str("network-token-bundle")),
+                                    ]),
+                                    Value::map_of([
+                                        ("var".to_string(), Value::str("id")),
+                                    ]),
                                 ])),
                                 ("select".to_string(), Value::map_of([
                                     ("exist".to_string(), Value::list(vec![
@@ -265,6 +278,10 @@ pub fn make_config() -> Value {
                                 ("transform".to_string(), Value::map_of([
                                     ("req".to_string(), Value::str("`reqdata`")),
                                     ("res".to_string(), Value::str("`body`")),
+                                ])),
+                                ("parts".to_string(), Value::list(vec![
+                                    Value::str("network-token-bundle"),
+                                    Value::str("{id}"),
                                 ])),
                             ]),
                             Value::map_of([
@@ -291,15 +308,21 @@ pub fn make_config() -> Value {
                                 ("kind".to_string(), Value::str("http")),
                                 ("method".to_string(), Value::str("GET")),
                                 ("orig".to_string(), Value::str("/network-token-bundle/{networkTokenBundleId}/payment-credentials")),
-                                ("parts".to_string(), Value::list(vec![
-                                    Value::str("network-token-bundle"),
-                                    Value::str("{id}"),
-                                    Value::str("payment-credentials"),
-                                ])),
                                 ("rename".to_string(), Value::map_of([
                                     ("param".to_string(), Value::map_of([
                                         ("networkTokenBundleId".to_string(), Value::str("id")),
                                     ])),
+                                ])),
+                                ("segments".to_string(), Value::list(vec![
+                                    Value::map_of([
+                                        ("lit".to_string(), Value::str("network-token-bundle")),
+                                    ]),
+                                    Value::map_of([
+                                        ("var".to_string(), Value::str("id")),
+                                    ]),
+                                    Value::map_of([
+                                        ("lit".to_string(), Value::str("payment-credentials")),
+                                    ]),
                                 ])),
                                 ("select".to_string(), Value::map_of([
                                     ("$action".to_string(), Value::str("payment_credential")),
@@ -311,6 +334,11 @@ pub fn make_config() -> Value {
                                 ("transform".to_string(), Value::map_of([
                                     ("req".to_string(), Value::str("`reqdata`")),
                                     ("res".to_string(), Value::str("`body`")),
+                                ])),
+                                ("parts".to_string(), Value::list(vec![
+                                    Value::str("network-token-bundle"),
+                                    Value::str("{id}"),
+                                    Value::str("payment-credentials"),
                                 ])),
                             ]),
                         ])),
@@ -343,14 +371,18 @@ pub fn make_config() -> Value {
                                 ("kind".to_string(), Value::str("http")),
                                 ("method".to_string(), Value::str("DELETE")),
                                 ("orig".to_string(), Value::str("/network-token-bundle/{networkTokenBundleId}")),
-                                ("parts".to_string(), Value::list(vec![
-                                    Value::str("network-token-bundle"),
-                                    Value::str("{id}"),
-                                ])),
                                 ("rename".to_string(), Value::map_of([
                                     ("param".to_string(), Value::map_of([
                                         ("networkTokenBundleId".to_string(), Value::str("id")),
                                     ])),
+                                ])),
+                                ("segments".to_string(), Value::list(vec![
+                                    Value::map_of([
+                                        ("lit".to_string(), Value::str("network-token-bundle")),
+                                    ]),
+                                    Value::map_of([
+                                        ("var".to_string(), Value::str("id")),
+                                    ]),
                                 ])),
                                 ("select".to_string(), Value::map_of([
                                     ("exist".to_string(), Value::list(vec![
@@ -361,6 +393,10 @@ pub fn make_config() -> Value {
                                 ("transform".to_string(), Value::map_of([
                                     ("req".to_string(), Value::str("`reqdata`")),
                                     ("res".to_string(), Value::str("`body`")),
+                                ])),
+                                ("parts".to_string(), Value::list(vec![
+                                    Value::str("network-token-bundle"),
+                                    Value::str("{id}"),
                                 ])),
                             ]),
                         ])),

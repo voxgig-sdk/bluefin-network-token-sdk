@@ -1,6 +1,14 @@
 # BluefinNetworkToken SDK configuration
 
 
+# The sekreto plugin DEFINITIONS the model selected per feature, imported
+# above by name from the modules the catalogue's active `plugin.def`
+# entries declare. Handed to each feature (secrets builds its Sekreto
+# with them): a provider kind not listed here is unknown to that SDK.
+FEATURE_PLUGINS = {
+}
+
+
 _shared_config = None
 
 
@@ -200,6 +208,10 @@ def make_config():
             "type": "`$STRING`",
           },
         ],
+        "id": {
+          "field": "id",
+          "name": "id",
+        },
         "name": "network_token_bundle",
         "op": {
           "create": {
@@ -221,8 +233,10 @@ def make_config():
                 "kind": "http",
                 "method": "POST",
                 "orig": "/network-token-bundle",
-                "parts": [
-                  "network-token-bundle",
+                "segments": [
+                  {
+                    "lit": "network-token-bundle",
+                  },
                 ],
                 "select": {
                   "exist": [
@@ -233,6 +247,9 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "network-token-bundle",
+                ],
               },
             ],
           },
@@ -264,15 +281,19 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/network-token-bundle/{networkTokenBundleId}",
-                "parts": [
-                  "network-token-bundle",
-                  "{id}",
-                ],
                 "rename": {
                   "param": {
                     "networkTokenBundleId": "id",
                   },
                 },
+                "segments": [
+                  {
+                    "lit": "network-token-bundle",
+                  },
+                  {
+                    "var": "id",
+                  },
+                ],
                 "select": {
                   "exist": [
                     "id",
@@ -283,6 +304,10 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "network-token-bundle",
+                  "{id}",
+                ],
               },
               {
                 "args": {
@@ -308,16 +333,22 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/network-token-bundle/{networkTokenBundleId}/payment-credentials",
-                "parts": [
-                  "network-token-bundle",
-                  "{id}",
-                  "payment-credentials",
-                ],
                 "rename": {
                   "param": {
                     "networkTokenBundleId": "id",
                   },
                 },
+                "segments": [
+                  {
+                    "lit": "network-token-bundle",
+                  },
+                  {
+                    "var": "id",
+                  },
+                  {
+                    "lit": "payment-credentials",
+                  },
+                ],
                 "select": {
                   "$action": "payment_credential",
                   "exist": [
@@ -329,6 +360,11 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "network-token-bundle",
+                  "{id}",
+                  "payment-credentials",
+                ],
               },
             ],
           },
@@ -360,15 +396,19 @@ def make_config():
                 "kind": "http",
                 "method": "DELETE",
                 "orig": "/network-token-bundle/{networkTokenBundleId}",
-                "parts": [
-                  "network-token-bundle",
-                  "{id}",
-                ],
                 "rename": {
                   "param": {
                     "networkTokenBundleId": "id",
                   },
                 },
+                "segments": [
+                  {
+                    "lit": "network-token-bundle",
+                  },
+                  {
+                    "var": "id",
+                  },
+                ],
                 "select": {
                   "exist": [
                     "id",
@@ -379,6 +419,10 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "network-token-bundle",
+                  "{id}",
+                ],
               },
             ],
           },

@@ -142,6 +142,9 @@ let make_config () : value =
           (jo [
             ("name", (Str "securityCode"));
             ("type", (Str "`$STRING`")) ]) ]));
+        ("id", (jo [
+          ("field", (Str "id"));
+          ("name", (Str "id")) ]));
         ("name", (Str "network_token_bundle"));
         ("op", (jo [
           ("create", (jo [
@@ -160,14 +163,17 @@ let make_config () : value =
                 ("kind", (Str "http"));
                 ("method", (Str "POST"));
                 ("orig", (Str "/network-token-bundle"));
-                ("parts", (ja [
-                  (Str "network-token-bundle") ]));
+                ("segments", (ja [
+                  (jo [
+                    ("lit", (Str "network-token-bundle")) ]) ]));
                 ("select", (jo [
                   ("exist", (ja [
                     (Str "scx_client_reference") ])) ]));
                 ("transform", (jo [
                   ("req", (Str "`reqdata`"));
-                  ("res", (Str "`body`")) ])) ]) ])) ]));
+                  ("res", (Str "`body`")) ]));
+                ("parts", (ja [
+                  (Str "network-token-bundle") ])) ]) ])) ]));
           ("load", (jo [
             ("input", (Str "data"));
             ("name", (Str "load"));
@@ -191,19 +197,24 @@ let make_config () : value =
                 ("kind", (Str "http"));
                 ("method", (Str "GET"));
                 ("orig", (Str "/network-token-bundle/{networkTokenBundleId}"));
-                ("parts", (ja [
-                  (Str "network-token-bundle");
-                  (Str "{id}") ]));
                 ("rename", (jo [
                   ("param", (jo [
                     ("networkTokenBundleId", (Str "id")) ])) ]));
+                ("segments", (ja [
+                  (jo [
+                    ("lit", (Str "network-token-bundle")) ]);
+                  (jo [
+                    ("var", (Str "id")) ]) ]));
                 ("select", (jo [
                   ("exist", (ja [
                     (Str "id");
                     (Str "scx_client_reference") ])) ]));
                 ("transform", (jo [
                   ("req", (Str "`reqdata`"));
-                  ("res", (Str "`body`")) ])) ]);
+                  ("res", (Str "`body`")) ]));
+                ("parts", (ja [
+                  (Str "network-token-bundle");
+                  (Str "{id}") ])) ]);
               (jo [
                 ("args", (jo [
                   ("header", (ja [
@@ -223,13 +234,16 @@ let make_config () : value =
                 ("kind", (Str "http"));
                 ("method", (Str "GET"));
                 ("orig", (Str "/network-token-bundle/{networkTokenBundleId}/payment-credentials"));
-                ("parts", (ja [
-                  (Str "network-token-bundle");
-                  (Str "{id}");
-                  (Str "payment-credentials") ]));
                 ("rename", (jo [
                   ("param", (jo [
                     ("networkTokenBundleId", (Str "id")) ])) ]));
+                ("segments", (ja [
+                  (jo [
+                    ("lit", (Str "network-token-bundle")) ]);
+                  (jo [
+                    ("var", (Str "id")) ]);
+                  (jo [
+                    ("lit", (Str "payment-credentials")) ]) ]));
                 ("select", (jo [
                   ("$action", (Str "payment_credential"));
                   ("exist", (ja [
@@ -237,7 +251,11 @@ let make_config () : value =
                     (Str "scx_client_reference") ])) ]));
                 ("transform", (jo [
                   ("req", (Str "`reqdata`"));
-                  ("res", (Str "`body`")) ])) ]) ])) ]));
+                  ("res", (Str "`body`")) ]));
+                ("parts", (ja [
+                  (Str "network-token-bundle");
+                  (Str "{id}");
+                  (Str "payment-credentials") ])) ]) ])) ]));
           ("remove", (jo [
             ("input", (Str "data"));
             ("name", (Str "remove"));
@@ -261,21 +279,30 @@ let make_config () : value =
                 ("kind", (Str "http"));
                 ("method", (Str "DELETE"));
                 ("orig", (Str "/network-token-bundle/{networkTokenBundleId}"));
-                ("parts", (ja [
-                  (Str "network-token-bundle");
-                  (Str "{id}") ]));
                 ("rename", (jo [
                   ("param", (jo [
                     ("networkTokenBundleId", (Str "id")) ])) ]));
+                ("segments", (ja [
+                  (jo [
+                    ("lit", (Str "network-token-bundle")) ]);
+                  (jo [
+                    ("var", (Str "id")) ]) ]));
                 ("select", (jo [
                   ("exist", (ja [
                     (Str "id");
                     (Str "scx_client_reference") ])) ]));
                 ("transform", (jo [
                   ("req", (Str "`reqdata`"));
-                  ("res", (Str "`body`")) ])) ]) ])) ])) ]));
+                  ("res", (Str "`body`")) ]));
+                ("parts", (ja [
+                  (Str "network-token-bundle");
+                  (Str "{id}") ])) ]) ])) ])) ]));
         ("relations", (jo [
           ("ancestors", (empty_list ())) ])) ])) ])) ])
+
+(* The plugin definitions the model selected, per feature: none - no
+ * plugin-bearing feature is active in this SDK. *)
+let feature_plugins (_name : string) = []
 
 let make_feature (name : string) : feature =
   match name with

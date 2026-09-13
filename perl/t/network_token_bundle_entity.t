@@ -107,7 +107,7 @@ sub network_token_bundle_basic_setup {
     'BLUEFIN_NETWORK_TOKEN_TEST_NETWORK_TOKEN_BUNDLE_ENTID' => $idmap,
     'BLUEFIN_NETWORK_TOKEN_TEST_LIVE' => 'FALSE',
     'BLUEFIN_NETWORK_TOKEN_TEST_EXPLAIN' => 'FALSE',
-    'BLUEFIN_NETWORK_TOKEN_APIKEY' => 'NONE',
+    'BLUEFIN_NETWORK_TOKEN_APIKEY' => '',
   });
 
   my $idmap_resolved = BluefinNetworkTokenHelpers::to_map($env->{'BLUEFIN_NETWORK_TOKEN_TEST_NETWORK_TOKEN_BUNDLE_ENTID'});
@@ -117,6 +117,9 @@ sub network_token_bundle_basic_setup {
 
   if ((($env->{'BLUEFIN_NETWORK_TOKEN_TEST_LIVE'}) || '') eq 'TRUE') {
     my $merged_opts = Voxgig::Struct::merge([
+      # FIRST, so the generated fields below win: sdk-test-control.json's
+      # test.client.options adds to the live client, it does not redirect it.
+      BluefinNetworkTokenTestRunner::live_client_options(),
       {
         'apikey' => $env->{'BLUEFIN_NETWORK_TOKEN_APIKEY'},
       },

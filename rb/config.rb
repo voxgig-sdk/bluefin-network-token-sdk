@@ -191,6 +191,10 @@ module BluefinNetworkTokenConfig
               "type" => "`$STRING`",
             },
           ],
+          "id" => {
+            "field" => "id",
+            "name" => "id",
+          },
           "name" => "network_token_bundle",
           "op" => {
             "create" => {
@@ -212,8 +216,10 @@ module BluefinNetworkTokenConfig
                   "kind" => "http",
                   "method" => "POST",
                   "orig" => "/network-token-bundle",
-                  "parts" => [
-                    "network-token-bundle",
+                  "segments" => [
+                    {
+                      "lit" => "network-token-bundle",
+                    },
                   ],
                   "select" => {
                     "exist" => [
@@ -224,6 +230,9 @@ module BluefinNetworkTokenConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "network-token-bundle",
+                  ],
                 },
               ],
             },
@@ -255,15 +264,19 @@ module BluefinNetworkTokenConfig
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/network-token-bundle/{networkTokenBundleId}",
-                  "parts" => [
-                    "network-token-bundle",
-                    "{id}",
-                  ],
                   "rename" => {
                     "param" => {
                       "networkTokenBundleId" => "id",
                     },
                   },
+                  "segments" => [
+                    {
+                      "lit" => "network-token-bundle",
+                    },
+                    {
+                      "var" => "id",
+                    },
+                  ],
                   "select" => {
                     "exist" => [
                       "id",
@@ -274,6 +287,10 @@ module BluefinNetworkTokenConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "network-token-bundle",
+                    "{id}",
+                  ],
                 },
                 {
                   "args" => {
@@ -299,16 +316,22 @@ module BluefinNetworkTokenConfig
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/network-token-bundle/{networkTokenBundleId}/payment-credentials",
-                  "parts" => [
-                    "network-token-bundle",
-                    "{id}",
-                    "payment-credentials",
-                  ],
                   "rename" => {
                     "param" => {
                       "networkTokenBundleId" => "id",
                     },
                   },
+                  "segments" => [
+                    {
+                      "lit" => "network-token-bundle",
+                    },
+                    {
+                      "var" => "id",
+                    },
+                    {
+                      "lit" => "payment-credentials",
+                    },
+                  ],
                   "select" => {
                     "$action" => "payment_credential",
                     "exist" => [
@@ -320,6 +343,11 @@ module BluefinNetworkTokenConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "network-token-bundle",
+                    "{id}",
+                    "payment-credentials",
+                  ],
                 },
               ],
             },
@@ -351,15 +379,19 @@ module BluefinNetworkTokenConfig
                   "kind" => "http",
                   "method" => "DELETE",
                   "orig" => "/network-token-bundle/{networkTokenBundleId}",
-                  "parts" => [
-                    "network-token-bundle",
-                    "{id}",
-                  ],
                   "rename" => {
                     "param" => {
                       "networkTokenBundleId" => "id",
                     },
                   },
+                  "segments" => [
+                    {
+                      "lit" => "network-token-bundle",
+                    },
+                    {
+                      "var" => "id",
+                    },
+                  ],
                   "select" => {
                     "exist" => [
                       "id",
@@ -370,6 +402,10 @@ module BluefinNetworkTokenConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "network-token-bundle",
+                    "{id}",
+                  ],
                 },
               ],
             },

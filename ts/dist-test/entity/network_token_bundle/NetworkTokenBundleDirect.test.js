@@ -3,12 +3,15 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const envlocal = __dirname + '/../../../.env.local';
-require('dotenv').config({ quiet: true, path: [envlocal] });
 const node_test_1 = require("node:test");
 const node_assert_1 = __importDefault(require("node:assert"));
 const __1 = require("../../..");
 const utility_1 = require("../../utility");
+// AFTER the imports on purpose: TypeScript hoists `import` above any
+// statement in the emitted CommonJS, so a loader placed above them would
+// run only after every imported module had already been evaluated - and
+// anything reading process.env at module scope would miss these values.
+(0, utility_1.loadEnvLocal)(__dirname + '/../../../.env.local');
 (0, node_test_1.describe)('NetworkTokenBundleDirect', async () => {
     // Per-test live pacing. Delay is read from sdk-test-control.json's
     // `test.live.delayMs`; only sleeps when BLUEFIN_NETWORK_TOKEN_TEST_LIVE=TRUE.
@@ -68,15 +71,17 @@ function directSetup(mockres) {
     const env = (0, utility_1.envOverride)({
         'BLUEFIN_NETWORK_TOKEN_TEST_NETWORK_TOKEN_BUNDLE_ENTID': {},
         'BLUEFIN_NETWORK_TOKEN_TEST_LIVE': 'FALSE',
-        'BLUEFIN_NETWORK_TOKEN_APIKEY': 'NONE',
-        'BLUEFIN_NETWORK_TOKEN_SECRET': 'NONE',
+        'BLUEFIN_NETWORK_TOKEN_APIKEY': '',
+        'BLUEFIN_NETWORK_TOKEN_SECRET': '',
     });
     const live = 'TRUE' === env.BLUEFIN_NETWORK_TOKEN_TEST_LIVE;
     if (live) {
-        const client = new __1.BluefinNetworkTokenSDK({
+        // Merged so the generated fields win: sdk-test-control.json's
+        // test.client.options adds to the live client, it does not redirect it.
+        const client = new __1.BluefinNetworkTokenSDK(Object.assign({}, (0, utility_1.liveClientOptions)(), {
             apikey: env.BLUEFIN_NETWORK_TOKEN_APIKEY,
             secret: env.BLUEFIN_NETWORK_TOKEN_SECRET,
-        });
+        }));
         let idmap = env['BLUEFIN_NETWORK_TOKEN_TEST_NETWORK_TOKEN_BUNDLE_ENTID'];
         if ('string' === typeof idmap && idmap.startsWith('{')) {
             idmap = JSON.parse(idmap);

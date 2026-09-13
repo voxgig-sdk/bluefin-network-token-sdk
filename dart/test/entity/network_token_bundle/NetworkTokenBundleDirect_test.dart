@@ -75,13 +75,16 @@ Map<String, dynamic> directSetup([dynamic mockres]) {
   final env = envOverride({
     'BLUEFIN_NETWORK_TOKEN_TEST_NETWORK_TOKEN_BUNDLE_ENTID': <String, dynamic>{},
     'BLUEFIN_NETWORK_TOKEN_TEST_LIVE': 'FALSE',
-    'BLUEFIN_NETWORK_TOKEN_APIKEY': 'NONE',
+    'BLUEFIN_NETWORK_TOKEN_APIKEY': '',
   });
 
   final live = 'TRUE' == env['BLUEFIN_NETWORK_TOKEN_TEST_LIVE'];
 
   if (live) {
-    final client = BluefinNetworkTokenSDK({
+    // Spread FIRST, so the generated fields below win: sdk-test-control.json's
+    // test.client.options adds to the live client, it does not redirect it.
+    final client = BluefinNetworkTokenSDK(<String, dynamic>{
+      ...liveClientOptions(),
       'apikey': env['BLUEFIN_NETWORK_TOKEN_APIKEY'],
     });
 

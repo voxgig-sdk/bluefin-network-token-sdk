@@ -30,6 +30,17 @@ const FEATURE_CLASS: Record<string, typeof BaseFeature> = {
 }
 
 
+// Per-feature plugin DEFINITIONS (voxgig/plugin `Definition` values), from
+// the model's active plugin groups. A feature that takes a `plugins` option
+// (secrets over sekreto) reads its own entry; a feature with no plugins has
+// none. Named imports above make each definition statically reachable, so
+// an SDK carries exactly the plugin modules its model selects — the same
+// leanness the old side-effect registry imports bought, without a registry.
+const FEATURE_PLUGINS: Record<string, any[]> = {
+  
+}
+
+
 class Config {
 
   makeFeature(this: any, fn: string) {
@@ -236,6 +247,10 @@ class Config {
           "type": "`$STRING`"
         }
       ],
+      "id": {
+        "field": "id",
+        "name": "id"
+      },
       "name": "network_token_bundle",
       "op": {
         "create": {
@@ -257,8 +272,10 @@ class Config {
               "kind": "http",
               "method": "POST",
               "orig": "/network-token-bundle",
-              "parts": [
-                "network-token-bundle"
+              "segments": [
+                {
+                  "lit": "network-token-bundle"
+                }
               ],
               "select": {
                 "exist": [
@@ -268,7 +285,10 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "network-token-bundle"
+              ]
             }
           ]
         },
@@ -300,15 +320,19 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/network-token-bundle/{networkTokenBundleId}",
-              "parts": [
-                "network-token-bundle",
-                "{id}"
-              ],
               "rename": {
                 "param": {
                   "networkTokenBundleId": "id"
                 }
               },
+              "segments": [
+                {
+                  "lit": "network-token-bundle"
+                },
+                {
+                  "var": "id"
+                }
+              ],
               "select": {
                 "exist": [
                   "id",
@@ -318,7 +342,11 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "network-token-bundle",
+                "{id}"
+              ]
             },
             {
               "args": {
@@ -344,16 +372,22 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/network-token-bundle/{networkTokenBundleId}/payment-credentials",
-              "parts": [
-                "network-token-bundle",
-                "{id}",
-                "payment-credentials"
-              ],
               "rename": {
                 "param": {
                   "networkTokenBundleId": "id"
                 }
               },
+              "segments": [
+                {
+                  "lit": "network-token-bundle"
+                },
+                {
+                  "var": "id"
+                },
+                {
+                  "lit": "payment-credentials"
+                }
+              ],
               "select": {
                 "$action": "payment_credential",
                 "exist": [
@@ -364,7 +398,12 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "network-token-bundle",
+                "{id}",
+                "payment-credentials"
+              ]
             }
           ]
         },
@@ -396,15 +435,19 @@ class Config {
               "kind": "http",
               "method": "DELETE",
               "orig": "/network-token-bundle/{networkTokenBundleId}",
-              "parts": [
-                "network-token-bundle",
-                "{id}"
-              ],
               "rename": {
                 "param": {
                   "networkTokenBundleId": "id"
                 }
               },
+              "segments": [
+                {
+                  "lit": "network-token-bundle"
+                },
+                {
+                  "var": "id"
+                }
+              ],
               "select": {
                 "exist": [
                   "id",
@@ -414,7 +457,11 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "network-token-bundle",
+                "{id}"
+              ]
             }
           ]
         }
@@ -430,6 +477,7 @@ class Config {
 const config = new Config()
 
 export {
-  config
+  config,
+  FEATURE_PLUGINS,
 }
 

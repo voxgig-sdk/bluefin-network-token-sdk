@@ -12,6 +12,7 @@ import 'feature/test/TestFeature.dart';
 import 'feature/timeout/TimeoutFeature.dart';
 
 
+
 // ignore: non_constant_identifier_names
 final Map<String, BaseFeature Function()> FEATURE_CLASS = {
     'audit': () => AuditFeature(),
@@ -26,6 +27,24 @@ final Map<String, BaseFeature Function()> FEATURE_CLASS = {
   'test': () => TestFeature(),
   'timeout': () => TimeoutFeature(),
 
+};
+
+// Per-feature plugin DEFINITIONS (voxgig/plugin `Definition` values), from
+// the model's active plugin groups. A feature that takes a `plugins` option
+// (secrets over sekreto) reads its own entry; a feature with no plugins has
+// none. The named `show` imports above make each definition statically
+// reachable, so an SDK carries exactly the plugin libraries its model
+// selects - the same leanness the old side-effect registry bought, without
+// a registry.
+//
+// Emitted UNCONDITIONALLY, empty when no group is active: SecretsFeature
+// imports this name, and the feature source can be present in a tree whose
+// model selects no plugin group at all. An emission conditional on the map
+// having entries would make that tree fail `dart analyze`.
+//
+// ignore: non_constant_identifier_names
+final Map<String, List<dynamic>> FEATURE_PLUGINS = <String, List<dynamic>>{
+  
 };
 
 class Config {
@@ -228,6 +247,10 @@ class Config {
           'type': '`\$STRING`',
         },
       ],
+      'id': <String, dynamic>{
+        'field': 'id',
+        'name': 'id',
+      },
       'name': 'network_token_bundle',
       'op': <String, dynamic>{
         'create': <String, dynamic>{
@@ -249,8 +272,10 @@ class Config {
               'kind': 'http',
               'method': 'POST',
               'orig': '/network-token-bundle',
-              'parts': <dynamic>[
-                'network-token-bundle',
+              'segments': <dynamic>[
+                <String, dynamic>{
+                  'lit': 'network-token-bundle',
+                },
               ],
               'select': <String, dynamic>{
                 'exist': <dynamic>[
@@ -261,6 +286,9 @@ class Config {
                 'req': '`reqdata`',
                 'res': '`body`',
               },
+              'parts': <dynamic>[
+                'network-token-bundle',
+              ],
             },
           ],
         },
@@ -292,15 +320,19 @@ class Config {
               'kind': 'http',
               'method': 'GET',
               'orig': '/network-token-bundle/{networkTokenBundleId}',
-              'parts': <dynamic>[
-                'network-token-bundle',
-                '{id}',
-              ],
               'rename': <String, dynamic>{
                 'param': <String, dynamic>{
                   'networkTokenBundleId': 'id',
                 },
               },
+              'segments': <dynamic>[
+                <String, dynamic>{
+                  'lit': 'network-token-bundle',
+                },
+                <String, dynamic>{
+                  'var': 'id',
+                },
+              ],
               'select': <String, dynamic>{
                 'exist': <dynamic>[
                   'id',
@@ -311,6 +343,10 @@ class Config {
                 'req': '`reqdata`',
                 'res': '`body`',
               },
+              'parts': <dynamic>[
+                'network-token-bundle',
+                '{id}',
+              ],
             },
             <String, dynamic>{
               'args': <String, dynamic>{
@@ -336,16 +372,22 @@ class Config {
               'kind': 'http',
               'method': 'GET',
               'orig': '/network-token-bundle/{networkTokenBundleId}/payment-credentials',
-              'parts': <dynamic>[
-                'network-token-bundle',
-                '{id}',
-                'payment-credentials',
-              ],
               'rename': <String, dynamic>{
                 'param': <String, dynamic>{
                   'networkTokenBundleId': 'id',
                 },
               },
+              'segments': <dynamic>[
+                <String, dynamic>{
+                  'lit': 'network-token-bundle',
+                },
+                <String, dynamic>{
+                  'var': 'id',
+                },
+                <String, dynamic>{
+                  'lit': 'payment-credentials',
+                },
+              ],
               'select': <String, dynamic>{
                 '\$action': 'payment_credential',
                 'exist': <dynamic>[
@@ -357,6 +399,11 @@ class Config {
                 'req': '`reqdata`',
                 'res': '`body`',
               },
+              'parts': <dynamic>[
+                'network-token-bundle',
+                '{id}',
+                'payment-credentials',
+              ],
             },
           ],
         },
@@ -388,15 +435,19 @@ class Config {
               'kind': 'http',
               'method': 'DELETE',
               'orig': '/network-token-bundle/{networkTokenBundleId}',
-              'parts': <dynamic>[
-                'network-token-bundle',
-                '{id}',
-              ],
               'rename': <String, dynamic>{
                 'param': <String, dynamic>{
                   'networkTokenBundleId': 'id',
                 },
               },
+              'segments': <dynamic>[
+                <String, dynamic>{
+                  'lit': 'network-token-bundle',
+                },
+                <String, dynamic>{
+                  'var': 'id',
+                },
+              ],
               'select': <String, dynamic>{
                 'exist': <dynamic>[
                   'id',
@@ -407,6 +458,10 @@ class Config {
                 'req': '`reqdata`',
                 'res': '`body`',
               },
+              'parts': <dynamic>[
+                'network-token-bundle',
+                '{id}',
+              ],
             },
           ],
         },

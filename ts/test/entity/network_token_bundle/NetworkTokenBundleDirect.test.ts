@@ -1,6 +1,4 @@
 
-const envlocal = __dirname + '/../../../.env.local'
-require('dotenv').config({ quiet: true, path: [envlocal] })
 
 import { test, describe, afterEach } from 'node:test'
 import assert from 'node:assert'
@@ -10,10 +8,19 @@ import { BluefinNetworkTokenSDK } from '../../..'
 
 import {
   envOverride,
+  liveClientOptions,
   liveDelay,
+  loadEnvLocal,
   maybeSkipControl,
   skipIfMissingIds,
 } from '../../utility'
+
+
+// AFTER the imports on purpose: TypeScript hoists `import` above any
+// statement in the emitted CommonJS, so a loader placed above them would
+// run only after every imported module had already been evaluated - and
+// anything reading process.env at module scope would miss these values.
+loadEnvLocal(__dirname + '/../../../.env.local')
 
 
 describe('NetworkTokenBundleDirect', async () => {
@@ -84,17 +91,20 @@ function directSetup(mockres?: any) {
   const env = envOverride({
     'BLUEFIN_NETWORK_TOKEN_TEST_NETWORK_TOKEN_BUNDLE_ENTID': {},
     'BLUEFIN_NETWORK_TOKEN_TEST_LIVE': 'FALSE',
-    'BLUEFIN_NETWORK_TOKEN_APIKEY': 'NONE',
-    'BLUEFIN_NETWORK_TOKEN_SECRET': 'NONE',
+    'BLUEFIN_NETWORK_TOKEN_APIKEY': '',
+    'BLUEFIN_NETWORK_TOKEN_SECRET': '',
   })
 
   const live = 'TRUE' === env.BLUEFIN_NETWORK_TOKEN_TEST_LIVE
 
   if (live) {
-    const client = new BluefinNetworkTokenSDK({
+    // Merged so the generated fields win: sdk-test-control.json's
+    // test.client.options adds to the live client, it does not redirect it.
+    const client = new BluefinNetworkTokenSDK(
+      Object.assign({}, liveClientOptions(), {
       apikey: env.BLUEFIN_NETWORK_TOKEN_APIKEY,
       secret: env.BLUEFIN_NETWORK_TOKEN_SECRET,
-    })
+      }))
 
     let idmap: any = env['BLUEFIN_NETWORK_TOKEN_TEST_NETWORK_TOKEN_BUNDLE_ENTID']
     if ('string' === typeof idmap && idmap.startsWith('{')) {

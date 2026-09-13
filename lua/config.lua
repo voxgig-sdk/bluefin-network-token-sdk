@@ -179,6 +179,10 @@ local function make_config()
             ["type"] = "`$STRING`",
           },
         },
+        ["id"] = {
+          ["field"] = "id",
+          ["name"] = "id",
+        },
         ["name"] = "network_token_bundle",
         ["op"] = {
           ["create"] = {
@@ -200,8 +204,10 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "POST",
                 ["orig"] = "/network-token-bundle",
-                ["parts"] = {
-                  "network-token-bundle",
+                ["segments"] = {
+                  {
+                    ["lit"] = "network-token-bundle",
+                  },
                 },
                 ["select"] = {
                   ["exist"] = {
@@ -211,6 +217,9 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "network-token-bundle",
                 },
               },
             },
@@ -243,13 +252,17 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/network-token-bundle/{networkTokenBundleId}",
-                ["parts"] = {
-                  "network-token-bundle",
-                  "{id}",
-                },
                 ["rename"] = {
                   ["param"] = {
                     ["networkTokenBundleId"] = "id",
+                  },
+                },
+                ["segments"] = {
+                  {
+                    ["lit"] = "network-token-bundle",
+                  },
+                  {
+                    ["var"] = "id",
                   },
                 },
                 ["select"] = {
@@ -261,6 +274,10 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "network-token-bundle",
+                  "{id}",
                 },
               },
               {
@@ -287,14 +304,20 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/network-token-bundle/{networkTokenBundleId}/payment-credentials",
-                ["parts"] = {
-                  "network-token-bundle",
-                  "{id}",
-                  "payment-credentials",
-                },
                 ["rename"] = {
                   ["param"] = {
                     ["networkTokenBundleId"] = "id",
+                  },
+                },
+                ["segments"] = {
+                  {
+                    ["lit"] = "network-token-bundle",
+                  },
+                  {
+                    ["var"] = "id",
+                  },
+                  {
+                    ["lit"] = "payment-credentials",
                   },
                 },
                 ["select"] = {
@@ -307,6 +330,11 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "network-token-bundle",
+                  "{id}",
+                  "payment-credentials",
                 },
               },
             },
@@ -339,13 +367,17 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "DELETE",
                 ["orig"] = "/network-token-bundle/{networkTokenBundleId}",
-                ["parts"] = {
-                  "network-token-bundle",
-                  "{id}",
-                },
                 ["rename"] = {
                   ["param"] = {
                     ["networkTokenBundleId"] = "id",
+                  },
+                },
+                ["segments"] = {
+                  {
+                    ["lit"] = "network-token-bundle",
+                  },
+                  {
+                    ["var"] = "id",
                   },
                 },
                 ["select"] = {
@@ -357,6 +389,10 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "network-token-bundle",
+                  "{id}",
                 },
               },
             },

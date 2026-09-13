@@ -43,6 +43,9 @@
           (vs/jm
             "name" "securityCode"
             "type" "`$STRING`"))
+        "id" (vs/jm
+          "field" "id"
+          "name" "id")
         "name" "network_token_bundle"
         "op" (vs/jm
           "create" (vs/jm
@@ -63,6 +66,9 @@
                 "orig" "/network-token-bundle"
                 "parts" (vs/jt
                   "network-token-bundle")
+                "segments" (vs/jt
+                  (vs/jm
+                    "lit" "network-token-bundle"))
                 "select" (vs/jm
                   "exist" (vs/jt
                     "scx_client_reference"))
@@ -98,6 +104,11 @@
                 "rename" (vs/jm
                   "param" (vs/jm
                     "networkTokenBundleId" "id"))
+                "segments" (vs/jt
+                  (vs/jm
+                    "lit" "network-token-bundle")
+                  (vs/jm
+                    "var" "id"))
                 "select" (vs/jm
                   "exist" (vs/jt
                     "id"
@@ -131,6 +142,13 @@
                 "rename" (vs/jm
                   "param" (vs/jm
                     "networkTokenBundleId" "id"))
+                "segments" (vs/jt
+                  (vs/jm
+                    "lit" "network-token-bundle")
+                  (vs/jm
+                    "var" "id")
+                  (vs/jm
+                    "lit" "payment-credentials"))
                 "select" (vs/jm
                   "$action" "payment_credential"
                   "exist" (vs/jt
@@ -168,6 +186,11 @@
                 "rename" (vs/jm
                   "param" (vs/jm
                     "networkTokenBundleId" "id"))
+                "segments" (vs/jt
+                  (vs/jm
+                    "lit" "network-token-bundle")
+                  (vs/jm
+                    "var" "id"))
                 "select" (vs/jm
                   "exist" (vs/jt
                     "id"
@@ -270,3 +293,9 @@
         "network_token_bundle" (vs/jm))
       "headers" (vs/jm
         "content-type" "application/json"))))
+
+(def feature-plugins
+  {})
+
+(def feature-extra
+  {})

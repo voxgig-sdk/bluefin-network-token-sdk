@@ -83,13 +83,17 @@ sub network_token_bundle_direct_setup {
   my $env = BluefinNetworkTokenTestRunner::env_override({
     'BLUEFIN_NETWORK_TOKEN_TEST_NETWORK_TOKEN_BUNDLE_ENTID' => {},
     'BLUEFIN_NETWORK_TOKEN_TEST_LIVE' => 'FALSE',
-    'BLUEFIN_NETWORK_TOKEN_APIKEY' => 'NONE',
+    'BLUEFIN_NETWORK_TOKEN_APIKEY' => '',
   });
 
   my $live = ((($env->{'BLUEFIN_NETWORK_TOKEN_TEST_LIVE'}) || '') eq 'TRUE') ? 1 : 0;
 
   if ($live) {
+    # live_client_options() FIRST so the generated fields below win:
+    # sdk-test-control.json's test.client.options adds to the live client,
+    # it does not redirect it (a later key wins in a Perl hash literal).
     my $client = BluefinNetworkTokenSDK->new({
+      %{ BluefinNetworkTokenTestRunner::live_client_options() },
       'apikey' => $env->{'BLUEFIN_NETWORK_TOKEN_APIKEY'},
     });
     return {

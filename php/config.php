@@ -205,6 +205,10 @@ class BluefinNetworkTokenConfig
               'type' => '`$STRING`',
             ],
           ],
+          'id' => [
+            'field' => 'id',
+            'name' => 'id',
+          ],
           'name' => 'network_token_bundle',
           'op' => [
             'create' => [
@@ -226,8 +230,10 @@ class BluefinNetworkTokenConfig
                   'kind' => 'http',
                   'method' => 'POST',
                   'orig' => '/network-token-bundle',
-                  'parts' => [
-                    'network-token-bundle',
+                  'segments' => [
+                    [
+                      'lit' => 'network-token-bundle',
+                    ],
                   ],
                   'select' => [
                     'exist' => [
@@ -237,6 +243,9 @@ class BluefinNetworkTokenConfig
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body`',
+                  ],
+                  'parts' => [
+                    'network-token-bundle',
                   ],
                 ],
               ],
@@ -269,13 +278,17 @@ class BluefinNetworkTokenConfig
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/network-token-bundle/{networkTokenBundleId}',
-                  'parts' => [
-                    'network-token-bundle',
-                    '{id}',
-                  ],
                   'rename' => [
                     'param' => [
                       'networkTokenBundleId' => 'id',
+                    ],
+                  ],
+                  'segments' => [
+                    [
+                      'lit' => 'network-token-bundle',
+                    ],
+                    [
+                      'var' => 'id',
                     ],
                   ],
                   'select' => [
@@ -287,6 +300,10 @@ class BluefinNetworkTokenConfig
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body`',
+                  ],
+                  'parts' => [
+                    'network-token-bundle',
+                    '{id}',
                   ],
                 ],
                 [
@@ -313,14 +330,20 @@ class BluefinNetworkTokenConfig
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/network-token-bundle/{networkTokenBundleId}/payment-credentials',
-                  'parts' => [
-                    'network-token-bundle',
-                    '{id}',
-                    'payment-credentials',
-                  ],
                   'rename' => [
                     'param' => [
                       'networkTokenBundleId' => 'id',
+                    ],
+                  ],
+                  'segments' => [
+                    [
+                      'lit' => 'network-token-bundle',
+                    ],
+                    [
+                      'var' => 'id',
+                    ],
+                    [
+                      'lit' => 'payment-credentials',
                     ],
                   ],
                   'select' => [
@@ -333,6 +356,11 @@ class BluefinNetworkTokenConfig
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body`',
+                  ],
+                  'parts' => [
+                    'network-token-bundle',
+                    '{id}',
+                    'payment-credentials',
                   ],
                 ],
               ],
@@ -365,13 +393,17 @@ class BluefinNetworkTokenConfig
                   'kind' => 'http',
                   'method' => 'DELETE',
                   'orig' => '/network-token-bundle/{networkTokenBundleId}',
-                  'parts' => [
-                    'network-token-bundle',
-                    '{id}',
-                  ],
                   'rename' => [
                     'param' => [
                       'networkTokenBundleId' => 'id',
+                    ],
+                  ],
+                  'segments' => [
+                    [
+                      'lit' => 'network-token-bundle',
+                    ],
+                    [
+                      'var' => 'id',
                     ],
                   ],
                   'select' => [
@@ -383,6 +415,10 @@ class BluefinNetworkTokenConfig
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body`',
+                  ],
+                  'parts' => [
+                    'network-token-bundle',
+                    '{id}',
                   ],
                 ],
               ],

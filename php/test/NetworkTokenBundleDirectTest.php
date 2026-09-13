@@ -77,15 +77,17 @@ function network_token_bundle_direct_setup($mockres)
     $env = Runner::env_override([
         "BLUEFIN_NETWORK_TOKEN_TEST_NETWORK_TOKEN_BUNDLE_ENTID" => [],
         "BLUEFIN_NETWORK_TOKEN_TEST_LIVE" => "FALSE",
-        "BLUEFIN_NETWORK_TOKEN_APIKEY" => "NONE",
+        "BLUEFIN_NETWORK_TOKEN_APIKEY" => "",
     ]);
 
     $live = $env["BLUEFIN_NETWORK_TOKEN_TEST_LIVE"] === "TRUE";
 
     if ($live) {
-        $merged_opts = [
+        // Merged so the generated fields win: sdk-test-control.json's
+        // test.client.options adds to the live client, it does not redirect it.
+        $merged_opts = array_merge(Runner::live_client_options(), [
             "apikey" => $env["BLUEFIN_NETWORK_TOKEN_APIKEY"],
-        ];
+        ]);
         $client = new BluefinNetworkTokenSDK($merged_opts);
         return [
             "client" => $client,

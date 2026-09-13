@@ -47,3 +47,9 @@ let prepare (client : sdk_client) (fetchargs : value) : value =
 (* NetworkTokenBundle entity bound to a client:  network_token_bundle client entopts *)
 let network_token_bundle (client : sdk_client) (entopts : value) : entity_obj =
   Sdk_entity_network_token_bundle.make client entopts
+
+(* Entity by name (None for a name this SDK did not generate). *)
+let entity (client : sdk_client) (name : string) (entopts : value) : entity_obj option =
+  match name with
+  | "network_token_bundle" -> Some (Sdk_entity_network_token_bundle.make client entopts)
+  | _ -> None

@@ -1,5 +1,6 @@
 package voxgig.bluefinnetworktokensdk.core;
 
+import java.util.List;
 import java.util.Map;
 
 import voxgig.bluefinnetworktokensdk.utility.Json;
@@ -61,6 +62,18 @@ public final class Config {
         return new voxgig.bluefinnetworktokensdk.feature.TimeoutFeature();
       default:
         return new voxgig.bluefinnetworktokensdk.feature.BaseFeature();
+    }
+  }
+
+  /**
+   * The plugin definitions the model selected for one feature's chain, as
+   * List&lt;Object&gt; so core never names a vendored type. Empty for a
+   * feature whose model declares no active plugin group.
+   */
+  public static List<Object> featurePlugins(String name) {
+    switch (name) {
+      default:
+        return List.of();
     }
   }
 
@@ -241,6 +254,10 @@ public final class Config {
     b.append("     \"type\": \"`$STRING`\"");
     b.append("    }");
     b.append("   ],");
+    b.append("   \"id\": {");
+    b.append("    \"field\": \"id\",");
+    b.append("    \"name\": \"id\"");
+    b.append("   },");
     b.append("   \"name\": \"network_token_bundle\",");
     b.append("   \"op\": {");
     b.append("    \"create\": {");
@@ -262,8 +279,10 @@ public final class Config {
     b.append("       \"kind\": \"http\",");
     b.append("       \"method\": \"POST\",");
     b.append("       \"orig\": \"/network-token-bundle\",");
-    b.append("       \"parts\": [");
-    b.append("        \"network-token-bundle\"");
+    b.append("       \"segments\": [");
+    b.append("        {");
+    b.append("         \"lit\": \"network-token-bundle\"");
+    b.append("        }");
     b.append("       ],");
     b.append("       \"select\": {");
     b.append("        \"exist\": [");
@@ -273,7 +292,10 @@ public final class Config {
     b.append("       \"transform\": {");
     b.append("        \"req\": \"`reqdata`\",");
     b.append("        \"res\": \"`body`\"");
-    b.append("       }");
+    b.append("       },");
+    b.append("       \"parts\": [");
+    b.append("        \"network-token-bundle\"");
+    b.append("       ]");
     b.append("      }");
     b.append("     ]");
     b.append("    },");
@@ -305,15 +327,19 @@ public final class Config {
     b.append("       \"kind\": \"http\",");
     b.append("       \"method\": \"GET\",");
     b.append("       \"orig\": \"/network-token-bundle/{networkTokenBundleId}\",");
-    b.append("       \"parts\": [");
-    b.append("        \"network-token-bundle\",");
-    b.append("        \"{id}\"");
-    b.append("       ],");
     b.append("       \"rename\": {");
     b.append("        \"param\": {");
     b.append("         \"networkTokenBundleId\": \"id\"");
     b.append("        }");
     b.append("       },");
+    b.append("       \"segments\": [");
+    b.append("        {");
+    b.append("         \"lit\": \"network-token-bundle\"");
+    b.append("        },");
+    b.append("        {");
+    b.append("         \"var\": \"id\"");
+    b.append("        }");
+    b.append("       ],");
     b.append("       \"select\": {");
     b.append("        \"exist\": [");
     b.append("         \"id\",");
@@ -323,7 +349,11 @@ public final class Config {
     b.append("       \"transform\": {");
     b.append("        \"req\": \"`reqdata`\",");
     b.append("        \"res\": \"`body`\"");
-    b.append("       }");
+    b.append("       },");
+    b.append("       \"parts\": [");
+    b.append("        \"network-token-bundle\",");
+    b.append("        \"{id}\"");
+    b.append("       ]");
     b.append("      },");
     b.append("      {");
     b.append("       \"args\": {");
@@ -349,16 +379,22 @@ public final class Config {
     b.append("       \"kind\": \"http\",");
     b.append("       \"method\": \"GET\",");
     b.append("       \"orig\": \"/network-token-bundle/{networkTokenBundleId}/payment-credentials\",");
-    b.append("       \"parts\": [");
-    b.append("        \"network-token-bundle\",");
-    b.append("        \"{id}\",");
-    b.append("        \"payment-credentials\"");
-    b.append("       ],");
     b.append("       \"rename\": {");
     b.append("        \"param\": {");
     b.append("         \"networkTokenBundleId\": \"id\"");
     b.append("        }");
     b.append("       },");
+    b.append("       \"segments\": [");
+    b.append("        {");
+    b.append("         \"lit\": \"network-token-bundle\"");
+    b.append("        },");
+    b.append("        {");
+    b.append("         \"var\": \"id\"");
+    b.append("        },");
+    b.append("        {");
+    b.append("         \"lit\": \"payment-credentials\"");
+    b.append("        }");
+    b.append("       ],");
     b.append("       \"select\": {");
     b.append("        \"$action\": \"payment_credential\",");
     b.append("        \"exist\": [");
@@ -369,7 +405,12 @@ public final class Config {
     b.append("       \"transform\": {");
     b.append("        \"req\": \"`reqdata`\",");
     b.append("        \"res\": \"`body`\"");
-    b.append("       }");
+    b.append("       },");
+    b.append("       \"parts\": [");
+    b.append("        \"network-token-bundle\",");
+    b.append("        \"{id}\",");
+    b.append("        \"payment-credentials\"");
+    b.append("       ]");
     b.append("      }");
     b.append("     ]");
     b.append("    },");
@@ -401,15 +442,19 @@ public final class Config {
     b.append("       \"kind\": \"http\",");
     b.append("       \"method\": \"DELETE\",");
     b.append("       \"orig\": \"/network-token-bundle/{networkTokenBundleId}\",");
-    b.append("       \"parts\": [");
-    b.append("        \"network-token-bundle\",");
-    b.append("        \"{id}\"");
-    b.append("       ],");
     b.append("       \"rename\": {");
     b.append("        \"param\": {");
     b.append("         \"networkTokenBundleId\": \"id\"");
     b.append("        }");
     b.append("       },");
+    b.append("       \"segments\": [");
+    b.append("        {");
+    b.append("         \"lit\": \"network-token-bundle\"");
+    b.append("        },");
+    b.append("        {");
+    b.append("         \"var\": \"id\"");
+    b.append("        }");
+    b.append("       ],");
     b.append("       \"select\": {");
     b.append("        \"exist\": [");
     b.append("         \"id\",");
@@ -419,7 +464,11 @@ public final class Config {
     b.append("       \"transform\": {");
     b.append("        \"req\": \"`reqdata`\",");
     b.append("        \"res\": \"`body`\"");
-    b.append("       }");
+    b.append("       },");
+    b.append("       \"parts\": [");
+    b.append("        \"network-token-bundle\",");
+    b.append("        \"{id}\"");
+    b.append("       ]");
     b.append("      }");
     b.append("     ]");
     b.append("    }");

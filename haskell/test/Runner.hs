@@ -10,13 +10,14 @@ import Data.IORef
 import System.Exit (exitFailure)
 
 import Testutil
-import TestJson (jsonRead)
+import SdkJson (jsonRead)
 import StructCorpus (runStructCorpus)
 import qualified TPipeline
 import qualified TFeature
 import qualified TNetsim
 import qualified TCustomUtility
 import qualified TPrimaryUtility
+import qualified TPrimaryCorpus
 import qualified SdkGenTests
 
 main :: IO ()
@@ -31,6 +32,7 @@ main = do
   TNetsim.tests c
   TCustomUtility.tests c
   TPrimaryUtility.tests c alltests
+  TPrimaryCorpus.tests c alltests
   SdkGenTests.genTests c
 
   fs <- readIORef (failures c)

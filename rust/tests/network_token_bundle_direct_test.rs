@@ -29,13 +29,22 @@ fn network_token_bundle_direct_setup(mockres: Value) -> NetworkTokenBundleDirect
     let env = env_override(jo(vec![
         ("BLUEFIN_NETWORK_TOKEN_TEST_NETWORK_TOKEN_BUNDLE_ENTID", Value::empty_map()),
         ("BLUEFIN_NETWORK_TOKEN_TEST_LIVE", Value::str("FALSE")),
-        ("BLUEFIN_NETWORK_TOKEN_APIKEY", Value::str("NONE")),
+        ("BLUEFIN_NETWORK_TOKEN_APIKEY", Value::str("")),
     ]));
 
     let live = getp(&env, "BLUEFIN_NETWORK_TOKEN_TEST_LIVE") == Value::str("TRUE");
 
     if live {
-        let client = BluefinNetworkTokenSDK::new(jo(vec![("apikey", getp(&env, "BLUEFIN_NETWORK_TOKEN_APIKEY"))]));
+        // live_client_options() FIRST, so the generated entries below win:
+        // sdk-test-control.json's test.client.options adds to the live
+        // client, it does not redirect it.
+        let client = BluefinNetworkTokenSDK::new(to_map(&vs::merge(
+            &ja(vec![
+                live_client_options(),
+                jo(vec![("apikey", getp(&env, "BLUEFIN_NETWORK_TOKEN_APIKEY"))]),
+            ]),
+            None,
+        )));
         let idmap = match to_map(&getp(&env, "BLUEFIN_NETWORK_TOKEN_TEST_NETWORK_TOKEN_BUNDLE_ENTID")) {
             Value::Map(m) => Value::Map(m),
             _ => Value::empty_map(),

@@ -13,9 +13,10 @@ module SdkRuntime where
 import Control.Exception (throwIO)
 import Control.Monad (forM_, when)
 import Data.Bits ((.&.))
-import Data.Char (toUpper)
+import Data.Char (isAlphaNum, toUpper)
 import Data.IORef
 import qualified Data.Map.Strict as Map
+import Data.Maybe (isNothing)
 import System.IO.Unsafe (unsafePerformIO)
 import Text.Printf (printf)
 
@@ -332,7 +333,15 @@ prepareMethodUtil ctx = do
       op <- readIORef (cOp ctx)
       pure $ case opName op of
         "create" -> "POST"; "update" -> "PUT"; "load" -> "GET"
-        "list" -> "GET"; "remove" -> "DELETE"; "patch" -> "PATCH"; _ -> "GET"
+        "list" -> "GET"; "remove" -> "DELETE"; "patch" -> "PATCH"
+        -- NO CATCH-ALL GET. The ts reference returns methodMap[key], which is
+        -- undefined for an op the map does not name — the request is then
+        -- rejected rather than silently issued. A `_ -> "GET"` here turned
+        -- every unrecognised op into a GET, which is both a divergence from
+        -- the corpus (which expects no method for opname "bad") and the more
+        -- dangerous of the two behaviours: a mistyped or unsupported op
+        -- quietly fetched. Found by the primary corpus on its first run.
+        _ -> ""
 
 prepareHeadersUtil :: Context -> IO Value
 prepareHeadersUtil ctx = do
@@ -725,12 +734,63 @@ makePointUtil ctx = do
                       reqAction <- getp reqsel "$action"
                       selectAction <- getp selectDef "$action"
                       pure (valEqScalar reqAction selectAction)
-                  choose [] = pure VNoval
-                  choose [pt] = pure pt
-                  choose (pt : rest) = do f <- isFound pt; if f then pure pt else choose rest
-              chosen <- choose pts
+                  findMatch [] = pure Nothing
+                  findMatch (pt : rest) = do
+                    f <- isFound pt
+                    if f then pure (Just pt) else findMatch rest
+                  -- A record route ends in the record's identifier
+                  -- (/boards/{id}); a cross-reference that also returns the
+                  -- entity ends in the relationship's name
+                  -- (/posts/{id}/author). That, then fewest segments, tells
+                  -- the entity's own route from a cross-reference. The same
+                  -- rule runs at generation time, in helpers/opShape.ts —
+                  -- both sides must move together.
+                  ptsLen pt = do
+                    parts <- getp pt "parts"
+                    case parts of
+                      VList _ -> length <$> listItems parts
+                      _ -> pure (0 :: Int)
+                  terminalParam pt = do
+                    parts <- getp pt "parts"
+                    case parts of
+                      VList _ -> do
+                        items <- listItems parts
+                        pure (case reverse items of
+                                (lastp : _) -> case vstring lastp of
+                                                 ('{' : _) -> True
+                                                 _ -> False
+                                [] -> False)
+                      _ -> pure False
+                  betterOwn cand best = do
+                    ct <- terminalParam cand
+                    bt <- terminalParam best
+                    if ct /= bt
+                      then pure ct
+                      else do
+                        cl <- ptsLen cand
+                        bl <- ptsLen best
+                        pure (cl < bl)
+                  ownPoint [] = pure VNoval
+                  ownPoint (p0 : rest0) = go p0 rest0
+                    where go best [] = pure best
+                          go best (c : cs) = do
+                            b <- betterOwn c best
+                            go (if b then c else best) cs
+              matched <- findMatch pts
               reqAction <- getp reqsel "$action"
-              if not (isNoval reqAction) && not (isNoval chosen)
+              chosen <- maybe (ownPoint pts) pure matched
+              -- select.exist can list more than the params needed to pick a
+              -- point, so nothing matched. A request naming an action gets
+              -- here only because that action's own point failed its exist
+              -- test, so it is unbuildable whatever we pick — refuse it
+              -- BEFORE the guard below, which compares the chosen point's
+              -- $action and would wave the request through whenever the
+              -- fallback lands on the action point itself.
+              if isNothing matched && not (isNoval reqAction)
+                then do
+                  e <- mkErr "point_action_invalid" ("Operation \"" ++ opName op ++ "\" action \"" ++ vstring reqAction ++ "\" is not valid.")
+                  pure (VNoval, Just e)
+                else if not (isNoval reqAction) && not (isNoval chosen)
                 then do
                   pointSelect <- toMap <$> getp chosen "select"
                   pointAction <- getp pointSelect "$action"
@@ -1014,8 +1074,13 @@ fetcherUtil ctx fullurl fetchdef = do
 
 optSpecValue :: IO Value
 optSpecValue = do
-  auth <- jo [("prefix", VStr "")]
+  auth <- jo [("prefix", VStr ""), ("basic", VBool False)]
   hdrs <- jo [("`$CHILD`", VStr "`$STRING`")]
+  -- OpenAPI server-variable defaults, carried by the generated config whenever
+  -- the spec's server URL is templated. Accepted here so validation does not
+  -- reject the SDK's own config; the {name} substitution into base is a
+  -- separate concern.
+  srv <- jo [("`$CHILD`", VStr "")]
   allow <- jo [("method", VStr "GET,PUT,POST,PATCH,DELETE,OPTIONS"), ("op", VStr "create,update,load,list,remove,command,direct,graphql")]
   entChild <- do a <- emptyMap; jo [("`$OPEN`", VBool True), ("active", VBool False), ("alias", a)]
   ent <- jo [("`$CHILD`", entChild)]
@@ -1027,7 +1092,7 @@ optSpecValue = do
   test <- jo [("active", VBool False), ("entity", testEnt)]
   clean <- jo [("keys", VStr "key,token,id")]
   jo [ ("apikey", VStr ""), ("base", VStr "http://localhost:8000"), ("prefix", VStr ""), ("suffix", VStr "")
-     , ("auth", auth), ("headers", hdrs), ("allow", allow), ("entity", ent), ("feature", feat)
+     , ("auth", auth), ("headers", hdrs), ("server", srv), ("allow", allow), ("entity", ent), ("feature", feat)
      , ("utility", utilm), ("system", sysm), ("test", test), ("clean", clean) ]
 
 makeOptionsUtil :: Context -> IO Value
@@ -1079,6 +1144,54 @@ makeOptionsUtil ctx = do
   merged <- merge mlist
   validated <- validate INone merged optspec
   opts <- case validated of VMap _ -> pure validated; _ -> emptyMap
+  -- Resolve a templated base URL (e.g. https://{tenant_id}.hanko.io).
+  -- Every placeholder must resolve to a non-empty value: from options.server
+  -- (user), else the Config default. A placeholder that resolves to "" is a
+  -- construction ERROR in live mode - the URL cannot work - but in test mode
+  -- substitutes the deterministic value "test-<name>" so offline tests need no
+  -- configuration. The SDK constructor has no error return, so a missing
+  -- required variable THROWS: construction-time misconfiguration.
+  baseV <- getp opts "base"
+  case baseV of
+    VStr base | '{' `elem` base -> do
+      taV <- getpathS opts "test.active"
+      faV <- getpathS opts "feature.test.active"
+      -- Value has no Eq instance: match the constructor.
+      let isTrue v = case v of VBool b -> b; _ -> False
+          testmode = isTrue taV || isTrue faV
+      server <- getp opts "server"
+      mnV <- getpathS config "main.name"
+      let sdkname = case mnV of VStr s | not (null s) -> s; _ -> "SDK"
+
+      -- Scanned by hand: a placeholder is `{` followed by [A-Za-z0-9_]+ and
+      -- `}`; anything else is literal text, so a stray brace is left alone.
+      let resolve [] = pure []
+          resolve ('{' : rest) =
+            let (name, tail') = span (\c -> isAlphaNum c || '_' == c) rest
+            in case tail' of
+                 ('}' : more) | not (null name) -> do
+                   valV <- case server of VMap _ -> getp server name; _ -> pure VNoval
+                   let val = case valV of VStr s -> s; _ -> ""
+                   sub <- if not (null val)
+                     then pure val
+                     else if testmode
+                       then pure ("test-" ++ name)
+                       else do
+                         e <- jo [ ("code", VStr "server_var_required")
+                                 , ("msg", VStr (sdkname ++ ": the server variable '" ++
+                                     name ++ "' is required: the API base URL is '" ++
+                                     base ++ "' - pass server = { \"" ++ name ++
+                                     "\": \"...\" } in the SDK options"))
+                                 , ("sdk", VStr "BluefinNetworkToken") ]
+                         throwIO (SdkException e)
+                   more' <- resolve more
+                   pure (sub ++ more')
+                 _ -> do r <- resolve rest; pure ('{' : r)
+          resolve (c : rest) = do r <- resolve rest; pure (c : r)
+      resolved <- resolve base
+      setp opts "base" (VStr resolved)
+    _ -> pure ()
+
   when (not (isNoval sysFetch)) $ do
     sys <- getp opts "system"
     case sys of

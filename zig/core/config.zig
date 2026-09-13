@@ -183,6 +183,10 @@ pub fn make_config() Value {
                         .{ "type", h.vstr("`$STRING`") },
                     }),
                 }) },
+                .{ "id", h.jo(&.{
+                    .{ "field", h.vstr("id") },
+                    .{ "name", h.vstr("id") },
+                }) },
                 .{ "name", h.vstr("network_token_bundle") },
                 .{ "op", h.jo(&.{
                     .{ "create", h.jo(&.{
@@ -204,8 +208,10 @@ pub fn make_config() Value {
                                 .{ "kind", h.vstr("http") },
                                 .{ "method", h.vstr("POST") },
                                 .{ "orig", h.vstr("/network-token-bundle") },
-                                .{ "parts", h.ja(&.{
-                                    h.vstr("network-token-bundle"),
+                                .{ "segments", h.ja(&.{
+                                    h.jo(&.{
+                                        .{ "lit", h.vstr("network-token-bundle") },
+                                    }),
                                 }) },
                                 .{ "select", h.jo(&.{
                                     .{ "exist", h.ja(&.{
@@ -215,6 +221,9 @@ pub fn make_config() Value {
                                 .{ "transform", h.jo(&.{
                                     .{ "req", h.vstr("`reqdata`") },
                                     .{ "res", h.vstr("`body`") },
+                                }) },
+                                .{ "parts", h.ja(&.{
+                                    h.vstr("network-token-bundle"),
                                 }) },
                             }),
                         }) },
@@ -247,14 +256,18 @@ pub fn make_config() Value {
                                 .{ "kind", h.vstr("http") },
                                 .{ "method", h.vstr("GET") },
                                 .{ "orig", h.vstr("/network-token-bundle/{networkTokenBundleId}") },
-                                .{ "parts", h.ja(&.{
-                                    h.vstr("network-token-bundle"),
-                                    h.vstr("{id}"),
-                                }) },
                                 .{ "rename", h.jo(&.{
                                     .{ "param", h.jo(&.{
                                         .{ "networkTokenBundleId", h.vstr("id") },
                                     }) },
+                                }) },
+                                .{ "segments", h.ja(&.{
+                                    h.jo(&.{
+                                        .{ "lit", h.vstr("network-token-bundle") },
+                                    }),
+                                    h.jo(&.{
+                                        .{ "var", h.vstr("id") },
+                                    }),
                                 }) },
                                 .{ "select", h.jo(&.{
                                     .{ "exist", h.ja(&.{
@@ -265,6 +278,10 @@ pub fn make_config() Value {
                                 .{ "transform", h.jo(&.{
                                     .{ "req", h.vstr("`reqdata`") },
                                     .{ "res", h.vstr("`body`") },
+                                }) },
+                                .{ "parts", h.ja(&.{
+                                    h.vstr("network-token-bundle"),
+                                    h.vstr("{id}"),
                                 }) },
                             }),
                             h.jo(&.{
@@ -291,15 +308,21 @@ pub fn make_config() Value {
                                 .{ "kind", h.vstr("http") },
                                 .{ "method", h.vstr("GET") },
                                 .{ "orig", h.vstr("/network-token-bundle/{networkTokenBundleId}/payment-credentials") },
-                                .{ "parts", h.ja(&.{
-                                    h.vstr("network-token-bundle"),
-                                    h.vstr("{id}"),
-                                    h.vstr("payment-credentials"),
-                                }) },
                                 .{ "rename", h.jo(&.{
                                     .{ "param", h.jo(&.{
                                         .{ "networkTokenBundleId", h.vstr("id") },
                                     }) },
+                                }) },
+                                .{ "segments", h.ja(&.{
+                                    h.jo(&.{
+                                        .{ "lit", h.vstr("network-token-bundle") },
+                                    }),
+                                    h.jo(&.{
+                                        .{ "var", h.vstr("id") },
+                                    }),
+                                    h.jo(&.{
+                                        .{ "lit", h.vstr("payment-credentials") },
+                                    }),
                                 }) },
                                 .{ "select", h.jo(&.{
                                     .{ "$action", h.vstr("payment_credential") },
@@ -311,6 +334,11 @@ pub fn make_config() Value {
                                 .{ "transform", h.jo(&.{
                                     .{ "req", h.vstr("`reqdata`") },
                                     .{ "res", h.vstr("`body`") },
+                                }) },
+                                .{ "parts", h.ja(&.{
+                                    h.vstr("network-token-bundle"),
+                                    h.vstr("{id}"),
+                                    h.vstr("payment-credentials"),
                                 }) },
                             }),
                         }) },
@@ -343,14 +371,18 @@ pub fn make_config() Value {
                                 .{ "kind", h.vstr("http") },
                                 .{ "method", h.vstr("DELETE") },
                                 .{ "orig", h.vstr("/network-token-bundle/{networkTokenBundleId}") },
-                                .{ "parts", h.ja(&.{
-                                    h.vstr("network-token-bundle"),
-                                    h.vstr("{id}"),
-                                }) },
                                 .{ "rename", h.jo(&.{
                                     .{ "param", h.jo(&.{
                                         .{ "networkTokenBundleId", h.vstr("id") },
                                     }) },
+                                }) },
+                                .{ "segments", h.ja(&.{
+                                    h.jo(&.{
+                                        .{ "lit", h.vstr("network-token-bundle") },
+                                    }),
+                                    h.jo(&.{
+                                        .{ "var", h.vstr("id") },
+                                    }),
                                 }) },
                                 .{ "select", h.jo(&.{
                                     .{ "exist", h.ja(&.{
@@ -361,6 +393,10 @@ pub fn make_config() Value {
                                 .{ "transform", h.jo(&.{
                                     .{ "req", h.vstr("`reqdata`") },
                                     .{ "res", h.vstr("`body`") },
+                                }) },
+                                .{ "parts", h.ja(&.{
+                                    h.vstr("network-token-bundle"),
+                                    h.vstr("{id}"),
                                 }) },
                             }),
                         }) },

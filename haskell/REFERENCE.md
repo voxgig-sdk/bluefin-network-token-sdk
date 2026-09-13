@@ -95,12 +95,13 @@ Prepare a fetch definition without sending. Returns the `fetchdef` and raises on
 | --- | --- | --- | --- |
 | `card` | `Value` | No |  |
 | `cardNumber` | `String` | No |  |
-| `expirationMonth` | `String` | No |  |
-| `expirationYear` | `String` | No |  |
+| `expirationMonth` | `String` | No | Two-digit month in which the payment card expires. |
+| `expirationYear` | `String` | No | Four-digit year in which the payment card expires. |
+| `id` | `String` | No |  |
 | `issuer` | `Value` | No |  |
 | `metadata` | `Value` | No |  |
 | `networkToken` | `Value` | No |  |
-| `networkTokenBundleId` | `String` | No |  |
+| `networkTokenBundleId` | `String` | No | Unique identifier for the Instrument Identifier token used in the transaction. |
 | `networkTokenBundleState` | `String` | No |  |
 | `securityCode` | `String` | No |  |
 
@@ -170,7 +171,17 @@ The entity name.
 
 | Feature | Version | Description |
 | --- | --- | --- |
+| `audit` | 0.0.1 | Structured audit trail of operations |
+| `clienttrack` | 0.0.1 | Client identity and per-request correlation headers |
+| `idempotency` | 0.0.1 | Idempotency keys for safe retries of mutating operations |
+| `log` | 0.0.1 | Structured request and response logging |
+| `metrics` | 0.0.1 | Statistics capture: per-operation counters and latency |
+| `paging` | 0.0.1 | Pagination signals for list operations |
+| `ratelimit` | 0.0.1 | Client-side rate limiting via a token bucket |
+| `retry` | 0.0.1 | Automatic retry of transient failures with exponential backoff |
+| `telemetry` | 0.0.1 | Distributed tracing spans with W3C trace-context propagation |
 | `test` | 0.0.1 | In-memory mock transport for testing without a live server |
+| `timeout` | 0.0.1 | Per-request timeout with transport abort |
 
 
 Features are activated via the `feature` option:
@@ -178,7 +189,17 @@ Features are activated via the `feature` option:
 ```haskell
   active <- jo [("active", VBool True)]
   featureCfg <- jo
-    [ ("test", active)
+    [ ("audit", active)
+    , ("clienttrack", active)
+    , ("idempotency", active)
+    , ("log", active)
+    , ("metrics", active)
+    , ("paging", active)
+    , ("ratelimit", active)
+    , ("retry", active)
+    , ("telemetry", active)
+    , ("test", active)
+    , ("timeout", active)
     ]
   opts <- jo [("feature", featureCfg)]
   client <- Sdk.newSdk opts

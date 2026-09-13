@@ -229,6 +229,11 @@ public static class SdkConfig
                             ["type"] = "`$STRING`",
                         },
                     },
+                    ["id"] = new Dictionary<string, object?>
+                    {
+                        ["field"] = "id",
+                        ["name"] = "id",
+                    },
                     ["name"] = "network_token_bundle",
                     ["op"] = new Dictionary<string, object?>
                     {
@@ -257,9 +262,12 @@ public static class SdkConfig
                                     ["kind"] = "http",
                                     ["method"] = "POST",
                                     ["orig"] = "/network-token-bundle",
-                                    ["parts"] = new List<object?>
+                                    ["segments"] = new List<object?>
                                     {
-                                        "network-token-bundle",
+                                        new Dictionary<string, object?>
+                                        {
+                                            ["lit"] = "network-token-bundle",
+                                        },
                                     },
                                     ["select"] = new Dictionary<string, object?>
                                     {
@@ -272,6 +280,10 @@ public static class SdkConfig
                                     {
                                         ["req"] = "`reqdata`",
                                         ["res"] = "`body`",
+                                    },
+                                    ["parts"] = new List<object?>
+                                    {
+                                        "network-token-bundle",
                                     },
                                 },
                             },
@@ -312,16 +324,22 @@ public static class SdkConfig
                                     ["kind"] = "http",
                                     ["method"] = "GET",
                                     ["orig"] = "/network-token-bundle/{networkTokenBundleId}",
-                                    ["parts"] = new List<object?>
-                                    {
-                                        "network-token-bundle",
-                                        "{id}",
-                                    },
                                     ["rename"] = new Dictionary<string, object?>
                                     {
                                         ["param"] = new Dictionary<string, object?>
                                         {
                                             ["networkTokenBundleId"] = "id",
+                                        },
+                                    },
+                                    ["segments"] = new List<object?>
+                                    {
+                                        new Dictionary<string, object?>
+                                        {
+                                            ["lit"] = "network-token-bundle",
+                                        },
+                                        new Dictionary<string, object?>
+                                        {
+                                            ["var"] = "id",
                                         },
                                     },
                                     ["select"] = new Dictionary<string, object?>
@@ -336,6 +354,11 @@ public static class SdkConfig
                                     {
                                         ["req"] = "`reqdata`",
                                         ["res"] = "`body`",
+                                    },
+                                    ["parts"] = new List<object?>
+                                    {
+                                        "network-token-bundle",
+                                        "{id}",
                                     },
                                 },
                                 new Dictionary<string, object?>
@@ -368,17 +391,26 @@ public static class SdkConfig
                                     ["kind"] = "http",
                                     ["method"] = "GET",
                                     ["orig"] = "/network-token-bundle/{networkTokenBundleId}/payment-credentials",
-                                    ["parts"] = new List<object?>
-                                    {
-                                        "network-token-bundle",
-                                        "{id}",
-                                        "payment-credentials",
-                                    },
                                     ["rename"] = new Dictionary<string, object?>
                                     {
                                         ["param"] = new Dictionary<string, object?>
                                         {
                                             ["networkTokenBundleId"] = "id",
+                                        },
+                                    },
+                                    ["segments"] = new List<object?>
+                                    {
+                                        new Dictionary<string, object?>
+                                        {
+                                            ["lit"] = "network-token-bundle",
+                                        },
+                                        new Dictionary<string, object?>
+                                        {
+                                            ["var"] = "id",
+                                        },
+                                        new Dictionary<string, object?>
+                                        {
+                                            ["lit"] = "payment-credentials",
                                         },
                                     },
                                     ["select"] = new Dictionary<string, object?>
@@ -394,6 +426,12 @@ public static class SdkConfig
                                     {
                                         ["req"] = "`reqdata`",
                                         ["res"] = "`body`",
+                                    },
+                                    ["parts"] = new List<object?>
+                                    {
+                                        "network-token-bundle",
+                                        "{id}",
+                                        "payment-credentials",
                                     },
                                 },
                             },
@@ -434,16 +472,22 @@ public static class SdkConfig
                                     ["kind"] = "http",
                                     ["method"] = "DELETE",
                                     ["orig"] = "/network-token-bundle/{networkTokenBundleId}",
-                                    ["parts"] = new List<object?>
-                                    {
-                                        "network-token-bundle",
-                                        "{id}",
-                                    },
                                     ["rename"] = new Dictionary<string, object?>
                                     {
                                         ["param"] = new Dictionary<string, object?>
                                         {
                                             ["networkTokenBundleId"] = "id",
+                                        },
+                                    },
+                                    ["segments"] = new List<object?>
+                                    {
+                                        new Dictionary<string, object?>
+                                        {
+                                            ["lit"] = "network-token-bundle",
+                                        },
+                                        new Dictionary<string, object?>
+                                        {
+                                            ["var"] = "id",
                                         },
                                     },
                                     ["select"] = new Dictionary<string, object?>
@@ -458,6 +502,11 @@ public static class SdkConfig
                                     {
                                         ["req"] = "`reqdata`",
                                         ["res"] = "`body`",
+                                    },
+                                    ["parts"] = new List<object?>
+                                    {
+                                        "network-token-bundle",
+                                        "{id}",
                                     },
                                 },
                             },
@@ -482,6 +531,15 @@ public static class SdkConfig
     public static Dictionary<string, object?> SharedConfig()
     {
         return SharedConfigVal.Value;
+    }
+
+    public static List<object?> FeaturePlugins(string name)
+    {
+        switch (name)
+        {
+            default:
+                return new List<object?>();
+        }
     }
 
     public static Feature.BaseFeature MakeFeature(string name)

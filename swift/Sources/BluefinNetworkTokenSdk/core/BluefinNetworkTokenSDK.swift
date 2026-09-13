@@ -1,16 +1,30 @@
 // BluefinNetworkToken SDK client.
+//
+// SDK TYPES ARE MODULE-QUALIFIED IN THIS FILE (`BluefinNetworkTokenSdk.VMap`, not
+// `VMap`), and only in this file. MainEntity_swift emits one accessor PER
+// ENTITY into this class body, named after the entity - `Utility()`,
+// `Spec()`, `Value()` for an API with entities of those names - and inside
+// a class body a METHOD of that name shadows the TYPE for every unqualified
+// use: `utility = Utility()` then reads as a call to the accessor, and
+// `-> Utility` as a return type that does not exist. The entity TYPE is
+// already renamed on such a collision (swiftSafeTypeName), but the accessor
+// keeps the entity's own name, which is the public API. Qualifying by
+// module - the generated module is <Name>Sdk, so `BluefinNetworkTokenSdk.` lands as
+// `<Name>Sdk.` - is the one spelling a method cannot shadow. The shared
+// fixture's `utility` entity is what found this; every other swift file is
+// outside this class and unaffected.
 
 import Foundation
 
 public final class BluefinNetworkTokenSDK {
   public var mode = "live"
-  private var options: VMap = VMap()
-  private let utility: Utility
+  private var options: BluefinNetworkTokenSdk.VMap = BluefinNetworkTokenSdk.VMap()
+  private let utility: BluefinNetworkTokenSdk.Utility
   public var features: [BaseFeature] = []
-  private var rootctx: Context!
+  private var rootctx: BluefinNetworkTokenSdk.Context!
 
-  public init(_ optionsIn: VMap? = nil) {
-    utility = Utility()
+  public init(_ optionsIn: BluefinNetworkTokenSdk.VMap? = nil) {
+    utility = BluefinNetworkTokenSdk.Utility()
 
     // The process-wide config (sdkgen rung L2): read-only on the request path,
     // so every client shares one rather than rebuilding it.
@@ -20,7 +34,7 @@ public final class BluefinNetworkTokenSDK {
       "client": self,
       "utility": utility,
       "config": config,
-      "shared": VMap(),
+      "shared": BluefinNetworkTokenSdk.VMap(),
     ]
     if let o = optionsIn { ctxmap["options"] = o }
 
@@ -39,7 +53,7 @@ public final class BluefinNetworkTokenSDK {
     // feature installs the base mock transport and the transport features
     // (retry/cache/netsim/proxy/ratelimit) wrap whatever is current, so `test`
     // must be added before them to sit at the base of the chain.
-    let featureOpts = gp(options, "feature").asMap ?? VMap()
+    let featureOpts = gp(options, "feature").asMap ?? BluefinNetworkTokenSdk.VMap()
     if let featureOrder = gpath(options, "__derived__", "featureorder").asList {
       for fnameVal in featureOrder.items {
         let fname = fnameVal.asString ?? ""
@@ -67,24 +81,24 @@ public final class BluefinNetworkTokenSDK {
     utility.featureHook(rootctx, "PostConstruct")
   }
 
-  public func optionsMap() -> VMap {
-    return clone(.map(options)).asMap ?? VMap()
+  public func optionsMap() -> BluefinNetworkTokenSdk.VMap {
+    return clone(.map(options)).asMap ?? BluefinNetworkTokenSdk.VMap()
   }
 
-  public func getUtility() -> Utility {
-    return Utility.copy(utility)
+  public func getUtility() -> BluefinNetworkTokenSdk.Utility {
+    return BluefinNetworkTokenSdk.Utility.copy(utility)
   }
 
-  public func getRootCtx() -> Context {
+  public func getRootCtx() -> BluefinNetworkTokenSdk.Context {
     return rootctx
   }
 
-  public func prepare(_ fetchargsIn: VMap?) throws -> VMap {
+  public func prepare(_ fetchargsIn: BluefinNetworkTokenSdk.VMap?) throws -> BluefinNetworkTokenSdk.VMap {
     let utility = self.utility
 
-    let fetchargs = fetchargsIn ?? VMap()
+    let fetchargs = fetchargsIn ?? BluefinNetworkTokenSdk.VMap()
 
-    let ctrl = gp(fetchargs, "ctrl").asMap ?? VMap()
+    let ctrl = gp(fetchargs, "ctrl").asMap ?? BluefinNetworkTokenSdk.VMap()
 
     let ctx = utility.makeContext(["opname": "prepare", "ctrl": ctrl], rootctx)
 
@@ -94,8 +108,8 @@ public final class BluefinNetworkTokenSDK {
     var method = gp(fetchargs, "method").asString ?? ""
     if method == "" { method = "GET" }
 
-    let pathParams = gp(fetchargs, "params").asMap ?? VMap()
-    let query = gp(fetchargs, "query").asMap ?? VMap()
+    let pathParams = gp(fetchargs, "params").asMap ?? BluefinNetworkTokenSdk.VMap()
+    let query = gp(fetchargs, "query").asMap ?? BluefinNetworkTokenSdk.VMap()
 
     let headers = utility.prepareHeaders(ctx)
 
@@ -103,7 +117,7 @@ public final class BluefinNetworkTokenSDK {
     let prefix = gp(options, "prefix").asString ?? ""
     let suffix = gp(options, "suffix").asString ?? ""
 
-    let specmap = VMap()
+    let specmap = BluefinNetworkTokenSdk.VMap()
     specmap.entries["base"] = .string(basev)
     specmap.entries["prefix"] = .string(prefix)
     specmap.entries["suffix"] = .string(suffix)
@@ -114,7 +128,7 @@ public final class BluefinNetworkTokenSDK {
     specmap.entries["headers"] = .map(headers)
     specmap.entries["body"] = gp(fetchargs, "body")
     specmap.entries["step"] = .string("start")
-    ctx.spec = Spec(specmap)
+    ctx.spec = BluefinNetworkTokenSdk.Spec(specmap)
 
     // Merge user-provided headers.
     if let uhm = gp(fetchargs, "headers").asMap {
@@ -131,7 +145,7 @@ public final class BluefinNetworkTokenSDK {
   // Raw endpoint access is operator-controllable, like every entity op.
   // Blocking it means denying BOTH the 'direct' and 'graphql' tokens, since
   // either one reaches the same endpoint.
-  public func direct(_ fetchargsIn: VMap?) -> VMap {
+  public func direct(_ fetchargsIn: BluefinNetworkTokenSdk.VMap?) -> BluefinNetworkTokenSdk.VMap {
     if !opAllowed("direct") {
       return opDenied("direct")
     }
@@ -145,9 +159,9 @@ public final class BluefinNetworkTokenSDK {
     return allow.contains(op)
   }
 
-  private func opDenied(_ op: String) -> VMap {
+  private func opDenied(_ op: String) -> BluefinNetworkTokenSdk.VMap {
     let allow = gpath(options, "allow", "op").asString ?? ""
-    let r = VMap()
+    let r = BluefinNetworkTokenSdk.VMap()
     r.entries["ok"] = .bool(false)
     r.entries["err"] = .nat(BluefinNetworkTokenError(
       op + "_allow",
@@ -160,38 +174,38 @@ public final class BluefinNetworkTokenSDK {
   // its own allow.op token first. Private, rather than a flag on fetchargs:
   // a caller-supplied marker would let anyone opt straight back out of the
   // gate by passing it.
-  private func rawRequest(_ fetchargsIn: VMap?) -> VMap {
+  private func rawRequest(_ fetchargsIn: BluefinNetworkTokenSdk.VMap?) -> BluefinNetworkTokenSdk.VMap {
     let utility = self.utility
 
-    let fetchdef: VMap
+    let fetchdef: BluefinNetworkTokenSdk.VMap
     do {
       fetchdef = try prepare(fetchargsIn)
     } catch {
-      let r = VMap()
+      let r = BluefinNetworkTokenSdk.VMap()
       r.entries["ok"] = .bool(false)
       r.entries["err"] = .nat(error)
       return r
     }
 
-    let fetchargs = fetchargsIn ?? VMap()
-    let ctrl = gp(fetchargs, "ctrl").asMap ?? VMap()
+    let fetchargs = fetchargsIn ?? BluefinNetworkTokenSdk.VMap()
+    let ctrl = gp(fetchargs, "ctrl").asMap ?? BluefinNetworkTokenSdk.VMap()
 
     let ctx = utility.makeContext(["opname": "direct", "ctrl": ctrl], rootctx)
 
     let url = gp(fetchdef, "url").asString ?? ""
 
-    let fetched: Value
+    let fetched: BluefinNetworkTokenSdk.Value
     do {
       fetched = try utility.fetcher(ctx, url, fetchdef)
     } catch {
-      let r = VMap()
+      let r = BluefinNetworkTokenSdk.VMap()
       r.entries["ok"] = .bool(false)
       r.entries["err"] = .nat(error)
       return r
     }
 
     if isNil(fetched) {
-      let r = VMap()
+      let r = BluefinNetworkTokenSdk.VMap()
       r.entries["ok"] = .bool(false)
       r.entries["err"] = .nat(ctx.makeError("direct_no_response", "response: undefined"))
       return r
@@ -209,12 +223,12 @@ public final class BluefinNetworkTokenSDK {
       }
       let noBody = status == 204 || status == 304 || contentLength == "0"
 
-      var jsonData: Value = .noval
-      if !noBody, let jf = gp(fm, "json").asNative as? NativeCall0 {
+      var jsonData: BluefinNetworkTokenSdk.Value = .noval
+      if !noBody, let jf = gp(fm, "json").asNative as? BluefinNetworkTokenSdk.NativeCall0 {
         jsonData = jf()
       }
 
-      let r = VMap()
+      let r = BluefinNetworkTokenSdk.VMap()
       r.entries["ok"] = .bool(status >= 200 && status < 300)
       r.entries["status"] = .int(Int64(status))
       r.entries["headers"] = headers
@@ -222,7 +236,7 @@ public final class BluefinNetworkTokenSDK {
       return r
     }
 
-    let r = VMap()
+    let r = BluefinNetworkTokenSdk.VMap()
     r.entries["ok"] = .bool(false)
     r.entries["err"] = .nat(ctx.makeError("direct_invalid", "invalid response type"))
     return r
@@ -240,24 +254,24 @@ public final class BluefinNetworkTokenSDK {
   // NOTE: like direct, this bypasses the feature pipeline — no retry,
   // ratelimit or paging features apply.
   public func graphql(
-    _ query: String, _ variables: VMap? = nil, _ ctrl: VMap? = nil
-  ) -> VMap {
+    _ query: String, _ variables: BluefinNetworkTokenSdk.VMap? = nil, _ ctrl: BluefinNetworkTokenSdk.VMap? = nil
+  ) -> BluefinNetworkTokenSdk.VMap {
     if !opAllowed("graphql") {
       return opDenied("graphql")
     }
 
-    let headers = VMap()
+    let headers = BluefinNetworkTokenSdk.VMap()
     headers.entries["content-type"] = .string("application/json")
 
-    let body = VMap()
+    let body = BluefinNetworkTokenSdk.VMap()
     body.entries["query"] = .string(query)
-    body.entries["variables"] = .map(variables ?? VMap())
+    body.entries["variables"] = .map(variables ?? BluefinNetworkTokenSdk.VMap())
 
-    let fetchargs = VMap()
+    let fetchargs = BluefinNetworkTokenSdk.VMap()
     fetchargs.entries["method"] = .string("POST")
     fetchargs.entries["headers"] = .map(headers)
     fetchargs.entries["body"] = .map(body)
-    fetchargs.entries["ctrl"] = .map(ctrl ?? VMap())
+    fetchargs.entries["ctrl"] = .map(ctrl ?? BluefinNetworkTokenSdk.VMap())
 
     let res = rawRequest(fetchargs)
 
@@ -291,10 +305,10 @@ public final class BluefinNetworkTokenSDK {
   }
 
 
-  public static func testSDK(_ testoptsIn: VMap?, _ sdkoptsIn: VMap?) -> BluefinNetworkTokenSDK {
-    let sdkopts = clone(.map(sdkoptsIn ?? VMap())).asMap ?? VMap()
+  public static func testSDK(_ testoptsIn: BluefinNetworkTokenSdk.VMap?, _ sdkoptsIn: BluefinNetworkTokenSdk.VMap?) -> BluefinNetworkTokenSDK {
+    let sdkopts = clone(.map(sdkoptsIn ?? BluefinNetworkTokenSdk.VMap())).asMap ?? BluefinNetworkTokenSdk.VMap()
 
-    let testopts = clone(.map(testoptsIn ?? VMap())).asMap ?? VMap()
+    let testopts = clone(.map(testoptsIn ?? BluefinNetworkTokenSdk.VMap())).asMap ?? BluefinNetworkTokenSdk.VMap()
     testopts.entries["active"] = .bool(true)
 
     _ = setpath(.map(sdkopts), jtp("feature", "test"), .map(testopts))
