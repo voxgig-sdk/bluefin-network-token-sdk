@@ -39,7 +39,7 @@ $client = new BluefinNetworkTokenSDK([
 try {
     // load() returns the ENTITY — call data_get() for the NetworkTokenBundle record (throws on error).
     $networktokenbundle = $client->NetworkTokenBundle()->load(["id" => "example_id"]);
-    print_r($networktokenbundle);
+    print_r($networktokenbundle->data_get());
 } catch (\Throwable $err) {
     echo "Error: " . $err->getMessage();
 }
@@ -141,7 +141,7 @@ $client = BluefinNetworkTokenSDK::test([
 // Entity ops return the ENTITY (throws on error);
 // call data_get() for the mock record.
 $networktokenbundle = $client->NetworkTokenBundle()->load(["id" => "test01"]);
-print_r($networktokenbundle);
+print_r($networktokenbundle->data_get());
 ```
 
 ### Use a custom fetch function
@@ -329,7 +329,7 @@ $network_token_bundle = $client->NetworkTokenBundle()->create([
 
 ## Features
 
-This SDK ships 11 optional features. Each is **inactive until you
+This SDK ships 12 optional features. Each is **inactive until you
 switch it on**, so an SDK you have not configured behaves exactly as if none of
 them existed — no retries, no cache, no logging, no measurable overhead.
 
@@ -340,6 +340,7 @@ above:
 |---|---|
 | [`audit`](#audit) | Structured audit trail of operations |
 | [`clienttrack`](#clienttrack) | Client identity and per-request correlation headers |
+| [`debug`](#debug) | Request/response capture ring buffer for debugging |
 | [`idempotency`](#idempotency) | Idempotency keys for safe retries of mutating operations |
 | [`log`](#log) | Structured request and response logging |
 | [`metrics`](#metrics) | Statistics capture: per-operation counters and latency |
@@ -377,6 +378,18 @@ Client identity and per-request correlation headers.
 | `clientVersion` | `'0.0.1'` |
 
 Set `feature.clienttrack.active` to enable it, then override any of the options above.
+
+### debug
+
+Request/response capture ring buffer for debugging.
+
+| Option | Default |
+|---|---|
+| `active` | `false` |
+| `max` | `100` |
+| `redact` | `['authorization', 'cookie', 'set-cookie', 'api-key', 'apikey', 'x-api-key', 'idempotency-key']` |
+
+Set `feature.debug.active` to enable it, then override any of the options above.
 
 ### idempotency
 
@@ -538,6 +551,7 @@ The SDK ships with built-in features:
 
 - **AuditFeature**: Structured audit trail of operations
 - **ClienttrackFeature**: Client identity and per-request correlation headers
+- **DebugFeature**: Request/response capture ring buffer for debugging
 - **IdempotencyFeature**: Idempotency keys for safe retries of mutating operations
 - **LogFeature**: Structured request and response logging
 - **MetricsFeature**: Statistics capture: per-operation counters and latency

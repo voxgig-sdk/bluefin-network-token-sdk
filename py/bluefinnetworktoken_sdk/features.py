@@ -3,6 +3,7 @@
 from bluefinnetworktoken_sdk.feature.base_feature import BluefinNetworkTokenBaseFeature
 from bluefinnetworktoken_sdk.feature.audit_feature import BluefinNetworkTokenAuditFeature
 from bluefinnetworktoken_sdk.feature.clienttrack_feature import BluefinNetworkTokenClienttrackFeature
+from bluefinnetworktoken_sdk.feature.debug_feature import BluefinNetworkTokenDebugFeature
 from bluefinnetworktoken_sdk.feature.idempotency_feature import BluefinNetworkTokenIdempotencyFeature
 from bluefinnetworktoken_sdk.feature.log_feature import BluefinNetworkTokenLogFeature
 from bluefinnetworktoken_sdk.feature.metrics_feature import BluefinNetworkTokenMetricsFeature
@@ -18,6 +19,7 @@ _FEATURES = {
     "base": lambda: BluefinNetworkTokenBaseFeature(),
     "audit": lambda: BluefinNetworkTokenAuditFeature(),
     "clienttrack": lambda: BluefinNetworkTokenClienttrackFeature(),
+    "debug": lambda: BluefinNetworkTokenDebugFeature(),
     "idempotency": lambda: BluefinNetworkTokenIdempotencyFeature(),
     "log": lambda: BluefinNetworkTokenLogFeature(),
     "metrics": lambda: BluefinNetworkTokenMetricsFeature(),

@@ -5,6 +5,7 @@ defmodule BluefinNetworkToken.Features do
     case name do
       "audit" -> BluefinNetworkToken.Feature.Audit.new()
       "clienttrack" -> BluefinNetworkToken.Feature.Clienttrack.new()
+      "debug" -> BluefinNetworkToken.Feature.Debug.new()
       "idempotency" -> BluefinNetworkToken.Feature.Idempotency.new()
       "log" -> BluefinNetworkToken.Feature.Log.new()
       "metrics" -> BluefinNetworkToken.Feature.Metrics.new()

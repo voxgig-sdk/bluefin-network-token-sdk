@@ -33,7 +33,93 @@
         "repr": "auto"
       },
       "contributor": {},
-      "docs": {},
+      "doc": {
+        "active": true,
+        "assets": {
+          "path": ".sdk/doc/assets"
+        },
+        "brand": {
+          "label": "",
+          "notice": "",
+          "shortNotice": "",
+          "url": ""
+        },
+        "ci": {
+          "active": true,
+          "branch": "main"
+        },
+        "content": {
+          "path": ".sdk/doc/content"
+        },
+        "edition": {
+          "github-pages": {
+            "active": true,
+            "base": "node_modules/@voxgig/docgen/project/.sdk",
+            "brand": {},
+            "filter": {
+              "entities": [],
+              "features": [],
+              "targets": []
+            },
+            "kind": "github-pages",
+            "name": "github-pages",
+            "origname": "",
+            "output": {
+              "path": "docs"
+            },
+            "package": "@voxgig/docgen",
+            "site": {
+              "active": true
+            },
+            "style": {},
+            "title": ""
+          },
+          "summary": {
+            "active": true,
+            "base": "node_modules/@voxgig/docgen/project/.sdk",
+            "brand": {},
+            "filter": {
+              "entities": [],
+              "features": [],
+              "targets": []
+            },
+            "kind": "summary",
+            "name": "summary",
+            "origname": "",
+            "output": {
+              "path": "SUMMARY.md"
+            },
+            "package": "@voxgig/docgen",
+            "site": {
+              "active": true
+            },
+            "style": {},
+            "title": ""
+          }
+        },
+        "qa": {
+          "vocabulary": []
+        },
+        "style": {
+          "color": {
+            "accent": "#00c6d8",
+            "background": "#f5f5f9",
+            "darkBackground": "#0f1117",
+            "darkText": "#e6edf3",
+            "primary": "#e70042",
+            "text": "#0a0a0a"
+          },
+          "font": "Nunito, system-ui, sans-serif",
+          "fontFile": "",
+          "headingFont": "Nunito, system-ui, sans-serif",
+          "headingFontFile": "",
+          "logo": "",
+          "mode": "light",
+          "mono": "ui-monospace, monospace",
+          "monoFile": ""
+        },
+        "target": {}
+      },
       "entity": {
         "network_token_bundle": {
           "active": true,
@@ -135,6 +221,12 @@
                       }
                     ]
                   },
+                  "contract": {
+                    "id": "POST /network-token-bundle",
+                    "json": "{\"operationId\":\"create-network-token-bundle\",\"parameters\":[{\"description\":\"\",\"in\":\"header\",\"name\":\"scx-client-reference\",\"required\":true,\"schema\":{\"maxLength\":255,\"minLength\":2,\"type\":\"string\"}}],\"protocol\":\"http\",\"requestBody\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"cardNumber\":{\"description\":\" \",\"type\":\"string\"},\"expirationMonth\":{\"description\":\"Two-digit month in which the payment card expires.\\n\\nFormat: `MM`.\\n\\nValid values: `01` through `12`. Leading 0 is required.\\n\\n#### Barclays and Streamline\\nFor Maestro (UK Domestic) and Maestro (International) cards on Barclays and Streamline, this must be a valid value\\n(`01` through `12`) but is not required to be a valid expiration date. In other words, an expiration date that is\\nin the past does not cause CyberSource to reject your request. However, an invalid expiration date might cause\\nthe issuer to reject your request.\\n\\n#### Encoded Account Numbers\\nFor encoded account numbers (_type_=039), if there is no expiration date on the card, use `12`.\\n\\n#### FDMS Nashville\\nRequired field.\\n\\n#### All other processors\\nRequired if `pointOfSaleInformation.entryMode=keyed`. However, this field is optional if your account is configured\\nfor relaxed requirements for address data and expiration date. **Important** It is your responsibility to determine\\nwhether a field is required for the transaction you are requesting.\\n\\n#### Google Pay transactions\\nFor PAN-based Google Pay transactions, this field is returned in the API response.\",\"maxLength\":2,\"type\":\"string\"},\"expirationYear\":{\"description\":\"Four-digit year in which the payment card expires.\\n\\nFormat: `YYYY`.\\n\\n#### Barclays and Streamline\\nFor Maestro (UK Domestic) and Maestro (International) cards on Barclays and Streamline, this must be a valid value (`1900` through `3000`) but is not required to be a valid expiration date. In other words, an expiration date that is in the past does not cause CyberSource to reject your request. However, an invalid expiration date might cause the issuer to reject your request.\\n\\n#### Encoded Account Numbers\\nFor encoded account numbers (**_type_**`=039`), if there is no expiration date on the card, use `2021`.\\n\\n#### FDMS Nashville\\nRequired field.\\n\\n#### FDC Nashville Global and FDMS South\\nYou can send in 2 digits or 4 digits. If you send in 2 digits, they must be the last 2 digits of the year.\\n\\n#### All other processors\\nRequired if `pointOfSaleInformation.entryMode=keyed`. However, this field is optional if your account is configured\\nfor relaxed requirements for address data and expiration date. **Important** It is your responsibility to determine\\nwhether a field is required for the transaction you are requesting.\\n\\n#### Google Pay transactions\\nFor PAN-based Google Pay transactions, this field is returned in the API response.\",\"maxLength\":4,\"type\":\"string\"},\"securityCode\":{\"description\":\" \",\"maxLength\":4,\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\" \",\"required\":true},\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"issuer\":{\"properties\":{\"paymentAccountReference\":{\"description\":\"This reference number serves as a link to the cardholder account and to all transactions for that account.\",\"maxLength\":32,\"type\":\"string\"}},\"type\":\"object\"},\"metadata\":{\"properties\":{\"creator\":{\"description\":\"The creator of the Payment Instrument.\",\"maxLength\":32,\"type\":\"string\"}},\"type\":\"object\"},\"networkToken\":{\"properties\":{\"card\":{\"properties\":{\"expirationMonth\":{\"description\":\"Two-digit month in which the payment card expires.\\n\\nFormat: `MM`.\\n\\nValid values: `01` through `12`. Leading 0 is required.\\n\\n#### Barclays and Streamline\\nFor Maestro (UK Domestic) and Maestro (International) cards on Barclays and Streamline, this must be a valid value\\n(`01` through `12`) but is not required to be a valid expiration date. In other words, an expiration date that is\\nin the past does not cause CyberSource to reject your request. However, an invalid expiration date might cause\\nthe issuer to reject your request.\\n\\n#### Encoded Account Numbers\\nFor encoded account numbers (_type_=039), if there is no expiration date on the card, use `12`.\\n\\n#### FDMS Nashville\\nRequired field.\\n\\n#### All other processors\\nRequired if `pointOfSaleInformation.entryMode=keyed`. However, this field is optional if your account is configured\\nfor relaxed requirements for address data and expiration date. **Important** It is your responsibility to determine\\nwhether a field is required for the transaction you are requesting.\\n\\n#### Google Pay transactions\\nFor PAN-based Google Pay transactions, this field is returned in the API response.\",\"maxLength\":2,\"type\":\"string\"},\"expirationYear\":{\"description\":\"Four-digit year in which the payment card expires.\\n\\nFormat: `YYYY`.\\n\\n#### Barclays and Streamline\\nFor Maestro (UK Domestic) and Maestro (International) cards on Barclays and Streamline, this must be a valid value (`1900` through `3000`) but is not required to be a valid expiration date. In other words, an expiration date that is in the past does not cause CyberSource to reject your request. However, an invalid expiration date might cause the issuer to reject your request.\\n\\n#### Encoded Account Numbers\\nFor encoded account numbers (**_type_**`=039`), if there is no expiration date on the card, use `2021`.\\n\\n#### FDMS Nashville\\nRequired field.\\n\\n#### FDC Nashville Global and FDMS South\\nYou can send in 2 digits or 4 digits. If you send in 2 digits, they must be the last 2 digits of the year.\\n\\n#### All other processors\\nRequired if `pointOfSaleInformation.entryMode=keyed`. However, this field is optional if your account is configured\\nfor relaxed requirements for address data and expiration date. **Important** It is your responsibility to determine\\nwhether a field is required for the transaction you are requesting.\\n\\n#### Google Pay transactions\\nFor PAN-based Google Pay transactions, this field is returned in the API response.\",\"maxLength\":4,\"type\":\"string\"},\"suffix\":{\"description\":\"Last four digits of the cardholder’s account number. This field is included in the reply message when the client software\\nthat is installed on the POS terminal uses the token management service (TMS) to retrieve tokenized payment details.\\n\\nYou must contact customer support to have your account enabled to receive these fields in the credit reply message.\\n\\n#### Google Pay transactions\\nFor PAN-based Google Pay transactions, this field is returned in the API response.\\n\\n#### PIN debit\\nThis field is returned only for tokenized transactions. You can use this value on the receipt that you give to the cardholder.\\n\\nReturned by PIN debit credit and PIN debit purchase.\\n\\nThis field is supported only by the following processors:\\n- American Express Direct\\n- Credit Mutuel-CIC\\n- FDC Nashville Global\\n- OmniPay Direct\\n- SIX\",\"type\":\"string\"}},\"type\":\"object\"},\"expirationMonth\":{\"description\":\"Two-digit month in which the payment card expires.\\n\\nFormat: `MM`.\\n\\nValid values: `01` through `12`. Leading 0 is required.\\n\\n#### Barclays and Streamline\\nFor Maestro (UK Domestic) and Maestro (International) cards on Barclays and Streamline, this must be a valid value\\n(`01` through `12`) but is not required to be a valid expiration date. In other words, an expiration date that is\\nin the past does not cause CyberSource to reject your request. However, an invalid expiration date might cause\\nthe issuer to reject your request.\\n\\n#### Encoded Account Numbers\\nFor encoded account numbers (_type_=039), if there is no expiration date on the card, use `12`.\\n\\n#### FDMS Nashville\\nRequired field.\\n\\n#### All other processors\\nRequired if `pointOfSaleInformation.entryMode=keyed`. However, this field is optional if your account is configured\\nfor relaxed requirements for address data and expiration date. **Important** It is your responsibility to determine\\nwhether a field is required for the transaction you are requesting.\\n\\n#### Google Pay transactions\\nFor PAN-based Google Pay transactions, this field is returned in the API response.\",\"maxLength\":2,\"type\":\"string\"},\"expirationYear\":{\"description\":\"Four-digit year in which the payment card expires.\\n\\nFormat: `YYYY`.\\n\\n#### Barclays and Streamline\\nFor Maestro (UK Domestic) and Maestro (International) cards on Barclays and Streamline, this must be a valid value (`1900` through `3000`) but is not required to be a valid expiration date. In other words, an expiration date that is in the past does not cause CyberSource to reject your request. However, an invalid expiration date might cause the issuer to reject your request.\\n\\n#### Encoded Account Numbers\\nFor encoded account numbers (**_type_**`=039`), if there is no expiration date on the card, use `2021`.\\n\\n#### FDMS Nashville\\nRequired field.\\n\\n#### FDC Nashville Global and FDMS South\\nYou can send in 2 digits or 4 digits. If you send in 2 digits, they must be the last 2 digits of the year.\\n\\n#### All other processors\\nRequired if `pointOfSaleInformation.entryMode=keyed`. However, this field is optional if your account is configured\\nfor relaxed requirements for address data and expiration date. **Important** It is your responsibility to determine\\nwhether a field is required for the transaction you are requesting.\\n\\n#### Google Pay transactions\\nFor PAN-based Google Pay transactions, this field is returned in the API response.\",\"maxLength\":4,\"type\":\"string\"},\"networkTokenId\":{\"description\":\"Network Token Id\",\"type\":\"string\"},\"networkTokenReason\":{\"description\":\"Network Token reason\",\"type\":\"string\"},\"networkTokenState\":{\"description\":\"Network Token state\",\"type\":\"string\"},\"tokenizedNumber\":{\"description\":\"Card tokenized number\",\"maxLength\":20,\"type\":\"string\"},\"type\":{\"description\":\"Last four digits of the cardholder’s account number. This field is included in the reply message when the client software\\nthat is installed on the POS terminal uses the token management service (TMS) to retrieve tokenized payment details.\\n\\nYou must contact customer support to have your account enabled to receive these fields in the credit reply message.\\n\\n#### Google Pay transactions\\nFor PAN-based Google Pay transactions, this field is returned in the API response.\\n\\n#### PIN debit\\nThis field is returned only for tokenized transactions. You can use this value on the receipt that you give to the cardholder.\\n\\nReturned by PIN debit credit and PIN debit purchase.\\n\\nThis field is supported only by the following processors:\\n- American Express Direct\\n- Credit Mutuel-CIC\\n- FDC Nashville Global\\n- OmniPay Direct\\n- SIX\",\"type\":\"string\"}},\"type\":\"object\"},\"networkTokenBundleId\":{\"description\":\"Unique identifier for the Network Token Bundle token used in the transaction.\",\"maxLength\":32,\"minLength\":12,\"type\":\"string\"},\"networkTokenBundleState\":{\"description\":\" \",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Network Token Creation Details\"},\"400\":{\"content\":{\"application/json\":{\"schema\":{\"description\":\"\",\"properties\":{\"errCode\":{\"description\":\"Error code\",\"type\":\"number\"},\"errMessage\":{\"description\":\"Error message\",\"type\":\"string\"},\"itemIndex\":{\"description\":\"Batch Item Index (optional)\",\"type\":\"number\"},\"itemReference\":{\"description\":\"Batch Item Reference (optional)\",\"type\":\"string\"},\"messageId\":{\"description\":\"Message Id\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Bad request\"},\"401\":{\"content\":{\"application/json\":{\"schema\":{\"description\":\"\",\"properties\":{\"errCode\":{\"description\":\"Error code\",\"type\":\"number\"},\"errMessage\":{\"description\":\"Error message\",\"type\":\"string\"},\"itemIndex\":{\"description\":\"Batch Item Index (optional)\",\"type\":\"number\"},\"itemReference\":{\"description\":\"Batch Item Reference (optional)\",\"type\":\"string\"},\"messageId\":{\"description\":\"Message Id\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Unauthorized\"},\"403\":{\"content\":{\"application/json\":{\"schema\":{\"description\":\"\",\"properties\":{\"errCode\":{\"description\":\"Error code\",\"type\":\"number\"},\"errMessage\":{\"description\":\"Error message\",\"type\":\"string\"},\"itemIndex\":{\"description\":\"Batch Item Index (optional)\",\"type\":\"number\"},\"itemReference\":{\"description\":\"Batch Item Reference (optional)\",\"type\":\"string\"},\"messageId\":{\"description\":\"Message Id\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Forbidden\"},\"409\":{\"content\":{\"application/json\":{\"schema\":{\"description\":\"\",\"properties\":{\"errCode\":{\"description\":\"Error code\",\"type\":\"number\"},\"errMessage\":{\"description\":\"Error message\",\"type\":\"string\"},\"itemIndex\":{\"description\":\"Batch Item Index (optional)\",\"type\":\"number\"},\"itemReference\":{\"description\":\"Batch Item Reference (optional)\",\"type\":\"string\"},\"messageId\":{\"description\":\"Message Id\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Invalid data\"},\"500\":{\"content\":{\"application/json\":{\"schema\":{\"description\":\"\",\"properties\":{\"errCode\":{\"description\":\"Error code\",\"type\":\"number\"},\"errMessage\":{\"description\":\"Error message\",\"type\":\"string\"},\"itemIndex\":{\"description\":\"Batch Item Index (optional)\",\"type\":\"number\"},\"itemReference\":{\"description\":\"Batch Item Reference (optional)\",\"type\":\"string\"},\"messageId\":{\"description\":\"Message Id\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Internal server error\"}},\"security\":[{\"basic\":[]}],\"securitySchemes\":{\"basic\":{\"scheme\":\"basic\",\"type\":\"http\"}},\"securitySource\":\"definition\"}",
+                    "source": "openapi3",
+                    "version": 1
+                  },
                   "kind": "http",
                   "method": "POST",
                   "orig": "/network-token-bundle",
@@ -182,6 +274,12 @@
                         "type": "`$STRING`"
                       }
                     ]
+                  },
+                  "contract": {
+                    "id": "GET /network-token-bundle/{networkTokenBundleId}",
+                    "json": "{\"operationId\":\"get-network-token-bundle\",\"parameters\":[{\"description\":\"\",\"in\":\"header\",\"name\":\"scx-client-reference\",\"required\":true,\"schema\":{\"maxLength\":255,\"minLength\":2,\"type\":\"string\"}},{\"description\":\"\",\"in\":\"path\",\"name\":\"networkTokenBundleId\",\"required\":true,\"schema\":{\"type\":\"string\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"issuer\":{\"properties\":{\"paymentAccountReference\":{\"description\":\"This reference number serves as a link to the cardholder account and to all transactions for that account.\",\"maxLength\":32,\"type\":\"string\"}},\"type\":\"object\"},\"networkToken\":{\"properties\":{\"card\":{\"properties\":{\"expirationMonth\":{\"description\":\"Two-digit month in which the payment card expires.\\n\\nFormat: `MM`.\\n\\nValid values: `01` through `12`. Leading 0 is required.\\n\\n#### Barclays and Streamline\\nFor Maestro (UK Domestic) and Maestro (International) cards on Barclays and Streamline, this must be a valid value\\n(`01` through `12`) but is not required to be a valid expiration date. In other words, an expiration date that is\\nin the past does not cause CyberSource to reject your request. However, an invalid expiration date might cause\\nthe issuer to reject your request.\\n\\n#### Encoded Account Numbers\\nFor encoded account numbers (_type_=039), if there is no expiration date on the card, use `12`.\\n\\n#### FDMS Nashville\\nRequired field.\\n\\n#### All other processors\\nRequired if `pointOfSaleInformation.entryMode=keyed`. However, this field is optional if your account is configured\\nfor relaxed requirements for address data and expiration date. **Important** It is your responsibility to determine\\nwhether a field is required for the transaction you are requesting.\\n\\n#### Google Pay transactions\\nFor PAN-based Google Pay transactions, this field is returned in the API response.\",\"maxLength\":2,\"type\":\"string\"},\"expirationYear\":{\"description\":\"Four-digit year in which the payment card expires.\\n\\nFormat: `YYYY`.\\n\\n#### Barclays and Streamline\\nFor Maestro (UK Domestic) and Maestro (International) cards on Barclays and Streamline, this must be a valid value (`1900` through `3000`) but is not required to be a valid expiration date. In other words, an expiration date that is in the past does not cause CyberSource to reject your request. However, an invalid expiration date might cause the issuer to reject your request.\\n\\n#### Encoded Account Numbers\\nFor encoded account numbers (**_type_**`=039`), if there is no expiration date on the card, use `2021`.\\n\\n#### FDMS Nashville\\nRequired field.\\n\\n#### FDC Nashville Global and FDMS South\\nYou can send in 2 digits or 4 digits. If you send in 2 digits, they must be the last 2 digits of the year.\\n\\n#### All other processors\\nRequired if `pointOfSaleInformation.entryMode=keyed`. However, this field is optional if your account is configured\\nfor relaxed requirements for address data and expiration date. **Important** It is your responsibility to determine\\nwhether a field is required for the transaction you are requesting.\\n\\n#### Google Pay transactions\\nFor PAN-based Google Pay transactions, this field is returned in the API response.\",\"maxLength\":4,\"type\":\"string\"},\"suffix\":{\"description\":\"Last four digits of the cardholder’s account number. This field is included in the reply message when the client software\\nthat is installed on the POS terminal uses the token management service (TMS) to retrieve tokenized payment details.\\n\\nYou must contact customer support to have your account enabled to receive these fields in the credit reply message.\\n\\n#### Google Pay transactions\\nFor PAN-based Google Pay transactions, this field is returned in the API response.\\n\\n#### PIN debit\\nThis field is returned only for tokenized transactions. You can use this value on the receipt that you give to the cardholder.\\n\\nReturned by PIN debit credit and PIN debit purchase.\\n\\nThis field is supported only by the following processors:\\n- American Express Direct\\n- Credit Mutuel-CIC\\n- FDC Nashville Global\\n- OmniPay Direct\\n- SIX\",\"type\":\"string\"}},\"type\":\"object\"},\"expirationMonth\":{\"description\":\"Two-digit month in which the payment card expires.\\n\\nFormat: `MM`.\\n\\nValid values: `01` through `12`. Leading 0 is required.\\n\\n#### Barclays and Streamline\\nFor Maestro (UK Domestic) and Maestro (International) cards on Barclays and Streamline, this must be a valid value\\n(`01` through `12`) but is not required to be a valid expiration date. In other words, an expiration date that is\\nin the past does not cause CyberSource to reject your request. However, an invalid expiration date might cause\\nthe issuer to reject your request.\\n\\n#### Encoded Account Numbers\\nFor encoded account numbers (_type_=039), if there is no expiration date on the card, use `12`.\\n\\n#### FDMS Nashville\\nRequired field.\\n\\n#### All other processors\\nRequired if `pointOfSaleInformation.entryMode=keyed`. However, this field is optional if your account is configured\\nfor relaxed requirements for address data and expiration date. **Important** It is your responsibility to determine\\nwhether a field is required for the transaction you are requesting.\\n\\n#### Google Pay transactions\\nFor PAN-based Google Pay transactions, this field is returned in the API response.\",\"maxLength\":2,\"type\":\"string\"},\"expirationYear\":{\"description\":\"Four-digit year in which the payment card expires.\\n\\nFormat: `YYYY`.\\n\\n#### Barclays and Streamline\\nFor Maestro (UK Domestic) and Maestro (International) cards on Barclays and Streamline, this must be a valid value (`1900` through `3000`) but is not required to be a valid expiration date. In other words, an expiration date that is in the past does not cause CyberSource to reject your request. However, an invalid expiration date might cause the issuer to reject your request.\\n\\n#### Encoded Account Numbers\\nFor encoded account numbers (**_type_**`=039`), if there is no expiration date on the card, use `2021`.\\n\\n#### FDMS Nashville\\nRequired field.\\n\\n#### FDC Nashville Global and FDMS South\\nYou can send in 2 digits or 4 digits. If you send in 2 digits, they must be the last 2 digits of the year.\\n\\n#### All other processors\\nRequired if `pointOfSaleInformation.entryMode=keyed`. However, this field is optional if your account is configured\\nfor relaxed requirements for address data and expiration date. **Important** It is your responsibility to determine\\nwhether a field is required for the transaction you are requesting.\\n\\n#### Google Pay transactions\\nFor PAN-based Google Pay transactions, this field is returned in the API response.\",\"maxLength\":4,\"type\":\"string\"},\"networkTokenId\":{\"description\":\"Network Token Id\",\"type\":\"string\"},\"networkTokenReason\":{\"description\":\"Network Token reason\",\"type\":\"string\"},\"networkTokenState\":{\"description\":\"Network Token state\",\"type\":\"string\"},\"tokenizedNumber\":{\"description\":\"Card tokenized number\",\"maxLength\":20,\"type\":\"string\"},\"type\":{\"description\":\"Last four digits of the cardholder’s account number. This field is included in the reply message when the client software\\nthat is installed on the POS terminal uses the token management service (TMS) to retrieve tokenized payment details.\\n\\nYou must contact customer support to have your account enabled to receive these fields in the credit reply message.\\n\\n#### Google Pay transactions\\nFor PAN-based Google Pay transactions, this field is returned in the API response.\\n\\n#### PIN debit\\nThis field is returned only for tokenized transactions. You can use this value on the receipt that you give to the cardholder.\\n\\nReturned by PIN debit credit and PIN debit purchase.\\n\\nThis field is supported only by the following processors:\\n- American Express Direct\\n- Credit Mutuel-CIC\\n- FDC Nashville Global\\n- OmniPay Direct\\n- SIX\",\"type\":\"string\"}},\"type\":\"object\"},\"networkTokenBundleId\":{\"description\":\"Unique identifier for the Instrument Identifier token used in the transaction.\",\"maxLength\":32,\"minLength\":12,\"type\":\"string\"},\"networkTokenBundleState\":{\"description\":\" \",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Network Token details response\"},\"401\":{\"content\":{\"application/json\":{\"schema\":{\"description\":\"\",\"properties\":{\"errCode\":{\"description\":\"Error code\",\"type\":\"number\"},\"errMessage\":{\"description\":\"Error message\",\"type\":\"string\"},\"itemIndex\":{\"description\":\"Batch Item Index (optional)\",\"type\":\"number\"},\"itemReference\":{\"description\":\"Batch Item Reference (optional)\",\"type\":\"string\"},\"messageId\":{\"description\":\"Message Id\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Unauthorized\"},\"403\":{\"content\":{\"application/json\":{\"schema\":{\"description\":\"\",\"properties\":{\"errCode\":{\"description\":\"Error code\",\"type\":\"number\"},\"errMessage\":{\"description\":\"Error message\",\"type\":\"string\"},\"itemIndex\":{\"description\":\"Batch Item Index (optional)\",\"type\":\"number\"},\"itemReference\":{\"description\":\"Batch Item Reference (optional)\",\"type\":\"string\"},\"messageId\":{\"description\":\"Message Id\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Forbidden\"},\"500\":{\"content\":{\"application/json\":{\"schema\":{\"description\":\"\",\"properties\":{\"errCode\":{\"description\":\"Error code\",\"type\":\"number\"},\"errMessage\":{\"description\":\"Error message\",\"type\":\"string\"},\"itemIndex\":{\"description\":\"Batch Item Index (optional)\",\"type\":\"number\"},\"itemReference\":{\"description\":\"Batch Item Reference (optional)\",\"type\":\"string\"},\"messageId\":{\"description\":\"Message Id\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Internal server error\"}},\"security\":[{\"basic\":[]}],\"securitySchemes\":{\"basic\":{\"scheme\":\"basic\",\"type\":\"http\"}},\"securitySource\":\"definition\"}",
+                    "source": "openapi3",
+                    "version": 1
                   },
                   "kind": "http",
                   "method": "GET",
@@ -233,6 +331,12 @@
                         "type": "`$STRING`"
                       }
                     ]
+                  },
+                  "contract": {
+                    "id": "GET /network-token-bundle/{networkTokenBundleId}/payment-credentials",
+                    "json": "{\"operationId\":\"get-payment-credentials\",\"parameters\":[{\"description\":\"\",\"in\":\"header\",\"name\":\"scx-client-reference\",\"required\":true,\"schema\":{\"maxLength\":255,\"minLength\":2,\"type\":\"string\"}},{\"description\":\"\",\"in\":\"path\",\"name\":\"networkTokenBundleId\",\"required\":true,\"schema\":{\"type\":\"string\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"card\":{\"properties\":{\"number\":{\"type\":\"string\"}},\"type\":\"object\"},\"issuer\":{\"properties\":{\"paymentAccountReference\":{\"description\":\"This reference number serves as a link to the cardholder account and to all transactions for that account.\",\"maxLength\":32,\"type\":\"string\"}},\"type\":\"object\"},\"networkToken\":{\"allOf\":[{\"properties\":{\"card\":{\"properties\":{\"expirationMonth\":{\"description\":\"Two-digit month in which the payment card expires.\\n\\nFormat: `MM`.\\n\\nValid values: `01` through `12`. Leading 0 is required.\\n\\n#### Barclays and Streamline\\nFor Maestro (UK Domestic) and Maestro (International) cards on Barclays and Streamline, this must be a valid value\\n(`01` through `12`) but is not required to be a valid expiration date. In other words, an expiration date that is\\nin the past does not cause CyberSource to reject your request. However, an invalid expiration date might cause\\nthe issuer to reject your request.\\n\\n#### Encoded Account Numbers\\nFor encoded account numbers (_type_=039), if there is no expiration date on the card, use `12`.\\n\\n#### FDMS Nashville\\nRequired field.\\n\\n#### All other processors\\nRequired if `pointOfSaleInformation.entryMode=keyed`. However, this field is optional if your account is configured\\nfor relaxed requirements for address data and expiration date. **Important** It is your responsibility to determine\\nwhether a field is required for the transaction you are requesting.\\n\\n#### Google Pay transactions\\nFor PAN-based Google Pay transactions, this field is returned in the API response.\",\"maxLength\":2,\"type\":\"string\"},\"expirationYear\":{\"description\":\"Four-digit year in which the payment card expires.\\n\\nFormat: `YYYY`.\\n\\n#### Barclays and Streamline\\nFor Maestro (UK Domestic) and Maestro (International) cards on Barclays and Streamline, this must be a valid value (`1900` through `3000`) but is not required to be a valid expiration date. In other words, an expiration date that is in the past does not cause CyberSource to reject your request. However, an invalid expiration date might cause the issuer to reject your request.\\n\\n#### Encoded Account Numbers\\nFor encoded account numbers (**_type_**`=039`), if there is no expiration date on the card, use `2021`.\\n\\n#### FDMS Nashville\\nRequired field.\\n\\n#### FDC Nashville Global and FDMS South\\nYou can send in 2 digits or 4 digits. If you send in 2 digits, they must be the last 2 digits of the year.\\n\\n#### All other processors\\nRequired if `pointOfSaleInformation.entryMode=keyed`. However, this field is optional if your account is configured\\nfor relaxed requirements for address data and expiration date. **Important** It is your responsibility to determine\\nwhether a field is required for the transaction you are requesting.\\n\\n#### Google Pay transactions\\nFor PAN-based Google Pay transactions, this field is returned in the API response.\",\"maxLength\":4,\"type\":\"string\"},\"suffix\":{\"description\":\"Last four digits of the cardholder’s account number. This field is included in the reply message when the client software\\nthat is installed on the POS terminal uses the token management service (TMS) to retrieve tokenized payment details.\\n\\nYou must contact customer support to have your account enabled to receive these fields in the credit reply message.\\n\\n#### Google Pay transactions\\nFor PAN-based Google Pay transactions, this field is returned in the API response.\\n\\n#### PIN debit\\nThis field is returned only for tokenized transactions. You can use this value on the receipt that you give to the cardholder.\\n\\nReturned by PIN debit credit and PIN debit purchase.\\n\\nThis field is supported only by the following processors:\\n- American Express Direct\\n- Credit Mutuel-CIC\\n- FDC Nashville Global\\n- OmniPay Direct\\n- SIX\",\"type\":\"string\"}},\"type\":\"object\"},\"expirationMonth\":{\"description\":\"Two-digit month in which the payment card expires.\\n\\nFormat: `MM`.\\n\\nValid values: `01` through `12`. Leading 0 is required.\\n\\n#### Barclays and Streamline\\nFor Maestro (UK Domestic) and Maestro (International) cards on Barclays and Streamline, this must be a valid value\\n(`01` through `12`) but is not required to be a valid expiration date. In other words, an expiration date that is\\nin the past does not cause CyberSource to reject your request. However, an invalid expiration date might cause\\nthe issuer to reject your request.\\n\\n#### Encoded Account Numbers\\nFor encoded account numbers (_type_=039), if there is no expiration date on the card, use `12`.\\n\\n#### FDMS Nashville\\nRequired field.\\n\\n#### All other processors\\nRequired if `pointOfSaleInformation.entryMode=keyed`. However, this field is optional if your account is configured\\nfor relaxed requirements for address data and expiration date. **Important** It is your responsibility to determine\\nwhether a field is required for the transaction you are requesting.\\n\\n#### Google Pay transactions\\nFor PAN-based Google Pay transactions, this field is returned in the API response.\",\"maxLength\":2,\"type\":\"string\"},\"expirationYear\":{\"description\":\"Four-digit year in which the payment card expires.\\n\\nFormat: `YYYY`.\\n\\n#### Barclays and Streamline\\nFor Maestro (UK Domestic) and Maestro (International) cards on Barclays and Streamline, this must be a valid value (`1900` through `3000`) but is not required to be a valid expiration date. In other words, an expiration date that is in the past does not cause CyberSource to reject your request. However, an invalid expiration date might cause the issuer to reject your request.\\n\\n#### Encoded Account Numbers\\nFor encoded account numbers (**_type_**`=039`), if there is no expiration date on the card, use `2021`.\\n\\n#### FDMS Nashville\\nRequired field.\\n\\n#### FDC Nashville Global and FDMS South\\nYou can send in 2 digits or 4 digits. If you send in 2 digits, they must be the last 2 digits of the year.\\n\\n#### All other processors\\nRequired if `pointOfSaleInformation.entryMode=keyed`. However, this field is optional if your account is configured\\nfor relaxed requirements for address data and expiration date. **Important** It is your responsibility to determine\\nwhether a field is required for the transaction you are requesting.\\n\\n#### Google Pay transactions\\nFor PAN-based Google Pay transactions, this field is returned in the API response.\",\"maxLength\":4,\"type\":\"string\"},\"networkTokenId\":{\"description\":\"Network Token Id\",\"type\":\"string\"},\"networkTokenReason\":{\"description\":\"Network Token reason\",\"type\":\"string\"},\"networkTokenState\":{\"description\":\"Network Token state\",\"type\":\"string\"},\"tokenizedNumber\":{\"description\":\"Card tokenized number\",\"maxLength\":20,\"type\":\"string\"},\"type\":{\"description\":\"Last four digits of the cardholder’s account number. This field is included in the reply message when the client software\\nthat is installed on the POS terminal uses the token management service (TMS) to retrieve tokenized payment details.\\n\\nYou must contact customer support to have your account enabled to receive these fields in the credit reply message.\\n\\n#### Google Pay transactions\\nFor PAN-based Google Pay transactions, this field is returned in the API response.\\n\\n#### PIN debit\\nThis field is returned only for tokenized transactions. You can use this value on the receipt that you give to the cardholder.\\n\\nReturned by PIN debit credit and PIN debit purchase.\\n\\nThis field is supported only by the following processors:\\n- American Express Direct\\n- Credit Mutuel-CIC\\n- FDC Nashville Global\\n- OmniPay Direct\\n- SIX\",\"type\":\"string\"}},\"type\":\"object\"},{\"properties\":{\"cryptogram\":{\"description\":\"This field contains token information.\",\"maxLength\":255,\"type\":\"string\"},\"eci\":{\"description\":\"Note This field applies only to non-U.S-issued cards.\\n\\nFor enroll, Numeric electronic commerce indicator (ECI) returned only for Visa, American Express, JCB,\\nDiners Club, and Discover transactions when the card is not enrolled. For more information, see\\n\\\"Interpreting the Reply,\\\" page 22.\\n\\nIf you are not using the CyberSource payment services, you must send this value to your payment\\nprocessor in the subsequent request for card authorization. This field contains one of these values:\\n- `06`: The card can be enrolled. Liability shift.\\n- `07`: The card cannot be enrolled. No liability shift.\\n\\nFor validate, Numeric electronic commerce indicator (ECI) returned only for Visa, American Express, JCB,\\nDiners Club, and Discover transactions. The field is absent when authentication fails.\\nYou must send this value to your payment processor in the subsequent request for card authorization.\\nThis field contains one of these values:\\n- `05`: Successful authentication\\n- `06`: Authentication attempted\\n- `07`: Failed authentication (No response from the merchant because of a problem.)\",\"type\":\"string\"},\"requestorId\":{\"description\":\"Value that identifies your business and indicates that the cardholder’s account number is tokenized. This value\\nis assigned by the token service provider and is unique within the token service provider’s database.\\n\\n**Note** This field is supported only for **CyberSource through VisaNet** and **FDC Nashville Global**.\\n\\n#### PIN debit\\nOptional field for PIN debit credit or PIN debit purchase transactions that use payment network tokens; otherwise, not used.\",\"maxLength\":11,\"type\":\"string\"}},\"type\":\"object\"}]},\"networkTokenBundleId\":{\"description\":\"Unique identifier for the Network Token Bundle token used in the transaction.\",\"maxLength\":32,\"minLength\":12,\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Payment Credentials details response\"},\"401\":{\"content\":{\"application/json\":{\"schema\":{\"description\":\"\",\"properties\":{\"errCode\":{\"description\":\"Error code\",\"type\":\"number\"},\"errMessage\":{\"description\":\"Error message\",\"type\":\"string\"},\"itemIndex\":{\"description\":\"Batch Item Index (optional)\",\"type\":\"number\"},\"itemReference\":{\"description\":\"Batch Item Reference (optional)\",\"type\":\"string\"},\"messageId\":{\"description\":\"Message Id\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Unauthorized\"},\"403\":{\"content\":{\"application/json\":{\"schema\":{\"description\":\"\",\"properties\":{\"errCode\":{\"description\":\"Error code\",\"type\":\"number\"},\"errMessage\":{\"description\":\"Error message\",\"type\":\"string\"},\"itemIndex\":{\"description\":\"Batch Item Index (optional)\",\"type\":\"number\"},\"itemReference\":{\"description\":\"Batch Item Reference (optional)\",\"type\":\"string\"},\"messageId\":{\"description\":\"Message Id\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Forbidden\"},\"500\":{\"content\":{\"application/json\":{\"schema\":{\"description\":\"\",\"properties\":{\"errCode\":{\"description\":\"Error code\",\"type\":\"number\"},\"errMessage\":{\"description\":\"Error message\",\"type\":\"string\"},\"itemIndex\":{\"description\":\"Batch Item Index (optional)\",\"type\":\"number\"},\"itemReference\":{\"description\":\"Batch Item Reference (optional)\",\"type\":\"string\"},\"messageId\":{\"description\":\"Message Id\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Internal server error\"}},\"security\":[{\"basic\":[]}],\"securitySchemes\":{\"basic\":{\"scheme\":\"basic\",\"type\":\"http\"}},\"securitySource\":\"definition\"}",
+                    "source": "openapi3",
+                    "version": 1
                   },
                   "kind": "http",
                   "method": "GET",
@@ -295,6 +399,12 @@
                       }
                     ]
                   },
+                  "contract": {
+                    "id": "DELETE /network-token-bundle/{networkTokenBundleId}",
+                    "json": "{\"operationId\":\"delete-network-token-bundle\",\"parameters\":[{\"description\":\"\",\"in\":\"header\",\"name\":\"scx-client-reference\",\"required\":true,\"schema\":{\"maxLength\":255,\"minLength\":2,\"type\":\"string\"}},{\"description\":\"\",\"in\":\"path\",\"name\":\"networkTokenBundleId\",\"required\":true,\"schema\":{\"type\":\"string\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"description\":\"\",\"type\":\"object\"}}},\"description\":\"Network Token delete response\"},\"401\":{\"content\":{\"application/json\":{\"schema\":{\"description\":\"\",\"properties\":{\"errCode\":{\"description\":\"Error code\",\"type\":\"number\"},\"errMessage\":{\"description\":\"Error message\",\"type\":\"string\"},\"itemIndex\":{\"description\":\"Batch Item Index (optional)\",\"type\":\"number\"},\"itemReference\":{\"description\":\"Batch Item Reference (optional)\",\"type\":\"string\"},\"messageId\":{\"description\":\"Message Id\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Unauthorized\"},\"403\":{\"content\":{\"application/json\":{\"schema\":{\"description\":\"\",\"properties\":{\"errCode\":{\"description\":\"Error code\",\"type\":\"number\"},\"errMessage\":{\"description\":\"Error message\",\"type\":\"string\"},\"itemIndex\":{\"description\":\"Batch Item Index (optional)\",\"type\":\"number\"},\"itemReference\":{\"description\":\"Batch Item Reference (optional)\",\"type\":\"string\"},\"messageId\":{\"description\":\"Message Id\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Forbidden\"},\"409\":{\"content\":{\"application/json\":{\"schema\":{\"description\":\"\",\"properties\":{\"errCode\":{\"description\":\"Error code\",\"type\":\"number\"},\"errMessage\":{\"description\":\"Error message\",\"type\":\"string\"},\"itemIndex\":{\"description\":\"Batch Item Index (optional)\",\"type\":\"number\"},\"itemReference\":{\"description\":\"Batch Item Reference (optional)\",\"type\":\"string\"},\"messageId\":{\"description\":\"Message Id\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Invalid data\"},\"500\":{\"content\":{\"application/json\":{\"schema\":{\"description\":\"\",\"properties\":{\"errCode\":{\"description\":\"Error code\",\"type\":\"number\"},\"errMessage\":{\"description\":\"Error message\",\"type\":\"string\"},\"itemIndex\":{\"description\":\"Batch Item Index (optional)\",\"type\":\"number\"},\"itemReference\":{\"description\":\"Batch Item Reference (optional)\",\"type\":\"string\"},\"messageId\":{\"description\":\"Message Id\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Internal server error\"}},\"security\":[{\"basic\":[]}],\"securitySchemes\":{\"basic\":{\"scheme\":\"basic\",\"type\":\"http\"}},\"securitySource\":\"definition\"}",
+                    "source": "openapi3",
+                    "version": 1
+                  },
                   "kind": "http",
                   "method": "DELETE",
                   "orig": "/network-token-bundle/{networkTokenBundleId}",
@@ -339,7 +449,12 @@
               "active": false,
               "actor": "anonymous",
               "max": 1000
-            }
+            },
+            "optspec": {
+              "now": "`$FUNCTION`",
+              "sink": "`$FUNCTION`"
+            },
+            "strict": false
           },
           "hook": {
             "GetData": {
@@ -489,7 +604,15 @@
             "options": {
               "active": false,
               "clientVersion": "0.0.1"
-            }
+            },
+            "optspec": {
+              "clientName": "`$STRING`",
+              "clientVersion": "`$STRING`",
+              "headers": "`$MAP`",
+              "idgen": "`$FUNCTION`",
+              "sessionId": "`$STRING`"
+            },
+            "strict": false
           },
           "hook": {
             "GetData": {
@@ -624,6 +747,170 @@
           "transport": "none",
           "version": "0.0.1"
         },
+        "debug": {
+          "active": true,
+          "base": "node_modules/@voxgig/sdkgen/project/.sdk",
+          "config": {
+            "options": {
+              "active": false,
+              "max": 100,
+              "redact": [
+                "authorization",
+                "cookie",
+                "set-cookie",
+                "api-key",
+                "apikey",
+                "x-api-key",
+                "idempotency-key"
+              ]
+            },
+            "optspec": {
+              "now": "`$FUNCTION`",
+              "onEntry": "`$FUNCTION`"
+            },
+            "strict": false
+          },
+          "hook": {
+            "GetData": {
+              "active": false,
+              "await": false
+            },
+            "GetMatch": {
+              "active": false,
+              "await": false
+            },
+            "PostConstruct": {
+              "active": false,
+              "await": false
+            },
+            "PostConstructEntity": {
+              "active": false,
+              "await": false
+            },
+            "PostOperation": {
+              "active": false,
+              "await": false
+            },
+            "PreDone": {
+              "active": true,
+              "await": false
+            },
+            "PreRequest": {
+              "active": true,
+              "await": false
+            },
+            "PreResponse": {
+              "active": true,
+              "await": false
+            },
+            "PreResult": {
+              "active": false,
+              "await": false
+            },
+            "PreSpec": {
+              "active": false,
+              "await": false
+            },
+            "PreTarget": {
+              "active": false,
+              "await": false
+            },
+            "PreUnexpected": {
+              "active": true,
+              "await": false
+            },
+            "SetData": {
+              "active": false,
+              "await": false
+            }
+          },
+          "name": "debug",
+          "needs": {},
+          "origname": "",
+          "package": "@voxgig/sdkgen",
+          "plugin": {},
+          "spec": {},
+          "target": {
+            "c": {
+              "deps": {}
+            },
+            "clojure": {
+              "deps": {}
+            },
+            "cpp": {
+              "deps": {}
+            },
+            "csharp": {
+              "deps": {}
+            },
+            "dart": {
+              "deps": {}
+            },
+            "elixir": {
+              "deps": {}
+            },
+            "go": {
+              "deps": {}
+            },
+            "go-cli": {
+              "deps": {}
+            },
+            "go-mcp": {
+              "deps": {}
+            },
+            "haskell": {
+              "deps": {}
+            },
+            "java": {
+              "deps": {}
+            },
+            "js": {
+              "deps": {}
+            },
+            "kotlin": {
+              "deps": {}
+            },
+            "lean": {
+              "deps": {}
+            },
+            "lua": {
+              "deps": {}
+            },
+            "ocaml": {
+              "deps": {}
+            },
+            "perl": {
+              "deps": {}
+            },
+            "php": {
+              "deps": {}
+            },
+            "py": {
+              "deps": {}
+            },
+            "rb": {
+              "deps": {}
+            },
+            "rust": {
+              "deps": {}
+            },
+            "scala": {
+              "deps": {}
+            },
+            "swift": {
+              "deps": {}
+            },
+            "ts": {
+              "deps": {}
+            },
+            "zig": {
+              "deps": {}
+            }
+          },
+          "title": "Request/response capture ring buffer for debugging",
+          "transport": "none",
+          "version": "0.0.1"
+        },
         "idempotency": {
           "active": true,
           "base": "node_modules/@voxgig/sdkgen/project/.sdk",
@@ -642,7 +929,11 @@
                 "update",
                 "remove"
               ]
-            }
+            },
+            "optspec": {
+              "keygen": "`$FUNCTION`"
+            },
+            "strict": false
           },
           "hook": {
             "GetData": {
@@ -783,7 +1074,12 @@
           "config": {
             "options": {
               "active": true
-            }
+            },
+            "optspec": {
+              "level": "`$STRING`",
+              "logger": "`$ANY`"
+            },
+            "strict": false
           },
           "deps": {
             "js": {
@@ -958,7 +1254,11 @@
           "config": {
             "options": {
               "active": false
-            }
+            },
+            "optspec": {
+              "now": "`$FUNCTION`"
+            },
+            "strict": false
           },
           "hook": {
             "GetData": {
@@ -1117,7 +1417,12 @@
               "limitParam": "limit",
               "pageParam": "page",
               "startPage": 1
-            }
+            },
+            "optspec": {
+              "limit": "`$NUMBER`",
+              "ops": "`$LIST`"
+            },
+            "strict": false
           },
           "hook": {
             "GetData": {
@@ -1260,7 +1565,12 @@
               "active": false,
               "burst": 5,
               "rate": 5
-            }
+            },
+            "optspec": {
+              "now": "`$FUNCTION`",
+              "sleep": "`$FUNCTION`"
+            },
+            "strict": false
           },
           "hook": {
             "GetData": {
@@ -1414,7 +1724,12 @@
                 503,
                 504
               ]
-            }
+            },
+            "optspec": {
+              "jitter": "`$BOOLEAN`",
+              "sleep": "`$FUNCTION`"
+            },
+            "strict": false
           },
           "hook": {
             "GetData": {
@@ -1555,7 +1870,14 @@
           "config": {
             "options": {
               "active": false
-            }
+            },
+            "optspec": {
+              "exporter": "`$FUNCTION`",
+              "headers": "`$MAP`",
+              "idgen": "`$FUNCTION`",
+              "now": "`$FUNCTION`"
+            },
+            "strict": false
           },
           "hook": {
             "GetData": {
@@ -1708,7 +2030,12 @@
           "config": {
             "options": {
               "active": false
-            }
+            },
+            "optspec": {
+              "entity": "`$MAP`",
+              "net": "`$MAP`"
+            },
+            "strict": false
           },
           "hook": {
             "GetData": {
@@ -1858,7 +2185,12 @@
             "options": {
               "active": false,
               "ms": 30000
-            }
+            },
+            "optspec": {
+              "clearTimer": "`$FUNCTION`",
+              "setTimer": "`$FUNCTION`"
+            },
+            "strict": false
           },
           "hook": {
             "GetData": {
@@ -2077,6 +2409,48 @@
         "website": "https://secure-cert.shieldconex.com"
       },
       "option": {},
+      "optspec": {
+        "allow": {
+          "method": "GET,PUT,POST,PATCH,DELETE,OPTIONS",
+          "op": "create,update,load,list,remove,command,direct,graphql"
+        },
+        "apikey": "",
+        "auth": {
+          "basic": false,
+          "prefix": ""
+        },
+        "base": "http://localhost:8000",
+        "clean": {
+          "keys": "key,token,id"
+        },
+        "entity": {
+          "`$CHILD`": {
+            "`$OPEN`": true,
+            "active": false,
+            "alias": {}
+          }
+        },
+        "extend": "`$ANY`",
+        "headers": {
+          "`$CHILD`": "`$STRING`"
+        },
+        "prefix": "",
+        "secret": "",
+        "server": {
+          "`$CHILD`": ""
+        },
+        "suffix": "",
+        "system": {
+          "fetch": "`$ANY`"
+        },
+        "test": {
+          "active": false,
+          "entity": {
+            "`$OPEN`": true
+          }
+        },
+        "utility": {}
+      },
       "repo": {
         "host": "github.com",
         "path": ""
@@ -2884,6 +3258,7 @@
           },
           "package": "@voxgig/sdkgen",
           "provides": {
+            "schema": true,
             "sekreto": true
           },
           "publish": {
@@ -3718,6 +4093,7 @@
           },
           "package": "@voxgig/sdkgen",
           "provides": {
+            "schema": true,
             "sekreto": true
           },
           "publish": {
@@ -3824,7 +4200,7 @@
         "live": {
           "app": false,
           "base": "",
-          "strict": false
+          "strict": true
         }
       }
     }
