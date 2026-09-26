@@ -1,7 +1,7 @@
 // Typed models for the BluefinNetworkToken SDK.
 //
-// GENERATED from the API model: main.kit.entity.<e>.fields[] and per-op
-// params (op.<name>.points[].args.params[]). Field/param types come from the
+// GENERATED from the API model: main.kit.entity.<e>.fields{} and per-op
+// params (op.<name>.points[].g.params[]). Field/param types come from the
 // canonical type sentinels via @voxgig/sdkgen canonToType (source of truth:
 // @voxgig/apidef VALID_CANON). Do not edit by hand.
 package entity
@@ -14,17 +14,6 @@ import (
 
 // NetworkTokenBundle is the typed data model for the network_token_bundle entity.
 type NetworkTokenBundle struct {
-	Card *map[string]any `json:"card,omitempty"`
-	CardNumber *string `json:"cardNumber,omitempty"`
-	ExpirationMonth *string `json:"expirationMonth,omitempty"`
-	ExpirationYear *string `json:"expirationYear,omitempty"`
-	Id *string `json:"id,omitempty"`
-	Issuer *map[string]any `json:"issuer,omitempty"`
-	Metadata *map[string]any `json:"metadata,omitempty"`
-	NetworkToken *map[string]any `json:"networkToken,omitempty"`
-	NetworkTokenBundleId *string `json:"networkTokenBundleId,omitempty"`
-	NetworkTokenBundleState *string `json:"networkTokenBundleState,omitempty"`
-	SecurityCode *string `json:"securityCode,omitempty"`
 }
 
 // NetworkTokenBundleLoadMatch is the typed request payload for NetworkTokenBundle.LoadTyped.

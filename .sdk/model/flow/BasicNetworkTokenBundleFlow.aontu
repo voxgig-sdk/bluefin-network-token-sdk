@@ -1,0 +1,53 @@
+# BasicNetworkTokenBundleFlow
+
+main: kit: flow: BasicNetworkTokenBundleFlow:
+{
+  entity: "network_token_bundle",
+  kind: "basic",
+  name: "BasicNetworkTokenBundleFlow",
+  step: [
+    {
+      i: {
+        ref: "network_token_bundle_ref01"
+      }
+
+      o: "create"
+    }
+
+    {
+      i: {
+        ref: "network_token_bundle_ref01",
+        srcdatavar: "network_token_bundle_ref01_data",
+        suffix: "_dt0"
+      }
+
+      m: {
+        id: "network_token_bundle01"
+      }
+
+      o: "load",
+      v: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-network_token_bundle_ref01"
+          }
+        }
+      ]
+    }
+
+    {
+      i: {
+        ref: "network_token_bundle_ref01",
+        suffix: "_rm0"
+      }
+
+      m: {
+        id: "network_token_bundle01"
+      }
+
+      o: "remove"
+    }
+  ],
+  "key$": "BasicNetworkTokenBundleFlow"
+}

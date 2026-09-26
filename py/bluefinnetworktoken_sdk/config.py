@@ -241,49 +241,60 @@ def make_config():
         "fields": [
           {
             "name": "card",
+            "title": "Card",
             "type": "`$OBJECT`",
           },
           {
             "name": "cardNumber",
+            "title": "Card Number",
             "type": "`$STRING`",
           },
           {
             "name": "expirationMonth",
-            "short": "Two-digit month in which the payment card expires.",
+            "title": "Expiration Month",
             "type": "`$STRING`",
+            "short": "Two-digit month in which the payment card expires.",
           },
           {
             "name": "expirationYear",
-            "short": "Four-digit year in which the payment card expires.",
+            "title": "Expiration Year",
             "type": "`$STRING`",
+            "short": "Four-digit year in which the payment card expires.",
           },
           {
             "name": "id",
+            "title": "Id",
             "type": "`$STRING`",
           },
           {
             "name": "issuer",
+            "title": "Issuer",
             "type": "`$OBJECT`",
           },
           {
             "name": "metadata",
+            "title": "Metadata",
             "type": "`$OBJECT`",
           },
           {
             "name": "networkToken",
+            "title": "Network Token",
             "type": "`$OBJECT`",
           },
           {
             "name": "networkTokenBundleId",
-            "short": "Unique identifier for the Instrument Identifier token used in the transaction.",
+            "title": "Network Token Bundle Id",
             "type": "`$STRING`",
+            "short": "Unique identifier for the Instrument Identifier token used in the transaction.",
           },
           {
             "name": "networkTokenBundleState",
+            "title": "Network Token Bundle State",
             "type": "`$STRING`",
           },
           {
             "name": "securityCode",
+            "title": "Security Code",
             "type": "`$STRING`",
           },
         ],
@@ -298,17 +309,6 @@ def make_config():
             "name": "create",
             "points": [
               {
-                "args": {
-                  "header": [
-                    {
-                      "kind": "header",
-                      "name": "scx_client_reference",
-                      "orig": "scx_client_reference",
-                      "reqd": True,
-                      "type": "`$STRING`",
-                    },
-                  ],
-                },
                 "kind": "http",
                 "method": "POST",
                 "orig": "/network-token-bundle",
@@ -317,18 +317,30 @@ def make_config():
                     "lit": "network-token-bundle",
                   },
                 ],
+                "parts": [
+                  "network-token-bundle",
+                ],
+                "rename": {},
+                "transform": {
+                  "req": "`reqdata`",
+                  "res": "`body`",
+                },
+                "args": {
+                  "header": [
+                    {
+                      "name": "scx_client_reference",
+                      "orig": "scx_client_reference",
+                      "type": "`$STRING`",
+                      "kind": "header",
+                      "reqd": True,
+                    },
+                  ],
+                },
                 "select": {
                   "exist": [
                     "scx_client_reference",
                   ],
                 },
-                "transform": {
-                  "req": "`reqdata`",
-                  "res": "`body`",
-                },
-                "parts": [
-                  "network-token-bundle",
-                ],
               },
             ],
           },
@@ -337,34 +349,9 @@ def make_config():
             "name": "load",
             "points": [
               {
-                "args": {
-                  "header": [
-                    {
-                      "kind": "header",
-                      "name": "scx_client_reference",
-                      "orig": "scx_client_reference",
-                      "reqd": True,
-                      "type": "`$STRING`",
-                    },
-                  ],
-                  "params": [
-                    {
-                      "kind": "param",
-                      "name": "id",
-                      "orig": "network_token_bundle_id",
-                      "reqd": True,
-                      "type": "`$STRING`",
-                    },
-                  ],
-                },
                 "kind": "http",
                 "method": "GET",
                 "orig": "/network-token-bundle/{networkTokenBundleId}",
-                "rename": {
-                  "param": {
-                    "networkTokenBundleId": "id",
-                  },
-                },
                 "segments": [
                   {
                     "lit": "network-token-bundle",
@@ -373,50 +360,50 @@ def make_config():
                     "var": "id",
                   },
                 ],
+                "parts": [
+                  "network-token-bundle",
+                  "{id}",
+                ],
+                "rename": {
+                  "param": {
+                    "networkTokenBundleId": "id",
+                  },
+                },
+                "transform": {
+                  "req": "`reqdata`",
+                  "res": "`body`",
+                },
+                "args": {
+                  "header": [
+                    {
+                      "name": "scx_client_reference",
+                      "orig": "scx_client_reference",
+                      "type": "`$STRING`",
+                      "kind": "header",
+                      "reqd": True,
+                    },
+                  ],
+                  "params": [
+                    {
+                      "name": "id",
+                      "orig": "network_token_bundle_id",
+                      "type": "`$STRING`",
+                      "kind": "param",
+                      "reqd": True,
+                    },
+                  ],
+                },
                 "select": {
                   "exist": [
                     "id",
                     "scx_client_reference",
                   ],
                 },
-                "transform": {
-                  "req": "`reqdata`",
-                  "res": "`body`",
-                },
-                "parts": [
-                  "network-token-bundle",
-                  "{id}",
-                ],
               },
               {
-                "args": {
-                  "header": [
-                    {
-                      "kind": "header",
-                      "name": "scx_client_reference",
-                      "orig": "scx_client_reference",
-                      "reqd": True,
-                      "type": "`$STRING`",
-                    },
-                  ],
-                  "params": [
-                    {
-                      "kind": "param",
-                      "name": "id",
-                      "orig": "network_token_bundle_id",
-                      "reqd": True,
-                      "type": "`$STRING`",
-                    },
-                  ],
-                },
                 "kind": "http",
                 "method": "GET",
                 "orig": "/network-token-bundle/{networkTokenBundleId}/payment-credentials",
-                "rename": {
-                  "param": {
-                    "networkTokenBundleId": "id",
-                  },
-                },
                 "segments": [
                   {
                     "lit": "network-token-bundle",
@@ -428,6 +415,40 @@ def make_config():
                     "lit": "payment-credentials",
                   },
                 ],
+                "parts": [
+                  "network-token-bundle",
+                  "{id}",
+                  "payment-credentials",
+                ],
+                "rename": {
+                  "param": {
+                    "networkTokenBundleId": "id",
+                  },
+                },
+                "transform": {
+                  "req": "`reqdata`",
+                  "res": "`body`",
+                },
+                "args": {
+                  "header": [
+                    {
+                      "name": "scx_client_reference",
+                      "orig": "scx_client_reference",
+                      "type": "`$STRING`",
+                      "kind": "header",
+                      "reqd": True,
+                    },
+                  ],
+                  "params": [
+                    {
+                      "name": "id",
+                      "orig": "network_token_bundle_id",
+                      "type": "`$STRING`",
+                      "kind": "param",
+                      "reqd": True,
+                    },
+                  ],
+                },
                 "select": {
                   "$action": "payment_credential",
                   "exist": [
@@ -435,15 +456,6 @@ def make_config():
                     "scx_client_reference",
                   ],
                 },
-                "transform": {
-                  "req": "`reqdata`",
-                  "res": "`body`",
-                },
-                "parts": [
-                  "network-token-bundle",
-                  "{id}",
-                  "payment-credentials",
-                ],
               },
             ],
           },
@@ -452,34 +464,9 @@ def make_config():
             "name": "remove",
             "points": [
               {
-                "args": {
-                  "header": [
-                    {
-                      "kind": "header",
-                      "name": "scx_client_reference",
-                      "orig": "scx_client_reference",
-                      "reqd": True,
-                      "type": "`$STRING`",
-                    },
-                  ],
-                  "params": [
-                    {
-                      "kind": "param",
-                      "name": "id",
-                      "orig": "network_token_bundle_id",
-                      "reqd": True,
-                      "type": "`$STRING`",
-                    },
-                  ],
-                },
                 "kind": "http",
                 "method": "DELETE",
                 "orig": "/network-token-bundle/{networkTokenBundleId}",
-                "rename": {
-                  "param": {
-                    "networkTokenBundleId": "id",
-                  },
-                },
                 "segments": [
                   {
                     "lit": "network-token-bundle",
@@ -488,20 +475,45 @@ def make_config():
                     "var": "id",
                   },
                 ],
+                "parts": [
+                  "network-token-bundle",
+                  "{id}",
+                ],
+                "rename": {
+                  "param": {
+                    "networkTokenBundleId": "id",
+                  },
+                },
+                "transform": {
+                  "req": "`reqdata`",
+                  "res": "`body`",
+                },
+                "args": {
+                  "header": [
+                    {
+                      "name": "scx_client_reference",
+                      "orig": "scx_client_reference",
+                      "type": "`$STRING`",
+                      "kind": "header",
+                      "reqd": True,
+                    },
+                  ],
+                  "params": [
+                    {
+                      "name": "id",
+                      "orig": "network_token_bundle_id",
+                      "type": "`$STRING`",
+                      "kind": "param",
+                      "reqd": True,
+                    },
+                  ],
+                },
                 "select": {
                   "exist": [
                     "id",
                     "scx_client_reference",
                   ],
                 },
-                "transform": {
-                  "req": "`reqdata`",
-                  "res": "`body`",
-                },
-                "parts": [
-                  "network-token-bundle",
-                  "{id}",
-                ],
               },
             ],
           },

@@ -9,39 +9,50 @@
         "fields" (vs/jt
           (vs/jm
             "name" "card"
+            "title" "Card"
             "type" "`$OBJECT`")
           (vs/jm
             "name" "cardNumber"
+            "title" "Card Number"
             "type" "`$STRING`")
           (vs/jm
             "name" "expirationMonth"
             "short" "Two-digit month in which the payment card expires."
+            "title" "Expiration Month"
             "type" "`$STRING`")
           (vs/jm
             "name" "expirationYear"
             "short" "Four-digit year in which the payment card expires."
+            "title" "Expiration Year"
             "type" "`$STRING`")
           (vs/jm
             "name" "id"
+            "title" "Id"
             "type" "`$STRING`")
           (vs/jm
             "name" "issuer"
+            "title" "Issuer"
             "type" "`$OBJECT`")
           (vs/jm
             "name" "metadata"
+            "title" "Metadata"
             "type" "`$OBJECT`")
           (vs/jm
             "name" "networkToken"
+            "title" "Network Token"
             "type" "`$OBJECT`")
           (vs/jm
             "name" "networkTokenBundleId"
             "short" "Unique identifier for the Instrument Identifier token used in the transaction."
+            "title" "Network Token Bundle Id"
             "type" "`$STRING`")
           (vs/jm
             "name" "networkTokenBundleState"
+            "title" "Network Token Bundle State"
             "type" "`$STRING`")
           (vs/jm
             "name" "securityCode"
+            "title" "Security Code"
             "type" "`$STRING`"))
         "id" (vs/jm
           "field" "id"
@@ -66,6 +77,7 @@
                 "orig" "/network-token-bundle"
                 "parts" (vs/jt
                   "network-token-bundle")
+                "rename" (vs/jm)
                 "segments" (vs/jt
                   (vs/jm
                     "lit" "network-token-bundle"))

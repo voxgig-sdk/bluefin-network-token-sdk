@@ -1,5 +1,3 @@
-// Custom utility overrides (mirrors tm/go/test/custom_utility_test.go):
-// caller-supplied callables in options.utility land on utility.custom.
 
 use bluefin_network_token_sdk::core::helpers::{call_vfn, getp, jo, vfn};
 use bluefin_network_token_sdk::{test_sdk, Value};

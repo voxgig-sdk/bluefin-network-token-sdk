@@ -216,49 +216,60 @@ func MakeConfig() map[string]any {
 				"fields": []any{
 					map[string]any{
 						"name": "card",
+						"title": "Card",
 						"type": "`$OBJECT`",
 					},
 					map[string]any{
 						"name": "cardNumber",
+						"title": "Card Number",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "expirationMonth",
-						"short": "Two-digit month in which the payment card expires.",
+						"title": "Expiration Month",
 						"type": "`$STRING`",
+						"short": "Two-digit month in which the payment card expires.",
 					},
 					map[string]any{
 						"name": "expirationYear",
-						"short": "Four-digit year in which the payment card expires.",
+						"title": "Expiration Year",
 						"type": "`$STRING`",
+						"short": "Four-digit year in which the payment card expires.",
 					},
 					map[string]any{
 						"name": "id",
+						"title": "Id",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "issuer",
+						"title": "Issuer",
 						"type": "`$OBJECT`",
 					},
 					map[string]any{
 						"name": "metadata",
+						"title": "Metadata",
 						"type": "`$OBJECT`",
 					},
 					map[string]any{
 						"name": "networkToken",
+						"title": "Network Token",
 						"type": "`$OBJECT`",
 					},
 					map[string]any{
 						"name": "networkTokenBundleId",
-						"short": "Unique identifier for the Instrument Identifier token used in the transaction.",
+						"title": "Network Token Bundle Id",
 						"type": "`$STRING`",
+						"short": "Unique identifier for the Instrument Identifier token used in the transaction.",
 					},
 					map[string]any{
 						"name": "networkTokenBundleState",
+						"title": "Network Token Bundle State",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "securityCode",
+						"title": "Security Code",
 						"type": "`$STRING`",
 					},
 				},
@@ -273,17 +284,6 @@ func MakeConfig() map[string]any {
 						"name": "create",
 						"points": []any{
 							map[string]any{
-								"args": map[string]any{
-									"header": []any{
-										map[string]any{
-											"kind": "header",
-											"name": "scx_client_reference",
-											"orig": "scx_client_reference",
-											"reqd": true,
-											"type": "`$STRING`",
-										},
-									},
-								},
 								"kind": "http",
 								"method": "POST",
 								"orig": "/network-token-bundle",
@@ -292,17 +292,29 @@ func MakeConfig() map[string]any {
 										"lit": "network-token-bundle",
 									},
 								},
-								"select": map[string]any{
-									"exist": []any{
-										"scx_client_reference",
-									},
+								"parts": []any{
+									"network-token-bundle",
 								},
+								"rename": map[string]any{},
 								"transform": map[string]any{
 									"req": "`reqdata`",
 									"res": "`body`",
 								},
-								"parts": []any{
-									"network-token-bundle",
+								"args": map[string]any{
+									"header": []any{
+										map[string]any{
+											"name": "scx_client_reference",
+											"orig": "scx_client_reference",
+											"type": "`$STRING`",
+											"kind": "header",
+											"reqd": true,
+										},
+									},
+								},
+								"select": map[string]any{
+									"exist": []any{
+										"scx_client_reference",
+									},
 								},
 							},
 						},
@@ -312,34 +324,9 @@ func MakeConfig() map[string]any {
 						"name": "load",
 						"points": []any{
 							map[string]any{
-								"args": map[string]any{
-									"header": []any{
-										map[string]any{
-											"kind": "header",
-											"name": "scx_client_reference",
-											"orig": "scx_client_reference",
-											"reqd": true,
-											"type": "`$STRING`",
-										},
-									},
-									"params": []any{
-										map[string]any{
-											"kind": "param",
-											"name": "id",
-											"orig": "network_token_bundle_id",
-											"reqd": true,
-											"type": "`$STRING`",
-										},
-									},
-								},
 								"kind": "http",
 								"method": "GET",
 								"orig": "/network-token-bundle/{networkTokenBundleId}",
-								"rename": map[string]any{
-									"param": map[string]any{
-										"networkTokenBundleId": "id",
-									},
-								},
 								"segments": []any{
 									map[string]any{
 										"lit": "network-token-bundle",
@@ -348,50 +335,50 @@ func MakeConfig() map[string]any {
 										"var": "id",
 									},
 								},
-								"select": map[string]any{
-									"exist": []any{
-										"id",
-										"scx_client_reference",
+								"parts": []any{
+									"network-token-bundle",
+									"{id}",
+								},
+								"rename": map[string]any{
+									"param": map[string]any{
+										"networkTokenBundleId": "id",
 									},
 								},
 								"transform": map[string]any{
 									"req": "`reqdata`",
 									"res": "`body`",
 								},
-								"parts": []any{
-									"network-token-bundle",
-									"{id}",
-								},
-							},
-							map[string]any{
 								"args": map[string]any{
 									"header": []any{
 										map[string]any{
-											"kind": "header",
 											"name": "scx_client_reference",
 											"orig": "scx_client_reference",
-											"reqd": true,
 											"type": "`$STRING`",
+											"kind": "header",
+											"reqd": true,
 										},
 									},
 									"params": []any{
 										map[string]any{
-											"kind": "param",
 											"name": "id",
 											"orig": "network_token_bundle_id",
-											"reqd": true,
 											"type": "`$STRING`",
+											"kind": "param",
+											"reqd": true,
 										},
 									},
 								},
+								"select": map[string]any{
+									"exist": []any{
+										"id",
+										"scx_client_reference",
+									},
+								},
+							},
+							map[string]any{
 								"kind": "http",
 								"method": "GET",
 								"orig": "/network-token-bundle/{networkTokenBundleId}/payment-credentials",
-								"rename": map[string]any{
-									"param": map[string]any{
-										"networkTokenBundleId": "id",
-									},
-								},
 								"segments": []any{
 									map[string]any{
 										"lit": "network-token-bundle",
@@ -403,21 +390,46 @@ func MakeConfig() map[string]any {
 										"lit": "payment-credentials",
 									},
 								},
-								"select": map[string]any{
-									"$action": "payment_credential",
-									"exist": []any{
-										"id",
-										"scx_client_reference",
+								"parts": []any{
+									"network-token-bundle",
+									"{id}",
+									"payment-credentials",
+								},
+								"rename": map[string]any{
+									"param": map[string]any{
+										"networkTokenBundleId": "id",
 									},
 								},
 								"transform": map[string]any{
 									"req": "`reqdata`",
 									"res": "`body`",
 								},
-								"parts": []any{
-									"network-token-bundle",
-									"{id}",
-									"payment-credentials",
+								"args": map[string]any{
+									"header": []any{
+										map[string]any{
+											"name": "scx_client_reference",
+											"orig": "scx_client_reference",
+											"type": "`$STRING`",
+											"kind": "header",
+											"reqd": true,
+										},
+									},
+									"params": []any{
+										map[string]any{
+											"name": "id",
+											"orig": "network_token_bundle_id",
+											"type": "`$STRING`",
+											"kind": "param",
+											"reqd": true,
+										},
+									},
+								},
+								"select": map[string]any{
+									"$action": "payment_credential",
+									"exist": []any{
+										"id",
+										"scx_client_reference",
+									},
 								},
 							},
 						},
@@ -427,34 +439,9 @@ func MakeConfig() map[string]any {
 						"name": "remove",
 						"points": []any{
 							map[string]any{
-								"args": map[string]any{
-									"header": []any{
-										map[string]any{
-											"kind": "header",
-											"name": "scx_client_reference",
-											"orig": "scx_client_reference",
-											"reqd": true,
-											"type": "`$STRING`",
-										},
-									},
-									"params": []any{
-										map[string]any{
-											"kind": "param",
-											"name": "id",
-											"orig": "network_token_bundle_id",
-											"reqd": true,
-											"type": "`$STRING`",
-										},
-									},
-								},
 								"kind": "http",
 								"method": "DELETE",
 								"orig": "/network-token-bundle/{networkTokenBundleId}",
-								"rename": map[string]any{
-									"param": map[string]any{
-										"networkTokenBundleId": "id",
-									},
-								},
 								"segments": []any{
 									map[string]any{
 										"lit": "network-token-bundle",
@@ -463,19 +450,44 @@ func MakeConfig() map[string]any {
 										"var": "id",
 									},
 								},
-								"select": map[string]any{
-									"exist": []any{
-										"id",
-										"scx_client_reference",
+								"parts": []any{
+									"network-token-bundle",
+									"{id}",
+								},
+								"rename": map[string]any{
+									"param": map[string]any{
+										"networkTokenBundleId": "id",
 									},
 								},
 								"transform": map[string]any{
 									"req": "`reqdata`",
 									"res": "`body`",
 								},
-								"parts": []any{
-									"network-token-bundle",
-									"{id}",
+								"args": map[string]any{
+									"header": []any{
+										map[string]any{
+											"name": "scx_client_reference",
+											"orig": "scx_client_reference",
+											"type": "`$STRING`",
+											"kind": "header",
+											"reqd": true,
+										},
+									},
+									"params": []any{
+										map[string]any{
+											"name": "id",
+											"orig": "network_token_bundle_id",
+											"type": "`$STRING`",
+											"kind": "param",
+											"reqd": true,
+										},
+									},
+								},
+								"select": map[string]any{
+									"exist": []any{
+										"id",
+										"scx_client_reference",
+									},
 								},
 							},
 						},

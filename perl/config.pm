@@ -224,49 +224,60 @@ my $CONFIG_JSON = <<'END_CONFIG_JSON';
       "fields": [
         {
           "name": "card",
+          "title": "Card",
           "type": "`$OBJECT`"
         },
         {
           "name": "cardNumber",
+          "title": "Card Number",
           "type": "`$STRING`"
         },
         {
           "name": "expirationMonth",
-          "short": "Two-digit month in which the payment card expires.",
-          "type": "`$STRING`"
+          "title": "Expiration Month",
+          "type": "`$STRING`",
+          "short": "Two-digit month in which the payment card expires."
         },
         {
           "name": "expirationYear",
-          "short": "Four-digit year in which the payment card expires.",
-          "type": "`$STRING`"
+          "title": "Expiration Year",
+          "type": "`$STRING`",
+          "short": "Four-digit year in which the payment card expires."
         },
         {
           "name": "id",
+          "title": "Id",
           "type": "`$STRING`"
         },
         {
           "name": "issuer",
+          "title": "Issuer",
           "type": "`$OBJECT`"
         },
         {
           "name": "metadata",
+          "title": "Metadata",
           "type": "`$OBJECT`"
         },
         {
           "name": "networkToken",
+          "title": "Network Token",
           "type": "`$OBJECT`"
         },
         {
           "name": "networkTokenBundleId",
-          "short": "Unique identifier for the Instrument Identifier token used in the transaction.",
-          "type": "`$STRING`"
+          "title": "Network Token Bundle Id",
+          "type": "`$STRING`",
+          "short": "Unique identifier for the Instrument Identifier token used in the transaction."
         },
         {
           "name": "networkTokenBundleState",
+          "title": "Network Token Bundle State",
           "type": "`$STRING`"
         },
         {
           "name": "securityCode",
+          "title": "Security Code",
           "type": "`$STRING`"
         }
       ],
@@ -281,17 +292,6 @@ my $CONFIG_JSON = <<'END_CONFIG_JSON';
           "name": "create",
           "points": [
             {
-              "args": {
-                "header": [
-                  {
-                    "kind": "header",
-                    "name": "scx_client_reference",
-                    "orig": "scx_client_reference",
-                    "reqd": true,
-                    "type": "`$STRING`"
-                  }
-                ]
-              },
               "kind": "http",
               "method": "POST",
               "orig": "/network-token-bundle",
@@ -300,18 +300,30 @@ my $CONFIG_JSON = <<'END_CONFIG_JSON';
                   "lit": "network-token-bundle"
                 }
               ],
-              "select": {
-                "exist": [
-                  "scx_client_reference"
-                ]
-              },
+              "parts": [
+                "network-token-bundle"
+              ],
+              "rename": {},
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
               },
-              "parts": [
-                "network-token-bundle"
-              ]
+              "args": {
+                "header": [
+                  {
+                    "name": "scx_client_reference",
+                    "orig": "scx_client_reference",
+                    "type": "`$STRING`",
+                    "kind": "header",
+                    "reqd": true
+                  }
+                ]
+              },
+              "select": {
+                "exist": [
+                  "scx_client_reference"
+                ]
+              }
             }
           ]
         },
@@ -320,34 +332,9 @@ my $CONFIG_JSON = <<'END_CONFIG_JSON';
           "name": "load",
           "points": [
             {
-              "args": {
-                "header": [
-                  {
-                    "kind": "header",
-                    "name": "scx_client_reference",
-                    "orig": "scx_client_reference",
-                    "reqd": true,
-                    "type": "`$STRING`"
-                  }
-                ],
-                "params": [
-                  {
-                    "kind": "param",
-                    "name": "id",
-                    "orig": "network_token_bundle_id",
-                    "reqd": true,
-                    "type": "`$STRING`"
-                  }
-                ]
-              },
               "kind": "http",
               "method": "GET",
               "orig": "/network-token-bundle/{networkTokenBundleId}",
-              "rename": {
-                "param": {
-                  "networkTokenBundleId": "id"
-                }
-              },
               "segments": [
                 {
                   "lit": "network-token-bundle"
@@ -356,50 +343,50 @@ my $CONFIG_JSON = <<'END_CONFIG_JSON';
                   "var": "id"
                 }
               ],
-              "select": {
-                "exist": [
-                  "id",
-                  "scx_client_reference"
-                ]
-              },
-              "transform": {
-                "req": "`reqdata`",
-                "res": "`body`"
-              },
               "parts": [
                 "network-token-bundle",
                 "{id}"
-              ]
-            },
-            {
-              "args": {
-                "header": [
-                  {
-                    "kind": "header",
-                    "name": "scx_client_reference",
-                    "orig": "scx_client_reference",
-                    "reqd": true,
-                    "type": "`$STRING`"
-                  }
-                ],
-                "params": [
-                  {
-                    "kind": "param",
-                    "name": "id",
-                    "orig": "network_token_bundle_id",
-                    "reqd": true,
-                    "type": "`$STRING`"
-                  }
-                ]
-              },
-              "kind": "http",
-              "method": "GET",
-              "orig": "/network-token-bundle/{networkTokenBundleId}/payment-credentials",
+              ],
               "rename": {
                 "param": {
                   "networkTokenBundleId": "id"
                 }
               },
+              "transform": {
+                "req": "`reqdata`",
+                "res": "`body`"
+              },
+              "args": {
+                "header": [
+                  {
+                    "name": "scx_client_reference",
+                    "orig": "scx_client_reference",
+                    "type": "`$STRING`",
+                    "kind": "header",
+                    "reqd": true
+                  }
+                ],
+                "params": [
+                  {
+                    "name": "id",
+                    "orig": "network_token_bundle_id",
+                    "type": "`$STRING`",
+                    "kind": "param",
+                    "reqd": true
+                  }
+                ]
+              },
+              "select": {
+                "exist": [
+                  "id",
+                  "scx_client_reference"
+                ]
+              }
+            },
+            {
+              "kind": "http",
+              "method": "GET",
+              "orig": "/network-token-bundle/{networkTokenBundleId}/payment-credentials",
               "segments": [
                 {
                   "lit": "network-token-bundle"
@@ -411,22 +398,47 @@ my $CONFIG_JSON = <<'END_CONFIG_JSON';
                   "lit": "payment-credentials"
                 }
               ],
+              "parts": [
+                "network-token-bundle",
+                "{id}",
+                "payment-credentials"
+              ],
+              "rename": {
+                "param": {
+                  "networkTokenBundleId": "id"
+                }
+              },
+              "transform": {
+                "req": "`reqdata`",
+                "res": "`body`"
+              },
+              "args": {
+                "header": [
+                  {
+                    "name": "scx_client_reference",
+                    "orig": "scx_client_reference",
+                    "type": "`$STRING`",
+                    "kind": "header",
+                    "reqd": true
+                  }
+                ],
+                "params": [
+                  {
+                    "name": "id",
+                    "orig": "network_token_bundle_id",
+                    "type": "`$STRING`",
+                    "kind": "param",
+                    "reqd": true
+                  }
+                ]
+              },
               "select": {
                 "$action": "payment_credential",
                 "exist": [
                   "id",
                   "scx_client_reference"
                 ]
-              },
-              "transform": {
-                "req": "`reqdata`",
-                "res": "`body`"
-              },
-              "parts": [
-                "network-token-bundle",
-                "{id}",
-                "payment-credentials"
-              ]
+              }
             }
           ]
         },
@@ -435,34 +447,9 @@ my $CONFIG_JSON = <<'END_CONFIG_JSON';
           "name": "remove",
           "points": [
             {
-              "args": {
-                "header": [
-                  {
-                    "kind": "header",
-                    "name": "scx_client_reference",
-                    "orig": "scx_client_reference",
-                    "reqd": true,
-                    "type": "`$STRING`"
-                  }
-                ],
-                "params": [
-                  {
-                    "kind": "param",
-                    "name": "id",
-                    "orig": "network_token_bundle_id",
-                    "reqd": true,
-                    "type": "`$STRING`"
-                  }
-                ]
-              },
               "kind": "http",
               "method": "DELETE",
               "orig": "/network-token-bundle/{networkTokenBundleId}",
-              "rename": {
-                "param": {
-                  "networkTokenBundleId": "id"
-                }
-              },
               "segments": [
                 {
                   "lit": "network-token-bundle"
@@ -471,20 +458,45 @@ my $CONFIG_JSON = <<'END_CONFIG_JSON';
                   "var": "id"
                 }
               ],
-              "select": {
-                "exist": [
-                  "id",
-                  "scx_client_reference"
-                ]
+              "parts": [
+                "network-token-bundle",
+                "{id}"
+              ],
+              "rename": {
+                "param": {
+                  "networkTokenBundleId": "id"
+                }
               },
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
               },
-              "parts": [
-                "network-token-bundle",
-                "{id}"
-              ]
+              "args": {
+                "header": [
+                  {
+                    "name": "scx_client_reference",
+                    "orig": "scx_client_reference",
+                    "type": "`$STRING`",
+                    "kind": "header",
+                    "reqd": true
+                  }
+                ],
+                "params": [
+                  {
+                    "name": "id",
+                    "orig": "network_token_bundle_id",
+                    "type": "`$STRING`",
+                    "kind": "param",
+                    "reqd": true
+                  }
+                ]
+              },
+              "select": {
+                "exist": [
+                  "id",
+                  "scx_client_reference"
+                ]
+              }
             }
           ]
         }

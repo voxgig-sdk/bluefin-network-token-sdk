@@ -172,39 +172,50 @@ let make_config () : value =
         ("fields", (ja [
           (jo [
             ("name", (Str "card"));
+            ("title", (Str "Card"));
             ("type", (Str "`$OBJECT`")) ]);
           (jo [
             ("name", (Str "cardNumber"));
+            ("title", (Str "Card Number"));
             ("type", (Str "`$STRING`")) ]);
           (jo [
             ("name", (Str "expirationMonth"));
-            ("short", (Str "Two-digit month in which the payment card expires."));
-            ("type", (Str "`$STRING`")) ]);
+            ("title", (Str "Expiration Month"));
+            ("type", (Str "`$STRING`"));
+            ("short", (Str "Two-digit month in which the payment card expires.")) ]);
           (jo [
             ("name", (Str "expirationYear"));
-            ("short", (Str "Four-digit year in which the payment card expires."));
-            ("type", (Str "`$STRING`")) ]);
+            ("title", (Str "Expiration Year"));
+            ("type", (Str "`$STRING`"));
+            ("short", (Str "Four-digit year in which the payment card expires.")) ]);
           (jo [
             ("name", (Str "id"));
+            ("title", (Str "Id"));
             ("type", (Str "`$STRING`")) ]);
           (jo [
             ("name", (Str "issuer"));
+            ("title", (Str "Issuer"));
             ("type", (Str "`$OBJECT`")) ]);
           (jo [
             ("name", (Str "metadata"));
+            ("title", (Str "Metadata"));
             ("type", (Str "`$OBJECT`")) ]);
           (jo [
             ("name", (Str "networkToken"));
+            ("title", (Str "Network Token"));
             ("type", (Str "`$OBJECT`")) ]);
           (jo [
             ("name", (Str "networkTokenBundleId"));
-            ("short", (Str "Unique identifier for the Instrument Identifier token used in the transaction."));
-            ("type", (Str "`$STRING`")) ]);
+            ("title", (Str "Network Token Bundle Id"));
+            ("type", (Str "`$STRING`"));
+            ("short", (Str "Unique identifier for the Instrument Identifier token used in the transaction.")) ]);
           (jo [
             ("name", (Str "networkTokenBundleState"));
+            ("title", (Str "Network Token Bundle State"));
             ("type", (Str "`$STRING`")) ]);
           (jo [
             ("name", (Str "securityCode"));
+            ("title", (Str "Security Code"));
             ("type", (Str "`$STRING`")) ]) ]));
         ("id", (jo [
           ("field", (Str "id"));
@@ -216,91 +227,74 @@ let make_config () : value =
             ("name", (Str "create"));
             ("points", (ja [
               (jo [
-                ("args", (jo [
-                  ("header", (ja [
-                    (jo [
-                      ("kind", (Str "header"));
-                      ("name", (Str "scx_client_reference"));
-                      ("orig", (Str "scx_client_reference"));
-                      ("reqd", (Bool true));
-                      ("type", (Str "`$STRING`")) ]) ])) ]));
                 ("kind", (Str "http"));
                 ("method", (Str "POST"));
                 ("orig", (Str "/network-token-bundle"));
                 ("segments", (ja [
                   (jo [
                     ("lit", (Str "network-token-bundle")) ]) ]));
-                ("select", (jo [
-                  ("exist", (ja [
-                    (Str "scx_client_reference") ])) ]));
+                ("parts", (ja [
+                  (Str "network-token-bundle") ]));
+                ("rename", (empty_map ()));
                 ("transform", (jo [
                   ("req", (Str "`reqdata`"));
                   ("res", (Str "`body`")) ]));
-                ("parts", (ja [
-                  (Str "network-token-bundle") ])) ]) ])) ]));
+                ("args", (jo [
+                  ("header", (ja [
+                    (jo [
+                      ("name", (Str "scx_client_reference"));
+                      ("orig", (Str "scx_client_reference"));
+                      ("type", (Str "`$STRING`"));
+                      ("kind", (Str "header"));
+                      ("reqd", (Bool true)) ]) ])) ]));
+                ("select", (jo [
+                  ("exist", (ja [
+                    (Str "scx_client_reference") ])) ])) ]) ])) ]));
           ("load", (jo [
             ("input", (Str "data"));
             ("name", (Str "load"));
             ("points", (ja [
               (jo [
-                ("args", (jo [
-                  ("header", (ja [
-                    (jo [
-                      ("kind", (Str "header"));
-                      ("name", (Str "scx_client_reference"));
-                      ("orig", (Str "scx_client_reference"));
-                      ("reqd", (Bool true));
-                      ("type", (Str "`$STRING`")) ]) ]));
-                  ("params", (ja [
-                    (jo [
-                      ("kind", (Str "param"));
-                      ("name", (Str "id"));
-                      ("orig", (Str "network_token_bundle_id"));
-                      ("reqd", (Bool true));
-                      ("type", (Str "`$STRING`")) ]) ])) ]));
                 ("kind", (Str "http"));
                 ("method", (Str "GET"));
                 ("orig", (Str "/network-token-bundle/{networkTokenBundleId}"));
-                ("rename", (jo [
-                  ("param", (jo [
-                    ("networkTokenBundleId", (Str "id")) ])) ]));
                 ("segments", (ja [
                   (jo [
                     ("lit", (Str "network-token-bundle")) ]);
                   (jo [
                     ("var", (Str "id")) ]) ]));
-                ("select", (jo [
-                  ("exist", (ja [
-                    (Str "id");
-                    (Str "scx_client_reference") ])) ]));
-                ("transform", (jo [
-                  ("req", (Str "`reqdata`"));
-                  ("res", (Str "`body`")) ]));
                 ("parts", (ja [
                   (Str "network-token-bundle");
-                  (Str "{id}") ])) ]);
-              (jo [
-                ("args", (jo [
-                  ("header", (ja [
-                    (jo [
-                      ("kind", (Str "header"));
-                      ("name", (Str "scx_client_reference"));
-                      ("orig", (Str "scx_client_reference"));
-                      ("reqd", (Bool true));
-                      ("type", (Str "`$STRING`")) ]) ]));
-                  ("params", (ja [
-                    (jo [
-                      ("kind", (Str "param"));
-                      ("name", (Str "id"));
-                      ("orig", (Str "network_token_bundle_id"));
-                      ("reqd", (Bool true));
-                      ("type", (Str "`$STRING`")) ]) ])) ]));
-                ("kind", (Str "http"));
-                ("method", (Str "GET"));
-                ("orig", (Str "/network-token-bundle/{networkTokenBundleId}/payment-credentials"));
+                  (Str "{id}") ]));
                 ("rename", (jo [
                   ("param", (jo [
                     ("networkTokenBundleId", (Str "id")) ])) ]));
+                ("transform", (jo [
+                  ("req", (Str "`reqdata`"));
+                  ("res", (Str "`body`")) ]));
+                ("args", (jo [
+                  ("header", (ja [
+                    (jo [
+                      ("name", (Str "scx_client_reference"));
+                      ("orig", (Str "scx_client_reference"));
+                      ("type", (Str "`$STRING`"));
+                      ("kind", (Str "header"));
+                      ("reqd", (Bool true)) ]) ]));
+                  ("params", (ja [
+                    (jo [
+                      ("name", (Str "id"));
+                      ("orig", (Str "network_token_bundle_id"));
+                      ("type", (Str "`$STRING`"));
+                      ("kind", (Str "param"));
+                      ("reqd", (Bool true)) ]) ])) ]));
+                ("select", (jo [
+                  ("exist", (ja [
+                    (Str "id");
+                    (Str "scx_client_reference") ])) ])) ]);
+              (jo [
+                ("kind", (Str "http"));
+                ("method", (Str "GET"));
+                ("orig", (Str "/network-token-bundle/{networkTokenBundleId}/payment-credentials"));
                 ("segments", (ja [
                   (jo [
                     ("lit", (Str "network-token-bundle")) ]);
@@ -308,59 +302,77 @@ let make_config () : value =
                     ("var", (Str "id")) ]);
                   (jo [
                     ("lit", (Str "payment-credentials")) ]) ]));
+                ("parts", (ja [
+                  (Str "network-token-bundle");
+                  (Str "{id}");
+                  (Str "payment-credentials") ]));
+                ("rename", (jo [
+                  ("param", (jo [
+                    ("networkTokenBundleId", (Str "id")) ])) ]));
+                ("transform", (jo [
+                  ("req", (Str "`reqdata`"));
+                  ("res", (Str "`body`")) ]));
+                ("args", (jo [
+                  ("header", (ja [
+                    (jo [
+                      ("name", (Str "scx_client_reference"));
+                      ("orig", (Str "scx_client_reference"));
+                      ("type", (Str "`$STRING`"));
+                      ("kind", (Str "header"));
+                      ("reqd", (Bool true)) ]) ]));
+                  ("params", (ja [
+                    (jo [
+                      ("name", (Str "id"));
+                      ("orig", (Str "network_token_bundle_id"));
+                      ("type", (Str "`$STRING`"));
+                      ("kind", (Str "param"));
+                      ("reqd", (Bool true)) ]) ])) ]));
                 ("select", (jo [
                   ("$action", (Str "payment_credential"));
                   ("exist", (ja [
                     (Str "id");
-                    (Str "scx_client_reference") ])) ]));
-                ("transform", (jo [
-                  ("req", (Str "`reqdata`"));
-                  ("res", (Str "`body`")) ]));
-                ("parts", (ja [
-                  (Str "network-token-bundle");
-                  (Str "{id}");
-                  (Str "payment-credentials") ])) ]) ])) ]));
+                    (Str "scx_client_reference") ])) ])) ]) ])) ]));
           ("remove", (jo [
             ("input", (Str "data"));
             ("name", (Str "remove"));
             ("points", (ja [
               (jo [
-                ("args", (jo [
-                  ("header", (ja [
-                    (jo [
-                      ("kind", (Str "header"));
-                      ("name", (Str "scx_client_reference"));
-                      ("orig", (Str "scx_client_reference"));
-                      ("reqd", (Bool true));
-                      ("type", (Str "`$STRING`")) ]) ]));
-                  ("params", (ja [
-                    (jo [
-                      ("kind", (Str "param"));
-                      ("name", (Str "id"));
-                      ("orig", (Str "network_token_bundle_id"));
-                      ("reqd", (Bool true));
-                      ("type", (Str "`$STRING`")) ]) ])) ]));
                 ("kind", (Str "http"));
                 ("method", (Str "DELETE"));
                 ("orig", (Str "/network-token-bundle/{networkTokenBundleId}"));
-                ("rename", (jo [
-                  ("param", (jo [
-                    ("networkTokenBundleId", (Str "id")) ])) ]));
                 ("segments", (ja [
                   (jo [
                     ("lit", (Str "network-token-bundle")) ]);
                   (jo [
                     ("var", (Str "id")) ]) ]));
-                ("select", (jo [
-                  ("exist", (ja [
-                    (Str "id");
-                    (Str "scx_client_reference") ])) ]));
+                ("parts", (ja [
+                  (Str "network-token-bundle");
+                  (Str "{id}") ]));
+                ("rename", (jo [
+                  ("param", (jo [
+                    ("networkTokenBundleId", (Str "id")) ])) ]));
                 ("transform", (jo [
                   ("req", (Str "`reqdata`"));
                   ("res", (Str "`body`")) ]));
-                ("parts", (ja [
-                  (Str "network-token-bundle");
-                  (Str "{id}") ])) ]) ])) ])) ]));
+                ("args", (jo [
+                  ("header", (ja [
+                    (jo [
+                      ("name", (Str "scx_client_reference"));
+                      ("orig", (Str "scx_client_reference"));
+                      ("type", (Str "`$STRING`"));
+                      ("kind", (Str "header"));
+                      ("reqd", (Bool true)) ]) ]));
+                  ("params", (ja [
+                    (jo [
+                      ("name", (Str "id"));
+                      ("orig", (Str "network_token_bundle_id"));
+                      ("type", (Str "`$STRING`"));
+                      ("kind", (Str "param"));
+                      ("reqd", (Bool true)) ]) ])) ]));
+                ("select", (jo [
+                  ("exist", (ja [
+                    (Str "id");
+                    (Str "scx_client_reference") ])) ])) ]) ])) ])) ]));
         ("relations", (jo [
           ("ancestors", (empty_list ())) ])) ])) ])) ])
 

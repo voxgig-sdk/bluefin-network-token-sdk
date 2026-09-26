@@ -267,59 +267,70 @@ public static class SdkConfig
                         new Dictionary<string, object?>
                         {
                             ["name"] = "card",
+                            ["title"] = "Card",
                             ["type"] = "`$OBJECT`",
                         },
                         new Dictionary<string, object?>
                         {
                             ["name"] = "cardNumber",
+                            ["title"] = "Card Number",
                             ["type"] = "`$STRING`",
                         },
                         new Dictionary<string, object?>
                         {
                             ["name"] = "expirationMonth",
-                            ["short"] = "Two-digit month in which the payment card expires.",
+                            ["title"] = "Expiration Month",
                             ["type"] = "`$STRING`",
+                            ["short"] = "Two-digit month in which the payment card expires.",
                         },
                         new Dictionary<string, object?>
                         {
                             ["name"] = "expirationYear",
-                            ["short"] = "Four-digit year in which the payment card expires.",
+                            ["title"] = "Expiration Year",
                             ["type"] = "`$STRING`",
+                            ["short"] = "Four-digit year in which the payment card expires.",
                         },
                         new Dictionary<string, object?>
                         {
                             ["name"] = "id",
+                            ["title"] = "Id",
                             ["type"] = "`$STRING`",
                         },
                         new Dictionary<string, object?>
                         {
                             ["name"] = "issuer",
+                            ["title"] = "Issuer",
                             ["type"] = "`$OBJECT`",
                         },
                         new Dictionary<string, object?>
                         {
                             ["name"] = "metadata",
+                            ["title"] = "Metadata",
                             ["type"] = "`$OBJECT`",
                         },
                         new Dictionary<string, object?>
                         {
                             ["name"] = "networkToken",
+                            ["title"] = "Network Token",
                             ["type"] = "`$OBJECT`",
                         },
                         new Dictionary<string, object?>
                         {
                             ["name"] = "networkTokenBundleId",
-                            ["short"] = "Unique identifier for the Instrument Identifier token used in the transaction.",
+                            ["title"] = "Network Token Bundle Id",
                             ["type"] = "`$STRING`",
+                            ["short"] = "Unique identifier for the Instrument Identifier token used in the transaction.",
                         },
                         new Dictionary<string, object?>
                         {
                             ["name"] = "networkTokenBundleState",
+                            ["title"] = "Network Token Bundle State",
                             ["type"] = "`$STRING`",
                         },
                         new Dictionary<string, object?>
                         {
                             ["name"] = "securityCode",
+                            ["title"] = "Security Code",
                             ["type"] = "`$STRING`",
                         },
                     },
@@ -339,20 +350,6 @@ public static class SdkConfig
                             {
                                 new Dictionary<string, object?>
                                 {
-                                    ["args"] = new Dictionary<string, object?>
-                                    {
-                                        ["header"] = new List<object?>
-                                        {
-                                            new Dictionary<string, object?>
-                                            {
-                                                ["kind"] = "header",
-                                                ["name"] = "scx_client_reference",
-                                                ["orig"] = "scx_client_reference",
-                                                ["reqd"] = true,
-                                                ["type"] = "`$STRING`",
-                                            },
-                                        },
-                                    },
                                     ["kind"] = "http",
                                     ["method"] = "POST",
                                     ["orig"] = "/network-token-bundle",
@@ -363,21 +360,36 @@ public static class SdkConfig
                                             ["lit"] = "network-token-bundle",
                                         },
                                     },
+                                    ["parts"] = new List<object?>
+                                    {
+                                        "network-token-bundle",
+                                    },
+                                    ["rename"] = new Dictionary<string, object?>(),
+                                    ["transform"] = new Dictionary<string, object?>
+                                    {
+                                        ["req"] = "`reqdata`",
+                                        ["res"] = "`body`",
+                                    },
+                                    ["args"] = new Dictionary<string, object?>
+                                    {
+                                        ["header"] = new List<object?>
+                                        {
+                                            new Dictionary<string, object?>
+                                            {
+                                                ["name"] = "scx_client_reference",
+                                                ["orig"] = "scx_client_reference",
+                                                ["type"] = "`$STRING`",
+                                                ["kind"] = "header",
+                                                ["reqd"] = true,
+                                            },
+                                        },
+                                    },
                                     ["select"] = new Dictionary<string, object?>
                                     {
                                         ["exist"] = new List<object?>
                                         {
                                             "scx_client_reference",
                                         },
-                                    },
-                                    ["transform"] = new Dictionary<string, object?>
-                                    {
-                                        ["req"] = "`reqdata`",
-                                        ["res"] = "`body`",
-                                    },
-                                    ["parts"] = new List<object?>
-                                    {
-                                        "network-token-bundle",
                                     },
                                 },
                             },
@@ -390,41 +402,9 @@ public static class SdkConfig
                             {
                                 new Dictionary<string, object?>
                                 {
-                                    ["args"] = new Dictionary<string, object?>
-                                    {
-                                        ["header"] = new List<object?>
-                                        {
-                                            new Dictionary<string, object?>
-                                            {
-                                                ["kind"] = "header",
-                                                ["name"] = "scx_client_reference",
-                                                ["orig"] = "scx_client_reference",
-                                                ["reqd"] = true,
-                                                ["type"] = "`$STRING`",
-                                            },
-                                        },
-                                        ["params"] = new List<object?>
-                                        {
-                                            new Dictionary<string, object?>
-                                            {
-                                                ["kind"] = "param",
-                                                ["name"] = "id",
-                                                ["orig"] = "network_token_bundle_id",
-                                                ["reqd"] = true,
-                                                ["type"] = "`$STRING`",
-                                            },
-                                        },
-                                    },
                                     ["kind"] = "http",
                                     ["method"] = "GET",
                                     ["orig"] = "/network-token-bundle/{networkTokenBundleId}",
-                                    ["rename"] = new Dictionary<string, object?>
-                                    {
-                                        ["param"] = new Dictionary<string, object?>
-                                        {
-                                            ["networkTokenBundleId"] = "id",
-                                        },
-                                    },
                                     ["segments"] = new List<object?>
                                     {
                                         new Dictionary<string, object?>
@@ -436,6 +416,48 @@ public static class SdkConfig
                                             ["var"] = "id",
                                         },
                                     },
+                                    ["parts"] = new List<object?>
+                                    {
+                                        "network-token-bundle",
+                                        "{id}",
+                                    },
+                                    ["rename"] = new Dictionary<string, object?>
+                                    {
+                                        ["param"] = new Dictionary<string, object?>
+                                        {
+                                            ["networkTokenBundleId"] = "id",
+                                        },
+                                    },
+                                    ["transform"] = new Dictionary<string, object?>
+                                    {
+                                        ["req"] = "`reqdata`",
+                                        ["res"] = "`body`",
+                                    },
+                                    ["args"] = new Dictionary<string, object?>
+                                    {
+                                        ["header"] = new List<object?>
+                                        {
+                                            new Dictionary<string, object?>
+                                            {
+                                                ["name"] = "scx_client_reference",
+                                                ["orig"] = "scx_client_reference",
+                                                ["type"] = "`$STRING`",
+                                                ["kind"] = "header",
+                                                ["reqd"] = true,
+                                            },
+                                        },
+                                        ["params"] = new List<object?>
+                                        {
+                                            new Dictionary<string, object?>
+                                            {
+                                                ["name"] = "id",
+                                                ["orig"] = "network_token_bundle_id",
+                                                ["type"] = "`$STRING`",
+                                                ["kind"] = "param",
+                                                ["reqd"] = true,
+                                            },
+                                        },
+                                    },
                                     ["select"] = new Dictionary<string, object?>
                                     {
                                         ["exist"] = new List<object?>
@@ -444,54 +466,12 @@ public static class SdkConfig
                                             "scx_client_reference",
                                         },
                                     },
-                                    ["transform"] = new Dictionary<string, object?>
-                                    {
-                                        ["req"] = "`reqdata`",
-                                        ["res"] = "`body`",
-                                    },
-                                    ["parts"] = new List<object?>
-                                    {
-                                        "network-token-bundle",
-                                        "{id}",
-                                    },
                                 },
                                 new Dictionary<string, object?>
                                 {
-                                    ["args"] = new Dictionary<string, object?>
-                                    {
-                                        ["header"] = new List<object?>
-                                        {
-                                            new Dictionary<string, object?>
-                                            {
-                                                ["kind"] = "header",
-                                                ["name"] = "scx_client_reference",
-                                                ["orig"] = "scx_client_reference",
-                                                ["reqd"] = true,
-                                                ["type"] = "`$STRING`",
-                                            },
-                                        },
-                                        ["params"] = new List<object?>
-                                        {
-                                            new Dictionary<string, object?>
-                                            {
-                                                ["kind"] = "param",
-                                                ["name"] = "id",
-                                                ["orig"] = "network_token_bundle_id",
-                                                ["reqd"] = true,
-                                                ["type"] = "`$STRING`",
-                                            },
-                                        },
-                                    },
                                     ["kind"] = "http",
                                     ["method"] = "GET",
                                     ["orig"] = "/network-token-bundle/{networkTokenBundleId}/payment-credentials",
-                                    ["rename"] = new Dictionary<string, object?>
-                                    {
-                                        ["param"] = new Dictionary<string, object?>
-                                        {
-                                            ["networkTokenBundleId"] = "id",
-                                        },
-                                    },
                                     ["segments"] = new List<object?>
                                     {
                                         new Dictionary<string, object?>
@@ -507,6 +487,49 @@ public static class SdkConfig
                                             ["lit"] = "payment-credentials",
                                         },
                                     },
+                                    ["parts"] = new List<object?>
+                                    {
+                                        "network-token-bundle",
+                                        "{id}",
+                                        "payment-credentials",
+                                    },
+                                    ["rename"] = new Dictionary<string, object?>
+                                    {
+                                        ["param"] = new Dictionary<string, object?>
+                                        {
+                                            ["networkTokenBundleId"] = "id",
+                                        },
+                                    },
+                                    ["transform"] = new Dictionary<string, object?>
+                                    {
+                                        ["req"] = "`reqdata`",
+                                        ["res"] = "`body`",
+                                    },
+                                    ["args"] = new Dictionary<string, object?>
+                                    {
+                                        ["header"] = new List<object?>
+                                        {
+                                            new Dictionary<string, object?>
+                                            {
+                                                ["name"] = "scx_client_reference",
+                                                ["orig"] = "scx_client_reference",
+                                                ["type"] = "`$STRING`",
+                                                ["kind"] = "header",
+                                                ["reqd"] = true,
+                                            },
+                                        },
+                                        ["params"] = new List<object?>
+                                        {
+                                            new Dictionary<string, object?>
+                                            {
+                                                ["name"] = "id",
+                                                ["orig"] = "network_token_bundle_id",
+                                                ["type"] = "`$STRING`",
+                                                ["kind"] = "param",
+                                                ["reqd"] = true,
+                                            },
+                                        },
+                                    },
                                     ["select"] = new Dictionary<string, object?>
                                     {
                                         ["$action"] = "payment_credential",
@@ -515,17 +538,6 @@ public static class SdkConfig
                                             "id",
                                             "scx_client_reference",
                                         },
-                                    },
-                                    ["transform"] = new Dictionary<string, object?>
-                                    {
-                                        ["req"] = "`reqdata`",
-                                        ["res"] = "`body`",
-                                    },
-                                    ["parts"] = new List<object?>
-                                    {
-                                        "network-token-bundle",
-                                        "{id}",
-                                        "payment-credentials",
                                     },
                                 },
                             },
@@ -538,41 +550,9 @@ public static class SdkConfig
                             {
                                 new Dictionary<string, object?>
                                 {
-                                    ["args"] = new Dictionary<string, object?>
-                                    {
-                                        ["header"] = new List<object?>
-                                        {
-                                            new Dictionary<string, object?>
-                                            {
-                                                ["kind"] = "header",
-                                                ["name"] = "scx_client_reference",
-                                                ["orig"] = "scx_client_reference",
-                                                ["reqd"] = true,
-                                                ["type"] = "`$STRING`",
-                                            },
-                                        },
-                                        ["params"] = new List<object?>
-                                        {
-                                            new Dictionary<string, object?>
-                                            {
-                                                ["kind"] = "param",
-                                                ["name"] = "id",
-                                                ["orig"] = "network_token_bundle_id",
-                                                ["reqd"] = true,
-                                                ["type"] = "`$STRING`",
-                                            },
-                                        },
-                                    },
                                     ["kind"] = "http",
                                     ["method"] = "DELETE",
                                     ["orig"] = "/network-token-bundle/{networkTokenBundleId}",
-                                    ["rename"] = new Dictionary<string, object?>
-                                    {
-                                        ["param"] = new Dictionary<string, object?>
-                                        {
-                                            ["networkTokenBundleId"] = "id",
-                                        },
-                                    },
                                     ["segments"] = new List<object?>
                                     {
                                         new Dictionary<string, object?>
@@ -584,12 +564,16 @@ public static class SdkConfig
                                             ["var"] = "id",
                                         },
                                     },
-                                    ["select"] = new Dictionary<string, object?>
+                                    ["parts"] = new List<object?>
                                     {
-                                        ["exist"] = new List<object?>
+                                        "network-token-bundle",
+                                        "{id}",
+                                    },
+                                    ["rename"] = new Dictionary<string, object?>
+                                    {
+                                        ["param"] = new Dictionary<string, object?>
                                         {
-                                            "id",
-                                            "scx_client_reference",
+                                            ["networkTokenBundleId"] = "id",
                                         },
                                     },
                                     ["transform"] = new Dictionary<string, object?>
@@ -597,10 +581,38 @@ public static class SdkConfig
                                         ["req"] = "`reqdata`",
                                         ["res"] = "`body`",
                                     },
-                                    ["parts"] = new List<object?>
+                                    ["args"] = new Dictionary<string, object?>
                                     {
-                                        "network-token-bundle",
-                                        "{id}",
+                                        ["header"] = new List<object?>
+                                        {
+                                            new Dictionary<string, object?>
+                                            {
+                                                ["name"] = "scx_client_reference",
+                                                ["orig"] = "scx_client_reference",
+                                                ["type"] = "`$STRING`",
+                                                ["kind"] = "header",
+                                                ["reqd"] = true,
+                                            },
+                                        },
+                                        ["params"] = new List<object?>
+                                        {
+                                            new Dictionary<string, object?>
+                                            {
+                                                ["name"] = "id",
+                                                ["orig"] = "network_token_bundle_id",
+                                                ["type"] = "`$STRING`",
+                                                ["kind"] = "param",
+                                                ["reqd"] = true,
+                                            },
+                                        },
+                                    },
+                                    ["select"] = new Dictionary<string, object?>
+                                    {
+                                        ["exist"] = new List<object?>
+                                        {
+                                            "id",
+                                            "scx_client_reference",
+                                        },
                                     },
                                 },
                             },

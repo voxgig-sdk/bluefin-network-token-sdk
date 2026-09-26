@@ -216,49 +216,60 @@ pub fn make_config() -> Value {
                 ("fields".to_string(), Value::list(vec![
                     Value::map_of([
                         ("name".to_string(), Value::str("card")),
+                        ("title".to_string(), Value::str("Card")),
                         ("type".to_string(), Value::str("`$OBJECT`")),
                     ]),
                     Value::map_of([
                         ("name".to_string(), Value::str("cardNumber")),
+                        ("title".to_string(), Value::str("Card Number")),
                         ("type".to_string(), Value::str("`$STRING`")),
                     ]),
                     Value::map_of([
                         ("name".to_string(), Value::str("expirationMonth")),
-                        ("short".to_string(), Value::str("Two-digit month in which the payment card expires.")),
+                        ("title".to_string(), Value::str("Expiration Month")),
                         ("type".to_string(), Value::str("`$STRING`")),
+                        ("short".to_string(), Value::str("Two-digit month in which the payment card expires.")),
                     ]),
                     Value::map_of([
                         ("name".to_string(), Value::str("expirationYear")),
-                        ("short".to_string(), Value::str("Four-digit year in which the payment card expires.")),
+                        ("title".to_string(), Value::str("Expiration Year")),
                         ("type".to_string(), Value::str("`$STRING`")),
+                        ("short".to_string(), Value::str("Four-digit year in which the payment card expires.")),
                     ]),
                     Value::map_of([
                         ("name".to_string(), Value::str("id")),
+                        ("title".to_string(), Value::str("Id")),
                         ("type".to_string(), Value::str("`$STRING`")),
                     ]),
                     Value::map_of([
                         ("name".to_string(), Value::str("issuer")),
+                        ("title".to_string(), Value::str("Issuer")),
                         ("type".to_string(), Value::str("`$OBJECT`")),
                     ]),
                     Value::map_of([
                         ("name".to_string(), Value::str("metadata")),
+                        ("title".to_string(), Value::str("Metadata")),
                         ("type".to_string(), Value::str("`$OBJECT`")),
                     ]),
                     Value::map_of([
                         ("name".to_string(), Value::str("networkToken")),
+                        ("title".to_string(), Value::str("Network Token")),
                         ("type".to_string(), Value::str("`$OBJECT`")),
                     ]),
                     Value::map_of([
                         ("name".to_string(), Value::str("networkTokenBundleId")),
-                        ("short".to_string(), Value::str("Unique identifier for the Instrument Identifier token used in the transaction.")),
+                        ("title".to_string(), Value::str("Network Token Bundle Id")),
                         ("type".to_string(), Value::str("`$STRING`")),
+                        ("short".to_string(), Value::str("Unique identifier for the Instrument Identifier token used in the transaction.")),
                     ]),
                     Value::map_of([
                         ("name".to_string(), Value::str("networkTokenBundleState")),
+                        ("title".to_string(), Value::str("Network Token Bundle State")),
                         ("type".to_string(), Value::str("`$STRING`")),
                     ]),
                     Value::map_of([
                         ("name".to_string(), Value::str("securityCode")),
+                        ("title".to_string(), Value::str("Security Code")),
                         ("type".to_string(), Value::str("`$STRING`")),
                     ]),
                 ])),
@@ -273,17 +284,6 @@ pub fn make_config() -> Value {
                         ("name".to_string(), Value::str("create")),
                         ("points".to_string(), Value::list(vec![
                             Value::map_of([
-                                ("args".to_string(), Value::map_of([
-                                    ("header".to_string(), Value::list(vec![
-                                        Value::map_of([
-                                            ("kind".to_string(), Value::str("header")),
-                                            ("name".to_string(), Value::str("scx_client_reference")),
-                                            ("orig".to_string(), Value::str("scx_client_reference")),
-                                            ("reqd".to_string(), Value::Bool(true)),
-                                            ("type".to_string(), Value::str("`$STRING`")),
-                                        ]),
-                                    ])),
-                                ])),
                                 ("kind".to_string(), Value::str("http")),
                                 ("method".to_string(), Value::str("POST")),
                                 ("orig".to_string(), Value::str("/network-token-bundle")),
@@ -292,17 +292,29 @@ pub fn make_config() -> Value {
                                         ("lit".to_string(), Value::str("network-token-bundle")),
                                     ]),
                                 ])),
-                                ("select".to_string(), Value::map_of([
-                                    ("exist".to_string(), Value::list(vec![
-                                        Value::str("scx_client_reference"),
-                                    ])),
+                                ("parts".to_string(), Value::list(vec![
+                                    Value::str("network-token-bundle"),
                                 ])),
+                                ("rename".to_string(), Value::empty_map()),
                                 ("transform".to_string(), Value::map_of([
                                     ("req".to_string(), Value::str("`reqdata`")),
                                     ("res".to_string(), Value::str("`body`")),
                                 ])),
-                                ("parts".to_string(), Value::list(vec![
-                                    Value::str("network-token-bundle"),
+                                ("args".to_string(), Value::map_of([
+                                    ("header".to_string(), Value::list(vec![
+                                        Value::map_of([
+                                            ("name".to_string(), Value::str("scx_client_reference")),
+                                            ("orig".to_string(), Value::str("scx_client_reference")),
+                                            ("type".to_string(), Value::str("`$STRING`")),
+                                            ("kind".to_string(), Value::str("header")),
+                                            ("reqd".to_string(), Value::Bool(true)),
+                                        ]),
+                                    ])),
+                                ])),
+                                ("select".to_string(), Value::map_of([
+                                    ("exist".to_string(), Value::list(vec![
+                                        Value::str("scx_client_reference"),
+                                    ])),
                                 ])),
                             ]),
                         ])),
@@ -312,34 +324,9 @@ pub fn make_config() -> Value {
                         ("name".to_string(), Value::str("load")),
                         ("points".to_string(), Value::list(vec![
                             Value::map_of([
-                                ("args".to_string(), Value::map_of([
-                                    ("header".to_string(), Value::list(vec![
-                                        Value::map_of([
-                                            ("kind".to_string(), Value::str("header")),
-                                            ("name".to_string(), Value::str("scx_client_reference")),
-                                            ("orig".to_string(), Value::str("scx_client_reference")),
-                                            ("reqd".to_string(), Value::Bool(true)),
-                                            ("type".to_string(), Value::str("`$STRING`")),
-                                        ]),
-                                    ])),
-                                    ("params".to_string(), Value::list(vec![
-                                        Value::map_of([
-                                            ("kind".to_string(), Value::str("param")),
-                                            ("name".to_string(), Value::str("id")),
-                                            ("orig".to_string(), Value::str("network_token_bundle_id")),
-                                            ("reqd".to_string(), Value::Bool(true)),
-                                            ("type".to_string(), Value::str("`$STRING`")),
-                                        ]),
-                                    ])),
-                                ])),
                                 ("kind".to_string(), Value::str("http")),
                                 ("method".to_string(), Value::str("GET")),
                                 ("orig".to_string(), Value::str("/network-token-bundle/{networkTokenBundleId}")),
-                                ("rename".to_string(), Value::map_of([
-                                    ("param".to_string(), Value::map_of([
-                                        ("networkTokenBundleId".to_string(), Value::str("id")),
-                                    ])),
-                                ])),
                                 ("segments".to_string(), Value::list(vec![
                                     Value::map_of([
                                         ("lit".to_string(), Value::str("network-token-bundle")),
@@ -348,50 +335,50 @@ pub fn make_config() -> Value {
                                         ("var".to_string(), Value::str("id")),
                                     ]),
                                 ])),
-                                ("select".to_string(), Value::map_of([
-                                    ("exist".to_string(), Value::list(vec![
-                                        Value::str("id"),
-                                        Value::str("scx_client_reference"),
+                                ("parts".to_string(), Value::list(vec![
+                                    Value::str("network-token-bundle"),
+                                    Value::str("{id}"),
+                                ])),
+                                ("rename".to_string(), Value::map_of([
+                                    ("param".to_string(), Value::map_of([
+                                        ("networkTokenBundleId".to_string(), Value::str("id")),
                                     ])),
                                 ])),
                                 ("transform".to_string(), Value::map_of([
                                     ("req".to_string(), Value::str("`reqdata`")),
                                     ("res".to_string(), Value::str("`body`")),
                                 ])),
-                                ("parts".to_string(), Value::list(vec![
-                                    Value::str("network-token-bundle"),
-                                    Value::str("{id}"),
-                                ])),
-                            ]),
-                            Value::map_of([
                                 ("args".to_string(), Value::map_of([
                                     ("header".to_string(), Value::list(vec![
                                         Value::map_of([
-                                            ("kind".to_string(), Value::str("header")),
                                             ("name".to_string(), Value::str("scx_client_reference")),
                                             ("orig".to_string(), Value::str("scx_client_reference")),
-                                            ("reqd".to_string(), Value::Bool(true)),
                                             ("type".to_string(), Value::str("`$STRING`")),
+                                            ("kind".to_string(), Value::str("header")),
+                                            ("reqd".to_string(), Value::Bool(true)),
                                         ]),
                                     ])),
                                     ("params".to_string(), Value::list(vec![
                                         Value::map_of([
-                                            ("kind".to_string(), Value::str("param")),
                                             ("name".to_string(), Value::str("id")),
                                             ("orig".to_string(), Value::str("network_token_bundle_id")),
-                                            ("reqd".to_string(), Value::Bool(true)),
                                             ("type".to_string(), Value::str("`$STRING`")),
+                                            ("kind".to_string(), Value::str("param")),
+                                            ("reqd".to_string(), Value::Bool(true)),
                                         ]),
                                     ])),
                                 ])),
+                                ("select".to_string(), Value::map_of([
+                                    ("exist".to_string(), Value::list(vec![
+                                        Value::str("id"),
+                                        Value::str("scx_client_reference"),
+                                    ])),
+                                ])),
+                            ]),
+                            Value::map_of([
                                 ("kind".to_string(), Value::str("http")),
                                 ("method".to_string(), Value::str("GET")),
                                 ("orig".to_string(), Value::str("/network-token-bundle/{networkTokenBundleId}/payment-credentials")),
-                                ("rename".to_string(), Value::map_of([
-                                    ("param".to_string(), Value::map_of([
-                                        ("networkTokenBundleId".to_string(), Value::str("id")),
-                                    ])),
-                                ])),
                                 ("segments".to_string(), Value::list(vec![
                                     Value::map_of([
                                         ("lit".to_string(), Value::str("network-token-bundle")),
@@ -403,21 +390,46 @@ pub fn make_config() -> Value {
                                         ("lit".to_string(), Value::str("payment-credentials")),
                                     ]),
                                 ])),
-                                ("select".to_string(), Value::map_of([
-                                    ("$action".to_string(), Value::str("payment_credential")),
-                                    ("exist".to_string(), Value::list(vec![
-                                        Value::str("id"),
-                                        Value::str("scx_client_reference"),
+                                ("parts".to_string(), Value::list(vec![
+                                    Value::str("network-token-bundle"),
+                                    Value::str("{id}"),
+                                    Value::str("payment-credentials"),
+                                ])),
+                                ("rename".to_string(), Value::map_of([
+                                    ("param".to_string(), Value::map_of([
+                                        ("networkTokenBundleId".to_string(), Value::str("id")),
                                     ])),
                                 ])),
                                 ("transform".to_string(), Value::map_of([
                                     ("req".to_string(), Value::str("`reqdata`")),
                                     ("res".to_string(), Value::str("`body`")),
                                 ])),
-                                ("parts".to_string(), Value::list(vec![
-                                    Value::str("network-token-bundle"),
-                                    Value::str("{id}"),
-                                    Value::str("payment-credentials"),
+                                ("args".to_string(), Value::map_of([
+                                    ("header".to_string(), Value::list(vec![
+                                        Value::map_of([
+                                            ("name".to_string(), Value::str("scx_client_reference")),
+                                            ("orig".to_string(), Value::str("scx_client_reference")),
+                                            ("type".to_string(), Value::str("`$STRING`")),
+                                            ("kind".to_string(), Value::str("header")),
+                                            ("reqd".to_string(), Value::Bool(true)),
+                                        ]),
+                                    ])),
+                                    ("params".to_string(), Value::list(vec![
+                                        Value::map_of([
+                                            ("name".to_string(), Value::str("id")),
+                                            ("orig".to_string(), Value::str("network_token_bundle_id")),
+                                            ("type".to_string(), Value::str("`$STRING`")),
+                                            ("kind".to_string(), Value::str("param")),
+                                            ("reqd".to_string(), Value::Bool(true)),
+                                        ]),
+                                    ])),
+                                ])),
+                                ("select".to_string(), Value::map_of([
+                                    ("$action".to_string(), Value::str("payment_credential")),
+                                    ("exist".to_string(), Value::list(vec![
+                                        Value::str("id"),
+                                        Value::str("scx_client_reference"),
+                                    ])),
                                 ])),
                             ]),
                         ])),
@@ -427,34 +439,9 @@ pub fn make_config() -> Value {
                         ("name".to_string(), Value::str("remove")),
                         ("points".to_string(), Value::list(vec![
                             Value::map_of([
-                                ("args".to_string(), Value::map_of([
-                                    ("header".to_string(), Value::list(vec![
-                                        Value::map_of([
-                                            ("kind".to_string(), Value::str("header")),
-                                            ("name".to_string(), Value::str("scx_client_reference")),
-                                            ("orig".to_string(), Value::str("scx_client_reference")),
-                                            ("reqd".to_string(), Value::Bool(true)),
-                                            ("type".to_string(), Value::str("`$STRING`")),
-                                        ]),
-                                    ])),
-                                    ("params".to_string(), Value::list(vec![
-                                        Value::map_of([
-                                            ("kind".to_string(), Value::str("param")),
-                                            ("name".to_string(), Value::str("id")),
-                                            ("orig".to_string(), Value::str("network_token_bundle_id")),
-                                            ("reqd".to_string(), Value::Bool(true)),
-                                            ("type".to_string(), Value::str("`$STRING`")),
-                                        ]),
-                                    ])),
-                                ])),
                                 ("kind".to_string(), Value::str("http")),
                                 ("method".to_string(), Value::str("DELETE")),
                                 ("orig".to_string(), Value::str("/network-token-bundle/{networkTokenBundleId}")),
-                                ("rename".to_string(), Value::map_of([
-                                    ("param".to_string(), Value::map_of([
-                                        ("networkTokenBundleId".to_string(), Value::str("id")),
-                                    ])),
-                                ])),
                                 ("segments".to_string(), Value::list(vec![
                                     Value::map_of([
                                         ("lit".to_string(), Value::str("network-token-bundle")),
@@ -463,19 +450,44 @@ pub fn make_config() -> Value {
                                         ("var".to_string(), Value::str("id")),
                                     ]),
                                 ])),
-                                ("select".to_string(), Value::map_of([
-                                    ("exist".to_string(), Value::list(vec![
-                                        Value::str("id"),
-                                        Value::str("scx_client_reference"),
+                                ("parts".to_string(), Value::list(vec![
+                                    Value::str("network-token-bundle"),
+                                    Value::str("{id}"),
+                                ])),
+                                ("rename".to_string(), Value::map_of([
+                                    ("param".to_string(), Value::map_of([
+                                        ("networkTokenBundleId".to_string(), Value::str("id")),
                                     ])),
                                 ])),
                                 ("transform".to_string(), Value::map_of([
                                     ("req".to_string(), Value::str("`reqdata`")),
                                     ("res".to_string(), Value::str("`body`")),
                                 ])),
-                                ("parts".to_string(), Value::list(vec![
-                                    Value::str("network-token-bundle"),
-                                    Value::str("{id}"),
+                                ("args".to_string(), Value::map_of([
+                                    ("header".to_string(), Value::list(vec![
+                                        Value::map_of([
+                                            ("name".to_string(), Value::str("scx_client_reference")),
+                                            ("orig".to_string(), Value::str("scx_client_reference")),
+                                            ("type".to_string(), Value::str("`$STRING`")),
+                                            ("kind".to_string(), Value::str("header")),
+                                            ("reqd".to_string(), Value::Bool(true)),
+                                        ]),
+                                    ])),
+                                    ("params".to_string(), Value::list(vec![
+                                        Value::map_of([
+                                            ("name".to_string(), Value::str("id")),
+                                            ("orig".to_string(), Value::str("network_token_bundle_id")),
+                                            ("type".to_string(), Value::str("`$STRING`")),
+                                            ("kind".to_string(), Value::str("param")),
+                                            ("reqd".to_string(), Value::Bool(true)),
+                                        ]),
+                                    ])),
+                                ])),
+                                ("select".to_string(), Value::map_of([
+                                    ("exist".to_string(), Value::list(vec![
+                                        Value::str("id"),
+                                        Value::str("scx_client_reference"),
+                                    ])),
                                 ])),
                             ]),
                         ])),

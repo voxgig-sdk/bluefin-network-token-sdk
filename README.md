@@ -12,7 +12,7 @@ Learn more about Voxgig SDKs at [voxgig.com/sdk](https://voxgig.com/sdk/).
 
 > TypeScript, Python, PHP, Golang, Ruby, Lua, C, Clojure, C++, C#, Dart, Elixir, Haskell, Java, JavaScript, Kotlin, Lean, OCaml, Perl, Rust, Scala, Swift, Zig SDKs, a CLI with an interactive REPL, and an MCP server for AI agents — all generated from one OpenAPI spec by [@voxgig/sdkgen](https://github.com/voxgig/sdkgen).
 
-> **Features:** `audit`, `clienttrack`, `debug`, `idempotency`, `log`, `metrics`, `paging`, `ratelimit`, `retry`, `telemetry`, `test`, `timeout` — opt-in,
+> **Features:** `undefined`, `undefined`, `undefined`, `undefined`, `undefined`, `undefined`, `undefined`, `undefined`, `undefined`, `undefined`, `undefined`, `undefined` — opt-in,
 > inactive until switched on, and configured per client. See the Features
 > section of any SDK README below for what each one does.
 
@@ -282,29 +282,29 @@ switch (client.network_token_bundle(h.vnull()).load(h.jo(&.{.{ "id", h.vstr("tes
 
 | Language | Package | Install |
 | --- | --- | --- |
-| TypeScript | `@voxgig-sdk/bluefin-network-token` | publish pending — [install from git tag](https://github.com/voxgig-sdk/bluefin-network-token-sdk/releases) |
-| Python | `voxgig-sdk-bluefin-network-token` | publish pending — [install from git tag](https://github.com/voxgig-sdk/bluefin-network-token-sdk/releases) |
-| PHP | `voxgig-sdk/bluefin-network-token` | publish pending — [install from git tag](https://github.com/voxgig-sdk/bluefin-network-token-sdk/releases) |
+| TypeScript | `@voxgig-sdk/bluefin-network-token-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/bluefin-network-token-sdk/tags) |
+| Python | `voxgig-sdk-bluefin-network-token-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/bluefin-network-token-sdk/tags) |
+| PHP | `voxgig-sdk/bluefin-network-token-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/bluefin-network-token-sdk/tags) |
 | Golang | `github.com/voxgig-sdk/bluefin-network-token-sdk/go` | `go get github.com/voxgig-sdk/bluefin-network-token-sdk/go@latest` |
-| Ruby | `voxgig-sdk-bluefin-network-token` | publish pending — [install from git tag](https://github.com/voxgig-sdk/bluefin-network-token-sdk/releases) |
-| Lua | `voxgig-sdk-bluefin-network-token` | publish pending — [install from git tag](https://github.com/voxgig-sdk/bluefin-network-token-sdk/releases) |
-| C | `voxgig-sdk-bluefin-network-token` | publish pending — [install from git tag](https://github.com/voxgig-sdk/bluefin-network-token-sdk/releases) |
-| Clojure | `voxgig-sdk-bluefin-network-token` | publish pending — [install from git tag](https://github.com/voxgig-sdk/bluefin-network-token-sdk/releases) |
-| C++ | `voxgig-sdk-bluefin-network-token` | publish pending — [install from git tag](https://github.com/voxgig-sdk/bluefin-network-token-sdk/releases) |
-| C# | `voxgig-sdk-bluefin-network-token` | publish pending — [install from git tag](https://github.com/voxgig-sdk/bluefin-network-token-sdk/releases) |
-| Dart | `voxgig-sdk-bluefin-network-token` | publish pending — [install from git tag](https://github.com/voxgig-sdk/bluefin-network-token-sdk/releases) |
-| Elixir | `voxgig-sdk-bluefin-network-token` | publish pending — [install from git tag](https://github.com/voxgig-sdk/bluefin-network-token-sdk/releases) |
-| Haskell | `voxgig-sdk-bluefin-network-token` | publish pending — [install from git tag](https://github.com/voxgig-sdk/bluefin-network-token-sdk/releases) |
-| Java | `voxgig-sdk-bluefin-network-token` | publish pending — [install from git tag](https://github.com/voxgig-sdk/bluefin-network-token-sdk/releases) |
-| JavaScript | `@voxgig-sdk/bluefin-network-token-js` | publish pending — [install from git tag](https://github.com/voxgig-sdk/bluefin-network-token-sdk/releases) |
-| Kotlin | `voxgig-sdk-bluefin-network-token` | publish pending — [install from git tag](https://github.com/voxgig-sdk/bluefin-network-token-sdk/releases) |
-| Lean | `voxgig-sdk-bluefin-network-token` | publish pending — [install from git tag](https://github.com/voxgig-sdk/bluefin-network-token-sdk/releases) |
-| OCaml | `voxgig-sdk-bluefin-network-token` | publish pending — [install from git tag](https://github.com/voxgig-sdk/bluefin-network-token-sdk/releases) |
-| Perl | `voxgig-sdk-bluefin-network-token` | publish pending — [install from git tag](https://github.com/voxgig-sdk/bluefin-network-token-sdk/releases) |
-| Rust | `voxgig-sdk-bluefin-network-token` | publish pending — [install from git tag](https://github.com/voxgig-sdk/bluefin-network-token-sdk/releases) |
-| Scala | `voxgig-sdk-bluefin-network-token` | publish pending — [install from git tag](https://github.com/voxgig-sdk/bluefin-network-token-sdk/releases) |
-| Swift | `voxgig-sdk-bluefin-network-token` | publish pending — [install from git tag](https://github.com/voxgig-sdk/bluefin-network-token-sdk/releases) |
-| Zig | `voxgig-sdk-bluefin-network-token` | publish pending — [install from git tag](https://github.com/voxgig-sdk/bluefin-network-token-sdk/releases) |
+| Ruby | `voxgig-sdk-bluefin-network-token-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/bluefin-network-token-sdk/tags) |
+| Lua | `voxgig-sdk-bluefin-network-token-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/bluefin-network-token-sdk/tags) |
+| C | `voxgig-sdk-bluefin-network-token-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/bluefin-network-token-sdk/tags) |
+| Clojure | `voxgig-sdk-bluefin-network-token-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/bluefin-network-token-sdk/tags) |
+| C++ | `voxgig-sdk-bluefin-network-token-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/bluefin-network-token-sdk/tags) |
+| C# | `voxgig-sdk-bluefin-network-token-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/bluefin-network-token-sdk/tags) |
+| Dart | `voxgig-sdk-bluefin-network-token-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/bluefin-network-token-sdk/tags) |
+| Elixir | `voxgig-sdk-bluefin-network-token-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/bluefin-network-token-sdk/tags) |
+| Haskell | `voxgig-sdk-bluefin-network-token-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/bluefin-network-token-sdk/tags) |
+| Java | `voxgig-sdk-bluefin-network-token-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/bluefin-network-token-sdk/tags) |
+| JavaScript | `@voxgig-sdk/bluefin-network-token-sdk-js` | publish pending — [install from git tag](https://github.com/voxgig-sdk/bluefin-network-token-sdk/tags) |
+| Kotlin | `voxgig-sdk-bluefin-network-token-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/bluefin-network-token-sdk/tags) |
+| Lean | `voxgig-sdk-bluefin-network-token-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/bluefin-network-token-sdk/tags) |
+| OCaml | `voxgig-sdk-bluefin-network-token-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/bluefin-network-token-sdk/tags) |
+| Perl | `voxgig-sdk-bluefin-network-token-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/bluefin-network-token-sdk/tags) |
+| Rust | `voxgig-sdk-bluefin-network-token-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/bluefin-network-token-sdk/tags) |
+| Scala | `voxgig-sdk-bluefin-network-token-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/bluefin-network-token-sdk/tags) |
+| Swift | `voxgig-sdk-bluefin-network-token-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/bluefin-network-token-sdk/tags) |
+| Zig | `voxgig-sdk-bluefin-network-token-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/bluefin-network-token-sdk/tags) |
 | Go CLI | `github.com/voxgig-sdk/bluefin-network-token-sdk/go-cli` | `go install github.com/voxgig-sdk/bluefin-network-token-sdk/go-cli/cmd/bluefin-network-token@latest` |
 | Go MCP server | `github.com/voxgig-sdk/bluefin-network-token-sdk/go-mcp` | `go get github.com/voxgig-sdk/bluefin-network-token-sdk/go-mcp@latest` |
 
@@ -313,7 +313,7 @@ switch (client.network_token_bundle(h.vnull()).load(h.jo(&.{.{ "id", h.vstr("tes
 ### TypeScript
 
 ```ts
-import { BluefinNetworkTokenSDK } from '@voxgig-sdk/bluefin-network-token'
+import { BluefinNetworkTokenSDK } from '@voxgig-sdk/bluefin-network-token-sdk'
 
 const client = new BluefinNetworkTokenSDK({
   apikey: process.env.BLUEFIN_NETWORK_TOKEN_APIKEY,
@@ -587,7 +587,7 @@ System.out.println(networkTokenBundle);
 ### JavaScript
 
 ```js
-const { BluefinNetworkTokenSDK } = require('@voxgig-sdk/bluefin-network-token-js')
+const { BluefinNetworkTokenSDK } = require('@voxgig-sdk/bluefin-network-token-sdk-js')
 
 const client = new BluefinNetworkTokenSDK({
   apikey: process.env.BLUEFIN_NETWORK_TOKEN_APIKEY,
@@ -981,18 +981,18 @@ forking the SDK.
 
 | Feature | Purpose |
 | --- | --- |
-| **AuditFeature** | Structured audit trail of operations |
-| **ClienttrackFeature** | Client identity and per-request correlation headers |
-| **DebugFeature** | Request/response capture ring buffer for debugging |
-| **IdempotencyFeature** | Idempotency keys for safe retries of mutating operations |
-| **LogFeature** | Structured request and response logging |
-| **MetricsFeature** | Statistics capture: per-operation counters and latency |
-| **PagingFeature** | Pagination signals for list operations |
-| **RatelimitFeature** | Client-side rate limiting via a token bucket |
-| **RetryFeature** | Automatic retry of transient failures with exponential backoff |
-| **TelemetryFeature** | Distributed tracing spans with W3C trace-context propagation |
-| **TestFeature** | In-memory mock transport for testing without a live server |
-| **TimeoutFeature** | Per-request timeout with transport abort |
+| **AuditFeature** | Audit trail |
+| **ClienttrackFeature** | Client tracking |
+| **DebugFeature** | Debug capture |
+| **IdempotencyFeature** | Idempotency |
+| **LogFeature** | Logging |
+| **MetricsFeature** | Metrics |
+| **PagingFeature** | Paging |
+| **RatelimitFeature** | Rate limiting |
+| **RetryFeature** | Retry |
+| **TelemetryFeature** | Telemetry |
+| **TestFeature** | Test transport |
+| **TimeoutFeature** | Timeout |
 
 Pass custom features via the `extend` option at construction time.
 

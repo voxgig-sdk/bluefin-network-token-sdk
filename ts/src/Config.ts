@@ -32,12 +32,6 @@ const FEATURE_CLASS: Record<string, typeof BaseFeature> = {
 }
 
 
-// Per-feature plugin DEFINITIONS (voxgig/plugin `Definition` values), from
-// the model's active plugin groups. A feature that takes a `plugins` option
-// (secrets over sekreto) reads its own entry; a feature with no plugins has
-// none. Named imports above make each definition statically reachable, so
-// an SDK carries exactly the plugin modules its model selects — the same
-// leanness the old side-effect registry imports bought, without a registry.
 const FEATURE_PLUGINS: Record<string, any[]> = {
   
 }
@@ -48,7 +42,6 @@ class Config {
   makeFeature(this: any, fn: string) {
     const fc = FEATURE_CLASS[fn]
     const fi = new fc()
-    // TODO: errors etc
     return fi
   }
 
@@ -270,9 +263,9 @@ class Config {
 
     entity: {
       
-      network_token_bundle: {
-      },
-
+        network_token_bundle: {
+        },
+  
     }
   }
 
@@ -282,49 +275,60 @@ class Config {
       "fields": [
         {
           "name": "card",
+          "title": "Card",
           "type": "`$OBJECT`"
         },
         {
           "name": "cardNumber",
+          "title": "Card Number",
           "type": "`$STRING`"
         },
         {
           "name": "expirationMonth",
-          "short": "Two-digit month in which the payment card expires.",
-          "type": "`$STRING`"
+          "title": "Expiration Month",
+          "type": "`$STRING`",
+          "short": "Two-digit month in which the payment card expires."
         },
         {
           "name": "expirationYear",
-          "short": "Four-digit year in which the payment card expires.",
-          "type": "`$STRING`"
+          "title": "Expiration Year",
+          "type": "`$STRING`",
+          "short": "Four-digit year in which the payment card expires."
         },
         {
           "name": "id",
+          "title": "Id",
           "type": "`$STRING`"
         },
         {
           "name": "issuer",
+          "title": "Issuer",
           "type": "`$OBJECT`"
         },
         {
           "name": "metadata",
+          "title": "Metadata",
           "type": "`$OBJECT`"
         },
         {
           "name": "networkToken",
+          "title": "Network Token",
           "type": "`$OBJECT`"
         },
         {
           "name": "networkTokenBundleId",
-          "short": "Unique identifier for the Instrument Identifier token used in the transaction.",
-          "type": "`$STRING`"
+          "title": "Network Token Bundle Id",
+          "type": "`$STRING`",
+          "short": "Unique identifier for the Instrument Identifier token used in the transaction."
         },
         {
           "name": "networkTokenBundleState",
+          "title": "Network Token Bundle State",
           "type": "`$STRING`"
         },
         {
           "name": "securityCode",
+          "title": "Security Code",
           "type": "`$STRING`"
         }
       ],
@@ -339,17 +343,6 @@ class Config {
           "name": "create",
           "points": [
             {
-              "args": {
-                "header": [
-                  {
-                    "kind": "header",
-                    "name": "scx_client_reference",
-                    "orig": "scx_client_reference",
-                    "reqd": true,
-                    "type": "`$STRING`"
-                  }
-                ]
-              },
               "kind": "http",
               "method": "POST",
               "orig": "/network-token-bundle",
@@ -358,18 +351,30 @@ class Config {
                   "lit": "network-token-bundle"
                 }
               ],
-              "select": {
-                "exist": [
-                  "scx_client_reference"
-                ]
-              },
+              "parts": [
+                "network-token-bundle"
+              ],
+              "rename": {},
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
               },
-              "parts": [
-                "network-token-bundle"
-              ]
+              "args": {
+                "header": [
+                  {
+                    "name": "scx_client_reference",
+                    "orig": "scx_client_reference",
+                    "type": "`$STRING`",
+                    "kind": "header",
+                    "reqd": true
+                  }
+                ]
+              },
+              "select": {
+                "exist": [
+                  "scx_client_reference"
+                ]
+              }
             }
           ]
         },
@@ -378,34 +383,9 @@ class Config {
           "name": "load",
           "points": [
             {
-              "args": {
-                "header": [
-                  {
-                    "kind": "header",
-                    "name": "scx_client_reference",
-                    "orig": "scx_client_reference",
-                    "reqd": true,
-                    "type": "`$STRING`"
-                  }
-                ],
-                "params": [
-                  {
-                    "kind": "param",
-                    "name": "id",
-                    "orig": "network_token_bundle_id",
-                    "reqd": true,
-                    "type": "`$STRING`"
-                  }
-                ]
-              },
               "kind": "http",
               "method": "GET",
               "orig": "/network-token-bundle/{networkTokenBundleId}",
-              "rename": {
-                "param": {
-                  "networkTokenBundleId": "id"
-                }
-              },
               "segments": [
                 {
                   "lit": "network-token-bundle"
@@ -414,50 +394,50 @@ class Config {
                   "var": "id"
                 }
               ],
-              "select": {
-                "exist": [
-                  "id",
-                  "scx_client_reference"
-                ]
-              },
-              "transform": {
-                "req": "`reqdata`",
-                "res": "`body`"
-              },
               "parts": [
                 "network-token-bundle",
                 "{id}"
-              ]
-            },
-            {
-              "args": {
-                "header": [
-                  {
-                    "kind": "header",
-                    "name": "scx_client_reference",
-                    "orig": "scx_client_reference",
-                    "reqd": true,
-                    "type": "`$STRING`"
-                  }
-                ],
-                "params": [
-                  {
-                    "kind": "param",
-                    "name": "id",
-                    "orig": "network_token_bundle_id",
-                    "reqd": true,
-                    "type": "`$STRING`"
-                  }
-                ]
-              },
-              "kind": "http",
-              "method": "GET",
-              "orig": "/network-token-bundle/{networkTokenBundleId}/payment-credentials",
+              ],
               "rename": {
                 "param": {
                   "networkTokenBundleId": "id"
                 }
               },
+              "transform": {
+                "req": "`reqdata`",
+                "res": "`body`"
+              },
+              "args": {
+                "header": [
+                  {
+                    "name": "scx_client_reference",
+                    "orig": "scx_client_reference",
+                    "type": "`$STRING`",
+                    "kind": "header",
+                    "reqd": true
+                  }
+                ],
+                "params": [
+                  {
+                    "name": "id",
+                    "orig": "network_token_bundle_id",
+                    "type": "`$STRING`",
+                    "kind": "param",
+                    "reqd": true
+                  }
+                ]
+              },
+              "select": {
+                "exist": [
+                  "id",
+                  "scx_client_reference"
+                ]
+              }
+            },
+            {
+              "kind": "http",
+              "method": "GET",
+              "orig": "/network-token-bundle/{networkTokenBundleId}/payment-credentials",
               "segments": [
                 {
                   "lit": "network-token-bundle"
@@ -469,22 +449,47 @@ class Config {
                   "lit": "payment-credentials"
                 }
               ],
+              "parts": [
+                "network-token-bundle",
+                "{id}",
+                "payment-credentials"
+              ],
+              "rename": {
+                "param": {
+                  "networkTokenBundleId": "id"
+                }
+              },
+              "transform": {
+                "req": "`reqdata`",
+                "res": "`body`"
+              },
+              "args": {
+                "header": [
+                  {
+                    "name": "scx_client_reference",
+                    "orig": "scx_client_reference",
+                    "type": "`$STRING`",
+                    "kind": "header",
+                    "reqd": true
+                  }
+                ],
+                "params": [
+                  {
+                    "name": "id",
+                    "orig": "network_token_bundle_id",
+                    "type": "`$STRING`",
+                    "kind": "param",
+                    "reqd": true
+                  }
+                ]
+              },
               "select": {
                 "$action": "payment_credential",
                 "exist": [
                   "id",
                   "scx_client_reference"
                 ]
-              },
-              "transform": {
-                "req": "`reqdata`",
-                "res": "`body`"
-              },
-              "parts": [
-                "network-token-bundle",
-                "{id}",
-                "payment-credentials"
-              ]
+              }
             }
           ]
         },
@@ -493,34 +498,9 @@ class Config {
           "name": "remove",
           "points": [
             {
-              "args": {
-                "header": [
-                  {
-                    "kind": "header",
-                    "name": "scx_client_reference",
-                    "orig": "scx_client_reference",
-                    "reqd": true,
-                    "type": "`$STRING`"
-                  }
-                ],
-                "params": [
-                  {
-                    "kind": "param",
-                    "name": "id",
-                    "orig": "network_token_bundle_id",
-                    "reqd": true,
-                    "type": "`$STRING`"
-                  }
-                ]
-              },
               "kind": "http",
               "method": "DELETE",
               "orig": "/network-token-bundle/{networkTokenBundleId}",
-              "rename": {
-                "param": {
-                  "networkTokenBundleId": "id"
-                }
-              },
               "segments": [
                 {
                   "lit": "network-token-bundle"
@@ -529,20 +509,45 @@ class Config {
                   "var": "id"
                 }
               ],
-              "select": {
-                "exist": [
-                  "id",
-                  "scx_client_reference"
-                ]
+              "parts": [
+                "network-token-bundle",
+                "{id}"
+              ],
+              "rename": {
+                "param": {
+                  "networkTokenBundleId": "id"
+                }
               },
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
               },
-              "parts": [
-                "network-token-bundle",
-                "{id}"
-              ]
+              "args": {
+                "header": [
+                  {
+                    "name": "scx_client_reference",
+                    "orig": "scx_client_reference",
+                    "type": "`$STRING`",
+                    "kind": "header",
+                    "reqd": true
+                  }
+                ],
+                "params": [
+                  {
+                    "name": "id",
+                    "orig": "network_token_bundle_id",
+                    "type": "`$STRING`",
+                    "kind": "param",
+                    "reqd": true
+                  }
+                ]
+              },
+              "select": {
+                "exist": [
+                  "id",
+                  "scx_client_reference"
+                ]
+              }
             }
           ]
         }

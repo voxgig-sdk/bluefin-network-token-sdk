@@ -1,0 +1,299 @@
+# Entity: network_token_bundle
+
+main: kit: entity: network_token_bundle: {
+
+  alias: field: {}
+
+  fields: {
+    card: {
+      h: "Card"
+      n: "card"
+      r: false
+      t: "`$OBJECT`"
+    }
+    cardNumber: {
+      h: "Card Number"
+      n: "cardNumber"
+      r: false
+      t: "`$STRING`"
+    }
+    expirationMonth: {
+      h: "Expiration Month"
+      n: "expirationMonth"
+      r: false
+      sh: "Two-digit month in which the payment card expires."
+      t: "`$STRING`"
+    }
+    expirationYear: {
+      h: "Expiration Year"
+      n: "expirationYear"
+      r: false
+      sh: "Four-digit year in which the payment card expires."
+      t: "`$STRING`"
+    }
+    id: {
+      h: "Id"
+      n: "id"
+      r: false
+      t: "`$STRING`"
+    }
+    issuer: {
+      h: "Issuer"
+      n: "issuer"
+      r: false
+      t: "`$OBJECT`"
+    }
+    metadata: {
+      h: "Metadata"
+      n: "metadata"
+      r: false
+      t: "`$OBJECT`"
+    }
+    networkToken: {
+      h: "Network Token"
+      n: "networkToken"
+      r: false
+      t: "`$OBJECT`"
+    }
+    networkTokenBundleId: {
+      h: "Network Token Bundle Id"
+      n: "networkTokenBundleId"
+      r: false
+      sh: "Unique identifier for the Instrument Identifier token used in the transaction."
+      t: "`$STRING`"
+    }
+    networkTokenBundleState: {
+      h: "Network Token Bundle State"
+      n: "networkTokenBundleState"
+      r: false
+      t: "`$STRING`"
+    }
+    securityCode: {
+      h: "Security Code"
+      n: "securityCode"
+      r: false
+      t: "`$STRING`"
+    }
+  }
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "network_token_bundle"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          co: {
+            id: "POST /network-token-bundle"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "scx_client_reference"
+                or: "scx_client_reference"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/network-token-bundle"
+          q: {
+            exist: [
+              "scx_client_reference"
+            ]
+          }
+          s: [
+            {
+              lit: "network-token-bundle"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /network-token-bundle/{networkTokenBundleId}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "scx_client_reference"
+                or: "scx_client_reference"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+            params: [
+              {
+                k: "param"
+                n: "id"
+                or: "network_token_bundle_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/network-token-bundle/{networkTokenBundleId}"
+          q: {
+            exist: [
+              "id"
+              "scx_client_reference"
+            ]
+          }
+          r: {
+            param: {
+              networkTokenBundleId: "id"
+            }
+          }
+          s: [
+            {
+              lit: "network-token-bundle"
+            }
+            {
+              var: "id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "GET /network-token-bundle/{networkTokenBundleId}/payment-credentials"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "scx_client_reference"
+                or: "scx_client_reference"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+            params: [
+              {
+                k: "param"
+                n: "id"
+                or: "network_token_bundle_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/network-token-bundle/{networkTokenBundleId}/payment-credentials"
+          q: {
+            "$action": "payment_credential"
+            exist: [
+              "id"
+              "scx_client_reference"
+            ]
+          }
+          r: {
+            param: {
+              networkTokenBundleId: "id"
+            }
+          }
+          s: [
+            {
+              lit: "network-token-bundle"
+            }
+            {
+              var: "id"
+            }
+            {
+              lit: "payment-credentials"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    remove: {
+      name: "remove"
+      points: [
+        {
+          co: {
+            id: "DELETE /network-token-bundle/{networkTokenBundleId}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "scx_client_reference"
+                or: "scx_client_reference"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+            params: [
+              {
+                k: "param"
+                n: "id"
+                or: "network_token_bundle_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "DELETE"
+          o: "/network-token-bundle/{networkTokenBundleId}"
+          q: {
+            exist: [
+              "id"
+              "scx_client_reference"
+            ]
+          }
+          r: {
+            param: {
+              networkTokenBundleId: "id"
+            }
+          }
+          s: [
+            {
+              lit: "network-token-bundle"
+            }
+            {
+              var: "id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

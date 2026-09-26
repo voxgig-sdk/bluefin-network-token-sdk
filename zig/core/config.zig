@@ -216,49 +216,60 @@ pub fn make_config() Value {
                 .{ "fields", h.ja(&.{
                     h.jo(&.{
                         .{ "name", h.vstr("card") },
+                        .{ "title", h.vstr("Card") },
                         .{ "type", h.vstr("`$OBJECT`") },
                     }),
                     h.jo(&.{
                         .{ "name", h.vstr("cardNumber") },
+                        .{ "title", h.vstr("Card Number") },
                         .{ "type", h.vstr("`$STRING`") },
                     }),
                     h.jo(&.{
                         .{ "name", h.vstr("expirationMonth") },
-                        .{ "short", h.vstr("Two-digit month in which the payment card expires.") },
+                        .{ "title", h.vstr("Expiration Month") },
                         .{ "type", h.vstr("`$STRING`") },
+                        .{ "short", h.vstr("Two-digit month in which the payment card expires.") },
                     }),
                     h.jo(&.{
                         .{ "name", h.vstr("expirationYear") },
-                        .{ "short", h.vstr("Four-digit year in which the payment card expires.") },
+                        .{ "title", h.vstr("Expiration Year") },
                         .{ "type", h.vstr("`$STRING`") },
+                        .{ "short", h.vstr("Four-digit year in which the payment card expires.") },
                     }),
                     h.jo(&.{
                         .{ "name", h.vstr("id") },
+                        .{ "title", h.vstr("Id") },
                         .{ "type", h.vstr("`$STRING`") },
                     }),
                     h.jo(&.{
                         .{ "name", h.vstr("issuer") },
+                        .{ "title", h.vstr("Issuer") },
                         .{ "type", h.vstr("`$OBJECT`") },
                     }),
                     h.jo(&.{
                         .{ "name", h.vstr("metadata") },
+                        .{ "title", h.vstr("Metadata") },
                         .{ "type", h.vstr("`$OBJECT`") },
                     }),
                     h.jo(&.{
                         .{ "name", h.vstr("networkToken") },
+                        .{ "title", h.vstr("Network Token") },
                         .{ "type", h.vstr("`$OBJECT`") },
                     }),
                     h.jo(&.{
                         .{ "name", h.vstr("networkTokenBundleId") },
-                        .{ "short", h.vstr("Unique identifier for the Instrument Identifier token used in the transaction.") },
+                        .{ "title", h.vstr("Network Token Bundle Id") },
                         .{ "type", h.vstr("`$STRING`") },
+                        .{ "short", h.vstr("Unique identifier for the Instrument Identifier token used in the transaction.") },
                     }),
                     h.jo(&.{
                         .{ "name", h.vstr("networkTokenBundleState") },
+                        .{ "title", h.vstr("Network Token Bundle State") },
                         .{ "type", h.vstr("`$STRING`") },
                     }),
                     h.jo(&.{
                         .{ "name", h.vstr("securityCode") },
+                        .{ "title", h.vstr("Security Code") },
                         .{ "type", h.vstr("`$STRING`") },
                     }),
                 }) },
@@ -273,17 +284,6 @@ pub fn make_config() Value {
                         .{ "name", h.vstr("create") },
                         .{ "points", h.ja(&.{
                             h.jo(&.{
-                                .{ "args", h.jo(&.{
-                                    .{ "header", h.ja(&.{
-                                        h.jo(&.{
-                                            .{ "kind", h.vstr("header") },
-                                            .{ "name", h.vstr("scx_client_reference") },
-                                            .{ "orig", h.vstr("scx_client_reference") },
-                                            .{ "reqd", h.vbool(true) },
-                                            .{ "type", h.vstr("`$STRING`") },
-                                        }),
-                                    }) },
-                                }) },
                                 .{ "kind", h.vstr("http") },
                                 .{ "method", h.vstr("POST") },
                                 .{ "orig", h.vstr("/network-token-bundle") },
@@ -292,17 +292,29 @@ pub fn make_config() Value {
                                         .{ "lit", h.vstr("network-token-bundle") },
                                     }),
                                 }) },
-                                .{ "select", h.jo(&.{
-                                    .{ "exist", h.ja(&.{
-                                        h.vstr("scx_client_reference"),
-                                    }) },
+                                .{ "parts", h.ja(&.{
+                                    h.vstr("network-token-bundle"),
                                 }) },
+                                .{ "rename", h.omap() },
                                 .{ "transform", h.jo(&.{
                                     .{ "req", h.vstr("`reqdata`") },
                                     .{ "res", h.vstr("`body`") },
                                 }) },
-                                .{ "parts", h.ja(&.{
-                                    h.vstr("network-token-bundle"),
+                                .{ "args", h.jo(&.{
+                                    .{ "header", h.ja(&.{
+                                        h.jo(&.{
+                                            .{ "name", h.vstr("scx_client_reference") },
+                                            .{ "orig", h.vstr("scx_client_reference") },
+                                            .{ "type", h.vstr("`$STRING`") },
+                                            .{ "kind", h.vstr("header") },
+                                            .{ "reqd", h.vbool(true) },
+                                        }),
+                                    }) },
+                                }) },
+                                .{ "select", h.jo(&.{
+                                    .{ "exist", h.ja(&.{
+                                        h.vstr("scx_client_reference"),
+                                    }) },
                                 }) },
                             }),
                         }) },
@@ -312,34 +324,9 @@ pub fn make_config() Value {
                         .{ "name", h.vstr("load") },
                         .{ "points", h.ja(&.{
                             h.jo(&.{
-                                .{ "args", h.jo(&.{
-                                    .{ "header", h.ja(&.{
-                                        h.jo(&.{
-                                            .{ "kind", h.vstr("header") },
-                                            .{ "name", h.vstr("scx_client_reference") },
-                                            .{ "orig", h.vstr("scx_client_reference") },
-                                            .{ "reqd", h.vbool(true) },
-                                            .{ "type", h.vstr("`$STRING`") },
-                                        }),
-                                    }) },
-                                    .{ "params", h.ja(&.{
-                                        h.jo(&.{
-                                            .{ "kind", h.vstr("param") },
-                                            .{ "name", h.vstr("id") },
-                                            .{ "orig", h.vstr("network_token_bundle_id") },
-                                            .{ "reqd", h.vbool(true) },
-                                            .{ "type", h.vstr("`$STRING`") },
-                                        }),
-                                    }) },
-                                }) },
                                 .{ "kind", h.vstr("http") },
                                 .{ "method", h.vstr("GET") },
                                 .{ "orig", h.vstr("/network-token-bundle/{networkTokenBundleId}") },
-                                .{ "rename", h.jo(&.{
-                                    .{ "param", h.jo(&.{
-                                        .{ "networkTokenBundleId", h.vstr("id") },
-                                    }) },
-                                }) },
                                 .{ "segments", h.ja(&.{
                                     h.jo(&.{
                                         .{ "lit", h.vstr("network-token-bundle") },
@@ -348,50 +335,50 @@ pub fn make_config() Value {
                                         .{ "var", h.vstr("id") },
                                     }),
                                 }) },
-                                .{ "select", h.jo(&.{
-                                    .{ "exist", h.ja(&.{
-                                        h.vstr("id"),
-                                        h.vstr("scx_client_reference"),
+                                .{ "parts", h.ja(&.{
+                                    h.vstr("network-token-bundle"),
+                                    h.vstr("{id}"),
+                                }) },
+                                .{ "rename", h.jo(&.{
+                                    .{ "param", h.jo(&.{
+                                        .{ "networkTokenBundleId", h.vstr("id") },
                                     }) },
                                 }) },
                                 .{ "transform", h.jo(&.{
                                     .{ "req", h.vstr("`reqdata`") },
                                     .{ "res", h.vstr("`body`") },
                                 }) },
-                                .{ "parts", h.ja(&.{
-                                    h.vstr("network-token-bundle"),
-                                    h.vstr("{id}"),
-                                }) },
-                            }),
-                            h.jo(&.{
                                 .{ "args", h.jo(&.{
                                     .{ "header", h.ja(&.{
                                         h.jo(&.{
-                                            .{ "kind", h.vstr("header") },
                                             .{ "name", h.vstr("scx_client_reference") },
                                             .{ "orig", h.vstr("scx_client_reference") },
-                                            .{ "reqd", h.vbool(true) },
                                             .{ "type", h.vstr("`$STRING`") },
+                                            .{ "kind", h.vstr("header") },
+                                            .{ "reqd", h.vbool(true) },
                                         }),
                                     }) },
                                     .{ "params", h.ja(&.{
                                         h.jo(&.{
-                                            .{ "kind", h.vstr("param") },
                                             .{ "name", h.vstr("id") },
                                             .{ "orig", h.vstr("network_token_bundle_id") },
-                                            .{ "reqd", h.vbool(true) },
                                             .{ "type", h.vstr("`$STRING`") },
+                                            .{ "kind", h.vstr("param") },
+                                            .{ "reqd", h.vbool(true) },
                                         }),
                                     }) },
                                 }) },
+                                .{ "select", h.jo(&.{
+                                    .{ "exist", h.ja(&.{
+                                        h.vstr("id"),
+                                        h.vstr("scx_client_reference"),
+                                    }) },
+                                }) },
+                            }),
+                            h.jo(&.{
                                 .{ "kind", h.vstr("http") },
                                 .{ "method", h.vstr("GET") },
                                 .{ "orig", h.vstr("/network-token-bundle/{networkTokenBundleId}/payment-credentials") },
-                                .{ "rename", h.jo(&.{
-                                    .{ "param", h.jo(&.{
-                                        .{ "networkTokenBundleId", h.vstr("id") },
-                                    }) },
-                                }) },
                                 .{ "segments", h.ja(&.{
                                     h.jo(&.{
                                         .{ "lit", h.vstr("network-token-bundle") },
@@ -403,21 +390,46 @@ pub fn make_config() Value {
                                         .{ "lit", h.vstr("payment-credentials") },
                                     }),
                                 }) },
-                                .{ "select", h.jo(&.{
-                                    .{ "$action", h.vstr("payment_credential") },
-                                    .{ "exist", h.ja(&.{
-                                        h.vstr("id"),
-                                        h.vstr("scx_client_reference"),
+                                .{ "parts", h.ja(&.{
+                                    h.vstr("network-token-bundle"),
+                                    h.vstr("{id}"),
+                                    h.vstr("payment-credentials"),
+                                }) },
+                                .{ "rename", h.jo(&.{
+                                    .{ "param", h.jo(&.{
+                                        .{ "networkTokenBundleId", h.vstr("id") },
                                     }) },
                                 }) },
                                 .{ "transform", h.jo(&.{
                                     .{ "req", h.vstr("`reqdata`") },
                                     .{ "res", h.vstr("`body`") },
                                 }) },
-                                .{ "parts", h.ja(&.{
-                                    h.vstr("network-token-bundle"),
-                                    h.vstr("{id}"),
-                                    h.vstr("payment-credentials"),
+                                .{ "args", h.jo(&.{
+                                    .{ "header", h.ja(&.{
+                                        h.jo(&.{
+                                            .{ "name", h.vstr("scx_client_reference") },
+                                            .{ "orig", h.vstr("scx_client_reference") },
+                                            .{ "type", h.vstr("`$STRING`") },
+                                            .{ "kind", h.vstr("header") },
+                                            .{ "reqd", h.vbool(true) },
+                                        }),
+                                    }) },
+                                    .{ "params", h.ja(&.{
+                                        h.jo(&.{
+                                            .{ "name", h.vstr("id") },
+                                            .{ "orig", h.vstr("network_token_bundle_id") },
+                                            .{ "type", h.vstr("`$STRING`") },
+                                            .{ "kind", h.vstr("param") },
+                                            .{ "reqd", h.vbool(true) },
+                                        }),
+                                    }) },
+                                }) },
+                                .{ "select", h.jo(&.{
+                                    .{ "$action", h.vstr("payment_credential") },
+                                    .{ "exist", h.ja(&.{
+                                        h.vstr("id"),
+                                        h.vstr("scx_client_reference"),
+                                    }) },
                                 }) },
                             }),
                         }) },
@@ -427,34 +439,9 @@ pub fn make_config() Value {
                         .{ "name", h.vstr("remove") },
                         .{ "points", h.ja(&.{
                             h.jo(&.{
-                                .{ "args", h.jo(&.{
-                                    .{ "header", h.ja(&.{
-                                        h.jo(&.{
-                                            .{ "kind", h.vstr("header") },
-                                            .{ "name", h.vstr("scx_client_reference") },
-                                            .{ "orig", h.vstr("scx_client_reference") },
-                                            .{ "reqd", h.vbool(true) },
-                                            .{ "type", h.vstr("`$STRING`") },
-                                        }),
-                                    }) },
-                                    .{ "params", h.ja(&.{
-                                        h.jo(&.{
-                                            .{ "kind", h.vstr("param") },
-                                            .{ "name", h.vstr("id") },
-                                            .{ "orig", h.vstr("network_token_bundle_id") },
-                                            .{ "reqd", h.vbool(true) },
-                                            .{ "type", h.vstr("`$STRING`") },
-                                        }),
-                                    }) },
-                                }) },
                                 .{ "kind", h.vstr("http") },
                                 .{ "method", h.vstr("DELETE") },
                                 .{ "orig", h.vstr("/network-token-bundle/{networkTokenBundleId}") },
-                                .{ "rename", h.jo(&.{
-                                    .{ "param", h.jo(&.{
-                                        .{ "networkTokenBundleId", h.vstr("id") },
-                                    }) },
-                                }) },
                                 .{ "segments", h.ja(&.{
                                     h.jo(&.{
                                         .{ "lit", h.vstr("network-token-bundle") },
@@ -463,19 +450,44 @@ pub fn make_config() Value {
                                         .{ "var", h.vstr("id") },
                                     }),
                                 }) },
-                                .{ "select", h.jo(&.{
-                                    .{ "exist", h.ja(&.{
-                                        h.vstr("id"),
-                                        h.vstr("scx_client_reference"),
+                                .{ "parts", h.ja(&.{
+                                    h.vstr("network-token-bundle"),
+                                    h.vstr("{id}"),
+                                }) },
+                                .{ "rename", h.jo(&.{
+                                    .{ "param", h.jo(&.{
+                                        .{ "networkTokenBundleId", h.vstr("id") },
                                     }) },
                                 }) },
                                 .{ "transform", h.jo(&.{
                                     .{ "req", h.vstr("`reqdata`") },
                                     .{ "res", h.vstr("`body`") },
                                 }) },
-                                .{ "parts", h.ja(&.{
-                                    h.vstr("network-token-bundle"),
-                                    h.vstr("{id}"),
+                                .{ "args", h.jo(&.{
+                                    .{ "header", h.ja(&.{
+                                        h.jo(&.{
+                                            .{ "name", h.vstr("scx_client_reference") },
+                                            .{ "orig", h.vstr("scx_client_reference") },
+                                            .{ "type", h.vstr("`$STRING`") },
+                                            .{ "kind", h.vstr("header") },
+                                            .{ "reqd", h.vbool(true) },
+                                        }),
+                                    }) },
+                                    .{ "params", h.ja(&.{
+                                        h.jo(&.{
+                                            .{ "name", h.vstr("id") },
+                                            .{ "orig", h.vstr("network_token_bundle_id") },
+                                            .{ "type", h.vstr("`$STRING`") },
+                                            .{ "kind", h.vstr("param") },
+                                            .{ "reqd", h.vbool(true) },
+                                        }),
+                                    }) },
+                                }) },
+                                .{ "select", h.jo(&.{
+                                    .{ "exist", h.ja(&.{
+                                        h.vstr("id"),
+                                        h.vstr("scx_client_reference"),
+                                    }) },
                                 }) },
                             }),
                         }) },

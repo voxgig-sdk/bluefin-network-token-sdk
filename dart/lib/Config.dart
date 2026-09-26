@@ -282,49 +282,60 @@ class Config {
       'fields': <dynamic>[
         <String, dynamic>{
           'name': 'card',
+          'title': 'Card',
           'type': '`\$OBJECT`',
         },
         <String, dynamic>{
           'name': 'cardNumber',
+          'title': 'Card Number',
           'type': '`\$STRING`',
         },
         <String, dynamic>{
           'name': 'expirationMonth',
-          'short': 'Two-digit month in which the payment card expires.',
+          'title': 'Expiration Month',
           'type': '`\$STRING`',
+          'short': 'Two-digit month in which the payment card expires.',
         },
         <String, dynamic>{
           'name': 'expirationYear',
-          'short': 'Four-digit year in which the payment card expires.',
+          'title': 'Expiration Year',
           'type': '`\$STRING`',
+          'short': 'Four-digit year in which the payment card expires.',
         },
         <String, dynamic>{
           'name': 'id',
+          'title': 'Id',
           'type': '`\$STRING`',
         },
         <String, dynamic>{
           'name': 'issuer',
+          'title': 'Issuer',
           'type': '`\$OBJECT`',
         },
         <String, dynamic>{
           'name': 'metadata',
+          'title': 'Metadata',
           'type': '`\$OBJECT`',
         },
         <String, dynamic>{
           'name': 'networkToken',
+          'title': 'Network Token',
           'type': '`\$OBJECT`',
         },
         <String, dynamic>{
           'name': 'networkTokenBundleId',
-          'short': 'Unique identifier for the Instrument Identifier token used in the transaction.',
+          'title': 'Network Token Bundle Id',
           'type': '`\$STRING`',
+          'short': 'Unique identifier for the Instrument Identifier token used in the transaction.',
         },
         <String, dynamic>{
           'name': 'networkTokenBundleState',
+          'title': 'Network Token Bundle State',
           'type': '`\$STRING`',
         },
         <String, dynamic>{
           'name': 'securityCode',
+          'title': 'Security Code',
           'type': '`\$STRING`',
         },
       ],
@@ -339,17 +350,6 @@ class Config {
           'name': 'create',
           'points': <dynamic>[
             <String, dynamic>{
-              'args': <String, dynamic>{
-                'header': <dynamic>[
-                  <String, dynamic>{
-                    'kind': 'header',
-                    'name': 'scx_client_reference',
-                    'orig': 'scx_client_reference',
-                    'reqd': true,
-                    'type': '`\$STRING`',
-                  },
-                ],
-              },
               'kind': 'http',
               'method': 'POST',
               'orig': '/network-token-bundle',
@@ -358,18 +358,30 @@ class Config {
                   'lit': 'network-token-bundle',
                 },
               ],
+              'parts': <dynamic>[
+                'network-token-bundle',
+              ],
+              'rename': <String, dynamic>{},
+              'transform': <String, dynamic>{
+                'req': '`reqdata`',
+                'res': '`body`',
+              },
+              'args': <String, dynamic>{
+                'header': <dynamic>[
+                  <String, dynamic>{
+                    'name': 'scx_client_reference',
+                    'orig': 'scx_client_reference',
+                    'type': '`\$STRING`',
+                    'kind': 'header',
+                    'reqd': true,
+                  },
+                ],
+              },
               'select': <String, dynamic>{
                 'exist': <dynamic>[
                   'scx_client_reference',
                 ],
               },
-              'transform': <String, dynamic>{
-                'req': '`reqdata`',
-                'res': '`body`',
-              },
-              'parts': <dynamic>[
-                'network-token-bundle',
-              ],
             },
           ],
         },
@@ -378,34 +390,9 @@ class Config {
           'name': 'load',
           'points': <dynamic>[
             <String, dynamic>{
-              'args': <String, dynamic>{
-                'header': <dynamic>[
-                  <String, dynamic>{
-                    'kind': 'header',
-                    'name': 'scx_client_reference',
-                    'orig': 'scx_client_reference',
-                    'reqd': true,
-                    'type': '`\$STRING`',
-                  },
-                ],
-                'params': <dynamic>[
-                  <String, dynamic>{
-                    'kind': 'param',
-                    'name': 'id',
-                    'orig': 'network_token_bundle_id',
-                    'reqd': true,
-                    'type': '`\$STRING`',
-                  },
-                ],
-              },
               'kind': 'http',
               'method': 'GET',
               'orig': '/network-token-bundle/{networkTokenBundleId}',
-              'rename': <String, dynamic>{
-                'param': <String, dynamic>{
-                  'networkTokenBundleId': 'id',
-                },
-              },
               'segments': <dynamic>[
                 <String, dynamic>{
                   'lit': 'network-token-bundle',
@@ -414,50 +401,50 @@ class Config {
                   'var': 'id',
                 },
               ],
+              'parts': <dynamic>[
+                'network-token-bundle',
+                '{id}',
+              ],
+              'rename': <String, dynamic>{
+                'param': <String, dynamic>{
+                  'networkTokenBundleId': 'id',
+                },
+              },
+              'transform': <String, dynamic>{
+                'req': '`reqdata`',
+                'res': '`body`',
+              },
+              'args': <String, dynamic>{
+                'header': <dynamic>[
+                  <String, dynamic>{
+                    'name': 'scx_client_reference',
+                    'orig': 'scx_client_reference',
+                    'type': '`\$STRING`',
+                    'kind': 'header',
+                    'reqd': true,
+                  },
+                ],
+                'params': <dynamic>[
+                  <String, dynamic>{
+                    'name': 'id',
+                    'orig': 'network_token_bundle_id',
+                    'type': '`\$STRING`',
+                    'kind': 'param',
+                    'reqd': true,
+                  },
+                ],
+              },
               'select': <String, dynamic>{
                 'exist': <dynamic>[
                   'id',
                   'scx_client_reference',
                 ],
               },
-              'transform': <String, dynamic>{
-                'req': '`reqdata`',
-                'res': '`body`',
-              },
-              'parts': <dynamic>[
-                'network-token-bundle',
-                '{id}',
-              ],
             },
             <String, dynamic>{
-              'args': <String, dynamic>{
-                'header': <dynamic>[
-                  <String, dynamic>{
-                    'kind': 'header',
-                    'name': 'scx_client_reference',
-                    'orig': 'scx_client_reference',
-                    'reqd': true,
-                    'type': '`\$STRING`',
-                  },
-                ],
-                'params': <dynamic>[
-                  <String, dynamic>{
-                    'kind': 'param',
-                    'name': 'id',
-                    'orig': 'network_token_bundle_id',
-                    'reqd': true,
-                    'type': '`\$STRING`',
-                  },
-                ],
-              },
               'kind': 'http',
               'method': 'GET',
               'orig': '/network-token-bundle/{networkTokenBundleId}/payment-credentials',
-              'rename': <String, dynamic>{
-                'param': <String, dynamic>{
-                  'networkTokenBundleId': 'id',
-                },
-              },
               'segments': <dynamic>[
                 <String, dynamic>{
                   'lit': 'network-token-bundle',
@@ -469,6 +456,40 @@ class Config {
                   'lit': 'payment-credentials',
                 },
               ],
+              'parts': <dynamic>[
+                'network-token-bundle',
+                '{id}',
+                'payment-credentials',
+              ],
+              'rename': <String, dynamic>{
+                'param': <String, dynamic>{
+                  'networkTokenBundleId': 'id',
+                },
+              },
+              'transform': <String, dynamic>{
+                'req': '`reqdata`',
+                'res': '`body`',
+              },
+              'args': <String, dynamic>{
+                'header': <dynamic>[
+                  <String, dynamic>{
+                    'name': 'scx_client_reference',
+                    'orig': 'scx_client_reference',
+                    'type': '`\$STRING`',
+                    'kind': 'header',
+                    'reqd': true,
+                  },
+                ],
+                'params': <dynamic>[
+                  <String, dynamic>{
+                    'name': 'id',
+                    'orig': 'network_token_bundle_id',
+                    'type': '`\$STRING`',
+                    'kind': 'param',
+                    'reqd': true,
+                  },
+                ],
+              },
               'select': <String, dynamic>{
                 '\$action': 'payment_credential',
                 'exist': <dynamic>[
@@ -476,15 +497,6 @@ class Config {
                   'scx_client_reference',
                 ],
               },
-              'transform': <String, dynamic>{
-                'req': '`reqdata`',
-                'res': '`body`',
-              },
-              'parts': <dynamic>[
-                'network-token-bundle',
-                '{id}',
-                'payment-credentials',
-              ],
             },
           ],
         },
@@ -493,34 +505,9 @@ class Config {
           'name': 'remove',
           'points': <dynamic>[
             <String, dynamic>{
-              'args': <String, dynamic>{
-                'header': <dynamic>[
-                  <String, dynamic>{
-                    'kind': 'header',
-                    'name': 'scx_client_reference',
-                    'orig': 'scx_client_reference',
-                    'reqd': true,
-                    'type': '`\$STRING`',
-                  },
-                ],
-                'params': <dynamic>[
-                  <String, dynamic>{
-                    'kind': 'param',
-                    'name': 'id',
-                    'orig': 'network_token_bundle_id',
-                    'reqd': true,
-                    'type': '`\$STRING`',
-                  },
-                ],
-              },
               'kind': 'http',
               'method': 'DELETE',
               'orig': '/network-token-bundle/{networkTokenBundleId}',
-              'rename': <String, dynamic>{
-                'param': <String, dynamic>{
-                  'networkTokenBundleId': 'id',
-                },
-              },
               'segments': <dynamic>[
                 <String, dynamic>{
                   'lit': 'network-token-bundle',
@@ -529,20 +516,45 @@ class Config {
                   'var': 'id',
                 },
               ],
+              'parts': <dynamic>[
+                'network-token-bundle',
+                '{id}',
+              ],
+              'rename': <String, dynamic>{
+                'param': <String, dynamic>{
+                  'networkTokenBundleId': 'id',
+                },
+              },
+              'transform': <String, dynamic>{
+                'req': '`reqdata`',
+                'res': '`body`',
+              },
+              'args': <String, dynamic>{
+                'header': <dynamic>[
+                  <String, dynamic>{
+                    'name': 'scx_client_reference',
+                    'orig': 'scx_client_reference',
+                    'type': '`\$STRING`',
+                    'kind': 'header',
+                    'reqd': true,
+                  },
+                ],
+                'params': <dynamic>[
+                  <String, dynamic>{
+                    'name': 'id',
+                    'orig': 'network_token_bundle_id',
+                    'type': '`\$STRING`',
+                    'kind': 'param',
+                    'reqd': true,
+                  },
+                ],
+              },
               'select': <String, dynamic>{
                 'exist': <dynamic>[
                   'id',
                   'scx_client_reference',
                 ],
               },
-              'transform': <String, dynamic>{
-                'req': '`reqdata`',
-                'res': '`body`',
-              },
-              'parts': <dynamic>[
-                'network-token-bundle',
-                '{id}',
-              ],
             },
           ],
         },

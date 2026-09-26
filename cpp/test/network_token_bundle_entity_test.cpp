@@ -50,7 +50,7 @@ static NetworkTokenBundleSetup network_token_bundle_basic_setup(const Value& ext
 
   NetworkTokenBundleSetup s;
   s.client = client;
-  s.data = entity_data;
+  s.d = entity_data;
   s.idmap = idmap_resolved;
   s.env = env;
   s.live = live;
