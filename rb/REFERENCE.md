@@ -110,7 +110,7 @@ network_token_bundle = client.NetworkTokenBundle
 
 #### `create(reqdata, ctrl = nil) -> result`
 
-Create a new entity with the given data. Raises on error.
+Create a new entity with the given data. Returns the created entity and raises on error.
 
 ```ruby
 result = client.NetworkTokenBundle.create({
@@ -119,7 +119,7 @@ result = client.NetworkTokenBundle.create({
 
 #### `load(reqmatch, ctrl = nil) -> result`
 
-Load a single entity matching the given criteria. Raises on error.
+Load a single entity matching the given criteria. Returns the entity, whose record `data_get` reads, and raises on error.
 
 ```ruby
 result = client.NetworkTokenBundle.load({ "id" => "network_token_bundle_id" })
@@ -127,7 +127,7 @@ result = client.NetworkTokenBundle.load({ "id" => "network_token_bundle_id" })
 
 #### `remove(reqmatch, ctrl = nil) -> result`
 
-Remove the entity matching the given criteria. Raises on error.
+Remove the entity matching the given criteria. Returns the entity, marked as deleted, and raises on error.
 
 ```ruby
 result = client.NetworkTokenBundle.remove({ "id" => "network_token_bundle_id" })
@@ -584,6 +584,7 @@ Timeout.
 | Option | Type |
 |---|---|
 | `clearTimer` | function |
+| `now` | function |
 | `setTimer` | function |
 
 These take no default: the feature behaves one way when you supply them and

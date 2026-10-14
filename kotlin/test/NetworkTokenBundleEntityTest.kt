@@ -6,18 +6,29 @@ import java.nio.file.Paths
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertFalse
 import org.junit.jupiter.api.Assertions.assertNotNull
+import org.junit.jupiter.api.Assertions.assertThrows
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Assumptions
 import org.junit.jupiter.api.Test
 
+import voxgig.bluefinnetworktokensdk.core.Config
+import voxgig.bluefinnetworktokensdk.core.Context
 import voxgig.bluefinnetworktokensdk.core.Helpers
 import voxgig.bluefinnetworktokensdk.core.SdkEntity
+import voxgig.bluefinnetworktokensdk.core.SdkError
 import voxgig.bluefinnetworktokensdk.core.BluefinNetworkTokenSDK
+import voxgig.bluefinnetworktokensdk.feature.BaseFeature
 import voxgig.bluefinnetworktokensdk.utility.Json
 import voxgig.bluefinnetworktokensdk.utility.struct.Struct
 
 @Suppress("UNCHECKED_CAST", "UNUSED_VARIABLE", "UNUSED_VALUE")
 class NetworkTokenBundleEntityTest {
+
+  // main.kit.test.live.strict is true (the default is true): a live
+  // request that fails, or a live test missing an input it needs,
+  // fails the test.
+  // An account with no record for a test to read skips it either way.
+  private val LIVE_STRICT = true
 
   @Test
   fun instance() {
@@ -38,10 +49,6 @@ class NetworkTokenBundleEntityTest {
         if (reason == null || "" == reason) "skipped via sdk-test-control.json" else reason,
       )
     }
-    Assumptions.assumeFalse(
-      setup.syntheticOnly,
-      "live entity test uses synthetic IDs from fixture — set BLUEFIN_NETWORK_TOKEN_TEST_NETWORK_TOKEN_BUNDLE_ENTID JSON to run live",
-    )
     val client = setup.client
 
     // CREATE
@@ -68,6 +75,23 @@ class NetworkTokenBundleEntityTest {
     networkTokenBundleRef01MatchRm0["id"] = networkTokenBundleRef01Data["id"]
     networkTokenBundleRef01Ent.remove(networkTokenBundleRef01MatchRm0, null)
 
+  }
+
+  private fun hasFeature(name: String): Boolean {
+    val fm = Helpers.toMapAny(Config.sharedConfig()["feature"])
+    return fm != null && fm[name] != null
+  }
+
+  @Test
+  fun validate() {
+    Assumptions.assumeTrue(hasFeature("validate"), "feature not present in this SDK: validate")
+    val client = BluefinNetworkTokenSDK.testSDK(null, linkedMapOf<String, Any?>(
+      "feature" to linkedMapOf<String, Any?>(
+        "validate" to linkedMapOf<String, Any?>("active" to true))))
+    val err = assertThrows(SdkError::class.java) {
+      client.networkTokenBundle(null).load(linkedMapOf<String, Any?>("id" to 1), null)
+    }
+    assertEquals("validate_failed", err.code)
   }
 
   companion object {
@@ -99,7 +123,7 @@ class NetworkTokenBundleEntityTest {
           "\"`\$VAL`\": [\"`\$FORMAT`\", \"upper\", \"`\$COPY`\"]" +
           "}]}"))
 
-      // Detect ENTID env override before envOverride consumes it.
+      // Whether *_ENTID supplied the idmap, read before envOverride consumes it.
       val entidEnvRaw = RunnerSupport.getenv("BLUEFIN_NETWORK_TOKEN_TEST_NETWORK_TOKEN_BUNDLE_ENTID")
       val idmapOverridden = entidEnvRaw != null && entidEnvRaw.trim().startsWith("{")
 

@@ -103,7 +103,7 @@ final network_token_bundle = client.NetworkTokenBundle();
 
 #### `create(reqdata, [ctrl]) -> Future<dynamic>`
 
-Create a new entity with the given data. Returns the created entity data and throws on error.
+Create a new entity with the given data. Returns the created entity and throws on error.
 
 ```dart
 final result = await client.NetworkTokenBundle().create({
@@ -112,7 +112,7 @@ final result = await client.NetworkTokenBundle().create({
 
 #### `load(reqmatch, [ctrl]) -> Future<dynamic>`
 
-Load a single entity matching the given criteria. Returns the entity data and throws on error.
+Load a single entity matching the given criteria. Returns the entity, whose record `data()` reads, and throws on error.
 
 ```dart
 final result = await client.NetworkTokenBundle().load({'id': 'network_token_bundle_id'});
@@ -120,7 +120,7 @@ final result = await client.NetworkTokenBundle().load({'id': 'network_token_bund
 
 #### `remove(reqmatch, [ctrl]) -> Future<dynamic>`
 
-Remove the entity matching the given criteria. Throws on error.
+Remove the entity matching the given criteria. Returns the entity, marked as deleted (`deleted()`); it keeps the data it held. Throws on error.
 
 ```dart
 final result = await client.NetworkTokenBundle().remove({'id': 'network_token_bundle_id'});
@@ -568,6 +568,7 @@ Timeout.
 | Option | Type |
 |---|---|
 | `clearTimer` | function |
+| `now` | function |
 | `setTimer` | function |
 
 These take no default: the feature behaves one way when you supply them and

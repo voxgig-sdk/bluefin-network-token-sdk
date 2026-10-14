@@ -5,16 +5,36 @@
 
 import java.util.{ArrayList, LinkedHashMap, List => JList, Map => JMap}
 
-import voxgig.bluefinnetworktokensdk.core.{Helpers, SdkEntity, BluefinNetworkTokenSDK}
+import voxgig.bluefinnetworktokensdk.core.{Config, Context, Helpers, SdkEntity, SdkError, BluefinNetworkTokenSDK}
+import voxgig.bluefinnetworktokensdk.feature.BaseFeature
 import voxgig.bluefinnetworktokensdk.utility.struct.Struct
 
 object NetworkTokenBundleEntityTest {
+
+  import SdkTestSupport.{B, I, jl, om}
+
+  private def hasFeature(name: String): Boolean = {
+    val fm = Helpers.toMapAny(Config.sharedConfig().get("feature"))
+    fm != null && fm.get(name) != null
+  }
 
   def run(rep: SdkTestReport): Unit = {
     rep.scope("network_token_bundle.instance") {
       val testsdk = BluefinNetworkTokenSDK.testSDK()
       val ent = testsdk.networkTokenBundle(null)
       rep.check("network_token_bundle.instance", ent != null, "expected non-null network_token_bundle entity")
+    }
+
+    rep.scope("network_token_bundle.validate") {
+      if (hasFeature("validate")) {
+        val client = BluefinNetworkTokenSDK.testSDK(null, om("feature" -> om("validate" -> om("active" -> B(true)))))
+        val err = try {
+          client.networkTokenBundle(null).load(om("id" -> I(1)), null)
+          null
+        } catch { case e: SdkError => e }
+        rep.check("network_token_bundle.validate", err != null && "validate_failed" == err.code,
+          "expected validate_failed, got " + err)
+      }
     }
 
     rep.scope("network_token_bundle.basic") {

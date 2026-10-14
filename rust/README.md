@@ -15,7 +15,7 @@ keeps the cognitive load low.
 
 ## Install
 This crate is not yet published to crates.io. Depend on it from the GitHub
-release tag (`rust/vX.Y.Z`, see [Releases](https://github.com/voxgig-sdk/bluefin-network-token-sdk/releases)) or
+release tag (`rust/vX.Y.Z`, see [Tags](https://github.com/voxgig-sdk/bluefin-network-token-sdk/tags)) or
 from a source checkout by adding it to your `Cargo.toml`:
 
 ```toml
@@ -36,7 +36,7 @@ loading a specific record.
 ### 1. Create a client
 
 ```rust
-use bluefin_network_token_sdk::{getp, jo, BluefinNetworkTokenSDK, Value};
+use bluefin_network_token_sdk::{getp, jo, BluefinNetworkTokenEntity, BluefinNetworkTokenSDK, Entity, Value};
 
 let client = BluefinNetworkTokenSDK::new(jo(vec![
     ("apikey", Value::str(std::env::var("BLUEFIN_NETWORK_TOKEN_APIKEY").unwrap_or_default())),
@@ -45,11 +45,12 @@ let client = BluefinNetworkTokenSDK::new(jo(vec![
 
 ### 3. Load a networktokenbundle
 
-`load()` returns the bare record and returns `Err` on failure.
+`load()` returns the entity, and `Err` on failure; `data(None)` reads its
+record.
 
 ```rust
 match client.network_token_bundle(Value::Noval).load(jo(vec![("id", Value::str("example_id"))]), Value::Noval) {
-    Ok(network_token_bundle) => println!("{:?}", network_token_bundle),
+    Ok(network_token_bundle) => println!("{:?}", network_token_bundle.data(None)),
     Err(err) => eprintln!("load failed: {}", err),
 }
 ```
@@ -57,11 +58,11 @@ match client.network_token_bundle(Value::Noval).load(jo(vec![("id", Value::str("
 ### 4. Create, update, and remove
 
 ```rust
-// Create — returns the bare created record
+// Create — returns the created entity
 let created = client.network_token_bundle(Value::Noval).create(jo(vec![("card", Value::empty_map()), ("cardNumber", Value::str("example_cardNumber"))]), Value::Noval).unwrap();
 
 // Remove
-client.network_token_bundle(Value::Noval).remove(jo(vec![("id", getp(&created, "id"))]), Value::Noval).unwrap();
+client.network_token_bundle(Value::Noval).remove(jo(vec![("id", getp(&created.data(None), "id"))]), Value::Noval).unwrap();
 ```
 
 
@@ -72,14 +73,15 @@ Entity operations reject on failure, so wrap them in `try` / `catch`:
 ```ts
 try {
   const networktokenbundle = await client.NetworkTokenBundle().load({ id: "example_id" })
-  console.log(networktokenbundle)
+  console.log(networktokenbundle.data())
 } catch (err) {
   console.error('load failed:', err)
 }
 ```
 
 The low-level `direct()` method does **not** throw — it returns the
-value or an `Error`, so check the result before using it:
+result envelope. Branch on `ok`; on failure `status` holds the HTTP status
+(for error responses) and `err` holds the error:
 
 ```ts
 const result = await client.direct({
@@ -88,8 +90,8 @@ const result = await client.direct({
   params: { id: 'example_id' },
 })
 
-if (result instanceof Error) {
-  throw result
+if (!result.ok) {
+  console.error('request failed:', result.status, result.err)
 }
 ```
 
@@ -137,11 +139,13 @@ println!("{:?}", getp(&fetchdef, "headers"));
 Create a mock client for unit testing — no server required:
 
 ```rust
+use bluefin_network_token_sdk::{jo, test_sdk, BluefinNetworkTokenEntity, Entity, Value};
+
 let client = test_sdk(Value::Noval, Value::Noval);
 
-// Entity ops return the bare record on Ok and Err on failure.
+// Entity ops return the entity on Ok and Err on failure.
 let network_token_bundle = client.network_token_bundle(Value::Noval).load(jo(vec![("id", Value::str("test01"))]), Value::Noval).unwrap();
-// network_token_bundle contains the mock response record
+// network_token_bundle.data(None) is the mock response record
 ```
 
 ### Point at a different server
@@ -219,9 +223,9 @@ All entities share the same interface.
 
 | Method | Signature | Description |
 | --- | --- | --- |
-| `load` | `(reqmatch: Value, ctrl: Value) -> Result<Value, BluefinNetworkTokenError>` | Load a single entity by match criteria. |
-| `create` | `(reqdata: Value, ctrl: Value) -> Result<Value, BluefinNetworkTokenError>` | Create a new entity. |
-| `remove` | `(reqmatch: Value, ctrl: Value) -> Result<Value, BluefinNetworkTokenError>` | Remove an entity. |
+| `load` | `(reqmatch: Value, ctrl: Value) -> Result<Rc<Self>, BluefinNetworkTokenError>` | Load a single entity by match criteria. |
+| `create` | `(reqdata: Value, ctrl: Value) -> Result<Rc<Self>, BluefinNetworkTokenError>` | Create a new entity. |
+| `remove` | `(reqmatch: Value, ctrl: Value) -> Result<Rc<Self>, BluefinNetworkTokenError>` | Remove an entity, which is returned marked as deleted. |
 | `data` | `(args: Option<&Value>) -> Value` | Get entity data (pass `Some(&map)` to set). |
 | `matchv` | `(args: Option<&Value>) -> Value` | Get entity match criteria (pass `Some(&map)` to set). |
 | `make` | `() -> Rc<dyn Entity>` | Create a new instance with the same options. |
@@ -229,9 +233,11 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return `Result<Value, BluefinNetworkTokenError>` — the
-bare result data on `Ok` (a `Value::Map` for single-entity ops, a
-`Value::List` for `list`) and the branded error on `Err`.
+Entity operations return the entity on `Ok`, and `list` a `Vec` of
+entities, one per record; `data(None)` reads an entity's record. `Err` is
+the branded error. The operations are methods of the
+`BluefinNetworkTokenEntity` trait and `data` of the `Entity` trait, so
+import both.
 
 The `direct()` escape hatch resolves to `Ok` even on a non-2xx response —
 it returns a result `Value::Map` you branch on via `getp(&result, "ok")`:
@@ -280,9 +286,9 @@ Create an instance: `let network_token_bundle = client.network_token_bundle(Valu
 
 | Method | Description |
 | --- | --- |
-| `create(reqdata, ctrl)` | Create a new entity with the given data. |
-| `load(reqmatch, ctrl)` | Load a single entity by match criteria. |
-| `remove(reqmatch, ctrl)` | Remove the matching entity. |
+| `create(reqdata, ctrl)` | Create a new entity with the given data. `Ok` is the entity. |
+| `load(reqmatch, ctrl)` | Load a single entity by match criteria. `Ok` is the entity. |
+| `remove(reqmatch, ctrl)` | Remove the matching entity. `Ok` is the entity, marked as deleted. |
 
 #### Fields
 
@@ -304,6 +310,7 @@ Create an instance: `let network_token_bundle = client.network_token_bundle(Valu
 
 ```rust
 let network_token_bundle = client.network_token_bundle(Value::Noval).load(jo(vec![("id", Value::str("network_token_bundle_id"))]), Value::Noval).unwrap();
+println!("{:?}", network_token_bundle.data(None));
 ```
 
 #### Example: Create

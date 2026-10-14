@@ -69,7 +69,7 @@
                     (vs/jm
                       "kind" "header"
                       "name" "scx_client_reference"
-                      "orig" "scx_client_reference"
+                      "orig" "scx-client-reference"
                       "reqd" true
                       "type" "`$STRING`")))
                 "kind" "http"
@@ -78,6 +78,9 @@
                 "parts" (vs/jt
                   "network-token-bundle")
                 "rename" (vs/jm)
+                "response" (vs/jm
+                  "kind" "json"
+                  "media" "application/json")
                 "segments" (vs/jt
                   (vs/jm
                     "lit" "network-token-bundle"))
@@ -97,14 +100,14 @@
                     (vs/jm
                       "kind" "header"
                       "name" "scx_client_reference"
-                      "orig" "scx_client_reference"
+                      "orig" "scx-client-reference"
                       "reqd" true
                       "type" "`$STRING`"))
                   "params" (vs/jt
                     (vs/jm
                       "kind" "param"
                       "name" "id"
-                      "orig" "network_token_bundle_id"
+                      "orig" "networkTokenBundleId"
                       "reqd" true
                       "type" "`$STRING`")))
                 "kind" "http"
@@ -116,6 +119,9 @@
                 "rename" (vs/jm
                   "param" (vs/jm
                     "networkTokenBundleId" "id"))
+                "response" (vs/jm
+                  "kind" "json"
+                  "media" "application/json")
                 "segments" (vs/jt
                   (vs/jm
                     "lit" "network-token-bundle")
@@ -134,14 +140,14 @@
                     (vs/jm
                       "kind" "header"
                       "name" "scx_client_reference"
-                      "orig" "scx_client_reference"
+                      "orig" "scx-client-reference"
                       "reqd" true
                       "type" "`$STRING`"))
                   "params" (vs/jt
                     (vs/jm
                       "kind" "param"
                       "name" "id"
-                      "orig" "network_token_bundle_id"
+                      "orig" "networkTokenBundleId"
                       "reqd" true
                       "type" "`$STRING`")))
                 "kind" "http"
@@ -154,6 +160,9 @@
                 "rename" (vs/jm
                   "param" (vs/jm
                     "networkTokenBundleId" "id"))
+                "response" (vs/jm
+                  "kind" "json"
+                  "media" "application/json")
                 "segments" (vs/jt
                   (vs/jm
                     "lit" "network-token-bundle")
@@ -179,14 +188,14 @@
                     (vs/jm
                       "kind" "header"
                       "name" "scx_client_reference"
-                      "orig" "scx_client_reference"
+                      "orig" "scx-client-reference"
                       "reqd" true
                       "type" "`$STRING`"))
                   "params" (vs/jt
                     (vs/jm
                       "kind" "param"
                       "name" "id"
-                      "orig" "network_token_bundle_id"
+                      "orig" "networkTokenBundleId"
                       "reqd" true
                       "type" "`$STRING`")))
                 "kind" "http"
@@ -198,6 +207,9 @@
                 "rename" (vs/jm
                   "param" (vs/jm
                     "networkTokenBundleId" "id"))
+                "response" (vs/jm
+                  "kind" "json"
+                  "media" "application/json")
                 "segments" (vs/jt
                   (vs/jm
                     "lit" "network-token-bundle")
@@ -352,6 +364,7 @@
           "ms" 30000)
         "optspec" (vs/jm
           "clearTimer" "`$FUNCTION`"
+          "now" "`$FUNCTION`"
           "setTimer" "`$FUNCTION`")
         "strict" false
         "transport" "wrap"))

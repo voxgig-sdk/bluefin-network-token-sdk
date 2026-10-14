@@ -20,6 +20,11 @@
                (t/is-true (vs/ismap rec) "create resolves to an entity carrying a record")
                (t/is-true (some? (vs/getprop rec "id")) "created record has an id"))
              )))
+  (t/run-check rec "gen-validate-network_token_bundle"
+    (fn [] (when (vs/getpath (config/make-config) "feature.validate")
+             (let [client (api/test-sdk nil (vs/jm "feature" (vs/jm "validate" (vs/jm "active" true))))]
+               (t/is-throws (fn [] (e-network_token_bundle/load (api/network_token_bundle client nil) (vs/jm "id" 1) nil))
+                            "validate_failed" "validate refuses an invalid request")))))
   (t/run-check rec "gen-prepare-network_token_bundle"
     (fn [] (let [client (api/make-sdk (vs/jm "base" "http://example.test" "apikey" "test-key"))
                  fetchdef (api/prepare client (vs/jm "path" "/api/network_token_bundle" "method" "GET"))]

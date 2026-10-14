@@ -105,7 +105,7 @@ let networkTokenBundle = client.NetworkTokenBundle()
 
 #### `create(reqdata, ctrl) throws -> Value`
 
-Create a new entity with the given data. Returns the created entity data and throws on error.
+Create a new entity with the given data. Returns the created entity and throws on error.
 
 ```swift
 let result = try client.NetworkTokenBundle().create(VMap([
@@ -114,7 +114,7 @@ let result = try client.NetworkTokenBundle().create(VMap([
 
 #### `load(reqmatch, ctrl) throws -> Value`
 
-Load a single entity matching the given criteria. Returns the entity data and throws on error.
+Load a single entity matching the given criteria. Returns the entity, whose record `data()` reads, as a native `Value` that `asNative as? Entity` unwraps, and throws on error.
 
 ```swift
 let result = try client.NetworkTokenBundle().load(VMap([("id", .string("network_token_bundle_id"))]), nil)
@@ -122,7 +122,7 @@ let result = try client.NetworkTokenBundle().load(VMap([("id", .string("network_
 
 #### `remove(reqmatch, ctrl) throws -> Value`
 
-Remove the entity matching the given criteria. Throws on error.
+Remove the entity matching the given criteria. Returns the entity, marked as deleted, and throws on error.
 
 ```swift
 let result = try client.NetworkTokenBundle().remove(VMap([("id", .string("network_token_bundle_id"))]), nil)
@@ -570,6 +570,7 @@ Timeout.
 | Option | Type |
 |---|---|
 | `clearTimer` | function |
+| `now` | function |
 | `setTimer` | function |
 
 These take no default: the feature behaves one way when you supply them and

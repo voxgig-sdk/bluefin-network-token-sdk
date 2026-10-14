@@ -102,26 +102,26 @@ network_token_bundle = client.NetworkTokenBundle()
 
 ### Operations
 
-#### `create(reqdata, ctrl=None) -> dict`
+#### `create(reqdata, ctrl=None) -> NetworkTokenBundleEntity`
 
-Create a new entity with the given data. Returns the created entity data and raises on error.
+Create a new entity with the given data. Returns the created entity and raises on error.
 
 ```python
 result = client.NetworkTokenBundle().create({
 })
 ```
 
-#### `load(reqmatch, ctrl=None) -> dict`
+#### `load(reqmatch, ctrl=None) -> NetworkTokenBundleEntity`
 
-Load a single entity matching the given criteria. Returns the entity data and raises on error.
+Load a single entity matching the given criteria. Returns the entity, whose record `data_get()` reads, and raises on error.
 
 ```python
 result = client.NetworkTokenBundle().load({"id": "network_token_bundle_id"})
 ```
 
-#### `remove(reqmatch, ctrl=None) -> dict`
+#### `remove(reqmatch, ctrl=None) -> NetworkTokenBundleEntity`
 
-Remove the entity matching the given criteria. Raises on error.
+Remove the entity matching the given criteria. Returns the entity, marked as deleted, and raises on error.
 
 ```python
 result = client.NetworkTokenBundle().remove({"id": "network_token_bundle_id"})
@@ -577,6 +577,7 @@ Timeout.
 | Option | Type |
 |---|---|
 | `clearTimer` | function |
+| `now` | function |
 | `setTimer` | function |
 
 These take no default: the feature behaves one way when you supply them and

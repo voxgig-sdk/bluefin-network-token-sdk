@@ -201,6 +201,7 @@ module BluefinNetworkTokenConfig
           },
           "optspec" => {
             "clearTimer" => "`$FUNCTION`",
+            "now" => "`$FUNCTION`",
             "setTimer" => "`$FUNCTION`",
           },
           "strict" => false,
@@ -313,7 +314,7 @@ module BluefinNetworkTokenConfig
                     "header" => [
                       {
                         "name" => "scx_client_reference",
-                        "orig" => "scx_client_reference",
+                        "orig" => "scx-client-reference",
                         "type" => "`$STRING`",
                         "kind" => "header",
                         "reqd" => true,
@@ -324,6 +325,10 @@ module BluefinNetworkTokenConfig
                     "exist" => [
                       "scx_client_reference",
                     ],
+                  },
+                  "response" => {
+                    "kind" => "json",
+                    "media" => "application/json",
                   },
                 },
               ],
@@ -361,7 +366,7 @@ module BluefinNetworkTokenConfig
                     "header" => [
                       {
                         "name" => "scx_client_reference",
-                        "orig" => "scx_client_reference",
+                        "orig" => "scx-client-reference",
                         "type" => "`$STRING`",
                         "kind" => "header",
                         "reqd" => true,
@@ -370,7 +375,7 @@ module BluefinNetworkTokenConfig
                     "params" => [
                       {
                         "name" => "id",
-                        "orig" => "network_token_bundle_id",
+                        "orig" => "networkTokenBundleId",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
@@ -382,6 +387,10 @@ module BluefinNetworkTokenConfig
                       "id",
                       "scx_client_reference",
                     ],
+                  },
+                  "response" => {
+                    "kind" => "json",
+                    "media" => "application/json",
                   },
                 },
                 {
@@ -417,7 +426,7 @@ module BluefinNetworkTokenConfig
                     "header" => [
                       {
                         "name" => "scx_client_reference",
-                        "orig" => "scx_client_reference",
+                        "orig" => "scx-client-reference",
                         "type" => "`$STRING`",
                         "kind" => "header",
                         "reqd" => true,
@@ -426,7 +435,7 @@ module BluefinNetworkTokenConfig
                     "params" => [
                       {
                         "name" => "id",
-                        "orig" => "network_token_bundle_id",
+                        "orig" => "networkTokenBundleId",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
@@ -439,6 +448,10 @@ module BluefinNetworkTokenConfig
                       "id",
                       "scx_client_reference",
                     ],
+                  },
+                  "response" => {
+                    "kind" => "json",
+                    "media" => "application/json",
                   },
                 },
               ],
@@ -476,7 +489,7 @@ module BluefinNetworkTokenConfig
                     "header" => [
                       {
                         "name" => "scx_client_reference",
-                        "orig" => "scx_client_reference",
+                        "orig" => "scx-client-reference",
                         "type" => "`$STRING`",
                         "kind" => "header",
                         "reqd" => true,
@@ -485,7 +498,7 @@ module BluefinNetworkTokenConfig
                     "params" => [
                       {
                         "name" => "id",
-                        "orig" => "network_token_bundle_id",
+                        "orig" => "networkTokenBundleId",
                         "type" => "`$STRING`",
                         "kind" => "param",
                         "reqd" => true,
@@ -497,6 +510,10 @@ module BluefinNetworkTokenConfig
                       "id",
                       "scx_client_reference",
                     ],
+                  },
+                  "response" => {
+                    "kind" => "json",
+                    "media" => "application/json",
                   },
                 },
               ],

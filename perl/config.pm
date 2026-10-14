@@ -200,6 +200,7 @@ my $CONFIG_JSON = <<'END_CONFIG_JSON';
       },
       "optspec": {
         "clearTimer": "`$FUNCTION`",
+        "now": "`$FUNCTION`",
         "setTimer": "`$FUNCTION`"
       },
       "strict": false,
@@ -312,7 +313,7 @@ my $CONFIG_JSON = <<'END_CONFIG_JSON';
                 "header": [
                   {
                     "name": "scx_client_reference",
-                    "orig": "scx_client_reference",
+                    "orig": "scx-client-reference",
                     "type": "`$STRING`",
                     "kind": "header",
                     "reqd": true
@@ -323,6 +324,10 @@ my $CONFIG_JSON = <<'END_CONFIG_JSON';
                 "exist": [
                   "scx_client_reference"
                 ]
+              },
+              "response": {
+                "kind": "json",
+                "media": "application/json"
               }
             }
           ]
@@ -360,7 +365,7 @@ my $CONFIG_JSON = <<'END_CONFIG_JSON';
                 "header": [
                   {
                     "name": "scx_client_reference",
-                    "orig": "scx_client_reference",
+                    "orig": "scx-client-reference",
                     "type": "`$STRING`",
                     "kind": "header",
                     "reqd": true
@@ -369,7 +374,7 @@ my $CONFIG_JSON = <<'END_CONFIG_JSON';
                 "params": [
                   {
                     "name": "id",
-                    "orig": "network_token_bundle_id",
+                    "orig": "networkTokenBundleId",
                     "type": "`$STRING`",
                     "kind": "param",
                     "reqd": true
@@ -381,6 +386,10 @@ my $CONFIG_JSON = <<'END_CONFIG_JSON';
                   "id",
                   "scx_client_reference"
                 ]
+              },
+              "response": {
+                "kind": "json",
+                "media": "application/json"
               }
             },
             {
@@ -416,7 +425,7 @@ my $CONFIG_JSON = <<'END_CONFIG_JSON';
                 "header": [
                   {
                     "name": "scx_client_reference",
-                    "orig": "scx_client_reference",
+                    "orig": "scx-client-reference",
                     "type": "`$STRING`",
                     "kind": "header",
                     "reqd": true
@@ -425,7 +434,7 @@ my $CONFIG_JSON = <<'END_CONFIG_JSON';
                 "params": [
                   {
                     "name": "id",
-                    "orig": "network_token_bundle_id",
+                    "orig": "networkTokenBundleId",
                     "type": "`$STRING`",
                     "kind": "param",
                     "reqd": true
@@ -438,6 +447,10 @@ my $CONFIG_JSON = <<'END_CONFIG_JSON';
                   "id",
                   "scx_client_reference"
                 ]
+              },
+              "response": {
+                "kind": "json",
+                "media": "application/json"
               }
             }
           ]
@@ -475,7 +488,7 @@ my $CONFIG_JSON = <<'END_CONFIG_JSON';
                 "header": [
                   {
                     "name": "scx_client_reference",
-                    "orig": "scx_client_reference",
+                    "orig": "scx-client-reference",
                     "type": "`$STRING`",
                     "kind": "header",
                     "reqd": true
@@ -484,7 +497,7 @@ my $CONFIG_JSON = <<'END_CONFIG_JSON';
                 "params": [
                   {
                     "name": "id",
-                    "orig": "network_token_bundle_id",
+                    "orig": "networkTokenBundleId",
                     "type": "`$STRING`",
                     "kind": "param",
                     "reqd": true
@@ -496,6 +509,10 @@ my $CONFIG_JSON = <<'END_CONFIG_JSON';
                   "id",
                   "scx_client_reference"
                 ]
+              },
+              "response": {
+                "kind": "json",
+                "media": "application/json"
               }
             }
           ]

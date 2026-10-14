@@ -106,7 +106,7 @@ SdkEntity networkTokenBundle = client.networkTokenBundle(null);
 
 #### `create(reqdata, ctrl) -> Object`
 
-Create a new entity with the given data. Returns the created entity data and raises on error.
+Create a new entity with the given data. Returns the created entity and raises on error.
 
 ```java
 Object result = client.networkTokenBundle(null).create(Map.of(
@@ -115,7 +115,7 @@ Object result = client.networkTokenBundle(null).create(Map.of(
 
 #### `load(reqmatch, ctrl) -> Object`
 
-Load a single entity matching the given criteria. Returns the entity data and raises on error.
+Load a single entity matching the given criteria. Returns the entity, whose record `data()` reads, and raises on error.
 
 ```java
 Object result = client.networkTokenBundle(null).load(Map.of("id", "network_token_bundle_id"), null);
@@ -123,7 +123,7 @@ Object result = client.networkTokenBundle(null).load(Map.of("id", "network_token
 
 #### `remove(reqmatch, ctrl) -> Object`
 
-Remove the entity matching the given criteria. Raises on error.
+Remove the entity matching the given criteria. Returns the entity, marked as deleted, and raises on error.
 
 ```java
 Object result = client.networkTokenBundle(null).remove(Map.of("id", "network_token_bundle_id"), null);
@@ -571,6 +571,7 @@ Timeout.
 | Option | Type |
 |---|---|
 | `clearTimer` | function |
+| `now` | function |
 | `setTimer` | function |
 
 These take no default: the feature behaves one way when you supply them and

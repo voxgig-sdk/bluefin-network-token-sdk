@@ -3,11 +3,16 @@ declare(strict_types=1);
 
 // BluefinNetworkToken SDK utility: prepare_body
 
+require_once __DIR__ . '/Media.php';
+
 class BluefinNetworkTokenPrepareBody
 {
     public static function call(BluefinNetworkTokenContext $ctx): mixed
     {
         if ($ctx->op->input === 'data') {
+            if (BluefinNetworkTokenMedia::isRawRequest($ctx->point)) {
+                return BluefinNetworkTokenMedia::rawBody($ctx->reqdata);
+            }
             $body = ($ctx->utility->transform_request)($ctx);
             // PHP cannot tell an empty map from an empty list, and this
             // vendored struct answers [] where the canonical transform

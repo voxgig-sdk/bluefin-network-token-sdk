@@ -98,31 +98,37 @@ Entity* network_token_bundle = bluefinnetworktoken_network_token_bundle(client, 
 
 ### Operations
 
-#### `vt->create(Entity* e, voxgig_value* reqdata, voxgig_value* ctrl, PNError** err)`
+#### `Entity* vt->create(Entity* e, voxgig_value* reqdata, voxgig_value* ctrl, PNError** err)`
 
-Create a new entity with the given data. Returns the created entity data and sets `*err` on failure.
+Create a new entity with the given data. Returns the created entity, or `NULL` with `*err` set on failure.
 
 ```c
 Entity* network_token_bundle = bluefinnetworktoken_network_token_bundle(client, NULL);
-voxgig_value* result = network_token_bundle->vt->create(network_token_bundle, NULL, NULL, &err);
+Entity* result = network_token_bundle->vt->create(network_token_bundle, NULL, NULL, &err);
 ```
 
-#### `vt->load(Entity* e, voxgig_value* reqmatch, voxgig_value* ctrl, PNError** err)`
+#### `Entity* vt->load(Entity* e, voxgig_value* reqmatch, voxgig_value* ctrl, PNError** err)`
 
-Load a single entity matching the given criteria. Returns the entity data and sets `*err` on failure.
+Load a single entity matching the given criteria. Returns the entity, whose record `vt->data` reads, or `NULL` with `*err` set on failure.
 
 ```c
 Entity* network_token_bundle = bluefinnetworktoken_network_token_bundle(client, NULL);
-voxgig_value* result = network_token_bundle->vt->load(network_token_bundle, cmap(1, "id", v_str("network_token_bundle_id")), NULL, &err);
+Entity* result = network_token_bundle->vt->load(network_token_bundle, cmap(1, "id", v_str("network_token_bundle_id")), NULL, &err);
+if (result) {
+    printf("%s\n", voxgig_to_json(result->vt->data(result, NULL)));
+}
 ```
 
-#### `vt->remove(Entity* e, voxgig_value* reqmatch, voxgig_value* ctrl, PNError** err)`
+#### `Entity* vt->remove(Entity* e, voxgig_value* reqmatch, voxgig_value* ctrl, PNError** err)`
 
-Remove the entity matching the given criteria. Sets `*err` on failure.
+Remove the entity matching the given criteria. Returns the entity, marked as deleted, or `NULL` with `*err` set on failure.
 
 ```c
 Entity* network_token_bundle = bluefinnetworktoken_network_token_bundle(client, NULL);
-voxgig_value* result = network_token_bundle->vt->remove(network_token_bundle, cmap(1, "id", v_str("network_token_bundle_id")), NULL, &err);
+Entity* result = network_token_bundle->vt->remove(network_token_bundle, cmap(1, "id", v_str("network_token_bundle_id")), NULL, &err);
+if (result) {
+    printf("%s\n", voxgig_to_json(result->vt->data(result, NULL)));
+}
 ```
 
 ### Common Methods
@@ -566,6 +572,7 @@ Timeout.
 | Option | Type |
 |---|---|
 | `clearTimer` | function |
+| `now` | function |
 | `setTimer` | function |
 
 These take no default: the feature behaves one way when you supply them and

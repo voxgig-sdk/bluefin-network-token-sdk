@@ -101,29 +101,29 @@ network_token_bundle = BluefinNetworkToken.network_token_bundle(sdk)
 
 ### Operations
 
-#### `create(entity, reqdata, ctrl \\ nil) :: map()`
+#### `create(entity, reqdata, ctrl \\ nil) :: entity`
 
-Create a new entity with the given data. Returns the created entity data and raises on error.
+Create a new entity with the given data. Returns the created entity and raises on error.
 
 ```elixir
-record = BluefinNetworkToken.Entity.NetworkTokenBundle.create(network_token_bundle, BluefinNetworkToken.Helpers.deep(%{
+network_token_bundle = BluefinNetworkToken.Entity.NetworkTokenBundle.create(network_token_bundle, BluefinNetworkToken.Helpers.deep(%{
 }))
 ```
 
-#### `load(entity, reqmatch, ctrl \\ nil) :: map()`
+#### `load(entity, reqmatch, ctrl \\ nil) :: entity`
 
-Load a single entity matching the given criteria. Returns the entity data and raises on error.
+Load a single entity matching the given criteria. Returns the entity, whose record `data_get/1` reads, and raises on error.
 
 ```elixir
-record = BluefinNetworkToken.Entity.NetworkTokenBundle.load(network_token_bundle, BluefinNetworkToken.Helpers.deep(%{"id" => "network_token_bundle_id"}))
+network_token_bundle = BluefinNetworkToken.Entity.NetworkTokenBundle.load(network_token_bundle, BluefinNetworkToken.Helpers.deep(%{"id" => "network_token_bundle_id"}))
 ```
 
-#### `remove(entity, reqmatch, ctrl \\ nil) :: map()`
+#### `remove(entity, reqmatch, ctrl \\ nil) :: entity`
 
-Remove the entity matching the given criteria. Raises on error.
+Remove the entity matching the given criteria. Returns the entity, marked as deleted, and raises on error.
 
 ```elixir
-record = BluefinNetworkToken.Entity.NetworkTokenBundle.remove(network_token_bundle, BluefinNetworkToken.Helpers.deep(%{"id" => "network_token_bundle_id"}))
+network_token_bundle = BluefinNetworkToken.Entity.NetworkTokenBundle.remove(network_token_bundle, BluefinNetworkToken.Helpers.deep(%{"id" => "network_token_bundle_id"}))
 ```
 
 ### Common Functions
@@ -576,6 +576,7 @@ Timeout.
 | Option | Type |
 |---|---|
 | `clearTimer` | function |
+| `now` | function |
 | `setTimer` | function |
 
 These take no default: the feature behaves one way when you supply them and

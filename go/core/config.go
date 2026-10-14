@@ -193,6 +193,7 @@ func MakeConfig() map[string]any {
 				},
 				"optspec": map[string]any{
 					"clearTimer": "`$FUNCTION`",
+					"now": "`$FUNCTION`",
 					"setTimer": "`$FUNCTION`",
 				},
 				"strict": false,
@@ -203,6 +204,7 @@ func MakeConfig() map[string]any {
 			"base": "https://secure-cert.shieldconex.com/api",
 			"auth": map[string]any{
 				"prefix": "Basic",
+				"basic": true,
 			},
 			"headers": map[string]any{
 				"content-type": "application/json",
@@ -304,7 +306,7 @@ func MakeConfig() map[string]any {
 									"header": []any{
 										map[string]any{
 											"name": "scx_client_reference",
-											"orig": "scx_client_reference",
+											"orig": "scx-client-reference",
 											"type": "`$STRING`",
 											"kind": "header",
 											"reqd": true,
@@ -315,6 +317,10 @@ func MakeConfig() map[string]any {
 									"exist": []any{
 										"scx_client_reference",
 									},
+								},
+								"response": map[string]any{
+									"kind": "json",
+									"media": "application/json",
 								},
 							},
 						},
@@ -352,7 +358,7 @@ func MakeConfig() map[string]any {
 									"header": []any{
 										map[string]any{
 											"name": "scx_client_reference",
-											"orig": "scx_client_reference",
+											"orig": "scx-client-reference",
 											"type": "`$STRING`",
 											"kind": "header",
 											"reqd": true,
@@ -361,7 +367,7 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "id",
-											"orig": "network_token_bundle_id",
+											"orig": "networkTokenBundleId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -373,6 +379,10 @@ func MakeConfig() map[string]any {
 										"id",
 										"scx_client_reference",
 									},
+								},
+								"response": map[string]any{
+									"kind": "json",
+									"media": "application/json",
 								},
 							},
 							map[string]any{
@@ -408,7 +418,7 @@ func MakeConfig() map[string]any {
 									"header": []any{
 										map[string]any{
 											"name": "scx_client_reference",
-											"orig": "scx_client_reference",
+											"orig": "scx-client-reference",
 											"type": "`$STRING`",
 											"kind": "header",
 											"reqd": true,
@@ -417,7 +427,7 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "id",
-											"orig": "network_token_bundle_id",
+											"orig": "networkTokenBundleId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -430,6 +440,10 @@ func MakeConfig() map[string]any {
 										"id",
 										"scx_client_reference",
 									},
+								},
+								"response": map[string]any{
+									"kind": "json",
+									"media": "application/json",
 								},
 							},
 						},
@@ -467,7 +481,7 @@ func MakeConfig() map[string]any {
 									"header": []any{
 										map[string]any{
 											"name": "scx_client_reference",
-											"orig": "scx_client_reference",
+											"orig": "scx-client-reference",
 											"type": "`$STRING`",
 											"kind": "header",
 											"reqd": true,
@@ -476,7 +490,7 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "id",
-											"orig": "network_token_bundle_id",
+											"orig": "networkTokenBundleId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -488,6 +502,10 @@ func MakeConfig() map[string]any {
 										"id",
 										"scx_client_reference",
 									},
+								},
+								"response": map[string]any{
+									"kind": "json",
+									"media": "application/json",
 								},
 							},
 						},

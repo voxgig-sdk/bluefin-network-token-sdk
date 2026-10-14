@@ -24,7 +24,7 @@ class NetworkTokenBundleEntity extends BluefinNetworkTokenEntityBase {
   /**
    * @param {NetworkTokenBundleLoadMatch} [reqmatch]
    * @param {Object} [ctrl]
-   * @returns {Promise<NetworkTokenBundle>}
+   * @returns {Promise<NetworkTokenBundleEntity>}
    */
   async load(reqmatch, ctrl) {
 
@@ -129,9 +129,15 @@ class NetworkTokenBundleEntity extends BluefinNetworkTokenEntityBase {
       return (ctx.result && ctx.result.ok) ? this : out
     }
     catch (err) {
+      // What a hook throws here must not escape the cleaning below.
+      try {
 
-      fres = featureHook(ctx, 'PreUnexpected')
-      if (fres instanceof Promise) { await fres }
+        fres = featureHook(ctx, 'PreUnexpected')
+        if (fres instanceof Promise) { await fres }
+      }
+      catch (hookerr) {
+        err = hookerr
+      }
 
       err = this._unexpected(ctx, err)
 
@@ -150,7 +156,7 @@ class NetworkTokenBundleEntity extends BluefinNetworkTokenEntityBase {
   /**
    * @param {NetworkTokenBundleCreateData} [reqdata]
    * @param {Object} [ctrl]
-   * @returns {Promise<NetworkTokenBundle>}
+   * @returns {Promise<NetworkTokenBundleEntity>}
    */
   async create(reqdata, ctrl) {
 
@@ -250,9 +256,15 @@ class NetworkTokenBundleEntity extends BluefinNetworkTokenEntityBase {
       return (ctx.result && ctx.result.ok) ? this : out
     }
     catch (err) {
+      // What a hook throws here must not escape the cleaning below.
+      try {
 
-      fres = featureHook(ctx, 'PreUnexpected')
-      if (fres instanceof Promise) { await fres }
+        fres = featureHook(ctx, 'PreUnexpected')
+        if (fres instanceof Promise) { await fres }
+      }
+      catch (hookerr) {
+        err = hookerr
+      }
 
       err = this._unexpected(ctx, err)
 
@@ -268,10 +280,11 @@ class NetworkTokenBundleEntity extends BluefinNetworkTokenEntityBase {
 
 
 
+
   /**
    * @param {NetworkTokenBundleRemoveMatch} [reqmatch]
    * @param {Object} [ctrl]
-   * @returns {Promise<NetworkTokenBundle>}
+   * @returns {Promise<NetworkTokenBundleEntity>}
    */
   async remove(reqmatch, ctrl) {
 
@@ -383,9 +396,15 @@ class NetworkTokenBundleEntity extends BluefinNetworkTokenEntityBase {
       return out
     }
     catch (err) {
+      // What a hook throws here must not escape the cleaning below.
+      try {
 
-      fres = featureHook(ctx, 'PreUnexpected')
-      if (fres instanceof Promise) { await fres }
+        fres = featureHook(ctx, 'PreUnexpected')
+        if (fres instanceof Promise) { await fres }
+      }
+      catch (hookerr) {
+        err = hookerr
+      }
 
       err = this._unexpected(ctx, err)
 

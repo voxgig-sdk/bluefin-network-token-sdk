@@ -34,7 +34,7 @@ func main() {
 	server := mcp.NewServer(
 		&mcp.Implementation{
 			Name:    "bluefin-network-token",
-			Version: "0.0.0",
+			Version: "0.1.1",
 		},
 		nil,
 	)

@@ -109,7 +109,7 @@ Prepare a fetch definition without sending. Returns the `fetchdef` and raises on
 
 #### `eCreate ent data ctrl :: IO Entity`
 
-Create a new entity with the given data. Resolves to the ENTITY (read the record with `eDataGet`) and raises on error.
+Create a new entity with the given data. Resolves to the created entity and raises on error.
 
 ```haskell
   ent <- Sdk.network_token_bundle sdk VNoval
@@ -122,7 +122,7 @@ Create a new entity with the given data. Resolves to the ENTITY (read the record
 
 #### `eLoad ent match ctrl :: IO Entity`
 
-Load a single entity matching the given criteria. Resolves to the ENTITY (read the record with `eDataGet`) and raises on error.
+Load a single entity matching the given criteria. Resolves to the entity, whose record `eDataGet` reads, and raises on error.
 
 ```haskell
   ent <- Sdk.network_token_bundle sdk VNoval
@@ -133,7 +133,7 @@ Load a single entity matching the given criteria. Resolves to the ENTITY (read t
 
 #### `eRemove ent match ctrl :: IO Entity`
 
-Remove the entity matching the given criteria. Resolves to the ENTITY, marked deleted (`eDeleted`); it keeps the data it held. Raises on error.
+Remove the entity matching the given criteria. Resolves to the entity, marked as deleted (`eDeleted`); it keeps the data it held. Raises on error.
 
 ```haskell
   ent <- Sdk.network_token_bundle sdk VNoval

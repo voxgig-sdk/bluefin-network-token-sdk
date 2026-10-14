@@ -104,9 +104,9 @@ Prepare a fetch definition without sending. Returns the `fetchdef` and raises on
 
 ### Operations
 
-#### `(create ent reqdata ctrl) -> map`
+#### `(create ent reqdata ctrl) -> entity`
 
-Create a new entity with the given data. Returns the created entity data and raises on error.
+Create a new entity with the given data. Returns the created entity and raises on error.
 
 ```clojure
 (def result
@@ -116,17 +116,17 @@ Create a new entity with the given data. Returns the created entity data and rai
     nil))
 ```
 
-#### `(load ent reqmatch ctrl) -> map`
+#### `(load ent reqmatch ctrl) -> entity`
 
-Load a single entity matching the given criteria. Returns the entity data and raises on error.
+Load a single entity matching the given criteria. Returns the entity, whose record `((:data-get ent))` reads, and raises on error.
 
 ```clojure
 (def result (e-network_token_bundle/load (api/network_token_bundle client nil) (vs/jm "id" "network_token_bundle_id") nil))
 ```
 
-#### `(remove ent reqmatch ctrl) -> map`
+#### `(remove ent reqmatch ctrl) -> entity`
 
-Remove the entity matching the given criteria. Raises on error.
+Remove the entity matching the given criteria. Returns the entity, marked as deleted, and raises on error.
 
 ```clojure
 (def result (e-network_token_bundle/remove (api/network_token_bundle client nil) (vs/jm "id" "network_token_bundle_id") nil))
@@ -585,6 +585,7 @@ Timeout.
 | Option | Type |
 |---|---|
 | `clearTimer` | function |
+| `now` | function |
 | `setTimer` | function |
 
 These take no default: the feature behaves one way when you supply them and

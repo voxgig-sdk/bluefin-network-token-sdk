@@ -37,6 +37,8 @@ require_once __DIR__ . '/TransformResponse.php';
 
 BluefinNetworkTokenUtility::setRegistrar(function (BluefinNetworkTokenUtility $u): void {
     $u->clean = [BluefinNetworkTokenClean::class, 'call'];
+    $u->clean_add = [BluefinNetworkTokenClean::class, 'add'];
+    $u->clean_explain = [BluefinNetworkTokenDone::class, 'clean_explain'];
     $u->done = [BluefinNetworkTokenDone::class, 'call'];
     $u->make_error = [BluefinNetworkTokenMakeError::class, 'call'];
     $u->feature_add = [BluefinNetworkTokenFeatureAdd::class, 'call'];

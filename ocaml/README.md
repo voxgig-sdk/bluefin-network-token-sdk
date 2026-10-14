@@ -17,7 +17,7 @@ keeps the cognitive load low.
 
 ## Install
 This package is not yet published to the opam registry. Install it from the
-GitHub release tag (`ocaml/vX.Y.Z`, see [Releases](https://github.com/voxgig-sdk/bluefin-network-token-sdk/releases))
+GitHub release tag (`ocaml/vX.Y.Z`, see [Tags](https://github.com/voxgig-sdk/bluefin-network-token-sdk/tags))
 or from a source checkout. The SDK is dependency-free and compiles with the
 stock `ocamlc` — no opam packages, no dune:
 
@@ -36,6 +36,7 @@ loading a specific record.
 ```ocaml
 open Voxgig_struct
 open Sdk_helpers
+open Sdk_types
 
 let client = Sdk_client.make (jo [("apikey", Str (Sys.getenv "BLUEFIN_NETWORK_TOKEN_APIKEY"))])
 ```
@@ -60,7 +61,7 @@ let created = (Sdk_client.network_token_bundle client Noval).e_create (jo [("car
 print_endline (stringify (created.e_data_get ()));
 
 (* Remove — resolves to the entity, marked deleted; it keeps its data *)
-let removed = (Sdk_client.network_token_bundle client Noval).e_remove (jo [("id", (getp created "id"))]) Noval in
+let removed = (Sdk_client.network_token_bundle client Noval).e_remove (jo [("id", (getp (created.e_data_get ()) "id"))]) Noval in
 Printf.printf "deleted: %b\n" removed.e_deleted
 ```
 
@@ -72,14 +73,15 @@ Entity operations reject on failure, so wrap them in `try` / `catch`:
 ```ts
 try {
   const networktokenbundle = await client.NetworkTokenBundle().load({ id: "example_id" })
-  console.log(networktokenbundle)
+  console.log(networktokenbundle.data())
 } catch (err) {
   console.error('load failed:', err)
 }
 ```
 
 The low-level `direct()` method does **not** throw — it returns the
-value or an `Error`, so check the result before using it:
+result envelope. Branch on `ok`; on failure `status` holds the HTTP status
+(for error responses) and `err` holds the error:
 
 ```ts
 const result = await client.direct({
@@ -88,8 +90,8 @@ const result = await client.direct({
   params: { id: 'example_id' },
 })
 
-if (result instanceof Error) {
-  throw result
+if (!result.ok) {
+  console.error('request failed:', result.status, result.err)
 }
 ```
 
@@ -181,6 +183,7 @@ cd ocaml && make test
 ```ocaml
 open Voxgig_struct
 open Sdk_helpers
+open Sdk_types
 
 let client = Sdk_client.make options
 ```

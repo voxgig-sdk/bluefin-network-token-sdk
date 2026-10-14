@@ -83,6 +83,7 @@ pub trait BluefinNetworkTokenEntity: Entity + Sized {
     fn list(self: &Rc<Self>, reqmatch: Value, ctrl: Value) -> Result<Vec<Rc<Self>>, BluefinNetworkTokenError>;
     fn create(self: &Rc<Self>, reqdata: Value, ctrl: Value) -> Result<Rc<Self>, BluefinNetworkTokenError>;
     fn update(self: &Rc<Self>, reqdata: Value, ctrl: Value) -> Result<Rc<Self>, BluefinNetworkTokenError>;
+    fn patch(self: &Rc<Self>, reqdata: Value, ctrl: Value) -> Result<Rc<Self>, BluefinNetworkTokenError>;
     fn remove(self: &Rc<Self>, reqmatch: Value, ctrl: Value) -> Result<Rc<Self>, BluefinNetworkTokenError>;
 }
 

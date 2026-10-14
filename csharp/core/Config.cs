@@ -235,6 +235,7 @@ public static class SdkConfig
                     ["optspec"] = new Dictionary<string, object?>
                     {
                         ["clearTimer"] = "`$FUNCTION`",
+                        ["now"] = "`$FUNCTION`",
                         ["setTimer"] = "`$FUNCTION`",
                     },
                     ["strict"] = false,
@@ -377,7 +378,7 @@ public static class SdkConfig
                                             new Dictionary<string, object?>
                                             {
                                                 ["name"] = "scx_client_reference",
-                                                ["orig"] = "scx_client_reference",
+                                                ["orig"] = "scx-client-reference",
                                                 ["type"] = "`$STRING`",
                                                 ["kind"] = "header",
                                                 ["reqd"] = true,
@@ -390,6 +391,11 @@ public static class SdkConfig
                                         {
                                             "scx_client_reference",
                                         },
+                                    },
+                                    ["response"] = new Dictionary<string, object?>
+                                    {
+                                        ["kind"] = "json",
+                                        ["media"] = "application/json",
                                     },
                                 },
                             },
@@ -440,7 +446,7 @@ public static class SdkConfig
                                             new Dictionary<string, object?>
                                             {
                                                 ["name"] = "scx_client_reference",
-                                                ["orig"] = "scx_client_reference",
+                                                ["orig"] = "scx-client-reference",
                                                 ["type"] = "`$STRING`",
                                                 ["kind"] = "header",
                                                 ["reqd"] = true,
@@ -451,7 +457,7 @@ public static class SdkConfig
                                             new Dictionary<string, object?>
                                             {
                                                 ["name"] = "id",
-                                                ["orig"] = "network_token_bundle_id",
+                                                ["orig"] = "networkTokenBundleId",
                                                 ["type"] = "`$STRING`",
                                                 ["kind"] = "param",
                                                 ["reqd"] = true,
@@ -465,6 +471,11 @@ public static class SdkConfig
                                             "id",
                                             "scx_client_reference",
                                         },
+                                    },
+                                    ["response"] = new Dictionary<string, object?>
+                                    {
+                                        ["kind"] = "json",
+                                        ["media"] = "application/json",
                                     },
                                 },
                                 new Dictionary<string, object?>
@@ -512,7 +523,7 @@ public static class SdkConfig
                                             new Dictionary<string, object?>
                                             {
                                                 ["name"] = "scx_client_reference",
-                                                ["orig"] = "scx_client_reference",
+                                                ["orig"] = "scx-client-reference",
                                                 ["type"] = "`$STRING`",
                                                 ["kind"] = "header",
                                                 ["reqd"] = true,
@@ -523,7 +534,7 @@ public static class SdkConfig
                                             new Dictionary<string, object?>
                                             {
                                                 ["name"] = "id",
-                                                ["orig"] = "network_token_bundle_id",
+                                                ["orig"] = "networkTokenBundleId",
                                                 ["type"] = "`$STRING`",
                                                 ["kind"] = "param",
                                                 ["reqd"] = true,
@@ -538,6 +549,11 @@ public static class SdkConfig
                                             "id",
                                             "scx_client_reference",
                                         },
+                                    },
+                                    ["response"] = new Dictionary<string, object?>
+                                    {
+                                        ["kind"] = "json",
+                                        ["media"] = "application/json",
                                     },
                                 },
                             },
@@ -588,7 +604,7 @@ public static class SdkConfig
                                             new Dictionary<string, object?>
                                             {
                                                 ["name"] = "scx_client_reference",
-                                                ["orig"] = "scx_client_reference",
+                                                ["orig"] = "scx-client-reference",
                                                 ["type"] = "`$STRING`",
                                                 ["kind"] = "header",
                                                 ["reqd"] = true,
@@ -599,7 +615,7 @@ public static class SdkConfig
                                             new Dictionary<string, object?>
                                             {
                                                 ["name"] = "id",
-                                                ["orig"] = "network_token_bundle_id",
+                                                ["orig"] = "networkTokenBundleId",
                                                 ["type"] = "`$STRING`",
                                                 ["kind"] = "param",
                                                 ["reqd"] = true,
@@ -613,6 +629,11 @@ public static class SdkConfig
                                             "id",
                                             "scx_client_reference",
                                         },
+                                    },
+                                    ["response"] = new Dictionary<string, object?>
+                                    {
+                                        ["kind"] = "json",
+                                        ["media"] = "application/json",
                                     },
                                 },
                             },

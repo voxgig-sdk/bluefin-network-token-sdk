@@ -103,26 +103,26 @@ my $network_token_bundle = $client->NetworkTokenBundle;
 
 ### Operations
 
-#### `create($reqdata, $ctrl) -> hashref`
+#### `create($reqdata, $ctrl) -> NetworkTokenBundleEntity`
 
-Create a new entity with the given data. Returns the created entity data and dies on error.
+Create a new entity with the given data. Returns the created entity and dies on error.
 
 ```perl
 my $result = $client->NetworkTokenBundle->create({
 });
 ```
 
-#### `load($reqmatch, $ctrl) -> hashref`
+#### `load($reqmatch, $ctrl) -> NetworkTokenBundleEntity`
 
-Load a single entity matching the given criteria. Returns the entity data and dies on error.
+Load a single entity matching the given criteria. Returns the entity, whose record `data_get` reads, and dies on error.
 
 ```perl
 my $result = $client->NetworkTokenBundle->load({ 'id' => 'network_token_bundle_id' });
 ```
 
-#### `remove($reqmatch, $ctrl) -> hashref`
+#### `remove($reqmatch, $ctrl) -> NetworkTokenBundleEntity`
 
-Remove the entity matching the given criteria. Dies on error.
+Remove the entity matching the given criteria. Returns the entity, marked as deleted, and dies on error.
 
 ```perl
 my $result = $client->NetworkTokenBundle->remove({ 'id' => 'network_token_bundle_id' });
@@ -578,6 +578,7 @@ Timeout.
 | Option | Type |
 |---|---|
 | `clearTimer` | function |
+| `now` | function |
 | `setTimer` | function |
 
 These take no default: the feature behaves one way when you supply them and

@@ -54,12 +54,12 @@ final client = BluefinNetworkTokenSDK({
 
 ### 3. Load a networktokenbundle
 
-`load()` returns the ENTITY — call data() for the record — and throws on error.
+`load()` returns the entity and throws on error; `.data()` reads its record.
 
 ```dart
 try {
   final networktokenbundle = await client.NetworkTokenBundle().load({'id': 'example_id'});
-  print(networktokenbundle);
+  print(networktokenbundle.data());
 } catch (err) {
   print('load failed: $err');
 }
@@ -68,10 +68,10 @@ try {
 ### 4. Create, update, and remove
 
 ```dart
-// Create — returns the ENTITY (call data() for the record)
+// Create — returns the created entity; data() reads its record
 final created = await client.NetworkTokenBundle().create({'card': <String, dynamic>{}, 'cardNumber': 'example_cardNumber'});
 
-// Remove
+// Remove — returns the entity, marked as deleted
 await client.NetworkTokenBundle().remove({'id': created.data()['id']});
 ```
 
@@ -83,14 +83,15 @@ Entity operations reject on failure, so wrap them in `try` / `catch`:
 ```ts
 try {
   const networktokenbundle = await client.NetworkTokenBundle().load({ id: "example_id" })
-  console.log(networktokenbundle)
+  console.log(networktokenbundle.data())
 } catch (err) {
   console.error('load failed:', err)
 }
 ```
 
 The low-level `direct()` method does **not** throw — it returns the
-value or an `Error`, so check the result before using it:
+result envelope. Branch on `ok`; on failure `status` holds the HTTP status
+(for error responses) and `err` holds the error:
 
 ```ts
 const result = await client.direct({
@@ -99,8 +100,8 @@ const result = await client.direct({
   params: { id: 'example_id' },
 })
 
-if (result instanceof Error) {
-  throw result
+if (!result.ok) {
+  console.error('request failed:', result.status, result.err)
 }
 ```
 
@@ -152,11 +153,10 @@ Create a mock client for unit testing — no server required:
 ```dart
 final client = BluefinNetworkTokenSDK.test();
 
-// Entity ops return the ENTITY and throws on error;
-// call data() for the record.
+// Entity ops return the entity and throw on error;
+// data() reads its mock record.
 final networktokenbundle = await client.NetworkTokenBundle().load({'id': 'test01'});
-// networktokenbundle contains the mock response record
-print(networktokenbundle);
+print(networktokenbundle.data());
 ```
 
 ### Use a custom fetch function
@@ -243,9 +243,9 @@ All entities share the same interface.
 
 | Method | Signature | Description |
 | --- | --- | --- |
-| `load` | `(reqmatch, [ctrl]) -> Future<dynamic>` | Load a single entity by match criteria. Throws on error. |
-| `create` | `(reqdata, [ctrl]) -> Future<dynamic>` | Create a new entity. Throws on error. |
-| `remove` | `(reqmatch, [ctrl]) -> Future<dynamic>` | Remove an entity. Throws on error. |
+| `load` | `(reqmatch, [ctrl]) -> Future<dynamic>` | Load a single entity by match criteria. Returns the entity. Throws on error. |
+| `create` | `(reqdata, [ctrl]) -> Future<dynamic>` | Create a new entity. Returns the entity. Throws on error. |
+| `remove` | `(reqmatch, [ctrl]) -> Future<dynamic>` | Remove an entity. Returns the entity, marked as deleted. Throws on error. |
 | `data` | `([d]) -> Map` | Get (or, with an argument, set) entity data. |
 | `match` | `([m]) -> Map` | Get (or, with an argument, set) entity match criteria. |
 | `make` | `() -> Entity` | Create a new instance with the same options. |
@@ -254,9 +254,10 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return the ENTITY (call data() for the record) (a `Map` for single-entity
-ops, a `List` of entity instances for `list`) and throw on error. Wrap calls
-in `try`/`catch` to handle failures.
+Entity operations return the entity, not the raw record — `list` a `List`
+of entities, one per record — and throw on error. An entity's `data()` reads
+its record. `remove` returns the entity marked as deleted (`deleted()`); it
+keeps the data it held. Wrap calls in `try`/`catch` to handle failures.
 
 The `direct()` escape hatch never throws — it returns a result `Map` you
 branch on via `result['ok']`:
@@ -305,9 +306,9 @@ Create an instance: `final network_token_bundle = client.NetworkTokenBundle();`
 
 | Method | Description |
 | --- | --- |
-| `create(data)` | Create a new entity with the given data. |
-| `load(match)` | Load a single entity by match criteria. |
-| `remove(match)` | Remove the matching entity. |
+| `create(data)` | Create a new entity with the given data. Returns the entity. |
+| `load(match)` | Load a single entity by match criteria. Returns the entity. |
+| `remove(match)` | Remove the matching entity. Returns the entity, marked as deleted. |
 
 #### Fields
 

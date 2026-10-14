@@ -12,7 +12,7 @@ Learn more about Voxgig SDKs at [voxgig.com/sdk](https://voxgig.com/sdk/).
 
 > TypeScript, Python, PHP, Golang, Ruby, Lua, C, Clojure, C++, C#, Dart, Elixir, Haskell, Java, JavaScript, Kotlin, Lean, OCaml, Perl, Rust, Scala, Swift, Zig SDKs, a CLI with an interactive REPL, and an MCP server for AI agents — all generated from one OpenAPI spec by [@voxgig/sdkgen](https://github.com/voxgig/sdkgen).
 
-> **Features:** `undefined`, `undefined`, `undefined`, `undefined`, `undefined`, `undefined`, `undefined`, `undefined`, `undefined`, `undefined`, `undefined`, `undefined` — opt-in,
+> **Features:** `audit`, `clienttrack`, `debug`, `idempotency`, `log`, `metrics`, `paging`, `ratelimit`, `retry`, `telemetry`, `test`, `timeout` — opt-in,
 > inactive until switched on, and configured per client. See the Features
 > section of any SDK README below for what each one does.
 
@@ -50,9 +50,8 @@ const client = BluefinNetworkTokenSDK.test({
   },
 })
 const networktokenbundle = await client.NetworkTokenBundle().load({ id: 'test01' })
-// networktokenbundle is the NetworkTokenBundle entity, populated with mock data
-// — call networktokenbundle.data() for the record itself
-console.log(networktokenbundle)
+// networktokenbundle is the NetworkTokenBundle entity; .data() reads its mock record
+console.log(networktokenbundle.data())
 ```
 
 ### Python
@@ -60,7 +59,7 @@ console.log(networktokenbundle)
 ```python
 client = BluefinNetworkTokenSDK.test()
 networktokenbundle = client.NetworkTokenBundle().load({"id": "test01"})
-print(networktokenbundle)
+print(networktokenbundle.data_get())
 ```
 
 ### PHP
@@ -68,7 +67,7 @@ print(networktokenbundle)
 ```php
 // Seed fixture data so offline calls resolve without a live server.
 $client = BluefinNetworkTokenSDK::test([
-    "entity" => ["networktokenbundle" => ["test01" => ["id" => "test01"]]],
+    "entity" => ["network_token_bundle" => ["test01" => ["id" => "test01"]]],
 ]);
 $networktokenbundle = $client->NetworkTokenBundle()->load(["id" => "test01"]);
 ```
@@ -87,7 +86,7 @@ result, err := client.NetworkTokenBundle(nil).Load(
 ```ruby
 # Seed fixture data so offline calls resolve without a live server.
 client = BluefinNetworkTokenSDK.test({
-  "entity" => { "networktokenbundle" => { "test01" => { "id" => "test01" } } },
+  "entity" => { "network_token_bundle" => { "test01" => { "id" => "test01" } } },
 })
 networktokenbundle = client.NetworkTokenBundle.load({ "id" => "test01" })
 ```
@@ -107,8 +106,10 @@ local result, err = client:NetworkTokenBundle():load({ id = "test01" })
 BluefinNetworkTokenSDK* client = test_sdk(NULL, NULL);
 PNError* err = NULL;
 Entity* network_token_bundle = bluefinnetworktoken_network_token_bundle(client, NULL);
-voxgig_value* network_token_bundle_rec = network_token_bundle->vt->load(network_token_bundle, cmap(1, "id", v_str("test01")), NULL, &err);
-printf("%s\n", voxgig_to_json(network_token_bundle_rec));
+Entity* result = network_token_bundle->vt->load(network_token_bundle, cmap(1, "id", v_str("test01")), NULL, &err);
+if (result) {
+    printf("%s\n", voxgig_to_json(result->vt->data(result, NULL)));
+}
 ```
 
 ### Clojure
@@ -120,23 +121,23 @@ printf("%s\n", voxgig_to_json(network_token_bundle_rec));
 
 (def client (api/test-sdk nil nil))
 (def network_token_bundle (e-network_token_bundle/load (api/network_token_bundle client nil) (vs/jm "id" "test01") nil))
-(println network_token_bundle)
+(println ((:data-get network_token_bundle)))
 ```
 
 ### C++
 
 ```cpp
 auto client = BluefinNetworkTokenSDK::testSDK();
-Value network_token_bundle = client->network_token_bundle()->load(vmap({{"id", Value("test01")}}), Value::undef());
-std::cout << Struct::jsonify(network_token_bundle) << std::endl;
+SdkEntityPtr network_token_bundle = client->network_token_bundle()->load(vmap({{"id", Value("test01")}}), Value::undef());
+std::cout << Struct::jsonify(network_token_bundle->data()) << std::endl;
 ```
 
 ### C#
 
 ```csharp
 var client = BluefinNetworkTokenSDK.TestSDK(null, null);
-var networkTokenBundle = client.NetworkTokenBundle().Load(new Dictionary<string, object?> { ["id"] = "test01" });
-Console.WriteLine(networkTokenBundle);
+var networkTokenBundle = (IEntity)client.NetworkTokenBundle().Load(new Dictionary<string, object?> { ["id"] = "test01" })!;
+Console.WriteLine(StructUtils.Jsonify(networkTokenBundle.Data()));
 ```
 
 ### Dart
@@ -147,7 +148,7 @@ import 'package:bluefin_network_token_sdk/BluefinNetworkTokenSDK.dart';
 Future<void> main() async {
   final client = BluefinNetworkTokenSDK.test();
   final networktokenbundle = await client.NetworkTokenBundle().load({'id': 'test01'});
-  print(networktokenbundle);
+  print(networktokenbundle.data());
 }
 ```
 
@@ -158,15 +159,15 @@ alias BluefinNetworkToken.Helpers, as: H
 
 sdk = BluefinNetworkToken.test()
 network_token_bundle = BluefinNetworkToken.network_token_bundle(sdk)
-record = BluefinNetworkToken.Entity.NetworkTokenBundle.load(network_token_bundle, H.deep(%{"id" => "test01"}))
-IO.inspect(record)
+network_token_bundle = BluefinNetworkToken.Entity.NetworkTokenBundle.load(network_token_bundle, H.deep(%{"id" => "test01"}))
+IO.puts(Voxgig.Struct.jsonify(BluefinNetworkToken.Entity.NetworkTokenBundle.data_get(network_token_bundle)))
 ```
 
 ### Haskell
 
 ```haskell
 import qualified SdkClient as Sdk
-import VoxgigStruct (Value (..), emptyMap)
+import VoxgigStruct (Value (..), emptyMap, stringify)
 import SdkHelpers (jo)
 
 main :: IO ()
@@ -176,15 +177,15 @@ main = do
   arg <- jo [("id", VStr "test01")]
   ctrl <- emptyMap
   network_token_bundle <- Sdk.eLoad ent arg ctrl
-  print network_token_bundle
+  putStrLn =<< stringify =<< Sdk.eDataGet network_token_bundle
 ```
 
 ### Java
 
 ```java
 BluefinNetworkTokenSDK client = BluefinNetworkTokenSDK.testSDK(null, null);
-Object networkTokenBundle = client.networkTokenBundle(null).load(Map.of("id", "test01"), null);
-System.out.println(networkTokenBundle);
+SdkEntity networkTokenBundle = (SdkEntity) client.networkTokenBundle(null).load(Map.of("id", "test01"), null);
+System.out.println(networkTokenBundle.data());
 ```
 
 ### JavaScript
@@ -192,17 +193,16 @@ System.out.println(networkTokenBundle);
 ```js
 const client = BluefinNetworkTokenSDK.test()
 const networktokenbundle = await client.NetworkTokenBundle().load({ id: 'test01' })
-// networktokenbundle is the entity, populated with mock data
-// — call networktokenbundle.data() for the record itself
-console.log(networktokenbundle)
+// networktokenbundle is the NetworkTokenBundle entity; .data() reads its mock record
+console.log(networktokenbundle.data())
 ```
 
 ### Kotlin
 
 ```kotlin
 val client = BluefinNetworkTokenSDK.testSDK(null, null)
-val networkTokenBundle = client.networkTokenBundle(null).load(mutableMapOf<String, Any?>("id" to "test01"), null)
-println(networkTokenBundle)
+val networkTokenBundle = client.networkTokenBundle(null).load(mutableMapOf<String, Any?>("id" to "test01"), null) as SdkEntity
+println(networkTokenBundle.data())
 ```
 
 ### Lean
@@ -212,6 +212,7 @@ cd lean
 lake build
 lake exe omnismoke      # the vendored @voxgig/omni corpus engine itself
 lake exe primary        # shared corpus: request-shaping utilities
+lake exe pipeline       # request shaping driven directly: header, cookie and query arguments
 lake exe feature        # the feature catalog (retry, cache, rbac, netsim, …)
 lake exe structcorpus   # shared corpus: the vendored struct model
 lake exe runner         # entity behaviour (offline; add SDK_TEST_BASE for live)
@@ -235,25 +236,25 @@ use BluefinNetworkTokenSDK;
 
 my $client = BluefinNetworkTokenSDK->test(undef, undef);
 my $networktokenbundle = $client->NetworkTokenBundle->load({ 'id' => 'test01' });
-print "$networktokenbundle->{id}\n";
+print $networktokenbundle->data_get->{id}, "\n";
 ```
 
 ### Rust
 
 ```rust
-use bluefin_network_token_sdk::{jo, test_sdk, Value};
+use bluefin_network_token_sdk::{jo, test_sdk, BluefinNetworkTokenEntity, Entity, Value};
 
 let client = test_sdk(Value::Noval, Value::Noval);
 let network_token_bundle = client.network_token_bundle(Value::Noval).load(jo(vec![("id", Value::str("test01"))]), Value::Noval).unwrap();
-println!("{:?}", network_token_bundle);
+println!("{:?}", network_token_bundle.data(None));
 ```
 
 ### Scala
 
 ```scala
 val client = BluefinNetworkTokenSDK.testSDK(null, null)
-val networkTokenBundle = client.networkTokenBundle(null).load(java.util.Map.of("id", "test01"), null)
-println(networkTokenBundle)
+val networkTokenBundle = client.networkTokenBundle(null).load(java.util.Map.of("id", "test01"), null).asInstanceOf[SdkEntity]
+println(networkTokenBundle.data())
 ```
 
 ### Swift
@@ -261,7 +262,9 @@ println(networkTokenBundle)
 ```swift
 let client = BluefinNetworkTokenSDK.testSDK(nil, nil)
 let networkTokenBundle = try client.NetworkTokenBundle().load(VMap([("id", .string("test01"))]), nil)
-print(networkTokenBundle)
+if let networkTokenBundleEntity = networkTokenBundle.asNative as? Entity {
+    print(networkTokenBundleEntity.data())
+}
 ```
 
 ### Zig
@@ -273,7 +276,7 @@ const h = sdk.h;
 
 const client = sdk.test_sdk(h.vnull(), h.vnull());
 switch (client.network_token_bundle(h.vnull()).load(h.jo(&.{.{ "id", h.vstr("test01") }}), h.vnull())) {
-    .ok => |network_token_bundle| std.debug.print("{s}\n", .{h.stringify(network_token_bundle)}),
+    .ok => |network_token_bundle| std.debug.print("{s}\n", .{h.stringify(network_token_bundle.asEntity().data(null))}),
     .err => |e| std.debug.print("load failed: {s}\n", .{e.msg}),
 }
 ```
@@ -282,31 +285,31 @@ switch (client.network_token_bundle(h.vnull()).load(h.jo(&.{.{ "id", h.vstr("tes
 
 | Language | Package | Install |
 | --- | --- | --- |
-| TypeScript | `@voxgig-sdk/bluefin-network-token-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/bluefin-network-token-sdk/tags) |
-| Python | `voxgig-sdk-bluefin-network-token-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/bluefin-network-token-sdk/tags) |
-| PHP | `voxgig-sdk/bluefin-network-token-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/bluefin-network-token-sdk/tags) |
+| TypeScript | `@voxgig-sdk/bluefin-network-token-sdk` | publish pending — [install from source](ts/README.md#install) |
+| Python | `voxgig-sdk-bluefin-network-token-sdk` | publish pending — [install from source](py/README.md#install) |
+| PHP | `voxgig-sdk/bluefin-network-token-sdk` | publish pending — [install from source](php/README.md#install) |
 | Golang | `github.com/voxgig-sdk/bluefin-network-token-sdk/go` | `go get github.com/voxgig-sdk/bluefin-network-token-sdk/go@latest` |
-| Ruby | `voxgig-sdk-bluefin-network-token-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/bluefin-network-token-sdk/tags) |
-| Lua | `voxgig-sdk-bluefin-network-token-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/bluefin-network-token-sdk/tags) |
-| C | `voxgig-sdk-bluefin-network-token-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/bluefin-network-token-sdk/tags) |
-| Clojure | `voxgig-sdk-bluefin-network-token-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/bluefin-network-token-sdk/tags) |
-| C++ | `voxgig-sdk-bluefin-network-token-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/bluefin-network-token-sdk/tags) |
-| C# | `voxgig-sdk-bluefin-network-token-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/bluefin-network-token-sdk/tags) |
-| Dart | `voxgig-sdk-bluefin-network-token-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/bluefin-network-token-sdk/tags) |
-| Elixir | `voxgig-sdk-bluefin-network-token-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/bluefin-network-token-sdk/tags) |
-| Haskell | `voxgig-sdk-bluefin-network-token-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/bluefin-network-token-sdk/tags) |
-| Java | `voxgig-sdk-bluefin-network-token-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/bluefin-network-token-sdk/tags) |
-| JavaScript | `@voxgig-sdk/bluefin-network-token-sdk-js` | publish pending — [install from git tag](https://github.com/voxgig-sdk/bluefin-network-token-sdk/tags) |
-| Kotlin | `voxgig-sdk-bluefin-network-token-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/bluefin-network-token-sdk/tags) |
-| Lean | `voxgig-sdk-bluefin-network-token-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/bluefin-network-token-sdk/tags) |
-| OCaml | `voxgig-sdk-bluefin-network-token-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/bluefin-network-token-sdk/tags) |
-| Perl | `voxgig-sdk-bluefin-network-token-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/bluefin-network-token-sdk/tags) |
-| Rust | `voxgig-sdk-bluefin-network-token-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/bluefin-network-token-sdk/tags) |
-| Scala | `voxgig-sdk-bluefin-network-token-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/bluefin-network-token-sdk/tags) |
-| Swift | `voxgig-sdk-bluefin-network-token-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/bluefin-network-token-sdk/tags) |
-| Zig | `voxgig-sdk-bluefin-network-token-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/bluefin-network-token-sdk/tags) |
-| Go CLI | `github.com/voxgig-sdk/bluefin-network-token-sdk/go-cli` | `go install github.com/voxgig-sdk/bluefin-network-token-sdk/go-cli/cmd/bluefin-network-token@latest` |
-| Go MCP server | `github.com/voxgig-sdk/bluefin-network-token-sdk/go-mcp` | `go get github.com/voxgig-sdk/bluefin-network-token-sdk/go-mcp@latest` |
+| Ruby | `voxgig-sdk-bluefin-network-token-sdk` | publish pending — [install from source](rb/README.md#install) |
+| Lua | `voxgig-sdk-bluefin-network-token-sdk` | publish pending — [install from source](lua/README.md#install) |
+| C | `voxgig-sdk-bluefin-network-token-sdk` | publish pending — [install from source](c/README.md#install) |
+| Clojure | `voxgig-sdk-bluefin-network-token-sdk` | publish pending — [install from source](clojure/README.md#install) |
+| C++ | `voxgig-sdk-bluefin-network-token-sdk` | publish pending — [install from source](cpp/README.md#install) |
+| C# | `voxgig-sdk-bluefin-network-token-sdk` | publish pending — [install from source](csharp/README.md#install) |
+| Dart | `voxgig-sdk-bluefin-network-token-sdk` | publish pending — [install from source](dart/README.md#install) |
+| Elixir | `voxgig-sdk-bluefin-network-token-sdk` | publish pending — [install from source](elixir/README.md#install) |
+| Haskell | `voxgig-sdk-bluefin-network-token-sdk` | publish pending — [install from source](haskell/README.md#install) |
+| Java | `voxgig-sdk-bluefin-network-token-sdk` | publish pending — [install from source](java/README.md#install) |
+| JavaScript | `@voxgig-sdk/bluefin-network-token-sdk-js` | publish pending — [install from source](js/README.md#install) |
+| Kotlin | `voxgig-sdk-bluefin-network-token-sdk` | publish pending — [install from source](kotlin/README.md#install) |
+| Lean | `voxgig-sdk-bluefin-network-token-sdk` | publish pending — [install from source](lean/README.md#install) |
+| OCaml | `voxgig-sdk-bluefin-network-token-sdk` | publish pending — [install from source](ocaml/README.md#install) |
+| Perl | `voxgig-sdk-bluefin-network-token-sdk` | publish pending — [install from source](perl/README.md#install) |
+| Rust | `voxgig-sdk-bluefin-network-token-sdk` | publish pending — [install from source](rust/README.md#install) |
+| Scala | `voxgig-sdk-bluefin-network-token-sdk` | publish pending — [install from source](scala/README.md#install) |
+| Swift | `voxgig-sdk-bluefin-network-token-sdk` | publish pending — [install from source](swift/README.md#install) |
+| Zig | `voxgig-sdk-bluefin-network-token-sdk` | publish pending — [install from source](zig/README.md#install) |
+| Go CLI | `github.com/voxgig-sdk/bluefin-network-token-sdk/go-cli` | build from source — [go-cli/README.md](go-cli/README.md) |
+| Go MCP server | `github.com/voxgig-sdk/bluefin-network-token-sdk/go-mcp` | build from source — [go-mcp/README.md](go-mcp/README.md) |
 
 ## Quickstart
 
@@ -320,9 +323,11 @@ const client = new BluefinNetworkTokenSDK({
   secret: process.env.BLUEFIN_NETWORK_TOKEN_SECRET,
 })
 
-// Load networktokenbundle data (returns a NetworkTokenBundle)
-const networktokenbundle = await client.NetworkTokenBundle().load()
-console.log(networktokenbundle)
+// Load a specific networktokenbundle (returns the entity, a NetworkTokenBundleEntity)
+const networktokenbundle = await client.NetworkTokenBundle().load({
+  id: 'example_id',
+})
+console.log(networktokenbundle.data())
 ```
 
 See the [TypeScript README](ts/README.md) for the full guide.
@@ -337,9 +342,10 @@ See the [TypeScript README](ts/README.md) for the full guide.
 
 ## Use it from an AI agent (MCP)
 
-The generated MCP server exposes every operation in this SDK as an
-[MCP](https://modelcontextprotocol.io) tool that Claude, Cursor or Cline
-can call directly. Build and register it:
+The generated MCP server exposes this SDK's load operations as
+[MCP](https://modelcontextprotocol.io) tools that Claude, Cursor or Cline
+can call directly. It only reads: create, update, patch and remove become tools when the SDK's model sets
+`main: kit: target: 'go-mcp': tool: write: true`. Build and register it:
 
 ```bash
 cd go-mcp && go build -o bluefin-network-token-mcp .
@@ -381,9 +387,9 @@ client = BluefinNetworkTokenSDK({
 })
 
 
-# Load a specific networktokenbundle (returns the record, raises on error)
+# Load a specific networktokenbundle (returns the entity, raises on error)
 networktokenbundle = client.NetworkTokenBundle().load({"id": "example_id"})
-print(networktokenbundle)
+print(networktokenbundle.data_get())
 ```
 
 ### PHP
@@ -397,7 +403,7 @@ $client = new BluefinNetworkTokenSDK([
 ]);
 
 
-// Load a specific networktokenbundle (returns the ENTITY; call data_get() for the record; throws on error)
+// Load a specific networktokenbundle (returns the entity; data_get() reads its record; throws on error)
 $networktokenbundle = $client->NetworkTokenBundle()->load(["id" => "example_id"]);
 print_r($networktokenbundle->data_get());
 ```
@@ -411,12 +417,12 @@ client := sdk.NewBluefinNetworkTokenSDK(map[string]any{
     "apikey": os.Getenv("BLUEFIN_NETWORK_TOKEN_APIKEY"),
 })
 
-// Load networktokenbundle data
+// Load a specific networktokenbundle (returns the entity; err is non-nil on failure)
 networkTokenBundle, err := client.NetworkTokenBundle(nil).Load(map[string]any{"id": "example_id"}, nil)
 if err != nil {
     panic(err)
 }
-fmt.Println(networkTokenBundle)
+fmt.Println(networkTokenBundle.(sdk.Entity).Data())
 ```
 
 ### Ruby
@@ -429,24 +435,26 @@ client = BluefinNetworkTokenSDK.new({
 })
 
 
-# Load a specific networktokenbundle (returns the ENTITY; call data_get for the record)
+# Load a specific networktokenbundle (returns the entity; data_get reads its record; raises on error)
 networktokenbundle = client.NetworkTokenBundle.load({ "id" => "example_id" })
-puts networktokenbundle
+puts networktokenbundle.data_get
 ```
 
 ### Lua
 
 ```lua
 local sdk = require("bluefin-network-token_sdk")
+local json = require("dkjson")
 
 local client = sdk.new({
   apikey = os.getenv("BLUEFIN_NETWORK_TOKEN_APIKEY"),
 })
 
 
--- Load a specific networktokenbundle
+-- Load a specific networktokenbundle (returns the entity; err on failure)
 local networktokenbundle, err = client:NetworkTokenBundle():load({ id = "example_id" })
-print(networktokenbundle)
+if err then error(err) end
+print(json.encode(networktokenbundle:data_get()))
 ```
 
 ### C
@@ -460,9 +468,11 @@ PNError* err = NULL;
 
 
 Entity* network_token_bundle = bluefinnetworktoken_network_token_bundle(client, NULL);
-// Load a specific networktokenbundle (returns the record, sets *err on failure)
-voxgig_value* network_token_bundle_rec = network_token_bundle->vt->load(network_token_bundle, cmap(1, "id", v_str("example_id")), NULL, &err);
-printf("%s\n", voxgig_to_json(network_token_bundle_rec));
+// Load a specific networktokenbundle (returns the entity, sets *err on failure)
+Entity* loaded = network_token_bundle->vt->load(network_token_bundle, cmap(1, "id", v_str("example_id")), NULL, &err);
+if (loaded) {
+    printf("%s\n", voxgig_to_json(loaded->vt->data(loaded, NULL)));
+}
 ```
 
 ### Clojure
@@ -475,9 +485,9 @@ printf("%s\n", voxgig_to_json(network_token_bundle_rec));
 (def client (api/make-sdk (vs/jm "apikey" (System/getenv "BLUEFIN_NETWORK_TOKEN_APIKEY"))))
 
 
-;; Load a specific network_token_bundle (returns the record, raises on error)
+;; Load a specific network_token_bundle (returns the entity, raises on error)
 (def network_token_bundle (e-network_token_bundle/load (api/network_token_bundle client nil) (vs/jm "id" "example_id") nil))
-(println network_token_bundle)
+(println ((:data-get network_token_bundle)))
 ```
 
 ### C++
@@ -494,15 +504,16 @@ auto client = std::make_shared<BluefinNetworkTokenSDK>(vmap({
 }));
 
 
-// Load a specific network_token_bundle (returns the record, throws on error)
-Value network_token_bundle = client->network_token_bundle()->load(vmap({{"id", Value("example_id")}}), Value::undef());
-std::cout << Struct::jsonify(network_token_bundle) << std::endl;
+// Load a specific network_token_bundle (returns the entity, throws on error)
+SdkEntityPtr network_token_bundle = client->network_token_bundle()->load(vmap({{"id", Value("example_id")}}), Value::undef());
+std::cout << Struct::jsonify(network_token_bundle->data()) << std::endl;
 ```
 
 ### C#
 
 ```csharp
 using BluefinNetworkTokenSdk;
+using Voxgig.Struct;
 
 var client = new BluefinNetworkTokenSDK(new Dictionary<string, object?>
 {
@@ -510,9 +521,9 @@ var client = new BluefinNetworkTokenSDK(new Dictionary<string, object?>
 });
 
 
-// Load a specific networktokenbundle (returns the record, raises on error)
-var networkTokenBundle = client.NetworkTokenBundle().Load(new Dictionary<string, object?> { ["id"] = "example_id" });
-Console.WriteLine(networkTokenBundle);
+// Load a specific networktokenbundle (returns the entity, raises on error)
+var networkTokenBundle = (IEntity)client.NetworkTokenBundle().Load(new Dictionary<string, object?> { ["id"] = "example_id" })!;
+Console.WriteLine(StructUtils.Jsonify(networkTokenBundle.Data()));
 ```
 
 ### Dart
@@ -527,9 +538,9 @@ Future<void> main() async {
   });
 
 
-  // Load a specific networktokenbundle (returns the record, throws on error)
+  // Load a specific networktokenbundle (returns the entity, throws on error)
   final networktokenbundle = await client.NetworkTokenBundle().load({'id': 'example_id'});
-  print(networktokenbundle);
+  print(networktokenbundle.data());
 }
 ```
 
@@ -542,9 +553,9 @@ sdk = BluefinNetworkToken.new(H.deep(%{"apikey" => System.get_env("BLUEFIN_NETWO
 
 network_token_bundle = BluefinNetworkToken.network_token_bundle(sdk)
 
-# Load a specific networktokenbundle (returns the record, raises on error)
-record = BluefinNetworkToken.Entity.NetworkTokenBundle.load(network_token_bundle, H.deep(%{"id" => "example_id"}))
-IO.inspect(record)
+# Load a specific networktokenbundle (returns the entity, raises on error)
+network_token_bundle = BluefinNetworkToken.Entity.NetworkTokenBundle.load(network_token_bundle, H.deep(%{"id" => "example_id"}))
+IO.puts(Voxgig.Struct.jsonify(BluefinNetworkToken.Entity.NetworkTokenBundle.data_get(network_token_bundle)))
 ```
 
 ### Haskell
@@ -552,7 +563,7 @@ IO.inspect(record)
 ```haskell
 import System.Environment (lookupEnv)
 import qualified SdkClient as Sdk
-import VoxgigStruct (Value (..), emptyMap)
+import VoxgigStruct (Value (..), emptyMap, stringify)
 import SdkHelpers (jo)
 
 main :: IO ()
@@ -561,27 +572,29 @@ main = do
   opts <- jo [("apikey", maybe VNoval VStr mkey)]
   sdk <- Sdk.newSdk opts
 
-  -- Load a specific networktokenbundle (returns the ENTITY, raises on error)
+  -- Load a specific networktokenbundle (returns the entity, raises on error)
   ent2 <- Sdk.network_token_bundle sdk VNoval
   m <- jo [("id", VStr "example_id")]
   ctrl2 <- emptyMap
   network_token_bundle <- Sdk.eLoad ent2 m ctrl2
-  print =<< Sdk.eDataGet network_token_bundle
+  putStrLn =<< stringify =<< Sdk.eDataGet network_token_bundle
 ```
 
 ### Java
 
 ```java
+import java.util.Map;
 import voxgig.bluefinnetworktokensdk.core.BluefinNetworkTokenSDK;
+import voxgig.bluefinnetworktokensdk.core.SdkEntity;
 
 Map<String, Object> options = new java.util.LinkedHashMap<>();
 options.put("apikey", System.getenv("BLUEFIN_NETWORK_TOKEN_APIKEY"));
 BluefinNetworkTokenSDK client = new BluefinNetworkTokenSDK(options);
 
 
-// Load a specific networktokenbundle (returns the record, raises on error)
-Object networkTokenBundle = client.networkTokenBundle(null).load(Map.of("id", "example_id"), null);
-System.out.println(networkTokenBundle);
+// Load a specific networktokenbundle (returns the entity, raises on error)
+SdkEntity networkTokenBundle = (SdkEntity) client.networkTokenBundle(null).load(Map.of("id", "example_id"), null);
+System.out.println(networkTokenBundle.data());
 ```
 
 ### JavaScript
@@ -593,21 +606,27 @@ const client = new BluefinNetworkTokenSDK({
   apikey: process.env.BLUEFIN_NETWORK_TOKEN_APIKEY,
 })
 
+// Load a specific networktokenbundle (returns the entity)
+const networktokenbundle = await client.NetworkTokenBundle().load({
+  id: 'example_id',
+})
+console.log(networktokenbundle.data())
 ```
 
 ### Kotlin
 
 ```kotlin
 import voxgig.bluefinnetworktokensdk.core.BluefinNetworkTokenSDK
+import voxgig.bluefinnetworktokensdk.core.SdkEntity
 
 val client = BluefinNetworkTokenSDK(mutableMapOf<String, Any?>(
     "apikey" to System.getenv("BLUEFIN_NETWORK_TOKEN_APIKEY"),
 ))
 
 
-// Load a specific networktokenbundle (returns the record, raises on error)
-val networkTokenBundle = client.networkTokenBundle(null).load(mutableMapOf<String, Any?>("id" to "example_id"), null)
-println(networkTokenBundle)
+// Load a specific networktokenbundle (returns the entity, raises on error)
+val networkTokenBundle = client.networkTokenBundle(null).load(mutableMapOf<String, Any?>("id" to "example_id"), null) as SdkEntity
+println(networkTokenBundle.data())
 ```
 
 ### Lean
@@ -632,6 +651,7 @@ Build it with `cd lean && lake build`.
 ```ocaml
 open Voxgig_struct
 open Sdk_helpers
+open Sdk_types
 
 let () =
   let client = Sdk_client.make (jo [("apikey", Str (Sys.getenv "BLUEFIN_NETWORK_TOKEN_APIKEY"))]) in
@@ -651,39 +671,40 @@ my $client = BluefinNetworkTokenSDK->new({
 });
 
 
-# Load a specific networktokenbundle (returns the ENTITY; call data_get for the record; dies on error)
+# Load a specific networktokenbundle (returns the entity; data_get reads its record; dies on error)
 my $networktokenbundle = $client->NetworkTokenBundle->load({ 'id' => 'example_id' });
-print "$networktokenbundle->{id}\n";
+print $networktokenbundle->data_get->{id}, "\n";
 ```
 
 ### Rust
 
 ```rust
-use bluefin_network_token_sdk::{jo, BluefinNetworkTokenSDK, Value};
+use bluefin_network_token_sdk::{jo, BluefinNetworkTokenEntity, BluefinNetworkTokenSDK, Entity, Value};
 
 let client = BluefinNetworkTokenSDK::new(jo(vec![
     ("apikey", Value::str(std::env::var("BLUEFIN_NETWORK_TOKEN_APIKEY").unwrap_or_default())),
 ]));
 
 
-// Load a specific networktokenbundle (returns the record, Err on failure)
+// Load a specific networktokenbundle (returns the entity, Err on failure)
 let network_token_bundle = client.network_token_bundle(Value::Noval).load(jo(vec![("id", Value::str("example_id"))]), Value::Noval).unwrap();
-println!("{:?}", network_token_bundle);
+println!("{:?}", network_token_bundle.data(None));
 ```
 
 ### Scala
 
 ```scala
 import voxgig.bluefinnetworktokensdk.core.BluefinNetworkTokenSDK
+import voxgig.bluefinnetworktokensdk.core.SdkEntity
 
 val options = new java.util.LinkedHashMap[String, Object]()
 options.put("apikey", System.getenv("BLUEFIN_NETWORK_TOKEN_APIKEY"))
 val client = new BluefinNetworkTokenSDK(options)
 
 
-// Load a specific networktokenbundle (returns the record, raises on error)
-val networkTokenBundle = client.networkTokenBundle(null).load(java.util.Map.of("id", "example_id"), null)
-println(networkTokenBundle)
+// Load a specific networktokenbundle (returns the entity, raises on error)
+val networkTokenBundle = client.networkTokenBundle(null).load(java.util.Map.of("id", "example_id"), null).asInstanceOf[SdkEntity]
+println(networkTokenBundle.data())
 ```
 
 ### Swift
@@ -697,9 +718,11 @@ options.entries["apikey"] = .string(
 let client = BluefinNetworkTokenSDK(options)
 
 
-// Load a specific networktokenbundle (returns the record, throws on error)
+// Load a specific networktokenbundle (returns the entity, throws on error)
 let networkTokenBundle = try client.NetworkTokenBundle().load(VMap([("id", .string("example_id"))]), nil)
-print(networkTokenBundle)
+if let networkTokenBundleEntity = networkTokenBundle.asNative as? Entity {
+    print(networkTokenBundleEntity.data())
+}
 ```
 
 ### Zig
@@ -714,9 +737,9 @@ const client = sdk.BluefinNetworkTokenSDK.new(h.jo(&.{
 }));
 
 
-// Load a specific networktokenbundle (Ok is the record, .err on failure)
+// Load a specific networktokenbundle (.ok is the entity, .err on failure)
 switch (client.network_token_bundle(h.vnull()).load(h.jo(&.{.{ "id", h.vstr("example_id") }}), h.vnull())) {
-    .ok => |network_token_bundle| std.debug.print("{s}\n", .{h.stringify(network_token_bundle)}),
+    .ok => |network_token_bundle| std.debug.print("{s}\n", .{h.stringify(network_token_bundle.asEntity().data(null))}),
     .err => |e| std.debug.print("load failed: {s}\n", .{e.msg}),
 }
 ```
@@ -744,10 +767,9 @@ const result = await client.direct({
   method: 'GET',
   params: { id: 'example' },
 })
-if (result instanceof Error) {
-  throw result
+if (result.ok) {
+  console.log(result.data)
 }
-console.log(result.data)
 ```
 
 **Python:**
@@ -858,7 +880,7 @@ result = BluefinNetworkToken.direct(sdk, BluefinNetworkToken.Helpers.deep(%{
 ```haskell
 import qualified SdkClient as Sdk
 import qualified SdkFeatures as F
-import VoxgigStruct (Value (..))
+import VoxgigStruct (Value (..), stringify)
 import SdkHelpers (jo)
 
 main :: IO ()
@@ -867,7 +889,7 @@ main = do
   params <- jo [("id", VStr "example")]
   args <- jo [("path", VStr "/api/resource/{id}"), ("method", VStr "GET"), ("params", params)]
   result <- F.direct sdk args
-  print result
+  putStrLn =<< stringify result
 ```
 
 **Java:**
@@ -885,10 +907,9 @@ const result = await client.direct({
   method: 'GET',
   params: { id: 'example' },
 })
-if (result instanceof Error) {
-  throw result
+if (result.ok) {
+  console.log(result.data)
 }
-console.log(result.data)
 ```
 
 **Kotlin:**
@@ -1010,10 +1031,12 @@ customizable without forking any upstream tool:
 - **Templates** (`.sdk/tm/`) and **components** (`.sdk/src/cmp/`) are
   the two layers of generation, copied into this repo: templates are the
   literal per-language source, components generate the API-shaped parts.
-- **Regeneration merges.** By default, newly generated content is
-  three-way merged into existing files, so generator updates and local
-  edits usually converge without manual conflict handling. A project can
-  opt for plain overwrite instead.
+- **Regeneration overwrites.** Each run rewrites every generated file from
+  the model, the templates and the components, so an edit made to
+  generated output is lost. Say what this project needs in its own model
+  (`.sdk/model/sdk.aontu`), or extend a target with a component of its
+  own in `.sdk/src/cmp/<target>/`, registered with `registerComponent`,
+  which `voxgig-sdkgen doctor` reports as an addition rather than drift.
 - **Custom features and entire custom targets** arrive through sdkgen
   packages (`voxgig-sdkgen package add`), on the same rails as the
   bundled languages, and `voxgig-sdkgen doctor` reports any drift from

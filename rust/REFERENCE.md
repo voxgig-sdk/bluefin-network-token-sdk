@@ -8,7 +8,7 @@ Complete API reference for the BluefinNetworkToken Rust SDK.
 ### Constructor
 
 ```rust
-use bluefin_network_token_sdk::{BluefinNetworkTokenSDK, Value};
+use bluefin_network_token_sdk::{jo, BluefinNetworkTokenEntity, BluefinNetworkTokenSDK, Entity, Value};
 
 let client = BluefinNetworkTokenSDK::new(options);
 ```
@@ -107,29 +107,31 @@ let network_token_bundle = client.network_token_bundle(Value::Noval);
 
 ### Operations
 
-#### `create(reqdata: Value, ctrl: Value) -> Result<Value, BluefinNetworkTokenError>`
+#### `create(reqdata: Value, ctrl: Value) -> Result<Rc<Self>, BluefinNetworkTokenError>`
 
-Create a new entity with the given data. Returns the created entity data on `Ok` and `Err` on failure.
+Create a new entity with the given data. `Ok` is the created entity, and `Err` a failure.
 
 ```rust
 let result = client.network_token_bundle(Value::Noval).create(jo(vec![
 ]), Value::Noval).unwrap();
 ```
 
-#### `load(reqmatch: Value, ctrl: Value) -> Result<Value, BluefinNetworkTokenError>`
+#### `load(reqmatch: Value, ctrl: Value) -> Result<Rc<Self>, BluefinNetworkTokenError>`
 
-Load a single entity matching the given criteria. Returns the entity data on `Ok` and `Err` on failure.
+Load a single entity matching the given criteria. `Ok` is the entity, whose record `data(None)` reads, and `Err` a failure.
 
 ```rust
 let result = client.network_token_bundle(Value::Noval).load(jo(vec![("id", Value::str("network_token_bundle_id"))]), Value::Noval).unwrap();
+println!("{:?}", result.data(None));
 ```
 
-#### `remove(reqmatch: Value, ctrl: Value) -> Result<Value, BluefinNetworkTokenError>`
+#### `remove(reqmatch: Value, ctrl: Value) -> Result<Rc<Self>, BluefinNetworkTokenError>`
 
-Remove the entity matching the given criteria. `Err` on failure.
+Remove the entity matching the given criteria. `Ok` is the entity, marked as deleted, and `Err` a failure.
 
 ```rust
 let result = client.network_token_bundle(Value::Noval).remove(jo(vec![("id", Value::str("network_token_bundle_id"))]), Value::Noval).unwrap();
+println!("{:?}", result.data(None));
 ```
 
 ### Common Methods
@@ -574,6 +576,7 @@ Timeout.
 | Option | Type |
 |---|---|
 | `clearTimer` | function |
+| `now` | function |
 | `setTimer` | function |
 
 These take no default: the feature behaves one way when you supply them and

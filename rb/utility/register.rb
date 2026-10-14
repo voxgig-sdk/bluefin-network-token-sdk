@@ -33,6 +33,8 @@ require_relative 'transform_response'
 
 BluefinNetworkTokenUtility.registrar = ->(u) {
   u.clean = BluefinNetworkTokenUtilities::Clean
+  u.clean_add = BluefinNetworkTokenUtilities::CleanAdd
+  u.clean_explain = BluefinNetworkTokenUtilities::CleanExplain
   u.done = BluefinNetworkTokenUtilities::Done
   u.make_error = BluefinNetworkTokenUtilities::MakeError
   u.feature_add = BluefinNetworkTokenUtilities::FeatureAdd

@@ -40,8 +40,9 @@ loading a specific record.
 
 ```haskell
 import System.Environment (lookupEnv)
+import Data.IORef (readIORef)
 import qualified SdkClient as Sdk
-import VoxgigStruct (Value (..), emptyMap)
+import VoxgigStruct (Value (..), emptyMap, stringify)
 import SdkHelpers (jo)
 
 main :: IO ()
@@ -51,9 +52,9 @@ main = do
   sdk <- Sdk.newSdk opts
 ```
 
-Entity operations raise on error (via `Control.Exception.throwIO`) and
-return the bare result `Value`. Wrap a call in `Control.Exception.try`
-to recover from failures.
+Entity operations return the entity, whose record `eDataGet` reads, and
+raise on error (via `Control.Exception.throwIO`). Wrap a call in
+`Control.Exception.try` to recover from failures.
 
 ### 3. Load a networktokenbundle
 
@@ -65,7 +66,7 @@ to recover from failures.
   m <- jo [("id", VStr "example_id")]
   ctrl2 <- emptyMap
   network_token_bundle <- Sdk.eLoad ent2 m ctrl2
-  print =<< Sdk.eDataGet network_token_bundle
+  putStrLn =<< stringify =<< Sdk.eDataGet network_token_bundle
 ```
 
 ### 4. Create, update, and remove
@@ -75,14 +76,14 @@ to recover from failures.
   d <- jo [("card", VNoval), ("cardNumber", VStr "example_cardNumber")]
   cctrl <- emptyMap
   created <- Sdk.eCreate createEnt d cctrl
-  print =<< Sdk.eDataGet created
+  putStrLn =<< stringify =<< Sdk.eDataGet created
 ```
 
 ```haskell
   removeEnt <- Sdk.network_token_bundle sdk VNoval
   rm <- jo [("id", VStr "example_id")]
   rctrl <- emptyMap
-  -- Resolves to the entity, marked deleted; it keeps the data it held.
+  -- Resolves to the entity, marked as deleted; it keeps the data it held.
   removed <- Sdk.eRemove removeEnt rm rctrl
   print =<< readIORef (Sdk.eDeleted removed)
 ```
@@ -95,14 +96,15 @@ Entity operations reject on failure, so wrap them in `try` / `catch`:
 ```ts
 try {
   const networktokenbundle = await client.NetworkTokenBundle().load({ id: "example_id" })
-  console.log(networktokenbundle)
+  console.log(networktokenbundle.data())
 } catch (err) {
   console.error('load failed:', err)
 }
 ```
 
 The low-level `direct()` method does **not** throw — it returns the
-value or an `Error`, so check the result before using it:
+result envelope. Branch on `ok`; on failure `status` holds the HTTP status
+(for error responses) and `err` holds the error:
 
 ```ts
 const result = await client.direct({
@@ -111,8 +113,8 @@ const result = await client.direct({
   params: { id: 'example_id' },
 })
 
-if (result instanceof Error) {
-  throw result
+if (!result.ok) {
+  console.error('request failed:', result.status, result.err)
 }
 ```
 
@@ -127,7 +129,7 @@ raises and returns a result `Value` you branch on via its `ok` field:
 ```haskell
 import qualified SdkClient as Sdk
 import qualified SdkFeatures as F
-import VoxgigStruct (Value (..))
+import VoxgigStruct (Value (..), stringify)
 import SdkHelpers (jo, getp)
 
 main :: IO ()
@@ -141,13 +143,15 @@ main = do
     VBool True -> do
       status <- getp result "status"   -- e.g. VNum 200
       body <- getp result "data"       -- the response body
-      print (status, body)
+      putStrLn =<< stringify status
+      putStrLn =<< stringify body
     _ -> do
       -- A non-2xx response carries status + data (the error body); a
       -- transport-level failure carries err instead.
       status <- getp result "status"
       err <- getp result "err"
-      print (status, err)
+      putStrLn =<< stringify status
+      putStrLn =<< stringify err
 ```
 
 ### Prepare a request without sending it
@@ -155,7 +159,7 @@ main = do
 ```haskell
 import qualified SdkClient as Sdk
 import qualified SdkFeatures as F
-import VoxgigStruct (Value (..))
+import VoxgigStruct (Value (..), stringify)
 import SdkHelpers (jo, getp)
 
 main :: IO ()
@@ -167,7 +171,8 @@ main = do
   fetchdef <- F.prepare sdk args
   url <- getp fetchdef "url"
   method <- getp fetchdef "method"
-  print (url, method)
+  putStrLn =<< stringify url
+  putStrLn =<< stringify method
 ```
 
 ### Use test mode
@@ -177,7 +182,7 @@ Create a mock client for unit testing — no server required:
 ```haskell
 import qualified SdkClient as Sdk
 import qualified SdkFeatures as F
-import VoxgigStruct (Value (..), emptyMap)
+import VoxgigStruct (Value (..), emptyMap, stringify)
 import SdkHelpers (jo)
 
 main :: IO ()
@@ -186,9 +191,10 @@ main = do
   ent <- Sdk.network_token_bundle sdk VNoval
   arg <- jo [("id", VStr "test01")]
   ctrl <- emptyMap
-  -- Entity ops return the bare record and raise on error.
+  -- Entity ops return the entity and raise on error;
+  -- eDataGet reads its mock record.
   network_token_bundle <- Sdk.eLoad ent arg ctrl
-  print network_token_bundle
+  putStrLn =<< stringify =<< Sdk.eDataGet network_token_bundle
 ```
 
 ### Use a custom fetch function
@@ -283,7 +289,7 @@ All entities share the same record interface (fields of the `Entity` type).
 | --- | --- | --- |
 | `eLoad` | `Value -> Value -> IO Entity` | Load a single entity by match criteria. Resolves to the entity. Raises on error. |
 | `eCreate` | `Value -> Value -> IO Entity` | Create a new entity. Resolves to the entity. Raises on error. |
-| `eRemove` | `Value -> Value -> IO Entity` | Remove an entity. Resolves to the entity, marked deleted. Raises on error. |
+| `eRemove` | `Value -> Value -> IO Entity` | Remove an entity. Resolves to the entity, marked as deleted. Raises on error. |
 | `eDataGet` | `IO Value` | Get entity data. |
 | `eDataSet` | `Value -> IO ()` | Set entity data. |
 | `eStream` | `String -> Value -> Value -> IO [Value]` | Run an op as a lazy stream of items. |
@@ -295,7 +301,7 @@ All entities share the same record interface (fields of the `Entity` type).
 Entity operations resolve to the ENTITY, not the raw record — `eList` to
 one entity per record — and raise on error. The record is reached through
 `eDataGet`, which returns the entity's data container. `eRemove` resolves to
-the entity marked deleted (`eDeleted`); it keeps the data it held. Wrap calls
+the entity marked as deleted (`eDeleted`); it keeps the data it held. Wrap calls
 in `Control.Exception.try` to handle failures.
 
 The `direct` escape hatch never raises — it returns a result `Value`
@@ -347,7 +353,7 @@ Create an instance: `network_token_bundle <- Sdk.network_token_bundle sdk VNoval
 | --- | --- |
 | `eCreate ent data ctrl` | Create a new entity with the given data. Resolves to the entity. |
 | `eLoad ent match ctrl` | Load a single entity by match criteria. Resolves to the entity. |
-| `eRemove ent match ctrl` | Remove the matching entity. Resolves to the entity, marked deleted. |
+| `eRemove ent match ctrl` | Remove the matching entity. Resolves to the entity, marked as deleted. |
 
 #### Fields
 

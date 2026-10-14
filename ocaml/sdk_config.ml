@@ -155,6 +155,7 @@ let make_config () : value =
           ("ms", (Num (30000.))) ]));
         ("optspec", (jo [
           ("clearTimer", (Str "`$FUNCTION`"));
+          ("now", (Str "`$FUNCTION`"));
           ("setTimer", (Str "`$FUNCTION`")) ]));
         ("strict", (Bool false));
         ("transport", (Str "wrap")) ])) ]));
@@ -243,13 +244,16 @@ let make_config () : value =
                   ("header", (ja [
                     (jo [
                       ("name", (Str "scx_client_reference"));
-                      ("orig", (Str "scx_client_reference"));
+                      ("orig", (Str "scx-client-reference"));
                       ("type", (Str "`$STRING`"));
                       ("kind", (Str "header"));
                       ("reqd", (Bool true)) ]) ])) ]));
                 ("select", (jo [
                   ("exist", (ja [
-                    (Str "scx_client_reference") ])) ])) ]) ])) ]));
+                    (Str "scx_client_reference") ])) ]));
+                ("response", (jo [
+                  ("kind", (Str "json"));
+                  ("media", (Str "application/json")) ])) ]) ])) ]));
           ("load", (jo [
             ("input", (Str "data"));
             ("name", (Str "load"));
@@ -276,21 +280,24 @@ let make_config () : value =
                   ("header", (ja [
                     (jo [
                       ("name", (Str "scx_client_reference"));
-                      ("orig", (Str "scx_client_reference"));
+                      ("orig", (Str "scx-client-reference"));
                       ("type", (Str "`$STRING`"));
                       ("kind", (Str "header"));
                       ("reqd", (Bool true)) ]) ]));
                   ("params", (ja [
                     (jo [
                       ("name", (Str "id"));
-                      ("orig", (Str "network_token_bundle_id"));
+                      ("orig", (Str "networkTokenBundleId"));
                       ("type", (Str "`$STRING`"));
                       ("kind", (Str "param"));
                       ("reqd", (Bool true)) ]) ])) ]));
                 ("select", (jo [
                   ("exist", (ja [
                     (Str "id");
-                    (Str "scx_client_reference") ])) ])) ]);
+                    (Str "scx_client_reference") ])) ]));
+                ("response", (jo [
+                  ("kind", (Str "json"));
+                  ("media", (Str "application/json")) ])) ]);
               (jo [
                 ("kind", (Str "http"));
                 ("method", (Str "GET"));
@@ -316,14 +323,14 @@ let make_config () : value =
                   ("header", (ja [
                     (jo [
                       ("name", (Str "scx_client_reference"));
-                      ("orig", (Str "scx_client_reference"));
+                      ("orig", (Str "scx-client-reference"));
                       ("type", (Str "`$STRING`"));
                       ("kind", (Str "header"));
                       ("reqd", (Bool true)) ]) ]));
                   ("params", (ja [
                     (jo [
                       ("name", (Str "id"));
-                      ("orig", (Str "network_token_bundle_id"));
+                      ("orig", (Str "networkTokenBundleId"));
                       ("type", (Str "`$STRING`"));
                       ("kind", (Str "param"));
                       ("reqd", (Bool true)) ]) ])) ]));
@@ -331,7 +338,10 @@ let make_config () : value =
                   ("$action", (Str "payment_credential"));
                   ("exist", (ja [
                     (Str "id");
-                    (Str "scx_client_reference") ])) ])) ]) ])) ]));
+                    (Str "scx_client_reference") ])) ]));
+                ("response", (jo [
+                  ("kind", (Str "json"));
+                  ("media", (Str "application/json")) ])) ]) ])) ]));
           ("remove", (jo [
             ("input", (Str "data"));
             ("name", (Str "remove"));
@@ -358,21 +368,24 @@ let make_config () : value =
                   ("header", (ja [
                     (jo [
                       ("name", (Str "scx_client_reference"));
-                      ("orig", (Str "scx_client_reference"));
+                      ("orig", (Str "scx-client-reference"));
                       ("type", (Str "`$STRING`"));
                       ("kind", (Str "header"));
                       ("reqd", (Bool true)) ]) ]));
                   ("params", (ja [
                     (jo [
                       ("name", (Str "id"));
-                      ("orig", (Str "network_token_bundle_id"));
+                      ("orig", (Str "networkTokenBundleId"));
                       ("type", (Str "`$STRING`"));
                       ("kind", (Str "param"));
                       ("reqd", (Bool true)) ]) ])) ]));
                 ("select", (jo [
                   ("exist", (ja [
                     (Str "id");
-                    (Str "scx_client_reference") ])) ])) ]) ])) ])) ]));
+                    (Str "scx_client_reference") ])) ]));
+                ("response", (jo [
+                  ("kind", (Str "json"));
+                  ("media", (Str "application/json")) ])) ]) ])) ])) ]));
         ("relations", (jo [
           ("ancestors", (empty_list ())) ])) ])) ])) ])
 

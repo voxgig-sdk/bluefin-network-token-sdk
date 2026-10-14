@@ -189,6 +189,7 @@ local function make_config()
         },
         ["optspec"] = {
           ["clearTimer"] = "`$FUNCTION`",
+          ["now"] = "`$FUNCTION`",
           ["setTimer"] = "`$FUNCTION`",
         },
         ["strict"] = false,
@@ -199,6 +200,7 @@ local function make_config()
       base = "https://secure-cert.shieldconex.com/api",
       auth = {
         prefix = "Basic",
+        basic = true,
       },
       headers = {
         ["content-type"] = "application/json",
@@ -300,7 +302,7 @@ local function make_config()
                   ["header"] = {
                     {
                       ["name"] = "scx_client_reference",
-                      ["orig"] = "scx_client_reference",
+                      ["orig"] = "scx-client-reference",
                       ["type"] = "`$STRING`",
                       ["kind"] = "header",
                       ["reqd"] = true,
@@ -311,6 +313,10 @@ local function make_config()
                   ["exist"] = {
                     "scx_client_reference",
                   },
+                },
+                ["response"] = {
+                  ["kind"] = "json",
+                  ["media"] = "application/json",
                 },
               },
             },
@@ -348,7 +354,7 @@ local function make_config()
                   ["header"] = {
                     {
                       ["name"] = "scx_client_reference",
-                      ["orig"] = "scx_client_reference",
+                      ["orig"] = "scx-client-reference",
                       ["type"] = "`$STRING`",
                       ["kind"] = "header",
                       ["reqd"] = true,
@@ -357,7 +363,7 @@ local function make_config()
                   ["params"] = {
                     {
                       ["name"] = "id",
-                      ["orig"] = "network_token_bundle_id",
+                      ["orig"] = "networkTokenBundleId",
                       ["type"] = "`$STRING`",
                       ["kind"] = "param",
                       ["reqd"] = true,
@@ -369,6 +375,10 @@ local function make_config()
                     "id",
                     "scx_client_reference",
                   },
+                },
+                ["response"] = {
+                  ["kind"] = "json",
+                  ["media"] = "application/json",
                 },
               },
               {
@@ -404,7 +414,7 @@ local function make_config()
                   ["header"] = {
                     {
                       ["name"] = "scx_client_reference",
-                      ["orig"] = "scx_client_reference",
+                      ["orig"] = "scx-client-reference",
                       ["type"] = "`$STRING`",
                       ["kind"] = "header",
                       ["reqd"] = true,
@@ -413,7 +423,7 @@ local function make_config()
                   ["params"] = {
                     {
                       ["name"] = "id",
-                      ["orig"] = "network_token_bundle_id",
+                      ["orig"] = "networkTokenBundleId",
                       ["type"] = "`$STRING`",
                       ["kind"] = "param",
                       ["reqd"] = true,
@@ -426,6 +436,10 @@ local function make_config()
                     "id",
                     "scx_client_reference",
                   },
+                },
+                ["response"] = {
+                  ["kind"] = "json",
+                  ["media"] = "application/json",
                 },
               },
             },
@@ -463,7 +477,7 @@ local function make_config()
                   ["header"] = {
                     {
                       ["name"] = "scx_client_reference",
-                      ["orig"] = "scx_client_reference",
+                      ["orig"] = "scx-client-reference",
                       ["type"] = "`$STRING`",
                       ["kind"] = "header",
                       ["reqd"] = true,
@@ -472,7 +486,7 @@ local function make_config()
                   ["params"] = {
                     {
                       ["name"] = "id",
-                      ["orig"] = "network_token_bundle_id",
+                      ["orig"] = "networkTokenBundleId",
                       ["type"] = "`$STRING`",
                       ["kind"] = "param",
                       ["reqd"] = true,
@@ -484,6 +498,10 @@ local function make_config()
                     "id",
                     "scx_client_reference",
                   },
+                },
+                ["response"] = {
+                  ["kind"] = "json",
+                  ["media"] = "application/json",
                 },
               },
             },

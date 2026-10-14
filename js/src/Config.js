@@ -252,6 +252,7 @@ class Config {
       },
       "optspec": {
         "clearTimer": "`$FUNCTION`",
+        "now": "`$FUNCTION`",
         "setTimer": "`$FUNCTION`"
       },
       "strict": false,
@@ -266,6 +267,7 @@ class Config {
 
     auth: {
       prefix: 'Basic',
+      basic: true,
     },
 
     headers: {
@@ -374,7 +376,7 @@ class Config {
                 "header": [
                   {
                     "name": "scx_client_reference",
-                    "orig": "scx_client_reference",
+                    "orig": "scx-client-reference",
                     "type": "`$STRING`",
                     "kind": "header",
                     "reqd": true
@@ -385,6 +387,10 @@ class Config {
                 "exist": [
                   "scx_client_reference"
                 ]
+              },
+              "response": {
+                "kind": "json",
+                "media": "application/json"
               }
             }
           ]
@@ -422,7 +428,7 @@ class Config {
                 "header": [
                   {
                     "name": "scx_client_reference",
-                    "orig": "scx_client_reference",
+                    "orig": "scx-client-reference",
                     "type": "`$STRING`",
                     "kind": "header",
                     "reqd": true
@@ -431,7 +437,7 @@ class Config {
                 "params": [
                   {
                     "name": "id",
-                    "orig": "network_token_bundle_id",
+                    "orig": "networkTokenBundleId",
                     "type": "`$STRING`",
                     "kind": "param",
                     "reqd": true
@@ -443,6 +449,10 @@ class Config {
                   "id",
                   "scx_client_reference"
                 ]
+              },
+              "response": {
+                "kind": "json",
+                "media": "application/json"
               }
             },
             {
@@ -478,7 +488,7 @@ class Config {
                 "header": [
                   {
                     "name": "scx_client_reference",
-                    "orig": "scx_client_reference",
+                    "orig": "scx-client-reference",
                     "type": "`$STRING`",
                     "kind": "header",
                     "reqd": true
@@ -487,7 +497,7 @@ class Config {
                 "params": [
                   {
                     "name": "id",
-                    "orig": "network_token_bundle_id",
+                    "orig": "networkTokenBundleId",
                     "type": "`$STRING`",
                     "kind": "param",
                     "reqd": true
@@ -500,6 +510,10 @@ class Config {
                   "id",
                   "scx_client_reference"
                 ]
+              },
+              "response": {
+                "kind": "json",
+                "media": "application/json"
               }
             }
           ]
@@ -537,7 +551,7 @@ class Config {
                 "header": [
                   {
                     "name": "scx_client_reference",
-                    "orig": "scx_client_reference",
+                    "orig": "scx-client-reference",
                     "type": "`$STRING`",
                     "kind": "header",
                     "reqd": true
@@ -546,7 +560,7 @@ class Config {
                 "params": [
                   {
                     "name": "id",
-                    "orig": "network_token_bundle_id",
+                    "orig": "networkTokenBundleId",
                     "type": "`$STRING`",
                     "kind": "param",
                     "reqd": true
@@ -558,6 +572,10 @@ class Config {
                   "id",
                   "scx_client_reference"
                 ]
+              },
+              "response": {
+                "kind": "json",
+                "media": "application/json"
               }
             }
           ]

@@ -7,6 +7,19 @@ import { BluefinNetworkTokenEntityBase } from './BluefinNetworkTokenEntityBase';
 import { Utility } from './utility/Utility';
 import { BaseFeature } from './feature/base/BaseFeature';
 declare const stdutil: Utility;
+type DirectResult = {
+    ok: false;
+    err: any;
+    status?: undefined;
+    headers?: undefined;
+    data?: undefined;
+} | {
+    ok: boolean;
+    status: number;
+    headers: any;
+    data: any;
+    err?: any;
+};
 declare class BluefinNetworkTokenSDK {
     _mode: string;
     _options: any;
@@ -17,32 +30,8 @@ declare class BluefinNetworkTokenSDK {
     options(): any;
     utility(): any;
     prepare(fetchargs?: any): Promise<any>;
-    direct(fetchargs?: any): Promise<Error | {
-        ok: boolean;
-        status: number;
-        headers: any;
-        data: any;
-        err?: undefined;
-    } | {
-        ok: boolean;
-        err: any;
-        status?: undefined;
-        headers?: undefined;
-        data?: undefined;
-    }>;
-    _rawRequest(fetchargs?: any): Promise<Error | {
-        ok: boolean;
-        status: number;
-        headers: any;
-        data: any;
-        err?: undefined;
-    } | {
-        ok: boolean;
-        err: any;
-        status?: undefined;
-        headers?: undefined;
-        data?: undefined;
-    }>;
+    direct(fetchargs?: any): Promise<DirectResult>;
+    _rawRequest(fetchargs?: any): Promise<DirectResult>;
     graphql(query: string, variables?: any, ctrl?: any): Promise<any>;
     NetworkTokenBundle(entopts?: Record<string, any>): NetworkTokenBundleEntity;
     static test(testoptsarg?: any, sdkoptsarg?: any): BluefinNetworkTokenSDK;
@@ -55,3 +44,4 @@ declare class BluefinNetworkTokenSDK {
 }
 declare const SDK: typeof BluefinNetworkTokenSDK;
 export { stdutil, config, BaseFeature, BluefinNetworkTokenEntityBase, BluefinNetworkTokenSDK, SDK, };
+export type { DirectResult };

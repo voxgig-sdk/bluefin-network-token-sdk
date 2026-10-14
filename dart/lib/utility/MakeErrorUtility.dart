@@ -25,11 +25,15 @@ dynamic makeError(dynamic ctx, [dynamic err]) {
   BluefinNetworkTokenError sdkerr;
   if (err is BluefinNetworkTokenError) {
     sdkerr = err;
-    sdkerr.message = clean(ctx, msg);
+    sdkerr.message = msg;
   } else {
     final code = errcode(err);
-    sdkerr = BluefinNetworkTokenError('' == code ? 'unknown' : code, clean(ctx, msg), ctx);
+    sdkerr = BluefinNetworkTokenError('' == code ? 'unknown' : code, msg, ctx);
   }
+
+  // Cleaned in place, about to be thrown: the context stays reachable for a
+  // debugger and out of toJSON.
+  clean(ctx, sdkerr);
 
   if (null != result.err) {
     result.err = null;

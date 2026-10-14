@@ -15,8 +15,10 @@ keeps the cognitive load low.
 
 
 ## Install
+The SDK needs perl 5.18 or later.
+
 This package is not yet published to CPAN. Install it from the GitHub
-release tag (`perl/vX.Y.Z`, see [Releases](https://github.com/voxgig-sdk/bluefin-network-token-sdk/releases)) or
+release tag (`perl/vX.Y.Z`, see [Tags](https://github.com/voxgig-sdk/bluefin-network-token-sdk/tags)) or
 from a source checkout.
 
 The SDK is pure Perl with zero non-core runtime dependencies, so no build
@@ -54,7 +56,7 @@ if (my $err = $@) {
     print "load failed: $err\n";
 }
 else {
-    print "$networktokenbundle->{id}\n";
+    print $networktokenbundle->data_get->{id}, "\n";
 }
 ```
 
@@ -65,7 +67,7 @@ else {
 my $created = $client->NetworkTokenBundle->create({ 'card' => {}, 'cardNumber' => 'example_cardNumber' });
 
 # Remove
-$client->NetworkTokenBundle->remove({ 'id' => $created->{id} });
+$client->NetworkTokenBundle->remove({ 'id' => $created->data_get->{id} });
 ```
 
 
@@ -76,14 +78,15 @@ Entity operations reject on failure, so wrap them in `try` / `catch`:
 ```ts
 try {
   const networktokenbundle = await client.NetworkTokenBundle().load({ id: "example_id" })
-  console.log(networktokenbundle)
+  console.log(networktokenbundle.data())
 } catch (err) {
   console.error('load failed:', err)
 }
 ```
 
 The low-level `direct()` method does **not** throw — it returns the
-value or an `Error`, so check the result before using it:
+result envelope. Branch on `ok`; on failure `status` holds the HTTP status
+(for error responses) and `err` holds the error:
 
 ```ts
 const result = await client.direct({
@@ -92,8 +95,8 @@ const result = await client.direct({
   params: { id: 'example_id' },
 })
 
-if (result instanceof Error) {
-  throw result
+if (!result.ok) {
+  console.error('request failed:', result.status, result.err)
 }
 ```
 
@@ -145,10 +148,9 @@ Create a mock client for unit testing — no server required:
 ```perl
 my $client = BluefinNetworkTokenSDK->test(undef, undef);
 
-# Entity ops return the ENTITY and dies on error;
-# call data_get for the record.
+# Entity ops return the entity, and list one per record; they die on error.
 my $networktokenbundle = $client->NetworkTokenBundle->load({ 'id' => 'test01' });
-# $networktokenbundle contains the mock response record
+# data_get on an entity reads its mock response record
 ```
 
 ### Use a custom fetch function
@@ -235,9 +237,9 @@ All entities share the same interface.
 
 | Method | Signature | Description |
 | --- | --- | --- |
-| `load` | `($reqmatch, $ctrl) -> hashref` | Load a single entity by match criteria. Dies on error. |
-| `create` | `($reqdata, $ctrl) -> hashref` | Create a new entity. Dies on error. |
-| `remove` | `($reqmatch, $ctrl) -> hashref` | Remove an entity. Dies on error. |
+| `load` | `($reqmatch, $ctrl) -> entity` | Load a single entity by match criteria, and return it. Dies on error. |
+| `create` | `($reqdata, $ctrl) -> entity` | Create a new entity, and return it. Dies on error. |
+| `remove` | `($reqmatch, $ctrl) -> entity` | Remove an entity, and return it marked as deleted. Dies on error. |
 | `data_get` | `() -> hashref` | Get entity data. |
 | `data_set` | `($data)` | Set entity data. |
 | `match_get` | `() -> hashref` | Get entity match criteria. |
@@ -247,9 +249,10 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return the ENTITY (call data_get for the record) (a `hashref` for single-entity
-ops, an `arrayref` for `list`) and die on error. Wrap calls in
-`eval { ... }` and inspect `$@` to handle failures.
+Entity operations return the entity, and `list` an `arrayref` of
+entities, one per record; `data_get` reads an entity's record (a
+`hashref`). They die on error, so wrap calls in `eval { ... }` and
+inspect `$@` to handle failures.
 
 The `direct()` escape hatch never dies — it returns a result `hashref`
 you branch on via `$result->{ok}`:

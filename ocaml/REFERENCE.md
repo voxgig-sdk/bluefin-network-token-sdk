@@ -10,6 +10,7 @@ Complete API reference for the BluefinNetworkToken OCaml SDK.
 ```ocaml
 open Voxgig_struct
 open Sdk_helpers
+open Sdk_types
 
 let client = Sdk_client.make options
 ```
@@ -103,7 +104,7 @@ let network_token_bundle = Sdk_client.network_token_bundle client Noval
 
 #### `e_create reqdata ctrl : entity_obj`
 
-Create a new entity with the given data. Resolves to the ENTITY (read the record with `e_data_get`) and raises on error.
+Create a new entity with the given data. Resolves to the created entity and raises on error.
 
 ```ocaml
 let result = (Sdk_client.network_token_bundle client Noval).e_create (jo [
@@ -113,7 +114,7 @@ let result_data = result.e_data_get ()
 
 #### `e_load reqmatch ctrl : entity_obj`
 
-Load a single entity matching the given criteria. Resolves to the ENTITY (read the record with `e_data_get`) and raises on error.
+Load a single entity matching the given criteria. Resolves to the entity, whose record `e_data_get` reads, and raises on error.
 
 ```ocaml
 let result = (Sdk_client.network_token_bundle client Noval).e_load (jo [("id", (Str "network_token_bundle_id"))]) Noval
@@ -122,7 +123,7 @@ let result_data = result.e_data_get ()
 
 #### `e_remove reqmatch ctrl : entity_obj`
 
-Remove the entity matching the given criteria. Resolves to the ENTITY, marked deleted (`e_deleted`); it keeps the data it held. Raises on error.
+Remove the entity matching the given criteria. Resolves to the entity, marked as deleted (`e_deleted`); it keeps the data it held. Raises on error.
 
 ```ocaml
 let result = (Sdk_client.network_token_bundle client Noval).e_remove (jo [("id", (Str "network_token_bundle_id"))]) Noval
@@ -579,6 +580,7 @@ Timeout.
 | Option | Type |
 |---|---|
 | `clearTimer` | function |
+| `now` | function |
 | `setTimer` | function |
 
 These take no default: the feature behaves one way when you supply them and

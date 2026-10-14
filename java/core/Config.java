@@ -266,6 +266,7 @@ public final class Config {
     b.append("   },");
     b.append("   \"optspec\": {");
     b.append("    \"clearTimer\": \"`$FUNCTION`\",");
+    b.append("    \"now\": \"`$FUNCTION`\",");
     b.append("    \"setTimer\": \"`$FUNCTION`\"");
     b.append("   },");
     b.append("   \"strict\": false,");
@@ -378,7 +379,7 @@ public final class Config {
     b.append("        \"header\": [");
     b.append("         {");
     b.append("          \"name\": \"scx_client_reference\",");
-    b.append("          \"orig\": \"scx_client_reference\",");
+    b.append("          \"orig\": \"scx-client-reference\",");
     b.append("          \"type\": \"`$STRING`\",");
     b.append("          \"kind\": \"header\",");
     b.append("          \"reqd\": true");
@@ -389,6 +390,10 @@ public final class Config {
     b.append("        \"exist\": [");
     b.append("         \"scx_client_reference\"");
     b.append("        ]");
+    b.append("       },");
+    b.append("       \"response\": {");
+    b.append("        \"kind\": \"json\",");
+    b.append("        \"media\": \"application/json\"");
     b.append("       }");
     b.append("      }");
     b.append("     ]");
@@ -426,7 +431,7 @@ public final class Config {
     b.append("        \"header\": [");
     b.append("         {");
     b.append("          \"name\": \"scx_client_reference\",");
-    b.append("          \"orig\": \"scx_client_reference\",");
+    b.append("          \"orig\": \"scx-client-reference\",");
     b.append("          \"type\": \"`$STRING`\",");
     b.append("          \"kind\": \"header\",");
     b.append("          \"reqd\": true");
@@ -435,7 +440,7 @@ public final class Config {
     b.append("        \"params\": [");
     b.append("         {");
     b.append("          \"name\": \"id\",");
-    b.append("          \"orig\": \"network_token_bundle_id\",");
+    b.append("          \"orig\": \"networkTokenBundleId\",");
     b.append("          \"type\": \"`$STRING`\",");
     b.append("          \"kind\": \"param\",");
     b.append("          \"reqd\": true");
@@ -447,6 +452,10 @@ public final class Config {
     b.append("         \"id\",");
     b.append("         \"scx_client_reference\"");
     b.append("        ]");
+    b.append("       },");
+    b.append("       \"response\": {");
+    b.append("        \"kind\": \"json\",");
+    b.append("        \"media\": \"application/json\"");
     b.append("       }");
     b.append("      },");
     b.append("      {");
@@ -482,7 +491,7 @@ public final class Config {
     b.append("        \"header\": [");
     b.append("         {");
     b.append("          \"name\": \"scx_client_reference\",");
-    b.append("          \"orig\": \"scx_client_reference\",");
+    b.append("          \"orig\": \"scx-client-reference\",");
     b.append("          \"type\": \"`$STRING`\",");
     b.append("          \"kind\": \"header\",");
     b.append("          \"reqd\": true");
@@ -491,7 +500,7 @@ public final class Config {
     b.append("        \"params\": [");
     b.append("         {");
     b.append("          \"name\": \"id\",");
-    b.append("          \"orig\": \"network_token_bundle_id\",");
+    b.append("          \"orig\": \"networkTokenBundleId\",");
     b.append("          \"type\": \"`$STRING`\",");
     b.append("          \"kind\": \"param\",");
     b.append("          \"reqd\": true");
@@ -504,6 +513,10 @@ public final class Config {
     b.append("         \"id\",");
     b.append("         \"scx_client_reference\"");
     b.append("        ]");
+    b.append("       },");
+    b.append("       \"response\": {");
+    b.append("        \"kind\": \"json\",");
+    b.append("        \"media\": \"application/json\"");
     b.append("       }");
     b.append("      }");
     b.append("     ]");
@@ -541,7 +554,7 @@ public final class Config {
     b.append("        \"header\": [");
     b.append("         {");
     b.append("          \"name\": \"scx_client_reference\",");
-    b.append("          \"orig\": \"scx_client_reference\",");
+    b.append("          \"orig\": \"scx-client-reference\",");
     b.append("          \"type\": \"`$STRING`\",");
     b.append("          \"kind\": \"header\",");
     b.append("          \"reqd\": true");
@@ -550,7 +563,7 @@ public final class Config {
     b.append("        \"params\": [");
     b.append("         {");
     b.append("          \"name\": \"id\",");
-    b.append("          \"orig\": \"network_token_bundle_id\",");
+    b.append("          \"orig\": \"networkTokenBundleId\",");
     b.append("          \"type\": \"`$STRING`\",");
     b.append("          \"kind\": \"param\",");
     b.append("          \"reqd\": true");
@@ -562,6 +575,10 @@ public final class Config {
     b.append("         \"id\",");
     b.append("         \"scx_client_reference\"");
     b.append("        ]");
+    b.append("       },");
+    b.append("       \"response\": {");
+    b.append("        \"kind\": \"json\",");
+    b.append("        \"media\": \"application/json\"");
     b.append("       }");
     b.append("      }");
     b.append("     ]");

@@ -1,7 +1,7 @@
 # BluefinNetworkToken SDK NetworkTokenBundle entity
 #
 # Per-entity module. Generic construction/data/match operations delegate to
-# EntityBase; each active op (load/list/create/update/remove) builds a ctx
+# EntityBase; each active op (load/list/create/update/patch/remove) builds a ctx
 # and drives it through BluefinNetworkToken.Pipeline.run_op.
 
 defmodule BluefinNetworkToken.Entity.NetworkTokenBundle do
@@ -26,9 +26,10 @@ defmodule BluefinNetworkToken.Entity.NetworkTokenBundle do
     do: EntityBase.stream(ent, action, args, callopts)
 
   
-  # Returns the network_token_bundle entity map (BluefinNetworkToken.Types.network_token_bundle/0) on
-  # success; pipeline errors surface as the error value built by
-  # Utility.make_error (shape is utility-configurable), hence term().
+  # Returns the network_token_bundle entity, whose data_get/1 reads its record
+  # (BluefinNetworkToken.Types.network_token_bundle/0), on success; pipeline errors surface as
+  # the error value built by Utility.make_error (shape is
+  # utility-configurable), hence term().
   @spec load(map(), BluefinNetworkToken.Types.network_token_bundle_load_match() | nil, map() | nil) :: term()
   def load(ent, reqmatch \\ nil, ctrl \\ nil) do
     reqmatch = if reqmatch == nil, do: S.jm([]), else: reqmatch
@@ -65,9 +66,10 @@ defmodule BluefinNetworkToken.Entity.NetworkTokenBundle do
   
 
   
-  # Returns the created network_token_bundle entity map (BluefinNetworkToken.Types.network_token_bundle/0)
-  # on success; pipeline errors surface as the error value built by
-  # Utility.make_error (shape is utility-configurable), hence term().
+  # Returns the created network_token_bundle entity, whose data_get/1 reads its record
+  # (BluefinNetworkToken.Types.network_token_bundle/0), on success; pipeline errors surface as
+  # the error value built by Utility.make_error (shape is
+  # utility-configurable), hence term().
   @spec create(map(), BluefinNetworkToken.Types.network_token_bundle_create_data() | nil, map() | nil) :: term()
   def create(ent, reqdata, ctrl \\ nil) do
     ctx =
@@ -100,9 +102,12 @@ defmodule BluefinNetworkToken.Entity.NetworkTokenBundle do
   
 
   
-  # Returns the removed network_token_bundle entity map (BluefinNetworkToken.Types.network_token_bundle/0)
-  # on success; pipeline errors surface as the error value built by
-  # Utility.make_error (shape is utility-configurable), hence term().
+
+  
+  # Returns the removed network_token_bundle entity, marked as deleted, whose data_get/1
+  # reads the record it held (BluefinNetworkToken.Types.network_token_bundle/0), on success;
+  # pipeline errors surface as the error value built by Utility.make_error
+  # (shape is utility-configurable), hence term().
   @spec remove(map(), BluefinNetworkToken.Types.network_token_bundle_remove_match() | nil, map() | nil) :: term()
   def remove(ent, reqmatch \\ nil, ctrl \\ nil) do
     reqmatch = if reqmatch == nil, do: S.jm([]), else: reqmatch

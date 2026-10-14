@@ -16,7 +16,7 @@ keeps the cognitive load low.
 
 ## Install
 This package is not yet published to [Hex](https://hex.pm). Install it from
-the GitHub release tag (`elixir/vX.Y.Z`, see [Releases](https://github.com/voxgig-sdk/bluefin-network-token-sdk/releases))
+the GitHub release tag (`elixir/vX.Y.Z`, see [Tags](https://github.com/voxgig-sdk/bluefin-network-token-sdk/tags))
 by adding a git dependency to your `mix.exs`:
 
 ```elixir
@@ -55,13 +55,14 @@ sdk = BluefinNetworkToken.new(H.deep(%{"apikey" => System.get_env("BLUEFIN_NETWO
 
 ### 3. Load a networktokenbundle
 
-`load/2` returns the bare record and raises on error.
+`load/2` returns the entity and raises on error; `data_get/1` reads its
+record.
 
 ```elixir
 try do
   network_token_bundle = BluefinNetworkToken.network_token_bundle(sdk)
-  record = BluefinNetworkToken.Entity.NetworkTokenBundle.load(network_token_bundle, H.deep(%{"id" => "example_id"}))
-  IO.inspect(record)
+  network_token_bundle = BluefinNetworkToken.Entity.NetworkTokenBundle.load(network_token_bundle, H.deep(%{"id" => "example_id"}))
+  IO.puts(Voxgig.Struct.jsonify(BluefinNetworkToken.Entity.NetworkTokenBundle.data_get(network_token_bundle)))
 rescue
   err -> IO.puts("load failed: " <> inspect(err))
 end
@@ -72,11 +73,11 @@ end
 ```elixir
 network_token_bundle = BluefinNetworkToken.network_token_bundle(sdk)
 
-# Create — returns the bare created record
+# Create — returns the created entity
 created = BluefinNetworkToken.Entity.NetworkTokenBundle.create(network_token_bundle, H.deep(%{"card" => %{}, "cardNumber" => "example_cardNumber"}))
 
 # Remove
-BluefinNetworkToken.Entity.NetworkTokenBundle.remove(network_token_bundle, H.deep(%{"id" => Voxgig.Struct.getprop(created, "id")}))
+BluefinNetworkToken.Entity.NetworkTokenBundle.remove(network_token_bundle, H.deep(%{"id" => Voxgig.Struct.getprop(BluefinNetworkToken.Entity.NetworkTokenBundle.data_get(created), "id")}))
 ```
 
 
@@ -87,14 +88,15 @@ Entity operations reject on failure, so wrap them in `try` / `catch`:
 ```ts
 try {
   const networktokenbundle = await client.NetworkTokenBundle().load({ id: "example_id" })
-  console.log(networktokenbundle)
+  console.log(networktokenbundle.data())
 } catch (err) {
   console.error('load failed:', err)
 }
 ```
 
 The low-level `direct()` method does **not** throw — it returns the
-value or an `Error`, so check the result before using it:
+result envelope. Branch on `ok`; on failure `status` holds the HTTP status
+(for error responses) and `err` holds the error:
 
 ```ts
 const result = await client.direct({
@@ -103,8 +105,8 @@ const result = await client.direct({
   params: { id: 'example_id' },
 })
 
-if (result instanceof Error) {
-  throw result
+if (!result.ok) {
+  console.error('request failed:', result.status, result.err)
 }
 ```
 
@@ -161,10 +163,10 @@ alias BluefinNetworkToken.Helpers, as: H
 
 sdk = BluefinNetworkToken.test()
 
-# Entity ops return the bare record (raise on error).
+# Entity ops return the entity, and list one per record (raise on error).
 network_token_bundle = BluefinNetworkToken.network_token_bundle(sdk)
-record = BluefinNetworkToken.Entity.NetworkTokenBundle.load(network_token_bundle, H.deep(%{"id" => "test01"}))
-IO.inspect(record)
+network_token_bundle = BluefinNetworkToken.Entity.NetworkTokenBundle.load(network_token_bundle, H.deep(%{"id" => "test01"}))
+IO.puts(Voxgig.Struct.jsonify(BluefinNetworkToken.Entity.NetworkTokenBundle.data_get(network_token_bundle)))
 ```
 
 ### Use a custom fetch function
@@ -253,9 +255,9 @@ Every entity's `BluefinNetworkToken.Entity.<Name>` module shares the same interf
 
 | Function | Signature | Description |
 | --- | --- | --- |
-| `load` | `(entity, reqmatch, ctrl \\ nil) :: map()` | Load a single entity by match criteria. Raises on error. |
-| `create` | `(entity, reqdata, ctrl \\ nil) :: map()` | Create a new entity. Raises on error. |
-| `remove` | `(entity, reqmatch \\ nil, ctrl \\ nil) :: map()` | Remove an entity. Raises on error. |
+| `load` | `(entity, reqmatch, ctrl \\ nil) :: entity` | Load a single entity by match criteria, and return it. Raises on error. |
+| `create` | `(entity, reqdata, ctrl \\ nil) :: entity` | Create a new entity, and return it. Raises on error. |
+| `remove` | `(entity, reqmatch \\ nil, ctrl \\ nil) :: entity` | Remove an entity, and return it marked as deleted. Raises on error. |
 | `data_get` | `(entity) :: map()` | Get entity data. |
 | `data_set` | `(entity, data)` | Set entity data. |
 | `match_get` | `(entity) :: map()` | Get entity match criteria. |
@@ -265,9 +267,10 @@ Every entity's `BluefinNetworkToken.Entity.<Name>` module shares the same interf
 
 ### Result shape
 
-Entity operations return the bare result data (a value node — a map for
-single-entity ops, a list for `list`) and raise a `BluefinNetworkToken.Error` on
-failure. Wrap calls in `try`/`rescue` to handle errors.
+Entity operations return the entity, and `list` a list of entities, one per
+record; an entity module's `data_get/1` reads an entity's record. They raise
+a `BluefinNetworkToken.Error` on failure, so wrap calls in `try`/`rescue` to handle
+errors.
 
 The `direct/2` escape hatch never raises — it returns a result node you
 branch on via `Voxgig.Struct.getprop(result, "ok")`:
@@ -343,14 +346,14 @@ Create a handle: `network_token_bundle = BluefinNetworkToken.network_token_bundl
 
 ```elixir
 network_token_bundle = BluefinNetworkToken.network_token_bundle(sdk)
-record = BluefinNetworkToken.Entity.NetworkTokenBundle.load(network_token_bundle, BluefinNetworkToken.Helpers.deep(%{"id" => "network_token_bundle_id"}))
+network_token_bundle = BluefinNetworkToken.Entity.NetworkTokenBundle.load(network_token_bundle, BluefinNetworkToken.Helpers.deep(%{"id" => "network_token_bundle_id"}))
 ```
 
 #### Example: Create
 
 ```elixir
 network_token_bundle = BluefinNetworkToken.network_token_bundle(sdk)
-record = BluefinNetworkToken.Entity.NetworkTokenBundle.create(network_token_bundle, BluefinNetworkToken.Helpers.deep(%{
+network_token_bundle = BluefinNetworkToken.Entity.NetworkTokenBundle.create(network_token_bundle, BluefinNetworkToken.Helpers.deep(%{
 }))
 ```
 
@@ -602,7 +605,8 @@ that every later pipeline stage observes — the immutable-Elixir way to honour
 the shared-mutable hook contract.
 
 Build inputs from native Elixir maps with `BluefinNetworkToken.Helpers.deep/1`,
-and read fields off results with `Voxgig.Struct.getprop/2`.
+and read fields off a record, which an entity's `data_get/1` returns, with
+`Voxgig.Struct.getprop/2`.
 
 ### Module structure
 

@@ -50,7 +50,7 @@ static NetworkTokenBundleSetup network_token_bundle_basic_setup(const Value& ext
 
   NetworkTokenBundleSetup s;
   s.client = client;
-  s.d = entity_data;
+  s.data = entity_data;
   s.idmap = idmap_resolved;
   s.env = env;
   s.live = live;
@@ -65,6 +65,27 @@ static void network_token_bundle_entity_instance() {
   ASSERT_EQ(ent->getName(), std::string("network_token_bundle"), "entity name");
 }
 
+
+static bool network_token_bundle_has_feature(const std::string& name) {
+  Value fm = Helpers::toMapAny(getp(sharedConfig(), "feature"));
+  return fm.is_map() && !getp(fm, name).is_undef();
+}
+
+static void network_token_bundle_entity_validate() {
+  if (!network_token_bundle_has_feature("validate")) {
+    std::cerr << "skip: feature not present in this SDK: validate\n";
+    return;
+  }
+  auto vsdk = BluefinNetworkTokenSDK::testSDK(Value::undef(), vmap({{"feature",
+      vmap({{"validate", vmap({{"active", Value(true)}})}})}}));
+  std::string code;
+  try {
+    vsdk->network_token_bundle()->load(vmap({{"id", Value(1)}}), Value::undef());
+  } catch (const SdkErrorPtr& err) {
+    code = err->code;
+  }
+  ASSERT_EQ(code, std::string("validate_failed"), "an invalid request fails with validate_failed");
+}
 
 static void network_token_bundle_entity_basic() {
   auto setup = network_token_bundle_basic_setup(Value::undef());
@@ -103,6 +124,7 @@ static void network_token_bundle_entity_basic() {
 
 int main() {
   T_RUN(network_token_bundle_entity_instance);
+  T_RUN(network_token_bundle_entity_validate);
   T_RUN(network_token_bundle_entity_basic);
   return sdktest::summary("network_token_bundle_entity_test");
 }

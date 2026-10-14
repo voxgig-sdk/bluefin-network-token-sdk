@@ -3,6 +3,7 @@
 
 const std = @import("std");
 const sdk = @import("sdk");
+const fh = @import("fh.zig");
 const h = sdk.h;
 const Value = sdk.Value;
 
@@ -35,6 +36,15 @@ test "network_token_bundle_load_smoke" {
             std.debug.print("network_token_bundle load failed: {s}\n", .{er.msg});
             try std.testing.expect(false);
         },
+    }
+}
+
+test "network_token_bundle_validate" {
+    if (!fh.fh_has_feature("validate")) return error.SkipZigTest;
+    const opts = h.jo(&.{.{ "feature", h.jo(&.{.{ "validate", h.jo(&.{.{ "active", h.vbool(true) }}) }}) }});
+    switch (sdk.test_sdk(vnull(), opts).network_token_bundle(vnull()).load(h.jo(&.{ .{ "id", h.vnum(1) } }), vnull())) {
+        .err => |er| try std.testing.expect(std.mem.eql(u8, er.code, "validate_failed")),
+        .ok => try std.testing.expect(false),
     }
 }
 

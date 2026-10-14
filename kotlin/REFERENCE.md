@@ -106,7 +106,7 @@ val networkTokenBundle = client.networkTokenBundle(null)
 
 #### `create(reqdata, ctrl) -> Any?`
 
-Create a new entity with the given data. Returns the created entity data and raises on error.
+Create a new entity with the given data. Returns the created entity and raises on error.
 
 ```kotlin
 val result = client.networkTokenBundle(null).create(mutableMapOf<String, Any?>(
@@ -115,7 +115,7 @@ val result = client.networkTokenBundle(null).create(mutableMapOf<String, Any?>(
 
 #### `load(reqmatch, ctrl) -> Any?`
 
-Load a single entity matching the given criteria. Returns the entity data and raises on error.
+Load a single entity matching the given criteria. Returns the entity, whose record `data()` reads, and raises on error.
 
 ```kotlin
 val result = client.networkTokenBundle(null).load(mutableMapOf<String, Any?>("id" to "network_token_bundle_id"), null)
@@ -123,7 +123,7 @@ val result = client.networkTokenBundle(null).load(mutableMapOf<String, Any?>("id
 
 #### `remove(reqmatch, ctrl) -> Any?`
 
-Remove the entity matching the given criteria. Raises on error.
+Remove the entity matching the given criteria. Returns the entity, marked as deleted, and raises on error.
 
 ```kotlin
 val result = client.networkTokenBundle(null).remove(mutableMapOf<String, Any?>("id" to "network_token_bundle_id"), null)
@@ -570,6 +570,7 @@ Timeout.
 | Option | Type |
 |---|---|
 | `clearTimer` | function |
+| `now` | function |
 | `setTimer` | function |
 
 These take no default: the feature behaves one way when you supply them and

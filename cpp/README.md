@@ -21,7 +21,7 @@ The C++ SDK is **header-only** — there is no package to install
 from a registry. Vendor the `cpp/` directory into your project (or add the
 repository as a git submodule) and put it on your compiler's include path.
 Releases are cut as the git tag `cpp/vX.Y.Z` (see
-[Releases](https://github.com/voxgig-sdk/bluefin-network-token-sdk/releases)).
+[Tags](https://github.com/voxgig-sdk/bluefin-network-token-sdk/tags)).
 
 ```bash
 # Add the SDK as a submodule (or copy the cpp/ directory into your tree).
@@ -60,12 +60,12 @@ auto client = std::make_shared<BluefinNetworkTokenSDK>(vmap({
 
 ### 3. Load a networktokenbundle
 
-`load()` returns the bare record and throws on error.
+`load()` returns the entity and throws on error; `data()` reads its record.
 
 ```cpp
 try {
-  Value network_token_bundle = client->network_token_bundle()->load(vmap({{"id", Value("example_id")}}), Value::undef());
-  std::cout << Struct::jsonify(network_token_bundle) << std::endl;
+  SdkEntityPtr network_token_bundle = client->network_token_bundle()->load(vmap({{"id", Value("example_id")}}), Value::undef());
+  std::cout << Struct::jsonify(network_token_bundle->data()) << std::endl;
 } catch (const SdkErrorPtr& err) {
   std::cerr << "load failed: " << err->msg << std::endl;
 }
@@ -74,11 +74,11 @@ try {
 ### 4. Create, update, and remove
 
 ```cpp
-// Create — returns the bare created record.
-Value created = client->network_token_bundle()->create(vmap({{"card", vmap()}, {"cardNumber", Value("example_cardNumber")}}), Value::undef());
+// Create — returns the created entity.
+SdkEntityPtr created = client->network_token_bundle()->create(vmap({{"card", vmap()}, {"cardNumber", Value("example_cardNumber")}}), Value::undef());
 
 // Remove
-client->network_token_bundle()->remove(vmap({{"id", getp(created, "id")}}), Value::undef());
+client->network_token_bundle()->remove(vmap({{"id", getp(created->data(), "id")}}), Value::undef());
 ```
 
 
@@ -89,14 +89,15 @@ Entity operations reject on failure, so wrap them in `try` / `catch`:
 ```ts
 try {
   const networktokenbundle = await client.NetworkTokenBundle().load({ id: "example_id" })
-  console.log(networktokenbundle)
+  console.log(networktokenbundle.data())
 } catch (err) {
   console.error('load failed:', err)
 }
 ```
 
 The low-level `direct()` method does **not** throw — it returns the
-value or an `Error`, so check the result before using it:
+result envelope. Branch on `ok`; on failure `status` holds the HTTP status
+(for error responses) and `err` holds the error:
 
 ```ts
 const result = await client.direct({
@@ -105,8 +106,8 @@ const result = await client.direct({
   params: { id: 'example_id' },
 })
 
-if (result instanceof Error) {
-  throw result
+if (!result.ok) {
+  console.error('request failed:', result.status, result.err)
 }
 ```
 
@@ -161,10 +162,10 @@ feature installs an in-memory mock transport:
 ```cpp
 auto client = BluefinNetworkTokenSDK::testSDK();
 
-// Entity ops return the bare record and throw on error.
-Value network_token_bundle = client->network_token_bundle()->load(vmap({{"id", Value("test01")}}), Value::undef());
-// network_token_bundle contains the mock response record
-std::cout << Struct::jsonify(network_token_bundle) << std::endl;
+// Entity ops return the entity and throw on error.
+SdkEntityPtr network_token_bundle = client->network_token_bundle()->load(vmap({{"id", Value("test01")}}), Value::undef());
+// network_token_bundle->data() is the mock response record
+std::cout << Struct::jsonify(network_token_bundle->data()) << std::endl;
 ```
 
 You can seed the mock store by passing test options — see the generated
@@ -235,9 +236,9 @@ All entities share the same interface.
 
 | Method | Signature | Description |
 | --- | --- | --- |
-| `load` | `(reqmatch, ctrl) -> Value` | Load a single entity by match criteria. Throws on error. |
-| `create` | `(reqdata, ctrl) -> Value` | Create a new entity. Throws on error. |
-| `remove` | `(reqmatch, ctrl) -> Value` | Remove an entity. Throws on error. |
+| `load` | `(reqmatch, ctrl) -> SdkEntityPtr` | Load a single entity by match criteria. Throws on error. |
+| `create` | `(reqdata, ctrl) -> SdkEntityPtr` | Create a new entity. Throws on error. |
+| `remove` | `(reqmatch, ctrl) -> SdkEntityPtr` | Remove an entity, which is returned marked as deleted. Throws on error. |
 | `data` | `(arg) -> Value` | Get (no arg) or set (with arg) entity data. |
 | `match` | `(arg) -> Value` | Get (no arg) or set (with arg) entity match criteria. |
 | `make` | `() -> EntityPtr` | Create a new instance with the same options. |
@@ -245,9 +246,9 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return the bare result data (a map `Value` for
-single-entity ops, a list `Value` for `list`) and throw
-`sdk::SdkErrorPtr` on error. Wrap calls in `try`/`catch` to handle
+Entity operations return the entity, and `list` a `std::vector` of
+entities, one per record; `data()` reads an entity's record. They throw
+`sdk::SdkErrorPtr` on error, so wrap calls in `try`/`catch` to handle
 failures.
 
 The `direct()` escape hatch never throws — it returns a result `Value`
@@ -297,9 +298,9 @@ Create an instance: `auto network_token_bundle = client->network_token_bundle();
 
 | Method | Description |
 | --- | --- |
-| `create(data, ctrl)` | Create a new entity with the given data. |
-| `load(match, ctrl)` | Load a single entity by match criteria. |
-| `remove(match, ctrl)` | Remove the matching entity. |
+| `create(data, ctrl) -> SdkEntityPtr` | Create a new entity with the given data. |
+| `load(match, ctrl) -> SdkEntityPtr` | Load a single entity by match criteria. |
+| `remove(match, ctrl) -> SdkEntityPtr` | Remove the matching entity, which is returned marked as deleted. |
 
 #### Fields
 
@@ -320,13 +321,14 @@ Create an instance: `auto network_token_bundle = client->network_token_bundle();
 #### Example: Load
 
 ```cpp
-Value network_token_bundle = client->network_token_bundle()->load(vmap({{"id", Value("network_token_bundle_id")}}), Value::undef());
+SdkEntityPtr network_token_bundle = client->network_token_bundle()->load(vmap({{"id", Value("network_token_bundle_id")}}), Value::undef());
+std::cout << Struct::jsonify(network_token_bundle->data()) << std::endl;
 ```
 
 #### Example: Create
 
 ```cpp
-Value network_token_bundle = client->network_token_bundle()->create(vmap({
+SdkEntityPtr network_token_bundle = client->network_token_bundle()->create(vmap({
 }), Value::undef());
 ```
 

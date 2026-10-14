@@ -15,7 +15,7 @@ keeps the cognitive load low.
 
 ## Install
 C has no central package registry — a release is the git tag
-(`c/vX.Y.Z`, see [Releases](https://github.com/voxgig-sdk/bluefin-network-token-sdk/releases)). Build from a
+(`c/vX.Y.Z`, see [Tags](https://github.com/voxgig-sdk/bluefin-network-token-sdk/tags)). Build from a
 source checkout with the bundled `Makefile`; the voxgig struct library is
 vendored under `utility/struct`, so there are no external dependencies to
 fetch:
@@ -50,26 +50,29 @@ PNError* err = NULL;
 
 ### 3. Load a networktokenbundle
 
-`load()` returns the bare record and sets `*err` on failure.
+`load()` returns the entity and sets `*err` on failure; `vt->data` reads
+its record.
 
 ```c
 Entity* network_token_bundle = bluefinnetworktoken_network_token_bundle(client, NULL);
-voxgig_value* network_token_bundle_rec = network_token_bundle->vt->load(network_token_bundle, cmap(1, "id", v_str("example_id")), NULL, &err);
+Entity* loaded = network_token_bundle->vt->load(network_token_bundle, cmap(1, "id", v_str("example_id")), NULL, &err);
 if (err) {
     fprintf(stderr, "load failed: %s\n", err->msg);
 } else {
-    printf("%s\n", voxgig_to_json(network_token_bundle_rec));
+    printf("%s\n", voxgig_to_json(loaded->vt->data(loaded, NULL)));
 }
 ```
 
 ### 4. Create, update, and remove
 
 ```c
-// Create — returns the bare created record
-voxgig_value* created = network_token_bundle->vt->create(network_token_bundle, cmap(2, "card", v_map(), "cardNumber", v_str("example_cardNumber")), NULL, &err);
+// Create — returns the created entity, or NULL with *err set
+Entity* created = network_token_bundle->vt->create(network_token_bundle, cmap(2, "card", v_map(), "cardNumber", v_str("example_cardNumber")), NULL, &err);
+voxgig_value* created_id = created
+    ? getp(created->vt->data(created, NULL), "id") : v_undef();
 
 // Remove
-network_token_bundle->vt->remove(network_token_bundle, cmap(1, "id", getp(created, "id")), NULL, &err);
+network_token_bundle->vt->remove(network_token_bundle, cmap(1, "id", created_id), NULL, &err);
 ```
 
 
@@ -80,14 +83,15 @@ Entity operations reject on failure, so wrap them in `try` / `catch`:
 ```ts
 try {
   const networktokenbundle = await client.NetworkTokenBundle().load({ id: "example_id" })
-  console.log(networktokenbundle)
+  console.log(networktokenbundle.data())
 } catch (err) {
   console.error('load failed:', err)
 }
 ```
 
 The low-level `direct()` method does **not** throw — it returns the
-value or an `Error`, so check the result before using it:
+result envelope. Branch on `ok`; on failure `status` holds the HTTP status
+(for error responses) and `err` holds the error:
 
 ```ts
 const result = await client.direct({
@@ -96,8 +100,8 @@ const result = await client.direct({
   params: { id: 'example_id' },
 })
 
-if (result instanceof Error) {
-  throw result
+if (!result.ok) {
+  console.error('request failed:', result.status, result.err)
 }
 ```
 
@@ -150,10 +154,10 @@ Create a mock client for unit testing — no server required:
 BluefinNetworkTokenSDK* client = test_sdk(NULL, NULL);
 PNError* err = NULL;
 
-// Entity ops return the bare record and set *err on failure.
+// Entity ops return the entity and set *err on failure.
 Entity* network_token_bundle = bluefinnetworktoken_network_token_bundle(client, NULL);
-voxgig_value* network_token_bundle_rec = network_token_bundle->vt->load(network_token_bundle, cmap(1, "id", v_str("test01")), NULL, &err);
-// network_token_bundle_rec contains the mock response record
+Entity* result = network_token_bundle->vt->load(network_token_bundle, cmap(1, "id", v_str("test01")), NULL, &err);
+// result->vt->data(result, NULL) is the mock response record
 ```
 
 ### Use a custom fetch function
@@ -246,9 +250,9 @@ All entities share the same `EntityVT` vtable, reached via `e->vt->...`.
 
 | Method | Signature | Description |
 | --- | --- | --- |
-| `load` | `(Entity*, reqmatch, ctrl, PNError**) -> voxgig_value*` | Load a single entity by match criteria. |
-| `create` | `(Entity*, reqdata, ctrl, PNError**) -> voxgig_value*` | Create a new entity. |
-| `remove` | `(Entity*, reqmatch, ctrl, PNError**) -> voxgig_value*` | Remove an entity. |
+| `load` | `(Entity*, reqmatch, ctrl, PNError**) -> Entity*` | Load a single entity by match criteria. |
+| `create` | `(Entity*, reqdata, ctrl, PNError**) -> Entity*` | Create a new entity. |
+| `remove` | `(Entity*, reqmatch, ctrl, PNError**) -> Entity*` | Remove an entity, which is returned marked as deleted. |
 | `data` | `(Entity*, args) -> voxgig_value*` | Get entity data (pass a map to set). |
 | `matchv` | `(Entity*, args) -> voxgig_value*` | Get entity match criteria (pass a map to set). |
 | `make` | `(Entity*) -> Entity*` | Create a new instance with the same options. |
@@ -256,10 +260,10 @@ All entities share the same `EntityVT` vtable, reached via `e->vt->...`.
 
 ### Result shape
 
-Entity operations return the bare result data (a `voxgig_value` map for
-single-entity ops, a List for `list`) and set `*err` to a `PNError*` on
-failure. Always initialise `PNError* err = NULL;` and check it after the
-call.
+Entity operations return the entity, and `list` a `NULL`-terminated array
+of entities, one per record; `vt->data` reads an entity's record. On
+failure they return `NULL` and set `*err` to a `PNError*`. Always
+initialise `PNError* err = NULL;` and check it after the call.
 
 The `sdk_direct()` escape hatch never sets `*err` for a non-2xx response —
 it returns a result map you branch on via `getp(result, "ok")`:
@@ -308,9 +312,9 @@ Create an instance: `Entity* network_token_bundle = bluefinnetworktoken_network_
 
 | Method | Description |
 | --- | --- |
-| `vt->create(e, reqdata, ctrl, &err)` | Create a new entity with the given data. |
-| `vt->load(e, reqmatch, ctrl, &err)` | Load a single entity by match criteria. |
-| `vt->remove(e, reqmatch, ctrl, &err)` | Remove the matching entity. |
+| `Entity* vt->create(e, reqdata, ctrl, &err)` | Create a new entity with the given data. |
+| `Entity* vt->load(e, reqmatch, ctrl, &err)` | Load a single entity by match criteria. |
+| `Entity* vt->remove(e, reqmatch, ctrl, &err)` | Remove the matching entity, which is returned marked as deleted. |
 
 #### Fields
 
@@ -332,14 +336,17 @@ Create an instance: `Entity* network_token_bundle = bluefinnetworktoken_network_
 
 ```c
 Entity* network_token_bundle = bluefinnetworktoken_network_token_bundle(client, NULL);
-voxgig_value* network_token_bundle_rec = network_token_bundle->vt->load(network_token_bundle, cmap(1, "id", v_str("network_token_bundle_id")), NULL, &err);
+Entity* loaded = network_token_bundle->vt->load(network_token_bundle, cmap(1, "id", v_str("network_token_bundle_id")), NULL, &err);
+if (loaded) {
+    printf("%s\n", voxgig_to_json(loaded->vt->data(loaded, NULL)));
+}
 ```
 
 #### Example: Create
 
 ```c
 Entity* network_token_bundle = bluefinnetworktoken_network_token_bundle(client, NULL);
-voxgig_value* network_token_bundle_rec = network_token_bundle->vt->create(network_token_bundle, NULL, NULL, &err);
+Entity* created = network_token_bundle->vt->create(network_token_bundle, NULL, NULL, &err);
 ```
 
 ## Features

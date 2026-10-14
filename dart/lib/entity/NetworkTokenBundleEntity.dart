@@ -18,7 +18,7 @@ class NetworkTokenBundleEntity extends BluefinNetworkTokenEntityBase {
 
 
   /// Load a NetworkTokenBundle by match (see NetworkTokenBundleLoadMatch in
-  /// BluefinNetworkTokenTypes.dart). Returns the entity data map (NetworkTokenBundle).
+  /// BluefinNetworkTokenTypes.dart). Returns the entity, whose record `data()` reads.
   Future<dynamic> load([dynamic reqmatch, dynamic ctrl]) async {
     final utility = this.utility;
 
@@ -124,13 +124,19 @@ class NetworkTokenBundleEntity extends BluefinNetworkTokenEntityBase {
       // operations return ENTITIES".
       return (null != ctx.result && true == ctx.result.ok) ? this : out;
     } catch (err) {
+      // What a hook throws here must not escape the cleaning below.
+      dynamic failure = err;
+      try {
 
-      fres = featureHook(ctx, 'PreUnexpected');
-      if (fres is Future) {
-        await fres;
+        fres = featureHook(ctx, 'PreUnexpected');
+        if (fres is Future) {
+          await fres;
+        }
+      } catch (hookerr) {
+        failure = hookerr;
       }
 
-      final uerr = unexpected(ctx, err);
+      final uerr = unexpected(ctx, failure);
 
       if (null != uerr) {
         throw uerr;
@@ -145,7 +151,7 @@ class NetworkTokenBundleEntity extends BluefinNetworkTokenEntityBase {
 
 
   /// Create a NetworkTokenBundle (see NetworkTokenBundleCreateData in
-  /// BluefinNetworkTokenTypes.dart). Returns the entity data map (NetworkTokenBundle).
+  /// BluefinNetworkTokenTypes.dart). Returns the created entity.
   Future<dynamic> create([dynamic reqdata, dynamic ctrl]) async {
     final utility = this.utility;
 
@@ -247,13 +253,19 @@ class NetworkTokenBundleEntity extends BluefinNetworkTokenEntityBase {
       // operations return ENTITIES".
       return (null != ctx.result && true == ctx.result.ok) ? this : out;
     } catch (err) {
+      // What a hook throws here must not escape the cleaning below.
+      dynamic failure = err;
+      try {
 
-      fres = featureHook(ctx, 'PreUnexpected');
-      if (fres is Future) {
-        await fres;
+        fres = featureHook(ctx, 'PreUnexpected');
+        if (fres is Future) {
+          await fres;
+        }
+      } catch (hookerr) {
+        failure = hookerr;
       }
 
-      final uerr = unexpected(ctx, err);
+      final uerr = unexpected(ctx, failure);
 
       if (null != uerr) {
         throw uerr;
@@ -267,8 +279,9 @@ class NetworkTokenBundleEntity extends BluefinNetworkTokenEntityBase {
 
 
 
+
   /// Remove a NetworkTokenBundle by match (see NetworkTokenBundleRemoveMatch in
-  /// BluefinNetworkTokenTypes.dart). Returns the entity data map (NetworkTokenBundle).
+  /// BluefinNetworkTokenTypes.dart). Returns the entity, marked as deleted.
   Future<dynamic> remove([dynamic reqmatch, dynamic ctrl]) async {
     final utility = this.utility;
 
@@ -380,13 +393,19 @@ class NetworkTokenBundleEntity extends BluefinNetworkTokenEntityBase {
 
       return out;
     } catch (err) {
+      // What a hook throws here must not escape the cleaning below.
+      dynamic failure = err;
+      try {
 
-      fres = featureHook(ctx, 'PreUnexpected');
-      if (fres is Future) {
-        await fres;
+        fres = featureHook(ctx, 'PreUnexpected');
+        if (fres is Future) {
+          await fres;
+        }
+      } catch (hookerr) {
+        failure = hookerr;
       }
 
-      final uerr = unexpected(ctx, err);
+      final uerr = unexpected(ctx, failure);
 
       if (null != uerr) {
         throw uerr;

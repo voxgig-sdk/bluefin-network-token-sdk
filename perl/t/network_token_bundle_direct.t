@@ -11,6 +11,18 @@ use Cwd ();
 use BluefinNetworkTokenSDK;
 require(Cwd::abs_path("$FindBin::Bin/runner.pm"));
 
+# main.kit.test.live.strict is true (the default is true): a live
+# request that fails, or a live test missing an input it needs,
+# fails the test.
+# An account with no record for a test to read skips it either way.
+use constant LIVE_STRICT => 1;
+
+sub live_ok {
+  my ($result) = @_;
+  my $status = BluefinNetworkTokenHelpers::to_int($result->{status});
+  return !defined $result->{err} && $result->{ok} && $status >= 200 && $status < 300;
+}
+
 DIRECT_LOAD: {
   my $setup = network_token_bundle_direct_setup({ 'id' => 'direct01' });
   my ($_should_skip, $_reason) = BluefinNetworkTokenTestRunner::is_control_skipped(
@@ -21,15 +33,20 @@ DIRECT_LOAD: {
     last DIRECT_LOAD;
   }
   if ($setup->{live}) {
-    note('live direct-load needs real ID - set *_ENTID env var with real IDs to run');
-    pass('direct-load-network_token_bundle: skipped (live)');
-    last DIRECT_LOAD;
+    my @missing = grep { !defined $setup->{idmap}{$_} } ('network_token_bundle01');
+    if (@missing) {
+      BluefinNetworkTokenTestRunner::live_miss(LIVE_STRICT, 'direct-load-network_token_bundle', 'Live test blocked: needs ' . join(', ', @missing) . ' via BLUEFIN_NETWORK_TOKEN_TEST_NETWORK_TOKEN_BUNDLE_ENTID');
+      last DIRECT_LOAD;
+    }
   }
   my $client = $setup->{client};
 
   my $params = {};
   my $query = {};
-  unless ($setup->{live}) {
+  if ($setup->{live}) {
+    $params->{'id'} = $setup->{idmap}{'network_token_bundle01'};
+  }
+  else {
     $params->{'id'} = 'direct01';
   }
 
@@ -40,23 +57,12 @@ DIRECT_LOAD: {
     'query' => $query,
   });
   if ($setup->{live}) {
-    # Live mode is lenient: synthetic IDs frequently 4xx. Skip rather
-    # than fail when the load endpoint isn't reachable with the IDs
-    # we can construct from setup idmap.
-    if (defined $result->{err}) {
-      note("load call failed (likely synthetic IDs against live API): $result->{err}");
-      pass('direct-load-network_token_bundle: skipped (live)');
+    if (!live_ok($result)) {
+      BluefinNetworkTokenTestRunner::live_miss(LIVE_STRICT, 'direct-load-network_token_bundle', 'Live load failed: ' . BluefinNetworkTokenTestRunner::live_describe($result));
       last DIRECT_LOAD;
     }
-    unless ($result->{ok}) {
-      note('load call not ok (likely synthetic IDs against live API)');
-      pass('direct-load-network_token_bundle: skipped (live)');
-      last DIRECT_LOAD;
-    }
-    my $status = BluefinNetworkTokenHelpers::to_int($result->{status});
-    if ($status < 200 || $status >= 300) {
-      note("expected 2xx status, got $status");
-      pass('direct-load-network_token_bundle: skipped (live)');
+    if (!defined $result->{data}) {
+      BluefinNetworkTokenTestRunner::live_miss(LIVE_STRICT, 'direct-load-network_token_bundle', 'Live load returned no data: ' . BluefinNetworkTokenTestRunner::live_describe($result));
       last DIRECT_LOAD;
     }
     pass('direct-load-network_token_bundle: live ok');
@@ -96,11 +102,12 @@ sub network_token_bundle_direct_setup {
       %{ BluefinNetworkTokenTestRunner::live_client_options() },
       'apikey' => $env->{'BLUEFIN_NETWORK_TOKEN_APIKEY'},
     });
+    my $idmap = $env->{'BLUEFIN_NETWORK_TOKEN_TEST_NETWORK_TOKEN_BUNDLE_ENTID'};
     return {
       'client' => $client,
       'calls' => $calls,
       'live' => 1,
-      'idmap' => {},
+      'idmap' => ref $idmap eq 'HASH' ? $idmap : {},
     };
   }
 

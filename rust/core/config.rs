@@ -192,6 +192,7 @@ pub fn make_config() -> Value {
                 ])),
                 ("optspec".to_string(), Value::map_of([
                     ("clearTimer".to_string(), Value::str("`$FUNCTION`")),
+                    ("now".to_string(), Value::str("`$FUNCTION`")),
                     ("setTimer".to_string(), Value::str("`$FUNCTION`")),
                 ])),
                 ("strict".to_string(), Value::Bool(false)),
@@ -304,7 +305,7 @@ pub fn make_config() -> Value {
                                     ("header".to_string(), Value::list(vec![
                                         Value::map_of([
                                             ("name".to_string(), Value::str("scx_client_reference")),
-                                            ("orig".to_string(), Value::str("scx_client_reference")),
+                                            ("orig".to_string(), Value::str("scx-client-reference")),
                                             ("type".to_string(), Value::str("`$STRING`")),
                                             ("kind".to_string(), Value::str("header")),
                                             ("reqd".to_string(), Value::Bool(true)),
@@ -315,6 +316,10 @@ pub fn make_config() -> Value {
                                     ("exist".to_string(), Value::list(vec![
                                         Value::str("scx_client_reference"),
                                     ])),
+                                ])),
+                                ("response".to_string(), Value::map_of([
+                                    ("kind".to_string(), Value::str("json")),
+                                    ("media".to_string(), Value::str("application/json")),
                                 ])),
                             ]),
                         ])),
@@ -352,7 +357,7 @@ pub fn make_config() -> Value {
                                     ("header".to_string(), Value::list(vec![
                                         Value::map_of([
                                             ("name".to_string(), Value::str("scx_client_reference")),
-                                            ("orig".to_string(), Value::str("scx_client_reference")),
+                                            ("orig".to_string(), Value::str("scx-client-reference")),
                                             ("type".to_string(), Value::str("`$STRING`")),
                                             ("kind".to_string(), Value::str("header")),
                                             ("reqd".to_string(), Value::Bool(true)),
@@ -361,7 +366,7 @@ pub fn make_config() -> Value {
                                     ("params".to_string(), Value::list(vec![
                                         Value::map_of([
                                             ("name".to_string(), Value::str("id")),
-                                            ("orig".to_string(), Value::str("network_token_bundle_id")),
+                                            ("orig".to_string(), Value::str("networkTokenBundleId")),
                                             ("type".to_string(), Value::str("`$STRING`")),
                                             ("kind".to_string(), Value::str("param")),
                                             ("reqd".to_string(), Value::Bool(true)),
@@ -373,6 +378,10 @@ pub fn make_config() -> Value {
                                         Value::str("id"),
                                         Value::str("scx_client_reference"),
                                     ])),
+                                ])),
+                                ("response".to_string(), Value::map_of([
+                                    ("kind".to_string(), Value::str("json")),
+                                    ("media".to_string(), Value::str("application/json")),
                                 ])),
                             ]),
                             Value::map_of([
@@ -408,7 +417,7 @@ pub fn make_config() -> Value {
                                     ("header".to_string(), Value::list(vec![
                                         Value::map_of([
                                             ("name".to_string(), Value::str("scx_client_reference")),
-                                            ("orig".to_string(), Value::str("scx_client_reference")),
+                                            ("orig".to_string(), Value::str("scx-client-reference")),
                                             ("type".to_string(), Value::str("`$STRING`")),
                                             ("kind".to_string(), Value::str("header")),
                                             ("reqd".to_string(), Value::Bool(true)),
@@ -417,7 +426,7 @@ pub fn make_config() -> Value {
                                     ("params".to_string(), Value::list(vec![
                                         Value::map_of([
                                             ("name".to_string(), Value::str("id")),
-                                            ("orig".to_string(), Value::str("network_token_bundle_id")),
+                                            ("orig".to_string(), Value::str("networkTokenBundleId")),
                                             ("type".to_string(), Value::str("`$STRING`")),
                                             ("kind".to_string(), Value::str("param")),
                                             ("reqd".to_string(), Value::Bool(true)),
@@ -430,6 +439,10 @@ pub fn make_config() -> Value {
                                         Value::str("id"),
                                         Value::str("scx_client_reference"),
                                     ])),
+                                ])),
+                                ("response".to_string(), Value::map_of([
+                                    ("kind".to_string(), Value::str("json")),
+                                    ("media".to_string(), Value::str("application/json")),
                                 ])),
                             ]),
                         ])),
@@ -467,7 +480,7 @@ pub fn make_config() -> Value {
                                     ("header".to_string(), Value::list(vec![
                                         Value::map_of([
                                             ("name".to_string(), Value::str("scx_client_reference")),
-                                            ("orig".to_string(), Value::str("scx_client_reference")),
+                                            ("orig".to_string(), Value::str("scx-client-reference")),
                                             ("type".to_string(), Value::str("`$STRING`")),
                                             ("kind".to_string(), Value::str("header")),
                                             ("reqd".to_string(), Value::Bool(true)),
@@ -476,7 +489,7 @@ pub fn make_config() -> Value {
                                     ("params".to_string(), Value::list(vec![
                                         Value::map_of([
                                             ("name".to_string(), Value::str("id")),
-                                            ("orig".to_string(), Value::str("network_token_bundle_id")),
+                                            ("orig".to_string(), Value::str("networkTokenBundleId")),
                                             ("type".to_string(), Value::str("`$STRING`")),
                                             ("kind".to_string(), Value::str("param")),
                                             ("reqd".to_string(), Value::Bool(true)),
@@ -488,6 +501,10 @@ pub fn make_config() -> Value {
                                         Value::str("id"),
                                         Value::str("scx_client_reference"),
                                     ])),
+                                ])),
+                                ("response".to_string(), Value::map_of([
+                                    ("kind".to_string(), Value::str("json")),
+                                    ("media".to_string(), Value::str("application/json")),
                                 ])),
                             ]),
                         ])),

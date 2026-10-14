@@ -192,6 +192,7 @@ pub fn make_config() Value {
                 }) },
                 .{ "optspec", h.jo(&.{
                     .{ "clearTimer", h.vstr("`$FUNCTION`") },
+                    .{ "now", h.vstr("`$FUNCTION`") },
                     .{ "setTimer", h.vstr("`$FUNCTION`") },
                 }) },
                 .{ "strict", h.vbool(false) },
@@ -304,7 +305,7 @@ pub fn make_config() Value {
                                     .{ "header", h.ja(&.{
                                         h.jo(&.{
                                             .{ "name", h.vstr("scx_client_reference") },
-                                            .{ "orig", h.vstr("scx_client_reference") },
+                                            .{ "orig", h.vstr("scx-client-reference") },
                                             .{ "type", h.vstr("`$STRING`") },
                                             .{ "kind", h.vstr("header") },
                                             .{ "reqd", h.vbool(true) },
@@ -315,6 +316,10 @@ pub fn make_config() Value {
                                     .{ "exist", h.ja(&.{
                                         h.vstr("scx_client_reference"),
                                     }) },
+                                }) },
+                                .{ "response", h.jo(&.{
+                                    .{ "kind", h.vstr("json") },
+                                    .{ "media", h.vstr("application/json") },
                                 }) },
                             }),
                         }) },
@@ -352,7 +357,7 @@ pub fn make_config() Value {
                                     .{ "header", h.ja(&.{
                                         h.jo(&.{
                                             .{ "name", h.vstr("scx_client_reference") },
-                                            .{ "orig", h.vstr("scx_client_reference") },
+                                            .{ "orig", h.vstr("scx-client-reference") },
                                             .{ "type", h.vstr("`$STRING`") },
                                             .{ "kind", h.vstr("header") },
                                             .{ "reqd", h.vbool(true) },
@@ -361,7 +366,7 @@ pub fn make_config() Value {
                                     .{ "params", h.ja(&.{
                                         h.jo(&.{
                                             .{ "name", h.vstr("id") },
-                                            .{ "orig", h.vstr("network_token_bundle_id") },
+                                            .{ "orig", h.vstr("networkTokenBundleId") },
                                             .{ "type", h.vstr("`$STRING`") },
                                             .{ "kind", h.vstr("param") },
                                             .{ "reqd", h.vbool(true) },
@@ -373,6 +378,10 @@ pub fn make_config() Value {
                                         h.vstr("id"),
                                         h.vstr("scx_client_reference"),
                                     }) },
+                                }) },
+                                .{ "response", h.jo(&.{
+                                    .{ "kind", h.vstr("json") },
+                                    .{ "media", h.vstr("application/json") },
                                 }) },
                             }),
                             h.jo(&.{
@@ -408,7 +417,7 @@ pub fn make_config() Value {
                                     .{ "header", h.ja(&.{
                                         h.jo(&.{
                                             .{ "name", h.vstr("scx_client_reference") },
-                                            .{ "orig", h.vstr("scx_client_reference") },
+                                            .{ "orig", h.vstr("scx-client-reference") },
                                             .{ "type", h.vstr("`$STRING`") },
                                             .{ "kind", h.vstr("header") },
                                             .{ "reqd", h.vbool(true) },
@@ -417,7 +426,7 @@ pub fn make_config() Value {
                                     .{ "params", h.ja(&.{
                                         h.jo(&.{
                                             .{ "name", h.vstr("id") },
-                                            .{ "orig", h.vstr("network_token_bundle_id") },
+                                            .{ "orig", h.vstr("networkTokenBundleId") },
                                             .{ "type", h.vstr("`$STRING`") },
                                             .{ "kind", h.vstr("param") },
                                             .{ "reqd", h.vbool(true) },
@@ -430,6 +439,10 @@ pub fn make_config() Value {
                                         h.vstr("id"),
                                         h.vstr("scx_client_reference"),
                                     }) },
+                                }) },
+                                .{ "response", h.jo(&.{
+                                    .{ "kind", h.vstr("json") },
+                                    .{ "media", h.vstr("application/json") },
                                 }) },
                             }),
                         }) },
@@ -467,7 +480,7 @@ pub fn make_config() Value {
                                     .{ "header", h.ja(&.{
                                         h.jo(&.{
                                             .{ "name", h.vstr("scx_client_reference") },
-                                            .{ "orig", h.vstr("scx_client_reference") },
+                                            .{ "orig", h.vstr("scx-client-reference") },
                                             .{ "type", h.vstr("`$STRING`") },
                                             .{ "kind", h.vstr("header") },
                                             .{ "reqd", h.vbool(true) },
@@ -476,7 +489,7 @@ pub fn make_config() Value {
                                     .{ "params", h.ja(&.{
                                         h.jo(&.{
                                             .{ "name", h.vstr("id") },
-                                            .{ "orig", h.vstr("network_token_bundle_id") },
+                                            .{ "orig", h.vstr("networkTokenBundleId") },
                                             .{ "type", h.vstr("`$STRING`") },
                                             .{ "kind", h.vstr("param") },
                                             .{ "reqd", h.vbool(true) },
@@ -488,6 +501,10 @@ pub fn make_config() Value {
                                         h.vstr("id"),
                                         h.vstr("scx_client_reference"),
                                     }) },
+                                }) },
+                                .{ "response", h.jo(&.{
+                                    .{ "kind", h.vstr("json") },
+                                    .{ "media", h.vstr("application/json") },
                                 }) },
                             }),
                         }) },

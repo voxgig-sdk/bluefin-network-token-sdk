@@ -15,7 +15,7 @@ keeps the cognitive load low.
 
 ## Install
 This package is not yet published to NuGet. Install it from the GitHub
-release tag (`csharp/vX.Y.Z`, see [Releases](https://github.com/voxgig-sdk/bluefin-network-token-sdk/releases)) or
+release tag (`csharp/vX.Y.Z`, see [Tags](https://github.com/voxgig-sdk/bluefin-network-token-sdk/tags)) or
 from a source checkout — build the library and add a project reference:
 
 ```bash
@@ -32,6 +32,7 @@ loading a specific record.
 
 ```csharp
 using BluefinNetworkTokenSdk;
+using Voxgig.Struct;
 
 var client = new BluefinNetworkTokenSDK(new Dictionary<string, object?>
 {
@@ -41,13 +42,14 @@ var client = new BluefinNetworkTokenSDK(new Dictionary<string, object?>
 
 ### 3. Load a networktokenbundle
 
-`Load()` returns the bare record (as `object?`) and raises on error.
+`Load()` returns the entity (as `object?`) and raises on error; an entity's
+`Data()` reads its record.
 
 ```csharp
 try
 {
-    var networkTokenBundle = client.NetworkTokenBundle().Load(new Dictionary<string, object?> { ["id"] = "example_id" });
-    Console.WriteLine(networkTokenBundle);
+    var networkTokenBundle = (IEntity)client.NetworkTokenBundle().Load(new Dictionary<string, object?> { ["id"] = "example_id" })!;
+    Console.WriteLine(StructUtils.Jsonify(networkTokenBundle.Data()));
 }
 catch (Exception err)
 {
@@ -58,7 +60,7 @@ catch (Exception err)
 ### 4. Create, update, and remove
 
 ```csharp
-// Create — returns the bare created record (as object?)
+// Create — returns the created entity (as object?)
 var created = client.NetworkTokenBundle().Create(new Dictionary<string, object?> { ["card"] = new Dictionary<string, object?>(), ["cardNumber"] = "example_cardNumber" });
 
 // Remove
@@ -73,14 +75,15 @@ Entity operations reject on failure, so wrap them in `try` / `catch`:
 ```ts
 try {
   const networktokenbundle = await client.NetworkTokenBundle().load({ id: "example_id" })
-  console.log(networktokenbundle)
+  console.log(networktokenbundle.data())
 } catch (err) {
   console.error('load failed:', err)
 }
 ```
 
 The low-level `direct()` method does **not** throw — it returns the
-value or an `Error`, so check the result before using it:
+result envelope. Branch on `ok`; on failure `status` holds the HTTP status
+(for error responses) and `err` holds the error:
 
 ```ts
 const result = await client.direct({
@@ -89,8 +92,8 @@ const result = await client.direct({
   params: { id: 'example_id' },
 })
 
-if (result instanceof Error) {
-  throw result
+if (!result.ok) {
+  console.error('request failed:', result.status, result.err)
 }
 ```
 
@@ -148,10 +151,10 @@ Create a mock client for unit testing — no server required:
 ```csharp
 var client = BluefinNetworkTokenSDK.TestSDK(null, null);
 
-// Entity ops return the bare record and raise on error.
-var networkTokenBundle = client.NetworkTokenBundle().Load(new Dictionary<string, object?> { ["id"] = "test01" });
-// networkTokenBundle holds the mock response record
-Console.WriteLine(networkTokenBundle);
+// Entity ops return the entity; they raise on error.
+var networkTokenBundle = (IEntity)client.NetworkTokenBundle().Load(new Dictionary<string, object?> { ["id"] = "test01" })!;
+// Data() reads the entity's mock record
+Console.WriteLine(StructUtils.Jsonify(networkTokenBundle.Data()));
 ```
 
 ### Use a custom fetch function
@@ -240,9 +243,9 @@ All entities share the same interface.
 
 | Method | Signature | Description |
 | --- | --- | --- |
-| `Load` | `(reqmatch, ctrl) -> object?` | Load a single entity by match criteria. Raises on error. |
-| `Create` | `(reqdata, ctrl) -> object?` | Create a new entity. Raises on error. |
-| `Remove` | `(reqmatch, ctrl) -> object?` | Remove an entity. Raises on error. |
+| `Load` | `(reqmatch, ctrl) -> object?` | Load a single entity by match criteria, and return it. Raises on error. |
+| `Create` | `(reqdata, ctrl) -> object?` | Create a new entity, and return it. Raises on error. |
+| `Remove` | `(reqmatch, ctrl) -> object?` | Remove an entity, and return it marked as deleted. Raises on error. |
 | `Data` | `(newdata) -> object?` | Get or set entity data. |
 | `Match` | `(newmatch) -> object?` | Get or set entity match criteria. |
 | `Make` | `() -> IEntity` | Create a new instance with the same options. |
@@ -250,9 +253,10 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return the bare result data (a `Dictionary` for
-single-entity ops, an aggregate list for `List`) as `object?` and raise on
-error. Wrap calls in `try`/`catch` to handle failures.
+Entity operations return the entity, and `List` a list of entities, one per
+record, as `object?`; an entity is an `IEntity`, whose `Data()` reads its
+record. They raise on error, so wrap calls in `try`/`catch` to handle
+failures.
 
 The `Direct()` escape hatch never raises — it returns a result
 `Dictionary<string, object?>` you branch on via `result["ok"]`:

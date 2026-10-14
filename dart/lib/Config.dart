@@ -250,6 +250,7 @@ class Config {
       },
       'optspec': <String, dynamic>{
         'clearTimer': '`\$FUNCTION`',
+        'now': '`\$FUNCTION`',
         'setTimer': '`\$FUNCTION`',
       },
       'strict': false,
@@ -370,7 +371,7 @@ class Config {
                 'header': <dynamic>[
                   <String, dynamic>{
                     'name': 'scx_client_reference',
-                    'orig': 'scx_client_reference',
+                    'orig': 'scx-client-reference',
                     'type': '`\$STRING`',
                     'kind': 'header',
                     'reqd': true,
@@ -381,6 +382,10 @@ class Config {
                 'exist': <dynamic>[
                   'scx_client_reference',
                 ],
+              },
+              'response': <String, dynamic>{
+                'kind': 'json',
+                'media': 'application/json',
               },
             },
           ],
@@ -418,7 +423,7 @@ class Config {
                 'header': <dynamic>[
                   <String, dynamic>{
                     'name': 'scx_client_reference',
-                    'orig': 'scx_client_reference',
+                    'orig': 'scx-client-reference',
                     'type': '`\$STRING`',
                     'kind': 'header',
                     'reqd': true,
@@ -427,7 +432,7 @@ class Config {
                 'params': <dynamic>[
                   <String, dynamic>{
                     'name': 'id',
-                    'orig': 'network_token_bundle_id',
+                    'orig': 'networkTokenBundleId',
                     'type': '`\$STRING`',
                     'kind': 'param',
                     'reqd': true,
@@ -439,6 +444,10 @@ class Config {
                   'id',
                   'scx_client_reference',
                 ],
+              },
+              'response': <String, dynamic>{
+                'kind': 'json',
+                'media': 'application/json',
               },
             },
             <String, dynamic>{
@@ -474,7 +483,7 @@ class Config {
                 'header': <dynamic>[
                   <String, dynamic>{
                     'name': 'scx_client_reference',
-                    'orig': 'scx_client_reference',
+                    'orig': 'scx-client-reference',
                     'type': '`\$STRING`',
                     'kind': 'header',
                     'reqd': true,
@@ -483,7 +492,7 @@ class Config {
                 'params': <dynamic>[
                   <String, dynamic>{
                     'name': 'id',
-                    'orig': 'network_token_bundle_id',
+                    'orig': 'networkTokenBundleId',
                     'type': '`\$STRING`',
                     'kind': 'param',
                     'reqd': true,
@@ -496,6 +505,10 @@ class Config {
                   'id',
                   'scx_client_reference',
                 ],
+              },
+              'response': <String, dynamic>{
+                'kind': 'json',
+                'media': 'application/json',
               },
             },
           ],
@@ -533,7 +546,7 @@ class Config {
                 'header': <dynamic>[
                   <String, dynamic>{
                     'name': 'scx_client_reference',
-                    'orig': 'scx_client_reference',
+                    'orig': 'scx-client-reference',
                     'type': '`\$STRING`',
                     'kind': 'header',
                     'reqd': true,
@@ -542,7 +555,7 @@ class Config {
                 'params': <dynamic>[
                   <String, dynamic>{
                     'name': 'id',
-                    'orig': 'network_token_bundle_id',
+                    'orig': 'networkTokenBundleId',
                     'type': '`\$STRING`',
                     'kind': 'param',
                     'reqd': true,
@@ -554,6 +567,10 @@ class Config {
                   'id',
                   'scx_client_reference',
                 ],
+              },
+              'response': <String, dynamic>{
+                'kind': 'json',
+                'media': 'application/json',
               },
             },
           ],

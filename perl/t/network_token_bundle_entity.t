@@ -11,10 +11,25 @@ use Cwd ();
 use BluefinNetworkTokenSDK;
 require(Cwd::abs_path("$FindBin::Bin/runner.pm"));
 
+# main.kit.test.live.strict is true (the default is true): a live
+# request that fails, or a live test missing an input it needs,
+# fails the test.
+# An account with no record for a test to read skips it either way.
+use constant LIVE_STRICT => 1;
+
 {
   my $testsdk = BluefinNetworkTokenSDK->test(undef, undef);
   my $ent = $testsdk->NetworkTokenBundle(undef);
   ok(defined $ent, 'network_token_bundle: create instance');
+}
+
+SKIP: {
+  skip('feature not present in this SDK: validate', 1)
+    unless BluefinNetworkTokenConfig::shared_config()->{feature}{validate};
+  my $client = BluefinNetworkTokenSDK->test(undef, { feature => { validate => { active => 1 } } });
+  my $err = eval { $client->NetworkTokenBundle(undef)->load({ 'id' => 1 }, undef); undef } // $@;
+  is(ref $err ? $err->{code} : undef, 'validate_failed',
+    'network_token_bundle: an invalid request fails with validate_failed');
 }
 
 BASIC_FLOW: {
@@ -29,13 +44,6 @@ BASIC_FLOW: {
       pass('network_token_bundle: basic flow skipped via sdk-test-control.json');
       last BASIC_FLOW;
     }
-  }
-  # The basic flow consumes synthetic IDs from the fixture. In live mode
-  # without an *_ENTID env override, those IDs hit the live API and 4xx.
-  if ($setup->{synthetic_only}) {
-    note('live entity test uses synthetic IDs from fixture - set BLUEFIN_NETWORK_TOKEN_TEST_NETWORK_TOKEN_BUNDLE_ENTID JSON to run live');
-    pass('network_token_bundle: basic flow skipped (synthetic IDs only)');
-    last BASIC_FLOW;
   }
   my $client = $setup->{client};
   my %V;
@@ -96,10 +104,8 @@ sub network_token_bundle_basic_setup {
     }
   );
 
-  # Detect ENTID env override before env_override consumes it. When live
-  # mode is on without a real override, the basic test runs against
-  # synthetic IDs from the fixture and 4xx's. Surface this so the test can
-  # skip.
+  # Whether *_ENTID supplied the idmap, read before env_override consumes
+  # it: without it, the ids a live flow binds are the fixture's synthetic ones.
   my $entid_env_raw = $ENV{'BLUEFIN_NETWORK_TOKEN_TEST_NETWORK_TOKEN_BUNDLE_ENTID'};
   my $idmap_overridden = (defined $entid_env_raw && $entid_env_raw =~ /^\s*\{/) ? 1 : 0;
 
