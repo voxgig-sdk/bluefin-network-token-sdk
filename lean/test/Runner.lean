@@ -330,7 +330,8 @@ def main : IO UInt32 := do
           if gid == wid then pass s!"network_token_bundle.load offline (id={wid})"
           else fail s!"network_token_bundle.load offline: got {gid}, want {wid}"
         -- create -> load back -> remove, all in the store
-        let created ← Network_token_bundle.create tclient (← newRefData seed "network_token_bundle") (← emptyMap)
+        let cd ← newRefData seed "network_token_bundle"
+        let created ← Network_token_bundle.create tclient cd (← emptyMap)
         let cid ← SdkRuntime.gpS created "id"
         if cid == "" then fail "network_token_bundle.create offline returned no id" else do
           let m2 ← newMap #[("id", Value.str cid)]
